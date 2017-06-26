@@ -1,6 +1,6 @@
 <?php
 
-namespace our_team_showcase;
+namespace ots;
 
 if( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;

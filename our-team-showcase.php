@@ -9,12 +9,12 @@
  * License: GPL2
 */
 
-namespace our_team_showcase;
+namespace ots;
 
 /**
  * Include constants and Options definitions
  */
-include_once dirname( __FILE__ ) . 'constants.php';
+include_once dirname( __FILE__ ) . '/constants.php';
 
 
 /**
@@ -28,4 +28,21 @@ function load_text_domain() {
 
 }
 
-add_action( 'plugins_loaded', 'our_team_showcase\load_text_domain' );
+add_action( 'plugins_loaded', 'ots\load_text_domain' );
+
+
+/**
+ * Pull in all of the plugin's include files
+ *
+ * @since 4.0.0
+ */
+function include_plugin_files() {
+
+    include_once dirname(__FILE__) . '/includes/helpers.php';
+    include_once dirname(__FILE__) . '/includes/admin-settings.php';
+    include_once dirname(__FILE__) . '/includes/custom-post-type.php';
+
+}
+
+add_action( 'plugins_loaded', 'ots\include_plugin_files' );
+
