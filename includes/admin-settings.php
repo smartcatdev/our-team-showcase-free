@@ -2,6 +2,11 @@
 
 namespace ots;
 
+/**
+ * Register admin menu pages.
+ *
+ * @since 4.0.0
+ */
 function add_menu_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
@@ -11,6 +16,11 @@ function add_menu_pages() {
 add_action( 'admin_menu', 'ots\add_menu_pages' );
 
 
+/**
+ * Register settings with the settings API.
+ *
+ * @since 4.0.0
+ */
 function register_settings() {
 
     register_setting( 'ots-settings', Options::TEMPLATE );
@@ -29,6 +39,11 @@ function register_settings() {
 add_action( 'admin_init', 'ots\register_settings' );
 
 
+/**
+ * Add settings sections for admin settings pages.
+ *
+ * @since 4.0.0
+ */
 function add_settings_sections() {
 
     add_settings_section( 'team-view-global', __( 'Team View - Global Settings', 'ots' ), '', 'edit.php?post_type=team_member&page=ots-settings' );
@@ -39,15 +54,24 @@ function add_settings_sections() {
 add_action( 'admin_init', 'ots\add_settings_sections' );
 
 
-
+/**
+ * Add settings fields to pages and settings secctions.
+ *
+ * @since 4.0.0
+ */
 function add_settings_fields() {
 
     $display_field_previews = apply_filters( 'ots_show_pro_fields_preview', true );
 
+    /**
+     * Team View settings
+     *
+     * @since 4.0.0
+     */
     add_settings_field(
         Options::TEMPLATE,
         __( 'Template', 'ots' ),
-        'ots\do_select_box',
+        'ots\settings_select_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -61,7 +85,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::GRID_COLUMNS,
         __( 'Grid Columns', 'ots' ),
-        'ots\do_select_box',
+        'ots\settings_select_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -74,7 +98,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::MARGIN,
         __( 'Margin', 'ots' ),
-        'ots\do_text_box',
+        'ots\settings_text_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -87,7 +111,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::SHOW_SOCIAL,
         __( 'Show Social Icons', 'ots' ),
-        'ots\do_check_box',
+        'ots\settings_check_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -100,7 +124,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::SOCIAL_LINK_ACTION,
         __( 'Social Icon Link Action', 'ots' ),
-        'ots\do_select_box',
+        'ots\settings_select_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -113,7 +137,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::DISPLAY_NAME,
         __( 'Display Name', 'ots' ),
-        'ots\do_check_box',
+        'ots\settings_check_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -126,7 +150,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::DISPLAY_TITLE,
         __( 'Display Title', 'ots' ),
-        'ots\do_check_box',
+        'ots\settings_check_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -139,7 +163,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::REWRITE_SLUG,
         __( 'Team Member URL Slug', 'ots' ),
-        'ots\do_text_box',
+        'ots\settings_text_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -152,7 +176,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::DISPLAY_LIMIT,
         __( 'Display Limit', 'ots' ),
-        'ots\do_text_box',
+        'ots\settings_text_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -165,7 +189,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::MAIN_COLOR,
         __( 'Main Color', 'ots' ),
-        'ots\do_text_box',
+        'ots\settings_text_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'team-view-global',
         array(
@@ -183,11 +207,15 @@ function add_settings_fields() {
 
     }
 
-    // Single member view
+    /**
+     * Single Member View settings
+     *
+     * @since 4.0.0
+     */
     add_settings_field(
         Options::S_TEMPLATE,
         __( 'Template', 'ots' ),
-        'ots\do_select_box',
+        'ots\settings_select_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'single-member-view-global',
         array(
@@ -200,7 +228,7 @@ function add_settings_fields() {
     add_settings_field(
         Options::S_SHOW_SOCIAL,
         __( 'Show Social Icons', 'ots' ),
-        'ots\do_check_box',
+        'ots\settings_check_box',
         'edit.php?post_type=team_member&page=ots-settings',
         'single-member-view-global',
         array(
@@ -224,6 +252,11 @@ function add_settings_fields() {
 add_action( 'admin_init', 'ots\add_settings_fields' );
 
 
+/**
+ * Output the settings page.
+ *
+ * @since 4.0.0
+ */
 function do_settings_page() { ?>
 
     <form method="post" action="options.php">
@@ -235,5 +268,111 @@ function do_settings_page() { ?>
         <?php submit_button(); ?>
 
     </form>
+
+<?php }
+
+/**
+ * Output a select box for a settings field.
+ *
+ * @param array $args {
+ *  string $name     The name of the setting as registered with the settings API.
+ *  array  $attrs    An array of HTML attributes for the field.
+ *  array  $options  An array of key value pairs that are used for the options.
+ *  string $selected The current value of the select box.
+ * }
+ *
+ * @since 4.0.0
+ */
+function settings_select_box( array $args ) { ?>
+
+    <select name="<?php esc_attr_e( $args['name'] ); ?>"
+
+        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> >
+
+        <?php foreach( $args['options'] as $value => $label ) : ?>
+
+            <option value="<?php esc_attr_e( $value ); ?>"
+                <?php selected( isset( $args['selected'] ) ? $args['selected'] : '', $value ); ?>>
+
+                <?php esc_html_e( $label ); ?></option>
+
+        <?php endforeach; ?>
+
+    </select>
+
+    <?php if( isset( $args['description'] ) ) : ?>
+
+        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
+
+    <?php endif; ?>
+
+<?php }
+
+
+/**
+ * Output a check box for a settings field.
+ *
+ * @param array $args {
+ *  string $name     The name of the setting as registered with the settings API.
+ *  array  $attrs    An array of HTML attributes for the field.
+ *  array  $checked  Whether or not the checkbox is currently checked.
+ *  string $label    The label for the checkbox.
+ * }
+ *
+ * @since 4.0.0
+ */
+function settings_check_box( array $args ) { ?>
+
+    <label>
+
+        <input name="<?php esc_attr_e( $args['name'] ); ?>"
+               type="checkbox"
+
+            <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?>
+
+            <?php checked( 'on', $args['checked'] ); ?>/>
+
+        <?php esc_html_e( $args['label'] ); ?>
+
+    </label>
+
+<?php }
+
+/**
+ * Output a text box for a settings field.
+ *
+ * @param array $args {
+ *  string $name        The name of the setting as registered with the settings API.
+ *  array  $attrs       An array of HTML attributes for the field.
+ *  array  $value       The current value of the text box.
+ *  string $description The description to display below the field.
+ * }
+ *
+ * @since 4.0.0
+ */
+function settings_text_box( array $args ) { ?>
+
+    <input name="<?php esc_attr_e( $args['name'] ); ?>"
+           value="<?php echo isset( $args['value'] ) ? esc_attr( $args['value'] ) : ''; ?>"
+
+        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> />
+
+    <?php if( isset( $args['description'] ) ) : ?>
+
+        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
+
+    <?php endif; ?>
+
+<?php }
+
+
+/**
+ * Outputs disabled placeholder fields.
+ *
+ * @since 4.0.0
+ */
+function do_pro_only_field() { ?>
+
+    <p class="description"><?php _e( 'Pro version only', 'ots' ); ?></p>
 
 <?php }

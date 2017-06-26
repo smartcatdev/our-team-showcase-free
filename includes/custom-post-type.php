@@ -12,7 +12,7 @@ function register_team_member_post_type() {
     $labels = array(
         'name'               => _x( 'Team Members', 'post type general name', 'ots' ),
         'singular_name'      => _x( 'Team Member', 'post type singular name', 'ots' ),
-        'menu_name'          => _x( 'All Team Members', 'admin menu', 'ots' ),
+        'menu_name'          => _x( 'Team Members', 'admin menu', 'ots' ),
         'name_admin_bar'     => _x( 'Team Member', 'add new on admin bar', 'ots' ),
         'add_new'            => _x( 'Add New', 'team_member', 'ots' ),
         'add_new_item'       => __( 'Add New Member', 'ots' ),
@@ -48,6 +48,11 @@ function register_team_member_post_type() {
 add_action( 'init', 'ots\register_team_member_post_type' );
 
 
+/**
+ * Register the member grouping taxonomy.
+ *
+ * @since 4.0.0
+ */
 function register_team_member_position_taxonomy() {
 
     $labels = array(
@@ -76,7 +81,7 @@ add_action( 'init', 'ots\register_team_member_position_taxonomy' );
 
 
 /**
- * Renders the member custom post type metabox fields
+ * Renders the member custom post type metabox fields.
  *
  * @since 4.0.0
  */
@@ -96,6 +101,13 @@ function team_member_meta_boxes() {
 
 }
 
+/**
+ * Sanitize and save the contact metabox fields.
+ *
+ * @param $post_id
+ * @param \WP_Post $post
+ * @since 4.0.0
+ */
 function save_contact_meta_box( $post_id, \WP_Post $post ) {
 
     if( $post->post_type == 'team_member' &&
@@ -116,6 +128,13 @@ function save_contact_meta_box( $post_id, \WP_Post $post ) {
 add_action( 'save_post', 'ots\save_contact_meta_box', 10, 3 );
 
 
+/**
+ * Sanitize and save the articles metabox fields.
+ *
+ * @param $post_id
+ * @param \WP_Post $post
+ * @since 4.0.0
+ */
 function save_articles_meta_box( $post_id, \WP_Post $post ) {
 
     if( $post->post_type == 'team_member' &&
@@ -135,6 +154,12 @@ function save_articles_meta_box( $post_id, \WP_Post $post ) {
 add_action( 'save_post', 'ots\save_articles_meta_box', 10, 3 );
 
 
+/**
+ * Output the contact info metabox.
+ *
+ * @param \WP_Post $post
+ * @since 4.0.0
+ */
 function do_contact_meta_box( \WP_Post $post ) { ?>
 
     <?php wp_nonce_field( 'contact_meta_box', 'contact_mata_box_nonce' ); ?>
@@ -255,7 +280,12 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
 
 <?php }
 
-
+/**
+ * Output the articles metabox.
+ *
+ * @param \WP_Post $post
+ * @since 4.0.0
+ */
 function do_articles_meta_box( \WP_Post $post ) { ?>
 
     <?php wp_nonce_field( 'articles_meta_box', 'articles_mata_box_nonce' ); ?>
@@ -312,7 +342,13 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
 
 <?php }
 
-
+/**
+ * Output the skills metabox. Note all fields are disabled by default and this metabox has no save handler.
+ *
+ * @param \WP_Post $post
+ * @param array $meta_box
+ * @since 4.0.0
+ */
 function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
     <?php wp_nonce_field( 'skills_meta_box', 'skills_mata_box_nonce' ); ?>
@@ -450,6 +486,13 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 <?php }
 
 
+/**
+ * Output the tags metabox. Note all fields are disabled by default and this metabox has no save handler.
+ *
+ * @param \WP_Post $post
+ * @param array $meta_box
+ * @since 4.0.0
+ */
 function do_tags_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
     <?php wp_nonce_field( 'tags_meta_box', 'tags_mata_box_nonce' ); ?>
@@ -499,36 +542,4 @@ function do_tags_meta_box( \WP_Post $post, array $meta_box ) { ?>
         </tr>
     </table>
 
-<?php }
-
-
-function posts_dropdown( $name, $id = '', $selected = '' ) {
-
-    $posts = get_posts( array(
-        'post_type'      => 'post',
-        'posts_per_page' => -1
-    ) );
-
-    ?>
-
-    <select id="<?php esc_attr_e( $id ); ?>"
-            name="<?php esc_attr_e( $name ); ?>"
-            class="regular-text">
-
-        <option value=""><?php _e( 'Select an article', 'ots' ); ?></option>
-
-        <?php foreach( $posts as $post ) : ?>
-
-            <option value="<?php esc_attr_e( $post->ID ); ?>"
-
-                    <?php selected( $post->ID, $selected ); ?>>
-
-                <?php esc_html_e( $post->post_title ); ?>
-
-            </option>
-
-        <?php endforeach; ?>
-
-    </select>
-    
 <?php }

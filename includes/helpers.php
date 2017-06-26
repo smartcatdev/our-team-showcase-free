@@ -2,6 +2,13 @@
 
 namespace ots;
 
+/**
+ * Sanitize a checkbox to either be on or off.
+ *
+ * @param $value
+ * @return bool
+ * @since 4.0.0
+ */
 function sanitize_checkbox( $value ) {
 
     if( $value != 'on' && $value != 'off' ) {
@@ -12,74 +19,53 @@ function sanitize_checkbox( $value ) {
 
 }
 
+/**
+ * Convenience method to generate a dropdown of posts.
+ *
+ * @param $name
+ * @param string $id
+ * @param string $selected
+ * @since 4.0.0
+ */
+function posts_dropdown( $name, $id = '', $selected = '' ) {
 
-function do_select_box( array $args ) { ?>
+    $posts = get_posts( array(
+        'post_type'      => 'post',
+        'posts_per_page' => -1
+    ) );
 
-    <select name="<?php esc_attr_e( $args['name'] ); ?>"
+    ?>
 
-        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> >
+    <select id="<?php esc_attr_e( $id ); ?>"
+            name="<?php esc_attr_e( $name ); ?>"
+            class="regular-text">
 
-        <?php foreach( $args['options'] as $value => $label ) : ?>
+        <option value=""><?php _e( 'Select an article', 'ots' ); ?></option>
 
-            <option value="<?php esc_attr_e( $value ); ?>"
-                <?php selected( isset( $args['selected'] ) ? $args['selected'] : '', $value ); ?>>
+        <?php foreach( $posts as $post ) : ?>
 
-                <?php esc_html_e( $label ); ?></option>
+            <option value="<?php esc_attr_e( $post->ID ); ?>"
+
+                <?php selected( $post->ID, $selected ); ?>>
+
+                <?php esc_html_e( $post->post_title ); ?>
+
+            </option>
 
         <?php endforeach; ?>
 
     </select>
 
-    <?php if( isset( $args['description'] ) ) : ?>
-
-        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
-
-    <?php endif; ?>
-
 <?php }
 
 
-function do_check_box( array $args ) { ?>
-
-    <label>
-
-        <input name="<?php esc_attr_e( $args['name'] ); ?>"
-               type="checkbox"
-
-            <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?>
-
-            <?php checked( 'on', $args['checked'] ); ?>/>
-
-        <?php esc_html_e( $args['label'] ); ?>
-
-    </label>
-
-<?php }
-
-
-function do_text_box( array $args ) { ?>
-
-    <input name="<?php esc_attr_e( $args['name'] ); ?>"
-           value="<?php echo isset( $args['value'] ) ? esc_attr( $args['value'] ) : ''; ?>"
-
-        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> />
-
-    <?php if( isset( $args['description'] ) ) : ?>
-
-        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
-
-    <?php endif; ?>
-
-<?php }
-
-
-function do_pro_only_field() { ?>
-
-    <p class="description"><?php _e( 'Pro version only', 'ots' ); ?></p>
-
-<?php }
-
-
+/**
+ * Prints an array as attributes where key = " attributes ".
+ *
+ * @param array $attrs
+ * @since 4.0.0
+ *
+ */
 function print_attrs( array $attrs ) {
 
     foreach( $attrs as $attr => $values ) {
