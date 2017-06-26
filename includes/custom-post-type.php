@@ -2,6 +2,16 @@
 
 namespace ots;
 
+function enqueue_editor_scripts() {
+
+    if( get_post_type() == 'team_member' ) {
+        wp_enqueue_style( 'ots-metabox-css', asset( 'admin/css/metabox.css' ), null, VERSION );
+    }
+
+}
+
+add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
+
 /**
  * Register the team member custom post type.
  *
@@ -164,7 +174,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
 
     <?php wp_nonce_field( 'contact_meta_box', 'contact_mata_box_nonce' ); ?>
 
-    <table class="widefat">
+    <table id="ots-contact-meta-box" class="ots-meta-box widefat">
         <tr>
             <th>
                 <label for="ots-member-job-title"><?php _e( 'Job Title', 'ots' ); ?></label>
@@ -193,7 +203,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
             </th>
             <td>
                 <input id="ots-member-phone"
-                       type="tel"
                        name="team_member_phone"
                        class="regular-text"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_phone', true ) ); ?>" />
@@ -290,7 +299,7 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
 
     <?php wp_nonce_field( 'articles_meta_box', 'articles_mata_box_nonce' ); ?>
 
-    <table class="widefat">
+    <table id="ots-articles-meta-box" class="ots-meta-box widefat">
         <tr>
             <th>
                 <label for="ots-display-member-articles"><?php _e( 'Display Articles', 'ots' ); ?></label>
@@ -353,7 +362,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
     <?php wp_nonce_field( 'skills_meta_box', 'skills_mata_box_nonce' ); ?>
 
-    <table class="widefat">
+    <table id="ots-skills-meta-box" class="ots-meta-box widefat">
         <tr>
             <th>
                 <label for="ots-display-member-skills"><?php _e( 'Display Skills', 'ots' ); ?></label>
@@ -388,6 +397,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
             <td>
                 <input id="ots-member-skill-1"
                        name="team_member_skill_titles[]"
+                       class="ots-member-skill-title"
                        placeholder="<?php _e( 'Title', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill1', true ) ); ?>"
 
@@ -395,6 +405,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-1"
                        name="team_member_skill_ratings[]"
+                       class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value1', true ) ); ?>"
 
@@ -408,6 +419,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
             <td>
                 <input id="ots-member-skill-2"
                        name="team_member_skill_titles[]"
+                       class="ots-member-skill-title"
                        placeholder="<?php _e( 'Title', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill2', true ) ); ?>"
 
@@ -415,6 +427,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-2"
                        name="team_member_skill_ratings[]"
+                       class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value2', true ) ); ?>"
 
@@ -428,6 +441,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
             <td>
                 <input id="ots-member-skill-3"
                        name="team_member_skill_titles[]"
+                       class="ots-member-skill-title"
                        placeholder="<?php _e( 'Title', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill3', true ) ); ?>"
 
@@ -435,6 +449,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-3"
                        name="team_member_skill_ratings[]"
+                       class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value3', true ) ); ?>"
 
@@ -448,6 +463,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
             <td>
                 <input id="ots-member-skill-4"
                        name="team_member_skill_titles[]"
+                       class="ots-member-skill-title"
                        placeholder="<?php _e( 'Title', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill4', true ) ); ?>"
 
@@ -455,6 +471,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-4"
                        name="team_member_skill_ratings[]"
+                       class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value4', true ) ); ?>"
 
@@ -468,6 +485,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
             <td>
                 <input id="ots-member-skill-5"
                        name="team_member_skill_titles[]"
+                       class="ots-member-skill-title"
                        placeholder="<?php _e( 'Title', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill5', true ) ); ?>"
 
@@ -475,6 +493,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-5"
                        name="team_member_skill_ratings[]"
+                       class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value5', true ) ); ?>"
 
@@ -497,7 +516,7 @@ function do_tags_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
     <?php wp_nonce_field( 'tags_meta_box', 'tags_mata_box_nonce' ); ?>
 
-    <table class="widefat">
+    <table id="ots-tags-meta-box" class="ots-meta-box widefat">
         <tr>
             <th>
                 <label for="ots-display-member-tags"><?php _e( 'Display Tags', 'ots' ); ?></label>

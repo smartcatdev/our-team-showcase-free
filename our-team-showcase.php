@@ -46,3 +46,6 @@ function include_plugin_files() {
 
 add_action( 'plugins_loaded', 'ots\include_plugin_files' );
 
+function asset( $path = '' ) {
+    return trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/' . ltrim( $path, '/' );
+}
