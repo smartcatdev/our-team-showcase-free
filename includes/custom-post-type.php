@@ -7,7 +7,7 @@ namespace ots;
  *
  * @since 4.0.0
  */
-function register_custom_post_type() {
+function register_team_member_post_type() {
 
     $labels = array(
         'name'               => _x( 'Team Members', 'post type general name', 'ots' ),
@@ -45,7 +45,35 @@ function register_custom_post_type() {
 
 }
 
-add_action( 'init', 'ots\register_custom_post_type' );
+add_action( 'init', 'ots\register_team_member_post_type' );
+
+
+function register_team_member_position_taxonomy() {
+
+    $labels = array(
+        'name'              => _x( 'Groups', 'taxonomy general name', 'ots' ),
+        'singular_name'     => _x( 'Group', 'taxonomy singular name', 'ots' ),
+        'search_items'      => __( 'Search Groups', 'ots' ),
+        'all_items'         => __( 'All Groups', 'ots' ),
+        'parent_item'       => __( 'Parent Group', 'ots' ),
+        'parent_item_colon' => __( 'Parent Group:', 'ots' ),
+        'edit_item'         => __( 'Edit Group', 'ots' ),
+        'update_item'       => __( 'Update Group', 'ots' ),
+        'add_new_item'      => __( 'Add New Group', 'ots' ),
+        'new_item_name'     => __( 'New Group', 'ots' ),
+        'menu_name'         => __( 'Groups', 'ots' ),
+    );
+
+    $args = array(
+        'labels'       => $labels,
+        'hierarchical' => true,
+    );
+
+    register_taxonomy( 'team_member_position', 'team_member', $args );
+}
+
+add_action( 'init', 'ots\register_team_member_position_taxonomy' );
+
 
 /**
  * Renders the member custom post type metabox fields
