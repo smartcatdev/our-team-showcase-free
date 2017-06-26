@@ -23,16 +23,65 @@ add_action( 'admin_menu', 'ots\add_menu_pages' );
  */
 function register_settings() {
 
-    register_setting( 'ots-settings', Options::TEMPLATE );
-    register_setting( 'ots-settings', Options::REWRITE_SLUG );
-    register_setting( 'ots-settings', Options::GRID_COLUMNS, 'intval' );
-    register_setting( 'ots-settings', Options::MARGIN, 'intval' );
-    register_setting( 'ots-settings', Options::SHOW_SOCIAL );
-    register_setting( 'ots-settings', Options::SOCIAL_LINK_ACTION );
-    register_setting( 'ots-settings', Options::DISPLAY_NAME );
-    register_setting( 'ots-settings', Options::DISPLAY_TITLE );
-    register_setting( 'ots-settings', Options::DISPLAY_LIMIT );
-    register_setting( 'ots-settings', Options::MAIN_COLOR );
+    register_setting( 'ots-settings', Options::TEMPLATE, array(
+        'type'              => 'string',
+        'default'           => Defaults::TEMPLATE,
+        'sanitize_callback' => 'sanitize_title'
+    ) );
+
+    register_setting( 'ots-settings', Options::REWRITE_SLUG, array(
+        'type'              => 'string',
+        'default'           => Defaults::REWRITE_SLUG,
+        'sanitize_callback' => 'sanitize_title'
+    ) );
+
+    register_setting( 'ots-settings', Options::GRID_COLUMNS, array(
+        'type'              => 'integer',
+        'default'           => Defaults::GRID_COLUMNS,
+        'sanitize_callback' => 'intval'
+    ) );
+
+    register_setting( 'ots-settings', Options::MARGIN, array(
+        'type'              => 'integer',
+        'default'           => Defaults::MARGIN,
+        'sanitize_callback' => 'intval'
+    ) );
+
+    register_setting( 'ots-settings', Options::SHOW_SOCIAL, array(
+        'type'              => 'string',
+        'default'           => Defaults::SHOW_SOCIAL,
+        'sanitize_callback' => 'ots\sanitize_checkbox'
+    ) );
+
+    register_setting( 'ots-settings', Options::SOCIAL_LINK_ACTION, array(
+        'type'              => 'string',
+        'default'           => Defaults::SOCIAL_LINK_ACTION,
+        'sanitize_callback' => 'sanitize_title'
+    ) );
+
+    register_setting( 'ots-settings', Options::DISPLAY_NAME, array(
+        'type'              => 'string',
+        'default'           => Defaults::DISPLAY_NAME,
+        'sanitize_callback' => 'ots\sanitize_checkbox'
+    ) );
+
+    register_setting( 'ots-settings', Options::DISPLAY_TITLE, array(
+        'type'              => 'string',
+        'default'           => Defaults::DISPLAY_TITLE,
+        'sanitize_callback' => 'ots\sanitize_checkbox'
+    ) );
+
+    register_setting( 'ots-settings', Options::DISPLAY_LIMIT, array(
+        'type'              => 'integer',
+        'default'           => Defaults::DISPLAY_LIMIT,
+        'sanitize_callback' => 'intval'
+    ) );
+
+    register_setting( 'ots-settings', Options::MAIN_COLOR, array(
+        'type'              => 'string',
+        'default'           => Defaults::DISPLAY_TITLE,
+        'sanitize_callback' => 'sanitize_hex_color'
+    ) );
 
 }
 
@@ -77,7 +126,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::TEMPLATE,
             'options' => array(),
-            'value'   => get_option( Options::TEMPLATE, Defaults::TEMPLATE ),
+            'value'   => get_option( Options::TEMPLATE ),
             'attrs'   => array( 'class' => 'regular-text' )
         )
     );
@@ -91,7 +140,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::GRID_COLUMNS,
             'options' => array(),
-            'value'   => get_option( Options::GRID_COLUMNS, Defaults::GRID_COLUMNS )
+            'value'   => get_option( Options::GRID_COLUMNS )
         )
     );
 
@@ -103,7 +152,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::MARGIN,
-            'value'   => get_option( Options::MARGIN, Defaults::MARGIN ),
+            'value'   => get_option( Options::MARGIN ),
             'attrs'   => array( 'type' => 'number' )
         )
     );
@@ -116,7 +165,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'        => Options::SHOW_SOCIAL,
-            'checked'     => get_option( Options::SHOW_SOCIAL, Defaults::SHOW_SOCIAL ),
+            'checked'     => get_option( Options::SHOW_SOCIAL ),
             'label'       => __( 'Show social icons', 'ots' )
         )
     );
@@ -130,7 +179,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::SOCIAL_LINK_ACTION,
             'options' => array(),
-            'value'   => get_option( Options::SOCIAL_LINK_ACTION, Defaults::SOCIAL_LINK_ACTION )
+            'value'   => get_option( Options::SOCIAL_LINK_ACTION )
         )
     );
 
@@ -142,7 +191,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::DISPLAY_NAME,
-            'checked' => get_option( Options::DISPLAY_NAME, Defaults::SOCIAL_LINK_ACTION ),
+            'checked' => get_option( Options::DISPLAY_NAME ),
             'label'   => __( '', 'ots' )
         )
     );
@@ -155,7 +204,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::DISPLAY_TITLE,
-            'checked' => get_option( Options::DISPLAY_TITLE, Defaults::DISPLAY_TITLE ),
+            'checked' => get_option( Options::DISPLAY_TITLE ),
             'label'   => __( '', 'ots' )
         )
     );
@@ -168,7 +217,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::REWRITE_SLUG,
-            'value'   => get_option( Options::REWRITE_SLUG, Defaults::REWRITE_SLUG ),
+            'value'   => get_option( Options::REWRITE_SLUG  ),
             'attrs'   => array( 'class' => 'regular-text' )
         )
     );
@@ -181,7 +230,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::DISPLAY_LIMIT,
-            'value'   => get_option( Options::DISPLAY_LIMIT, Defaults::DISPLAY_LIMIT ),
+            'value'   => get_option( Options::DISPLAY_LIMIT ),
             'attrs'   => array( 'type' => 'number' )
         )
     );
@@ -194,7 +243,7 @@ function add_settings_fields() {
         'team-view-global',
         array(
             'name'    => Options::MAIN_COLOR,
-            'value'   => get_option( Options::MAIN_COLOR, Defaults::MAIN_COLOR )
+            'value'   => get_option( Options::MAIN_COLOR )
         )
     );
 
@@ -220,7 +269,7 @@ function add_settings_fields() {
         'single-member-view-global',
         array(
             'name'    => Options::S_TEMPLATE,
-            'value'   => get_option( Options::S_TEMPLATE, Defaults::S_TEMPLATE ),
+            'value'   => get_option( Options::S_TEMPLATE ),
             'options' => array()
         )
     );
@@ -233,7 +282,7 @@ function add_settings_fields() {
         'single-member-view-global',
         array(
             'name'    => Options::S_SHOW_SOCIAL,
-            'checked' => get_option( Options::S_SHOW_SOCIAL, Defaults::S_SHOW_SOCIAL ),
+            'checked' => get_option( Options::S_SHOW_SOCIAL ),
             'label'   => __( '', 'ots' )
         )
     );
