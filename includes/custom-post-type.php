@@ -93,9 +93,51 @@ function team_member_meta_boxes() {
         add_meta_box( 'team-member-tags', __( 'Interests / Tags / Additional Skills' . ( $preview ? ' - Pro version only' : '' ), 'ots' ), 'ots\do_tags_meta_box', null, 'advanced', 'default', array( 'preview' => $preview ) );
 
     }
+
 }
 
+function save_contact_meta_box( $post_id, \WP_Post $post ) {
+
+    if( $post->post_type == 'team_member' &&
+        check_admin_referer( 'contact_meta_box', 'contact_mata_box_nonce' ) ) {
+
+        update_post_meta( $post_id, 'team_member_title', sanitize_text_field( $_POST['team_member_title'] ) );
+        update_post_meta( $post_id, 'team_member_phone', sanitize_text_field( $_POST['team_member_phone'] ) );
+        update_post_meta( $post_id, 'team_member_email', sanitize_email( $_POST['team_member_email'] ) );
+
+        foreach( $_POST['team_member_links'] as $network => $link ) {
+            update_post_meta( $post_id, 'team_member_' . sanitize_key( $network ), esc_url_raw( $link ) );
+        }
+
+    }
+
+}
+
+add_action( 'save_post', 'ots\save_contact_meta_box', 10, 3 );
+
+
+function save_articles_meta_box( $post_id, \WP_Post $post ) {
+
+    if( $post->post_type == 'team_member' &&
+        check_admin_referer( 'articles_meta_box', 'articles_mata_box_nonce' ) ) {
+
+        update_post_meta( $post_id, 'team_member_article_bool', sanitize_checkbox( $_POST['team_member_article_bool'] ) );
+        update_post_meta( $post_id, 'team_member_article_title', sanitize_text_field( $_POST['team_member_article_title'] ) );
+
+        foreach( $_POST['team_member_articles'] as $index => $article ) {
+            update_post_meta( $post_id, 'team_member_article' . $index, intval( $article ) );
+        }
+
+    }
+
+}
+
+add_action( 'save_post', 'ots\save_articles_meta_box', 10, 3 );
+
+
 function do_contact_meta_box( \WP_Post $post ) { ?>
+
+    <?php wp_nonce_field( 'contact_meta_box', 'contact_mata_box_nonce' ); ?>
 
     <table class="widefat">
         <tr>
@@ -140,7 +182,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-facebook"
                        name="team_member_links[facebook]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_facebook', true ) ); ?>" />
             </td>
         </tr>
@@ -152,7 +193,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-twitter"
                        name="team_member_links[twitter]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_twitter', true ) ); ?>" />
             </td>
         </tr>
@@ -164,7 +204,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-linkedin"
                        name="team_member_links[linkedin]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_linkedin', true ) ); ?>" />
             </td>
         </tr>
@@ -176,7 +215,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-gplus"
                        name="team_member_links[gplus]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_gplus', true ) ); ?>" />
             </td>
         </tr>
@@ -188,7 +226,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-instagram"
                        name="team_member_links[instagram]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_instagram', true ) ); ?>" />
             </td>
         </tr>
@@ -200,7 +237,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-pinterest"
                        name="team_member_links[pinterest]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_pinterest', true ) ); ?>" />
             </td>
         </tr>
@@ -212,7 +248,6 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-website"
                        name="team_member_links[website]"
                        class="regular-text"
-                       type="url"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_website', true ) ); ?>" />
             </td>
         </tr>
@@ -222,6 +257,8 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
 
 
 function do_articles_meta_box( \WP_Post $post ) { ?>
+
+    <?php wp_nonce_field( 'articles_meta_box', 'articles_mata_box_nonce' ); ?>
 
     <table class="widefat">
         <tr>
@@ -252,7 +289,7 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
                 <label for="ots-member-article-1"><?php _e( 'Article 1', 'ots' ); ?></label>
             </th>
             <td>
-                <?php posts_dropdown( 'team_member_articles[]', 'ots-member-articles-1', get_post_meta( $post->ID, 'team_member_article1', true ) ); ?>
+                <?php posts_dropdown( 'team_member_articles[1]', 'ots-member-articles-1', get_post_meta( $post->ID, 'team_member_article1', true ) ); ?>
             </td>
         </tr>
         <tr>
@@ -260,7 +297,7 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
                 <label for="ots-member-article-2"><?php _e( 'Article 2', 'ots' ); ?></label>
             </th>
             <td>
-                <?php posts_dropdown( 'team_member_articles[]', 'ots-member-articles-2', get_post_meta( $post->ID, 'team_member_article2', true ) ); ?>
+                <?php posts_dropdown( 'team_member_articles[2]', 'ots-member-articles-2', get_post_meta( $post->ID, 'team_member_article2', true ) ); ?>
             </td>
         </tr>
         <tr>
@@ -268,7 +305,7 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
                 <label for="ots-member-article-3"><?php _e( 'Article 3', 'ots' ); ?></label>
             </th>
             <td>
-                <?php posts_dropdown( 'team_member_articles[]', 'ots-member-articles-3', get_post_meta( $post->ID, 'team_member_article3', true ) ); ?>
+                <?php posts_dropdown( 'team_member_articles[3]', 'ots-member-articles-3', get_post_meta( $post->ID, 'team_member_article3', true ) ); ?>
             </td>
         </tr>
     </table>
@@ -277,6 +314,8 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
 
 
 function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
+
+    <?php wp_nonce_field( 'skills_meta_box', 'skills_mata_box_nonce' ); ?>
 
     <table class="widefat">
         <tr>
@@ -413,6 +452,8 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
 function do_tags_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
+    <?php wp_nonce_field( 'tags_meta_box', 'tags_mata_box_nonce' ); ?>
+
     <table class="widefat">
         <tr>
             <th>
@@ -491,4 +532,3 @@ function posts_dropdown( $name, $id = '', $selected = '' ) {
     </select>
     
 <?php }
-

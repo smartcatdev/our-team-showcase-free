@@ -2,6 +2,17 @@
 
 namespace ots;
 
+function sanitize_checkbox( $value ) {
+
+    if( $value != 'on' && $value != 'off' ) {
+        return false;
+    }
+
+    return $value;
+
+}
+
+
 function do_select_box( array $args ) { ?>
 
     <select name="<?php esc_attr_e( $args['name'] ); ?>"
