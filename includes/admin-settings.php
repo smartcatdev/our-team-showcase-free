@@ -23,66 +23,77 @@ add_action( 'admin_menu', 'ots\add_menu_pages' );
  */
 function register_settings() {
 
-    register_setting( 'ots-settings', Options::TEMPLATE, array(
+    register_setting( 'ots-team-view', Options::TEMPLATE, array(
         'type'              => 'string',
         'default'           => Defaults::TEMPLATE,
         'sanitize_callback' => 'sanitize_title'
     ) );
 
-    register_setting( 'ots-settings', Options::REWRITE_SLUG, array(
+    register_setting( 'ots-team-view', Options::REWRITE_SLUG, array(
         'type'              => 'string',
         'default'           => Defaults::REWRITE_SLUG,
         'sanitize_callback' => 'sanitize_title'
     ) );
 
-    register_setting( 'ots-settings', Options::GRID_COLUMNS, array(
+    register_setting( 'ots-team-view', Options::GRID_COLUMNS, array(
         'type'              => 'integer',
         'default'           => Defaults::GRID_COLUMNS,
         'sanitize_callback' => 'intval'
     ) );
 
-    register_setting( 'ots-settings', Options::MARGIN, array(
+    register_setting( 'ots-team-view', Options::MARGIN, array(
         'type'              => 'integer',
         'default'           => Defaults::MARGIN,
         'sanitize_callback' => 'intval'
     ) );
 
-    register_setting( 'ots-settings', Options::SHOW_SOCIAL, array(
+    register_setting( 'ots-team-view', Options::SHOW_SOCIAL, array(
         'type'              => 'string',
         'default'           => Defaults::SHOW_SOCIAL,
         'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
 
-    register_setting( 'ots-settings', Options::SOCIAL_LINK_ACTION, array(
+    register_setting( 'ots-team-view', Options::SOCIAL_LINK_ACTION, array(
         'type'              => 'string',
         'default'           => Defaults::SOCIAL_LINK_ACTION,
         'sanitize_callback' => 'sanitize_title'
     ) );
 
-    register_setting( 'ots-settings', Options::DISPLAY_NAME, array(
+    register_setting( 'ots-team-view', Options::DISPLAY_NAME, array(
         'type'              => 'string',
         'default'           => Defaults::DISPLAY_NAME,
         'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
 
-    register_setting( 'ots-settings', Options::DISPLAY_TITLE, array(
+    register_setting( 'ots-team-view', Options::DISPLAY_TITLE, array(
         'type'              => 'string',
         'default'           => Defaults::DISPLAY_TITLE,
         'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
 
-    register_setting( 'ots-settings', Options::DISPLAY_LIMIT, array(
+    register_setting( 'ots-team-view', Options::DISPLAY_LIMIT, array(
         'type'              => 'integer',
         'default'           => Defaults::DISPLAY_LIMIT,
         'sanitize_callback' => 'intval'
     ) );
 
-    register_setting( 'ots-settings', Options::MAIN_COLOR, array(
+    register_setting( 'ots-team-view', Options::MAIN_COLOR, array(
         'type'              => 'string',
         'default'           => Defaults::DISPLAY_TITLE,
         'sanitize_callback' => 'sanitize_hex_color'
     ) );
 
+    register_setting( 'ots-single-member-view', Options::S_SHOW_SOCIAL, array(
+        'type'              => 'string',
+        'default'           => Defaults::S_SHOW_SOCIAL,
+        'sanitize_callback' => 'ots\sanitize_checkbox'
+    ) );
+
+    register_setting( 'ots-single-member-view', Options::S_TEMPLATE, array(
+        'type'              => 'string',
+        'default'           => Defaults::S_TEMPLATE,
+        'sanitize_callback' => 'sanitize_title'
+    ) );
 }
 
 add_action( 'admin_init', 'ots\register_settings' );
@@ -95,8 +106,8 @@ add_action( 'admin_init', 'ots\register_settings' );
  */
 function add_settings_sections() {
 
-    add_settings_section( 'team-view-global', __( 'Team View - Global Settings', 'ots' ), '', 'edit.php?post_type=team_member&page=ots-settings' );
-    add_settings_section( 'single-member-view-global', __( 'Single Member - Global Settings', 'ots' ), '', 'edit.php?post_type=team_member&page=ots-settings' );
+    add_settings_section( 'ots-team-view', __( 'Team View', 'ots' ), '', 'ots-team-view' );
+    add_settings_section( 'ots-single-member-view', __( 'Single Member', 'ots' ), '', 'ots-single-member-view' );
 
 }
 
@@ -121,8 +132,8 @@ function add_settings_fields() {
         Options::TEMPLATE,
         __( 'Template', 'ots' ),
         'ots\settings_select_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::TEMPLATE,
             'options' => array(),
@@ -135,8 +146,8 @@ function add_settings_fields() {
         Options::GRID_COLUMNS,
         __( 'Grid Columns', 'ots' ),
         'ots\settings_select_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::GRID_COLUMNS,
             'options' => array(),
@@ -148,8 +159,8 @@ function add_settings_fields() {
         Options::MARGIN,
         __( 'Margin', 'ots' ),
         'ots\settings_text_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::MARGIN,
             'value'   => get_option( Options::MARGIN ),
@@ -161,8 +172,8 @@ function add_settings_fields() {
         Options::SHOW_SOCIAL,
         __( 'Show Social Icons', 'ots' ),
         'ots\settings_check_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'        => Options::SHOW_SOCIAL,
             'checked'     => get_option( Options::SHOW_SOCIAL ),
@@ -174,8 +185,8 @@ function add_settings_fields() {
         Options::SOCIAL_LINK_ACTION,
         __( 'Social Icon Link Action', 'ots' ),
         'ots\settings_select_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::SOCIAL_LINK_ACTION,
             'options' => array(),
@@ -187,8 +198,8 @@ function add_settings_fields() {
         Options::DISPLAY_NAME,
         __( 'Display Name', 'ots' ),
         'ots\settings_check_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::DISPLAY_NAME,
             'checked' => get_option( Options::DISPLAY_NAME ),
@@ -200,8 +211,8 @@ function add_settings_fields() {
         Options::DISPLAY_TITLE,
         __( 'Display Title', 'ots' ),
         'ots\settings_check_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::DISPLAY_TITLE,
             'checked' => get_option( Options::DISPLAY_TITLE ),
@@ -213,8 +224,8 @@ function add_settings_fields() {
         Options::REWRITE_SLUG,
         __( 'Team Member URL Slug', 'ots' ),
         'ots\settings_text_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::REWRITE_SLUG,
             'value'   => get_option( Options::REWRITE_SLUG  ),
@@ -226,8 +237,8 @@ function add_settings_fields() {
         Options::DISPLAY_LIMIT,
         __( 'Display Limit', 'ots' ),
         'ots\settings_text_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::DISPLAY_LIMIT,
             'value'   => get_option( Options::DISPLAY_LIMIT ),
@@ -239,8 +250,8 @@ function add_settings_fields() {
         Options::MAIN_COLOR,
         __( 'Main Color', 'ots' ),
         'ots\settings_text_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'team-view-global',
+        'ots-team-view',
+        'ots-team-view',
         array(
             'name'    => Options::MAIN_COLOR,
             'value'   => get_option( Options::MAIN_COLOR )
@@ -249,10 +260,10 @@ function add_settings_fields() {
 
     if( $display_field_previews ) {
 
-        add_settings_field( 'pro-max-word-count', __( 'Max Word Count', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'team-view-global' );
-        add_settings_field( 'pro-name-font-size', __( 'Name Font Size', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'team-view-global' );
-        add_settings_field( 'pro-title-font-size', __( 'Title Font Size', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'team-view-global' );
-        add_settings_field( 'pro-icon-style', __( 'Icon Style', 'ots' ),'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'team-view-global' );
+        add_settings_field( 'pro-max-word-count', __( 'Max Word Count', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
+        add_settings_field( 'pro-name-font-size', __( 'Name Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
+        add_settings_field( 'pro-title-font-size', __( 'Title Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
+        add_settings_field( 'pro-icon-style', __( 'Icon Style', 'ots' ),'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
 
     }
 
@@ -265,8 +276,8 @@ function add_settings_fields() {
         Options::S_TEMPLATE,
         __( 'Template', 'ots' ),
         'ots\settings_select_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'single-member-view-global',
+        'ots-single-member-view',
+        'ots-single-member-view',
         array(
             'name'    => Options::S_TEMPLATE,
             'value'   => get_option( Options::S_TEMPLATE ),
@@ -278,8 +289,8 @@ function add_settings_fields() {
         Options::S_SHOW_SOCIAL,
         __( 'Show Social Icons', 'ots' ),
         'ots\settings_check_box',
-        'edit.php?post_type=team_member&page=ots-settings',
-        'single-member-view-global',
+        'ots-single-member-view',
+        'ots-single-member-view',
         array(
             'name'    => Options::S_SHOW_SOCIAL,
             'checked' => get_option( Options::S_SHOW_SOCIAL ),
@@ -289,10 +300,10 @@ function add_settings_fields() {
 
     if( $display_field_previews ) {
 
-        add_settings_field( 'pro-card-popup-margin-top', __( 'Card Popup Top Margin', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'single-member-view-global' );
-        add_settings_field( 'pro-display-skills-bar', __( 'Display Skills Bar', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'single-member-view-global' );
-        add_settings_field( 'pro-skills-title', __( 'Skills Title', 'ots' ), 'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'single-member-view-global' );
-        add_settings_field( 'pro-image-style', __( 'Image Style', 'ots' ),'ots\do_pro_only_field', 'edit.php?post_type=team_member&page=ots-settings', 'single-member-view-global' );
+        add_settings_field( 'pro-card-popup-margin-top', __( 'Card Popup Top Margin', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
+        add_settings_field( 'pro-display-skills-bar', __( 'Display Skills Bar', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
+        add_settings_field( 'pro-skills-title', __( 'Skills Title', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
+        add_settings_field( 'pro-image-style', __( 'Image Style', 'ots' ),'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
 
     }
 
@@ -306,17 +317,48 @@ add_action( 'admin_init', 'ots\add_settings_fields' );
  *
  * @since 4.0.0
  */
-function do_settings_page() { ?>
+function do_settings_page() {
 
-    <form method="post" action="options.php">
+    $tabs = apply_filters( 'ots_settings_page_tabs',  array(
+        'ots-team-view'          => __( 'Team View', 'ots' ),
+        'ots-single-member-view' => __( 'Single Member View', 'ots' )
+    ) );
 
-        <?php do_settings_sections( 'edit.php?post_type=team_member&page=ots-settings' ); ?>
+    reset( $tabs );
 
-        <?php settings_fields( 'ots-settings' ); ?>
+    $active = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : key( $tabs );
+    $screen = get_current_screen();
 
-        <?php submit_button(); ?>
+    ?>
 
-    </form>
+    <div class="wrap">
+
+            <h2><?php _e( 'Global Settings', 'ots' ); ?></h2>
+
+            <?php settings_errors(); ?>
+
+        <h2 class="nav-tab-wrapper">
+
+            <?php foreach( $tabs as $tab => $title ) : ?>
+
+                <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
+                   class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
+
+            <?php endforeach; ?>
+
+        </h2>
+
+        <form method="post" action="options.php">
+
+            <?php do_settings_sections( $active ); ?>
+
+            <?php settings_fields( $active ); ?>
+
+            <?php submit_button(); ?>
+
+        </form>
+
+    </div>
 
 <?php }
 

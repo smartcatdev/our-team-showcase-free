@@ -47,7 +47,7 @@ function register_team_member_post_type() {
         'supports'             => array( 'title', 'editor', 'thumbnail' ),
         'public'               => true,
         'rewrite'              => array(
-            'slug'  => get_option( Options::REWRITE_SLUG, Defaults::REWRITE_SLUG )
+            'slug'  => get_option( Options::REWRITE_SLUG )
         )
     );
 

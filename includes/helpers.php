@@ -11,7 +11,7 @@ namespace ots;
  */
 function sanitize_checkbox( $value ) {
 
-    if( $value != 'on' && $value != 'off' ) {
+    if( !empty( $value ) && $value !== 'on' ) {
         return false;
     }
 
