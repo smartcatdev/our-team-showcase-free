@@ -15,7 +15,6 @@ function do_migration() {
             'member_count'    => Options::DISPLAY_LIMIT,
             'text_color'      => Options::MAIN_COLOR,
             'margin'          => Options::MARGIN,
-            'social_link'     => Options::SOCIAL_LINK_ACTION,
             'single_template' => Options::S_TEMPLATE,
             'slug'            => Options::REWRITE_SLUG
         );
@@ -41,6 +40,8 @@ function do_migration() {
         // If the value was -1 set it to 'on' to display all
         update_option( Options::GRID_COLUMNS, $options['columns'] < 0 ? 'on' : $options['columns'] );
 
+        // If show social icons was set to open a new tab, change it to a boolean
+        update_option( Options::SOCIAL_LINK_ACTION, $options['social_link'] === 'new' ? 'on' : '' );
 
         // Delete the old options array
         delete_option( 'smartcat_team_options' );

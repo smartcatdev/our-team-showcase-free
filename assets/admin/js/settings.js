@@ -8,4 +8,7 @@ jQuery( document ).ready( function ( $ ) {
 
     } );
 
+
+    $( 'input[name="ots-global-team-main-color"]' ).wpColorPicker();
+
 } );

@@ -6,7 +6,8 @@ namespace ots;
 function enqueue_settings_scripts( $hook ) {
 
     if( strpos( $hook , 'ots-settings' ) !== false ) {
-        wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery' ), VERSION );
+        wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
+        wp_enqueue_style( 'wp-color-picker' );
     }
 
 }
@@ -68,7 +69,7 @@ function register_settings() {
     register_setting( 'ots-team-view', Options::SOCIAL_LINK_ACTION, array(
         'type'              => 'string',
         'default'           => Defaults::SOCIAL_LINK_ACTION,
-        'sanitize_callback' => 'sanitize_title'
+        'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
 
     register_setting( 'ots-team-view', Options::DISPLAY_NAME, array(
@@ -146,10 +147,10 @@ function add_settings_fields() {
         'ots-team-view',
         'ots-team-view',
         array(
-            'name'    => Options::TEMPLATE,
-            'options' => array(),
-            'value'   => get_option( Options::TEMPLATE ),
-            'attrs'   => array( 'class' => 'regular-text' )
+            'name'     => Options::TEMPLATE,
+            'options'  => array(),
+            'selected' => get_option( Options::TEMPLATE ),
+            'attrs'    => array( 'class' => 'regular-text' )
         )
     );
 
@@ -161,21 +162,32 @@ function add_settings_fields() {
         'ots-team-view',
         array(
             'name'    => Options::GRID_COLUMNS,
-            'options' => array(),
-            'value'   => get_option( Options::GRID_COLUMNS )
+            'selected' => get_option( Options::GRID_COLUMNS ),
+            'options' => array(
+                2  => 2,
+                3  => 3,
+                4  => 4,
+                5  => 5,
+                10 => 10
+            )
         )
     );
 
     add_settings_field(
         Options::MARGIN,
         __( 'Margin', 'ots' ),
-        'ots\settings_text_box',
+        'ots\settings_select_box',
         'ots-team-view',
         'ots-team-view',
         array(
-            'name'    => Options::MARGIN,
-            'value'   => get_option( Options::MARGIN ),
-            'attrs'   => array( 'type' => 'number' )
+            'name'     => Options::MARGIN,
+            'selected' => get_option( Options::MARGIN ),
+            'options'  => array(
+                0  => __( 'No Margin', 'ots' ),
+                5  => 5,
+                10 => 10,
+                15 => 15
+            )
         )
     );
 
@@ -194,14 +206,14 @@ function add_settings_fields() {
 
     add_settings_field(
         Options::SOCIAL_LINK_ACTION,
-        __( 'Social Icon Link Action', 'ots' ),
-        'ots\settings_select_box',
+        __( 'Social Links', 'ots' ),
+        'ots\settings_check_box',
         'ots-team-view',
         'ots-team-view',
         array(
             'name'    => Options::SOCIAL_LINK_ACTION,
-            'options' => array(),
-            'value'   => get_option( Options::SOCIAL_LINK_ACTION )
+            'checked' => get_option( Options::SOCIAL_LINK_ACTION ),
+            'label'   => __( 'Open social links in a new tab', 'ots' )
         )
     );
 
@@ -389,7 +401,7 @@ function settings_select_box( array $args ) { ?>
         <?php foreach( $args['options'] as $value => $label ) : ?>
 
             <option value="<?php esc_attr_e( $value ); ?>"
-                <?php selected( isset( $args['selected'] ) ? $args['selected'] : '', $value ); ?>>
+                <?php selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' ); ?>>
 
                 <?php esc_html_e( $label ); ?></option>
 
@@ -475,7 +487,7 @@ function do_pro_only_field() { ?>
 <?php }
 
 
-function display_limit_field( $args ) { ?>
+function display_limit_field() { ?>
 
     <?php $value = get_option( Options::DISPLAY_LIMIT ); ?>
 
@@ -487,7 +499,9 @@ function display_limit_field( $args ) { ?>
 
            <?php disabled( $value, 'on' ); ?> >
 
-    <label>
+    <?php _e( ' - or - ', 'ots' ); ?>
+
+    <label style="display: inline-block; margin: 10px 0;">
 
         <input type="checkbox"
                id="ots-display-limit-all"
@@ -495,7 +509,7 @@ function display_limit_field( $args ) { ?>
 
                 <?php checked( $value, 'on' ); ?> >
 
-        <?php _e( 'Display All', 'ots' ); ?>
+        <?php _e( 'Display all', 'ots' ); ?>
 
     </label>
 
