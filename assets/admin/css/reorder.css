@@ -8,6 +8,7 @@
     cursor: pointer;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     position: relative;
+    margin: 10px 5px;
 }
 
 .ots-member:hover {
@@ -17,6 +18,7 @@
 
 .ots-member .edit {
     color: #fff;
+    border: 2px solid #fff;
     text-decoration: none;
     opacity: 0;
     position: absolute;
@@ -24,8 +26,8 @@
     margin: -10px;
     background: #0085ba;
     border-radius: 50%;
-    padding: 5px;
-    z-index: 1;
+    padding: 4px;
+    z-index: 2;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
     transition: all 0.5s ease;
 }
@@ -62,7 +64,6 @@
 
     .ots-member {
         max-width: 31%;
-        margin: 5px;
     }
 
 }
