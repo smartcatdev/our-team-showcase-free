@@ -85,3 +85,18 @@ function print_attrs( array $attrs ) {
     }
 
 }
+
+
+function get_members_in_order() {
+
+    $args = array(
+        'post_type'      => 'team_member',
+        'posts_per_page' => -1,
+        'meta_key'       => 'sc_member_order',
+        'orderby'        => 'meta_value_num',
+        'order'          => 'ASC',
+    );
+
+    return  new \WP_Query( $args );
+
+}

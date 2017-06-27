@@ -22,6 +22,7 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_settings_scripts' );
  */
 function add_menu_pages() {
 
+    add_submenu_page( 'edit.php?post_type=team_member', __( 'Re-Order Members', 'ots' ), __( 'Re-Order Members', 'ots' ), 'manage_options', 'ots-reorder-members', 'ots\do_member_reorder_page' );
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
 
 }
@@ -525,5 +526,16 @@ function display_limit_field() { ?>
         <?php _e( 'Display all', 'ots' ); ?>
 
     </label>
+
+<?php }
+
+
+function do_member_reorder_page() { var_dump( get_members_in_order()->posts ); die;?>
+
+    <?php foreach( get_members_in_order()->posts as $member ) : ?>
+
+        <?php echo $member->post_title; ?>
+
+    <?php endforeach; ?>
 
 <?php }

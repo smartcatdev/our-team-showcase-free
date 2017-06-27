@@ -144,6 +144,16 @@ function team_member_meta_boxes() {
 
 }
 
+function set_default_post_meta( $post_id, $post, $update ) {
+
+    if( !$update ) {
+        update_post_meta( $post_id, 'sc_member_order', 1 );
+    }
+
+}
+
+add_action( 'save_post_team_member', 'ots\set_default_post_meta', 10, 3 );
+
 /**
  * Sanitize and save the contact metabox fields.
  *
@@ -151,10 +161,10 @@ function team_member_meta_boxes() {
  * @param \WP_Post $post
  * @since 4.0.0
  */
-function save_contact_meta_box( $post_id, \WP_Post $post ) {
+function save_contact_meta_box( $post_id ) {
 
-    if( $post->post_type == 'team_member' && isset( $_POST['articles_mata_box_nonce'] )
-        && wp_verify_nonce( $_POST['contact_mata_box_nonce'], 'contact_meta_box' ) ) {
+    if( isset( $_POST['articles_mata_box_nonce'] ) &&
+        wp_verify_nonce( $_POST['contact_mata_box_nonce'], 'contact_meta_box' ) ) {
 
         update_post_meta( $post_id, 'team_member_title', sanitize_text_field( $_POST['team_member_title'] ) );
         update_post_meta( $post_id, 'team_member_phone', sanitize_text_field( $_POST['team_member_phone'] ) );
@@ -168,7 +178,7 @@ function save_contact_meta_box( $post_id, \WP_Post $post ) {
 
 }
 
-add_action( 'save_post', 'ots\save_contact_meta_box', 10, 3 );
+add_action( 'save_post_team_member', 'ots\save_contact_meta_box' );
 
 
 /**
@@ -178,10 +188,10 @@ add_action( 'save_post', 'ots\save_contact_meta_box', 10, 3 );
  * @param \WP_Post $post
  * @since 4.0.0
  */
-function save_articles_meta_box( $post_id, \WP_Post $post ) {
+function save_articles_meta_box( $post_id ) {
 
-    if( $post->post_type == 'team_member' && isset( $_POST['articles_mata_box_nonce'] )
-        && wp_verify_nonce( $_POST['articles_mata_box_nonce'], 'articles_meta_box' ) ) {
+    if( isset( $_POST['articles_mata_box_nonce'] ) &&
+        wp_verify_nonce( $_POST['articles_mata_box_nonce'], 'articles_meta_box' ) ) {
 
         update_post_meta( $post_id, 'team_member_article_bool', sanitize_checkbox( $_POST['team_member_article_bool'] ) );
         update_post_meta( $post_id, 'team_member_article_title', sanitize_text_field( $_POST['team_member_article_title'] ) );
@@ -194,7 +204,7 @@ function save_articles_meta_box( $post_id, \WP_Post $post ) {
 
 }
 
-add_action( 'save_post', 'ots\save_articles_meta_box', 10, 3 );
+add_action( 'save_post_team_member', 'ots\save_articles_meta_box' );
 
 
 /**
