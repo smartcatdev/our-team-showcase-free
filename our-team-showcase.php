@@ -17,9 +17,9 @@ namespace ots;
 include_once dirname( __FILE__ ) . '/constants.php';
 include_once dirname( __FILE__ ) . '/upgrade.php';
 include_once dirname( __FILE__ ) . '/includes/helpers.php';
-include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
 include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
-
+include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
+include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
 
 /**
  * Load the plugin'js text domain.
