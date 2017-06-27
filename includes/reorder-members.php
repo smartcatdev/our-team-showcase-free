@@ -68,7 +68,7 @@ function do_member_reorder_page() { ?>
 
                                 <div class="member-info">
                                     <h2 class="name"><?php echo esc_html_e( $member->post_title ); ?></h2>
-                                    <p class="job-title"><?php esc_html_e( get_post_meta( $member->ID, 'team_member_title', true ) ); ?></p>
+                                    <p class="description job-title"><?php esc_html_e( get_post_meta( $member->ID, 'team_member_title', true ) ); ?></p>
                                 </div>
 
                             </div>
