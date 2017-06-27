@@ -1,0 +1,45 @@
+.ots-member {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #ddd;
+    height: 300px;
+    vertical-align: top;
+    width: 100%;
+}
+
+.ots-member .inner {
+    padding: 10px;
+}
+
+.ots-member .inner .thumbnail {
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+}
+
+.ots-member .name,
+.ots-member .job-title {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media screen and (min-width: 768px) {
+
+    .ots-member {
+        max-width: 31%;
+        margin: 5px;
+    }
+
+}
+
+@media screen and (min-width: 1025px) {
+
+    .ots-member {
+        max-width: 18.5%;
+    }
+
+}
