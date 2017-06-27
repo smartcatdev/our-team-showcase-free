@@ -2,6 +2,18 @@
 
 namespace ots;
 
+function sanitize_display_limit( $value ) {
+
+    if( $value === 'on' || is_null( $value ) ) {
+        return $value;
+    } else if( intval( $value ) < 1 ) {
+        return get_option( Options::DISPLAY_LIMIT );
+    }
+
+    return $value;
+}
+
+
 /**
  * Sanitize a checkbox to either be on or off.
  *

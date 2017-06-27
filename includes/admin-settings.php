@@ -2,6 +2,18 @@
 
 namespace ots;
 
+
+function enqueue_settings_scripts( $hook ) {
+
+    if( strpos( $hook , 'ots-settings' ) !== false ) {
+        wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery' ), VERSION );
+    }
+
+}
+
+add_action( 'admin_enqueue_scripts', 'ots\enqueue_settings_scripts' );
+
+
 /**
  * Register admin menu pages.
  *
@@ -72,9 +84,8 @@ function register_settings() {
     ) );
 
     register_setting( 'ots-team-view', Options::DISPLAY_LIMIT, array(
-        'type'              => 'integer',
         'default'           => Defaults::DISPLAY_LIMIT,
-        'sanitize_callback' => 'intval'
+        'sanitize_callback' => 'ots\sanitize_display_limit'
     ) );
 
     register_setting( 'ots-team-view', Options::MAIN_COLOR, array(
@@ -236,14 +247,9 @@ function add_settings_fields() {
     add_settings_field(
         Options::DISPLAY_LIMIT,
         __( 'Display Limit', 'ots' ),
-        'ots\settings_text_box',
+        'ots\display_limit_field',
         'ots-team-view',
-        'ots-team-view',
-        array(
-            'name'    => Options::DISPLAY_LIMIT,
-            'value'   => get_option( Options::DISPLAY_LIMIT ),
-            'attrs'   => array( 'type' => 'number' )
-        )
+        'ots-team-view'
     );
 
     add_settings_field(
@@ -465,5 +471,32 @@ function settings_text_box( array $args ) { ?>
 function do_pro_only_field() { ?>
 
     <p class="description"><?php _e( 'Pro version only', 'ots' ); ?></p>
+
+<?php }
+
+
+function display_limit_field( $args ) { ?>
+
+    <?php $value = get_option( Options::DISPLAY_LIMIT ); ?>
+
+    <input type="number"
+           min="1"
+           id="ots-display-limit-number"
+           name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
+           value="<?php $value !== 'on' ? esc_attr_e( $value ) : ''; ?>"
+
+           <?php disabled( $value, 'on' ); ?> >
+
+    <label>
+
+        <input type="checkbox"
+               id="ots-display-limit-all"
+               name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
+
+                <?php checked( $value, 'on' ); ?> >
+
+        <?php _e( 'Display All', 'ots' ); ?>
+
+    </label>
 
 <?php }

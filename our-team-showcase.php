@@ -18,7 +18,7 @@ include_once dirname( __FILE__ ) . '/constants.php';
 
 
 /**
- * Load the plugin's text domain.
+ * Load the plugin'js text domain.
  *
  * @since 4.0.0
  */
@@ -32,7 +32,7 @@ add_action( 'plugins_loaded', 'ots\load_text_domain' );
 
 
 /**
- * Pull in all of the plugin's include files
+ * Pull in all of the plugin'js include files
  *
  * @since 4.0.0
  */
