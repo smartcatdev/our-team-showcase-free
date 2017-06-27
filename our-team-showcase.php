@@ -41,10 +41,12 @@ function include_plugin_files() {
     include_once dirname(__FILE__) . '/includes/helpers.php';
     include_once dirname(__FILE__) . '/includes/admin-settings.php';
     include_once dirname(__FILE__) . '/includes/custom-post-type.php';
+    include_once dirname(__FILE__) . '/upgrade.php';
 
 }
 
 add_action( 'plugins_loaded', 'ots\include_plugin_files' );
+
 
 function asset( $path = '' ) {
     return trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/' . ltrim( $path, '/' );
