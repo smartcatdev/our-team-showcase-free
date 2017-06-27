@@ -120,8 +120,8 @@ function team_member_meta_boxes() {
  */
 function save_contact_meta_box( $post_id, \WP_Post $post ) {
 
-    if( $post->post_type == 'team_member' &&
-        check_admin_referer( 'contact_meta_box', 'contact_mata_box_nonce' ) ) {
+    if( $post->post_type == 'team_member' && isset( $_POST['articles_mata_box_nonce'] )
+        && wp_verify_nonce( $_POST['contact_mata_box_nonce'], 'contact_meta_box' ) ) {
 
         update_post_meta( $post_id, 'team_member_title', sanitize_text_field( $_POST['team_member_title'] ) );
         update_post_meta( $post_id, 'team_member_phone', sanitize_text_field( $_POST['team_member_phone'] ) );
@@ -147,8 +147,8 @@ add_action( 'save_post', 'ots\save_contact_meta_box', 10, 3 );
  */
 function save_articles_meta_box( $post_id, \WP_Post $post ) {
 
-    if( $post->post_type == 'team_member' &&
-        check_admin_referer( 'articles_meta_box', 'articles_mata_box_nonce' ) ) {
+    if( $post->post_type == 'team_member' && isset( $_POST['articles_mata_box_nonce'] )
+        && wp_verify_nonce( $_POST['articles_mata_box_nonce'], 'articles_meta_box' ) ) {
 
         update_post_meta( $post_id, 'team_member_article_bool', sanitize_checkbox( $_POST['team_member_article_bool'] ) );
         update_post_meta( $post_id, 'team_member_article_title', sanitize_text_field( $_POST['team_member_article_title'] ) );
@@ -405,6 +405,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
 
                 <input id="ots-member-skill-1"
                        name="team_member_skill_ratings[]"
+                       type="number"
                        class="ots-member-skill-rating"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value1', true ) ); ?>"
@@ -428,6 +429,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
                 <input id="ots-member-skill-2"
                        name="team_member_skill_ratings[]"
                        class="ots-member-skill-rating"
+                       type="number"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value2', true ) ); ?>"
 
@@ -450,6 +452,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
                 <input id="ots-member-skill-3"
                        name="team_member_skill_ratings[]"
                        class="ots-member-skill-rating"
+                       type="number"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value3', true ) ); ?>"
 
@@ -472,6 +475,7 @@ function do_skills_meta_box( \WP_Post $post, array $meta_box ) { ?>
                 <input id="ots-member-skill-4"
                        name="team_member_skill_ratings[]"
                        class="ots-member-skill-rating"
+                       type="number"
                        placeholder="<?php _e( 'Rating 1 - 10', 'ots' ); ?>"
                        value="<?php esc_attr_e( get_post_meta( $post->ID, 'team_member_skill_value4', true ) ); ?>"
 
