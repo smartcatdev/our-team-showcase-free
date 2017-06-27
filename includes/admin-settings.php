@@ -106,6 +106,7 @@ function register_settings() {
         'default'           => Defaults::S_TEMPLATE,
         'sanitize_callback' => 'sanitize_title'
     ) );
+
 }
 
 add_action( 'admin_init', 'ots\register_settings' );
@@ -328,6 +329,18 @@ function add_settings_fields() {
 }
 
 add_action( 'admin_init', 'ots\add_settings_fields' );
+
+
+function team_member_slug_changed( $option ) {
+
+    if( $option === Options::REWRITE_SLUG ) {
+        register_team_member_post_type();
+        flush_rewrite_rules();
+    }
+
+}
+
+add_action( 'updated_option', 'ots\team_member_slug_changed' );
 
 
 /**

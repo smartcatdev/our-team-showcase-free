@@ -15,6 +15,10 @@ namespace ots;
  * Include constants and Options definitions
  */
 include_once dirname( __FILE__ ) . '/constants.php';
+include_once dirname( __FILE__ ) . '/upgrade.php';
+include_once dirname( __FILE__ ) . '/includes/helpers.php';
+include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
+include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
 
 
 /**
@@ -31,21 +35,42 @@ function load_text_domain() {
 add_action( 'plugins_loaded', 'ots\load_text_domain' );
 
 
-/**
- * Pull in all of the plugin'js include files
- *
- * @since 4.0.0
- */
-function include_plugin_files() {
+function activate() {
 
-    include_once dirname(__FILE__) . '/includes/helpers.php';
-    include_once dirname(__FILE__) . '/includes/admin-settings.php';
-    include_once dirname(__FILE__) . '/includes/custom-post-type.php';
-    include_once dirname(__FILE__) . '/upgrade.php';
+    register_team_member_post_type();
+    register_team_member_position_taxonomy();
+
+    flush_rewrite_rules();
 
 }
 
-add_action( 'plugins_loaded', 'ots\include_plugin_files' );
+register_activation_hook( __FILE__, 'ots\activate' );
+
+
+function deactivate() {
+
+    unregister_setting( 'ots-team-view', Options::TEMPLATE );
+    unregister_setting( 'ots-team-view', Options::REWRITE_SLUG );
+    unregister_setting( 'ots-team-view', Options::GRID_COLUMNS );
+    unregister_setting( 'ots-team-view', Options::MARGIN );
+    unregister_setting( 'ots-team-view', Options::SHOW_SOCIAL );
+    unregister_setting( 'ots-team-view', Options::SOCIAL_LINK_ACTION );
+    unregister_setting( 'ots-team-view', Options::DISPLAY_NAME );
+    unregister_setting( 'ots-team-view', Options::DISPLAY_TITLE );
+    unregister_setting( 'ots-team-view', Options::DISPLAY_LIMIT );
+    unregister_setting( 'ots-team-view', Options::MAIN_COLOR );
+
+
+    unregister_setting( 'ots-single-member-view', Options::S_SHOW_SOCIAL );
+    unregister_setting( 'ots-single-member-view', Options::S_TEMPLATE );
+
+
+    unregister_post_type( 'team_member' );
+    unregister_taxonomy( 'team_member_position' );
+
+}
+
+register_deactivation_hook( __FILE__, 'ots\deactivate' );
 
 
 function asset( $path = '' ) {
