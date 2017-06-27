@@ -90,6 +90,39 @@ function register_team_member_position_taxonomy() {
 add_action( 'init', 'ots\register_team_member_position_taxonomy' );
 
 
+function add_team_member_custom_colums( $columns ) {
+
+    unset( $columns['date'] );
+
+    $columns['team_member_title'] = __( 'Title', 'ots' );
+    $columns['team_member_image'] = __( 'Image', 'ots' );
+
+    return $columns;
+
+}
+
+add_filter( 'manage_edit-team_member_columns', 'ots\add_team_member_custom_colums' );
+
+
+function do_team_member_custom_columns( $column, $post_id ) {
+
+    switch( $column ) {
+
+        case 'team_member_title' :
+            echo get_post_meta( $post_id, 'team_member_title', true );
+            break;
+
+        case 'team_member_image' :
+            echo get_the_post_thumbnail( $post_id, array( 50, 50 ) );
+            break;
+
+    }
+
+}
+
+add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom_columns', 10, 2 );
+
+
 /**
  * Renders the member custom post type metabox fields.
  *
