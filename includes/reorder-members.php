@@ -57,6 +57,9 @@ function do_member_reorder_page() { ?>
                     <?php foreach( $members->posts as $member ) : ?>
 
                         <li id="member_<?php esc_attr_e( $member->ID ); ?>" class="ots-member">
+                            <a class="edit" href="<?php echo esc_url( get_edit_post_link( $member->ID ) ); ?>">
+                                <span class="dashicons dashicons-edit"></span>
+                            </a>
                             <div class="inner">
                                 <div class="thumbnail" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( $member ) ); ?>');"></div>
                                 <div class="member-info">
