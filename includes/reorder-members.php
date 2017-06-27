@@ -50,7 +50,7 @@ function do_member_reorder_page() { ?>
 
         <?php if( $members->have_posts() ) : ?>
 
-            <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+            <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 
                 <ul id="ots-team-member-order">
 
@@ -58,10 +58,10 @@ function do_member_reorder_page() { ?>
 
                         <li id="member_<?php esc_attr_e( $member->ID ); ?>" class="ots-member">
                             <div class="inner">
-                                <div class="thumbnail" style="background-image: url('<?php echo get_the_post_thumbnail_url( $member ); ?>');"></div>
+                                <div class="thumbnail" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( $member ) ); ?>');"></div>
                                 <div class="member-info">
-                                    <h2 class="name"><?php echo $member->post_title; ?></h2>
-                                    <p class="job-title"><?php echo get_post_meta( $member->ID, 'team_member_title', true ); ?></p>
+                                    <h2 class="name"><?php echo esc_html_e( $member->post_title ); ?></h2>
+                                    <p class="job-title"><?php esc_html_e( get_post_meta( $member->ID, 'team_member_title', true ) ); ?></p>
                                 </div>
                             </div>
                         </li>
