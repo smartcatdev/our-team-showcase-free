@@ -12,8 +12,6 @@ function do_migration() {
         // Map out all non-boolean values
         $map = array(
             'template'        => Options::TEMPLATE,
-            'member_count'    => Options::DISPLAY_LIMIT,
-            'text_color'      => Options::MAIN_COLOR,
             'margin'          => Options::MARGIN,
             'single_template' => Options::S_TEMPLATE,
             'slug'            => Options::REWRITE_SLUG
@@ -36,9 +34,12 @@ function do_migration() {
             update_option( $new, $options[ $old ] == 'yes' ? 'on' : '' );
         }
 
+        // Add hash to main color
+        update_option( Options::MAIN_COLOR, '#' . $options['text_color'] );
 
         // If the value was -1 set it to 'on' to display all
         update_option( Options::GRID_COLUMNS, $options['columns'] < 0 ? 'on' : $options['columns'] );
+        update_option( Options::DISPLAY_LIMIT, $options['member_count'] < 0 ? 'on' : $options['member_count'] );
 
         // If show social icons was set to open a new tab, change it to a boolean
         update_option( Options::SOCIAL_LINK_ACTION, $options['social_link'] === 'new' ? 'on' : '' );
