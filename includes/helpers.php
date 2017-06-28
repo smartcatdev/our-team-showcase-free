@@ -56,3 +56,34 @@ function print_attrs( array $attrs ) {
     }
 
 }
+
+
+function social_link( $link, $icon = '' ) {
+
+    // See if we're opening links in a new tab
+    $target = get_option( Options::SOCIAL_LINK_ACTION ) == 'on' ? '_blank' : false;
+
+    return '<a ' . ( $target ? 'target="' . $target .'"' : '' ) . ' href="' . esc_url( $link ) . '">
+            <img src="' . esc_url( $icon ) . '" class="sc-social" /></a>';
+
+}
+
+function do_member_social_links( \WP_Post $member ) {
+
+    $links = array(
+        'facebook'  => '',
+        'twitter'   => '',
+        'linkedin'  => '',
+        'gplus'     => '',
+        'email'     => '',
+        'phone'     => '',
+        'pinterest' => '',
+        'instagram' => '',
+        'website'   => ''
+    );
+
+    foreach( $links as $meta_key => $icon ) {
+        echo social_link( get_post_meta( $member->ID, "team_member_$meta_key", true ), $icon );
+    }
+
+}

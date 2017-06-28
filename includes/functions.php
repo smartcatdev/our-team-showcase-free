@@ -2,11 +2,13 @@
 
 namespace ots;
 
-function get_members_in_order() {
+function get_members_in_order( $limit = false ) {
+
+    $limit = get_option( Options::DISPLAY_LIMIT );
 
     $args = array(
         'post_type'      => 'team_member',
-        'posts_per_page' => -1,
+        'posts_per_page' => $limit == 'on' ? -1 : $limit,
         'meta_key'       => 'sc_member_order',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
@@ -16,9 +18,9 @@ function get_members_in_order() {
 
 }
 
-function get_member_avatar( \WP_Post $member ) {
+function get_member_avatar( \WP_Post $member, $size = 'post-thumbnail' ) {
 
-    $url = get_the_post_thumbnail_url( $member );
+    $url = get_the_post_thumbnail_url( $member, $size );
 
     if( !$url ) {
         $url = asset( 'images/default-avatar.png' );
