@@ -62,9 +62,6 @@ function deactivate() {
     unregister_setting( 'ots-team-view', Options::DISPLAY_TITLE );
     unregister_setting( 'ots-team-view', Options::DISPLAY_LIMIT );
     unregister_setting( 'ots-team-view', Options::MAIN_COLOR );
-
-
-    unregister_setting( 'ots-single-member-view', Options::S_SHOW_SOCIAL );
     unregister_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE );
 
 

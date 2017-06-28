@@ -47,19 +47,19 @@ function print_dynamic_styles() { ?>
 
     <style id="ots-dynamic-styles">
 
-        #sc_our_team a {
+        #ots a {
             color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
         }
 
-        .grid#sc_our_team .sc_team_member .sc_team_member_name,
-        .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
-        .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
-        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name {
+        .grid#ots .ots-team-member .ots-name,
+        .grid#ots .ots-team-member .ots-jobtitle,
+        .grid-circles#ots .ots-team-member .ots-name,
+        .grid-circles#ots .ots-team-member .ots-jobtitle {
             background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
         }
 
-        .grid#sc_our_team .sc_team_member {
-            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+        #ots .ots-team-member {
+            margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
         }
 
     </style>
