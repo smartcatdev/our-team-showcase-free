@@ -24,8 +24,14 @@ function do_shortcode_output( $attributes = array() ) {
     $args = shortcode_atts( $defaults, $attributes );
     $include = template_path( $args['template'] . '.php' );
 
+    // Helper for getting short code attributes
+    $get_attr = function ( $attr, $value = false ) use ( $args ) {
+
+        return array_key_exists( $attr, $args ) ? $args[ $attr ] : $value;
+
+    };
+
     ob_start();
-    extract( $args );
 
     // Dynamically pull in the template file
     include_once apply_filters( 'ots_template_include', $include, $attributes );

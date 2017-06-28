@@ -3,10 +3,11 @@
 namespace ots;
 
 $members = get_members_in_order();
+$vars = get_defined_vars();
 
 ?>
 
-<div id="sc_our_team" class="<?php esc_attr_e( $template ); esc_attr_e( ' sc-col' . get_option( Options::GRID_COLUMNS ) ); ?>">
+<div id="sc_our_team" class="<?php esc_attr_e( $get_attr( 'template', '' ) ); esc_attr_e( ' sc-col' . get_option( Options::GRID_COLUMNS ) ); ?>">
 
     <div class="clear"></div>
 
@@ -44,7 +45,7 @@ $members = get_members_in_order();
 
                     <div class="sc_team_member_overlay"></div>
 
-                    <?php if( $single_template !== 'disabled' ) : ?>
+                    <?php if( $get_attr( 'single_template' ) !== 'disabled' ) : ?>
 
                         <div class="sc_team_more">
                             <a href="<?php the_permalink() ?>" rel="bookmark">
