@@ -7,7 +7,7 @@ $members = get_members_in_order();
 ?>
 
 <?php //TODO fix css files ?>
-<div id="sc_our_team" class="grid <?php esc_attr_e( ' col-' . get_option( Options::GRID_COLUMNS ) ); ?>">
+<div id="sc_our_team" class="grid <?php esc_attr_e( ' sc-col' . get_option( Options::GRID_COLUMNS ) ); ?>">
 
     <?php if ( $members->have_posts() ) : ?>
 

@@ -3,11 +3,13 @@ jQuery( document ).ready(function($){
     do_resize();
     
     $( window ).resize(function() {
+
         do_resize();
         
     });
 
     function do_resize() {
+
         var member_height = $('#sc_our_team.grid .sc_team_member').width();
         $('#sc_our_team.grid .sc_team_member .sc_team_member_inner').each(function(){
             $(this).css({

@@ -74,7 +74,7 @@ function sanitize_template( $template ) {
 function sanitize_single_template( $template ) {
 
     if( !array_key_exists( $template, get_single_templates() ) ) {
-        $template = get_option( Options::S_TEMPLATE );
+        $template = get_option( Options::SINGLE_TEMPLATE );
     }
 
     return $template;

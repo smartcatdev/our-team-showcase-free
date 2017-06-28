@@ -59,12 +59,7 @@ final class Options {
     /**
      * @since 4.0.0
      */
-    const S_TEMPLATE = 'ots-global-single-template';
-
-    /**
-     * @since 4.0.0
-     */
-    const S_SHOW_SOCIAL = 'ots-global-single-show-social';
+    const SINGLE_TEMPLATE = 'ots-global-single-template';
 
     /**
      * @since 4.0.0
@@ -129,10 +124,5 @@ final class Defaults {
      * @since 4.0.0
      */
     const S_TEMPLATE = '';
-
-    /**
-     * @since 4.0.0
-     */
-    const S_SHOW_SOCIAL = 'on';
 
 }

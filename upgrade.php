@@ -13,7 +13,7 @@ function do_migration() {
         $map = array(
             'template'        => Options::TEMPLATE,
             'margin'          => Options::MARGIN,
-            'single_template' => Options::S_TEMPLATE,
+            'single_template' => Options::SINGLE_TEMPLATE,
             'slug'            => Options::REWRITE_SLUG
         );
 
@@ -25,7 +25,6 @@ function do_migration() {
         // Map out all boolean values
         $checkboxes = array(
             'social'          => Options::SHOW_SOCIAL,
-            'single_social'   => Options::S_SHOW_SOCIAL,
             'name'            => Options::DISPLAY_NAME,
             'title'           => Options::DISPLAY_TITLE,
         );

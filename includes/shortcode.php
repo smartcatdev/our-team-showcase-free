@@ -18,7 +18,7 @@ function do_shortcode_output( $attributes = array() ) {
     $defaults = array(
         'group'           => '',
         'template'        => get_option( Options::TEMPLATE ),
-        'single_template' => get_option( Options::S_TEMPLATE )
+        'single_template' => get_option( Options::SINGLE_TEMPLATE )
     );
 
     $args = shortcode_atts( $defaults, $attributes );
@@ -47,27 +47,15 @@ function print_dynamic_styles() { ?>
 
     <style id="ots-dynamic-styles">
 
-        #sc_our_team a,
-        .sc_our_team_lightbox .name,
-        .sc_personal_quote span.sc_team_icon-quote-left {
+        #sc_our_team a {
             color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
         }
 
         .grid#sc_our_team .sc_team_member .sc_team_member_name,
         .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
         .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
-        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name,
-        #sc_our_team_lightbox .progress,
-        .sc_our_team_panel .sc-right-panel .sc-name,
-        #sc_our_team .sc_team_member .icons span,
-        .sc_our_team_panel .sc-right-panel .sc-skills .progress,
-        #sc_our_team_lightbox .sc_our_team_lightbox .social span,
-        .sc_team_single_member .sc_team_single_skills .progress {
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name {
             background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
-        }
-
-        .stacked#sc_our_team .smartcat_team_member {
-            border-color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
         }
 
         .grid#sc_our_team .sc_team_member {

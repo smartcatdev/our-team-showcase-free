@@ -65,7 +65,7 @@ function deactivate() {
 
 
     unregister_setting( 'ots-single-member-view', Options::S_SHOW_SOCIAL );
-    unregister_setting( 'ots-single-member-view', Options::S_TEMPLATE );
+    unregister_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE );
 
 
     unregister_post_type( 'team_member' );

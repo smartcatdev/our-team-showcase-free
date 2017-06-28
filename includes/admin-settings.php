@@ -97,13 +97,7 @@ function register_settings() {
         'sanitize_callback' => 'sanitize_hex_color'
     ) );
 
-    register_setting( 'ots-single-member-view', Options::S_SHOW_SOCIAL, array(
-        'type'              => 'string',
-        'default'           => Defaults::S_SHOW_SOCIAL,
-        'sanitize_callback' => 'ots\sanitize_checkbox'
-    ) );
-
-    register_setting( 'ots-single-member-view', Options::S_TEMPLATE, array(
+    register_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE, array(
         'type'              => 'string',
         'default'           => Defaults::S_TEMPLATE,
         'sanitize_callback' => 'ots\sanitize_single_template'
@@ -314,32 +308,20 @@ function add_settings_fields() {
      * @since 4.0.0
      */
     add_settings_field(
-        Options::S_TEMPLATE,
+        Options::SINGLE_TEMPLATE,
         __( 'Template', 'ots' ),
         'ots\settings_select_box',
         'ots-single-member-view',
         'ots-single-member-view',
         array(
-            'name'             => Options::S_TEMPLATE,
-            'selected'         => get_option( Options::S_TEMPLATE ),
+            'name'             => Options::SINGLE_TEMPLATE,
+            'selected'         => get_option( Options::SINGLE_TEMPLATE ),
             'attrs'            => array( 'class' => 'regular-text' ),
             'options'          => $templates + $preview_templates,
             'disabled_options' => array_keys( $preview_templates )
         )
     );
 
-    add_settings_field(
-        Options::S_SHOW_SOCIAL,
-        __( 'Show Social Icons', 'ots' ),
-        'ots\settings_check_box',
-        'ots-single-member-view',
-        'ots-single-member-view',
-        array(
-            'name'    => Options::S_SHOW_SOCIAL,
-            'checked' => get_option( Options::S_SHOW_SOCIAL ),
-            'label'   => __( '', 'ots' )
-        )
-    );
 
     if( $display_field_previews ) {
 
