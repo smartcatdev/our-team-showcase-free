@@ -66,6 +66,11 @@ final class Options {
      */
     const S_SHOW_SOCIAL = 'ots-global-single-show-social';
 
+    /**
+     * @since 4.0.0
+     */
+    const DEFAULT_AVATAR = 'ots-global-default-avatar';
+
 }
 
 final class Defaults {

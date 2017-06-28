@@ -64,7 +64,7 @@ function do_member_reorder_page() { ?>
 
                             <div class="inner">
 
-                                <div class="thumbnail" style="background-image: url('<?php echo esc_url( get_the_post_thumbnail_url( $member ) ); ?>');"></div>
+                                <div class="thumbnail" style="background-image: url('<?php echo esc_url( get_member_avatar( $member ) ); ?>');"></div>
 
                                 <div class="member-info">
                                     <h2 class="name"><?php echo esc_html_e( $member->post_title ); ?></h2>

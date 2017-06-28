@@ -100,3 +100,15 @@ function get_members_in_order() {
     return  new \WP_Query( $args );
 
 }
+
+function get_member_avatar( \WP_Post $member ) {
+
+    $url = get_the_post_thumbnail_url( $member );
+
+    if( !$url ) {
+        $url = asset( 'images/default-avatar.png' );
+    }
+
+    return apply_filters( 'ots_member_avatar', $url, $member );
+
+}
