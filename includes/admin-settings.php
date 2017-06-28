@@ -7,6 +7,7 @@ function enqueue_settings_scripts( $hook ) {
 
     if( strpos( $hook, 'ots-settings' ) ) {
         wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
+        wp_enqueue_style( 'ots-settings-css', asset( 'admin/css/settings.css' ), null, VERSION );
         wp_enqueue_style( 'wp-color-picker' );
     }
 
@@ -363,32 +364,42 @@ function do_settings_page() {
 
     ?>
 
-    <div class="wrap">
+    <div class="wrap ots-admin-page">
 
-            <h2><?php _e( 'Global Settings', 'ots' ); ?></h2>
+        <div class="inner">
+
+            <div class="ad-header">
+
+                <h2><?php _e( 'Our Team Showcase', 'ots' ); ?></h2>
+
+                <button class="cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
+
+            </div>
 
             <?php settings_errors(); ?>
 
-        <h2 class="nav-tab-wrapper">
+            <h2 class="nav-tab-wrapper">
 
-            <?php foreach( $tabs as $tab => $title ) : ?>
+                <?php foreach( $tabs as $tab => $title ) : ?>
 
-                <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
-                   class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
+                    <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
+                       class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
 
-            <?php endforeach; ?>
+                <?php endforeach; ?>
 
-        </h2>
+            </h2>
 
-        <form method="post" action="options.php">
+            <form method="post" action="options.php">
 
-            <?php do_settings_sections( $active ); ?>
+                <?php do_settings_sections( $active ); ?>
 
-            <?php settings_fields( $active ); ?>
+                <?php settings_fields( $active ); ?>
 
-            <?php submit_button(); ?>
+                <?php submit_button(); ?>
 
-        </form>
+            </form>
+
+        </div>
 
     </div>
 

@@ -1,0 +1,12 @@
+.ad-header .cta-primary {
+    background: #0085ba;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.ad-header h2 {
+    display: inline-block;
+}

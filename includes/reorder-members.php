@@ -46,7 +46,7 @@ function do_member_reorder_page() { ?>
 
     <div class="wrap">
 
-        <h2><?php _e( 'Re-Order Team Members', 'ots' ); ?></h2>
+        <h2><?php _e( 'Drag & Drop to Re-Order Team Members', 'ots' ); ?></h2>
 
         <?php if( $members->have_posts() ) : ?>
 
