@@ -3,17 +3,15 @@
 namespace ots;
 
 $members = get_members_in_order();
-$vars = get_defined_vars();
 
 ?>
 
-<div id="sc_our_team" class="<?php esc_attr_e( $get_attr( 'template', '' ) ); esc_attr_e( ' sc-col' . get_option( Options::GRID_COLUMNS ) ); ?>">
+<?php //TODO fix css files ?>
+<div id="sc_our_team" class="grid <?php esc_attr_e( ' sc-col' . get_option( Options::GRID_COLUMNS ) ); ?>">
 
-    <div class="clear"></div>
+    <?php if ( $members->have_posts() ) : ?>
 
-    <?php if( $members->have_posts() ) : ?>
-
-        <?php while( $members->have_posts() ) : $members->the_post(); ?>
+        <?php while ( $members->have_posts() ) : $members->the_post(); ?>
 
             <div itemscope itemtype="http://schema.org/Person" class="sc_team_member">
 
