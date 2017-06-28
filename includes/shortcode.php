@@ -21,7 +21,7 @@ function do_shortcode_output( $attributes = array() ) {
         'single_template' => get_option( Options::SINGLE_TEMPLATE )
     );
 
-    $args = shortcode_atts( $defaults, $attributes );
+    $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
     $include = template_path( $args['template'] . '.php' );
 
     // Helper for getting short code attributes
