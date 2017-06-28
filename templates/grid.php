@@ -44,7 +44,7 @@ $members = get_members_in_order();
 
                     <div class="sc_team_member_overlay"></div>
 
-                    <?php if( $template !== 'disabled' ) : ?>
+                    <?php if( $single_template !== 'disabled' ) : ?>
 
                         <div class="sc_team_more">
                             <a href="<?php the_permalink() ?>" rel="bookmark">
