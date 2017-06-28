@@ -22,6 +22,8 @@ include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
 include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
 include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
 include_once dirname( __FILE__ ) . '/includes/shortcode.php';
+include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
+include_once dirname( __FILE__ ) . '/includes/widgets.php';
 
 
 /**
