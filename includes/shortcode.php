@@ -3,6 +3,16 @@
 namespace ots;
 
 
+function enqueue_scripts() {
+    //TODO only enqueue on shortcode page
+    wp_enqueue_style( 'ots-css', asset( 'css/style.css' ), null, VERSION );
+    wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'ots\enqueue_scripts' );
+
+
 function do_shortcode_output( $attributes = array() ) {
 
     $defaults = array(

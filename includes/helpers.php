@@ -71,19 +71,25 @@ function social_link( $link, $icon = '' ) {
 function do_member_social_links( \WP_Post $member ) {
 
     $links = array(
-        'facebook'  => '',
-        'twitter'   => '',
-        'linkedin'  => '',
-        'gplus'     => '',
-        'email'     => '',
-        'phone'     => '',
-        'pinterest' => '',
-        'instagram' => '',
-        'website'   => ''
+        'facebook'  => asset( 'images/social/facebook.png' ),
+        'twitter'   => asset( 'images/social/twitter.png' ),
+        'linkedin'  => asset( 'images/social/linkedin.png' ),
+        'gplus'     => asset( 'images/social/gplus.png' ),
+        'email'     => asset( 'images/social/email.png' ),
+        'phone'     => asset( 'images/social/phone.png' ),
+        'pinterest' => asset( 'images/social/pinterest.png' ),
+        'instagram' => asset( 'images/social/instagram.png' ),
+        'website'   => asset( 'images/social/website.png' )
     );
 
     foreach( $links as $meta_key => $icon ) {
-        echo social_link( get_post_meta( $member->ID, "team_member_$meta_key", true ), $icon );
+
+        $link = get_post_meta( $member->ID, "team_member_$meta_key", true );
+
+        if( !empty( $link ) ) {
+            echo social_link( $link, $icon );
+        }
+
     }
 
 }

@@ -44,17 +44,15 @@ $members = get_members_in_order();
 
                     <div class="sc_team_member_overlay"></div>
 
-                        <?php if( $template !== 'disabled' ) : ?>
+                    <?php if( $template !== 'disabled' ) : ?>
 
-                            <div class="sc_team_more">
-                                <a href="<?php the_permalink() ?>" rel="bookmark">
-                                    <img src="<?php //echo SC_TEAM_URL . 'inc/img/more.png' ?>"/>
-                                </a>
-                            </div>
+                        <div class="sc_team_more">
+                            <a href="<?php the_permalink() ?>" rel="bookmark">
+                                <img src="<?php echo esc_url( asset( 'images/more.png' ) ); ?>"/>
+                            </a>
+                        </div>
 
-                        <?php endif; ?>
-
-                    </div>
+                    <?php endif; ?>
 
                 </div>
 
