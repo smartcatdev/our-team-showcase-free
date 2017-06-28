@@ -41,7 +41,7 @@ function register_settings() {
     register_setting( 'ots-team-view', Options::TEMPLATE, array(
         'type'              => 'string',
         'default'           => Defaults::TEMPLATE,
-        'sanitize_callback' => 'sanitize_title'
+        'sanitize_callback' => 'ots\sanitize_template'
     ) );
 
     register_setting( 'ots-team-view', Options::REWRITE_SLUG, array(
@@ -106,7 +106,7 @@ function register_settings() {
     register_setting( 'ots-single-member-view', Options::S_TEMPLATE, array(
         'type'              => 'string',
         'default'           => Defaults::S_TEMPLATE,
-        'sanitize_callback' => 'sanitize_title'
+        'sanitize_callback' => 'ots\sanitize_single_template'
     ) );
 
 }
@@ -138,6 +138,16 @@ function add_settings_fields() {
 
     $display_field_previews = apply_filters( 'ots_show_pro_fields_preview', true );
 
+    $templates = array( '' => __( 'Select a template', 'ots' ) ) + get_templates();
+
+    $preview_templates = !$display_field_previews ? array() : array(
+        'list-stacked'    => __( 'List - Stacked (Pro)', 'ots' ),
+        'honey-comb'      => __( 'Honey Comb (Pro)', 'ots' ),
+        'carousel'        => __( 'Carousel (Pro)', 'ots' ),
+        'staff-directory' => __( 'Staff Directory (Pro)' )
+    );
+
+
     /**
      * Team View settings
      *
@@ -150,10 +160,11 @@ function add_settings_fields() {
         'ots-team-view',
         'ots-team-view',
         array(
-            'name'     => Options::TEMPLATE,
-            'options'  => array(),
-            'selected' => get_option( Options::TEMPLATE ),
-            'attrs'    => array( 'class' => 'regular-text' )
+            'name'             => Options::TEMPLATE,
+            'selected'         => get_option( Options::TEMPLATE ),
+            'attrs'            => array( 'class' => 'regular-text' ),
+            'options'          => $templates + $preview_templates,
+            'disabled_options' => array_keys( $preview_templates )
         )
     );
 
@@ -288,6 +299,15 @@ function add_settings_fields() {
 
     }
 
+    $templates = array( '' => __( 'Select a template', 'ots' ) ) + get_single_templates();
+
+    $preview_templates = !$display_field_previews ? array() : array(
+        'custom'     => __( 'Custom Template (Pro)', 'ots' ),
+        'card-popup' => __( 'Card - Popup (Pro)', 'ots' ),
+        'side-panel' => __( 'Side Panel (Pro)', 'ots' )
+    );
+
+
     /**
      * Single Member View settings
      *
@@ -300,9 +320,11 @@ function add_settings_fields() {
         'ots-single-member-view',
         'ots-single-member-view',
         array(
-            'name'    => Options::S_TEMPLATE,
-            'value'   => get_option( Options::S_TEMPLATE ),
-            'options' => array()
+            'name'             => Options::S_TEMPLATE,
+            'selected'         => get_option( Options::S_TEMPLATE ),
+            'attrs'            => array( 'class' => 'regular-text' ),
+            'options'          => $templates + $preview_templates,
+            'disabled_options' => array_keys( $preview_templates )
         )
     );
 
@@ -427,9 +449,15 @@ function settings_select_box( array $args ) { ?>
         <?php foreach( $args['options'] as $value => $label ) : ?>
 
             <option value="<?php esc_attr_e( $value ); ?>"
-                <?php selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' ); ?>>
+                <?php selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' ); ?>
 
-                <?php esc_html_e( $label ); ?></option>
+                <?php if( !empty( $args['disabled_options'] ) ) : ?>
+
+                    <?php disabled( true, in_array( $value, $args['disabled_options'] ) ); ?>
+
+                <?php endif; ?>
+
+                ><?php esc_html_e( $label ); ?></option>
 
         <?php endforeach; ?>
 

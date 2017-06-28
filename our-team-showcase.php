@@ -16,10 +16,13 @@ namespace ots;
  */
 include_once dirname( __FILE__ ) . '/constants.php';
 include_once dirname( __FILE__ ) . '/upgrade.php';
+include_once dirname( __FILE__ ) . '/includes/functions.php';
 include_once dirname( __FILE__ ) . '/includes/helpers.php';
 include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
 include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
 include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
+include_once dirname( __FILE__ ) . '/includes/shortcode.php';
+
 
 /**
  * Load the plugin'js text domain.
@@ -75,4 +78,16 @@ register_deactivation_hook( __FILE__, 'ots\deactivate' );
 
 function asset( $path = '' ) {
     return trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/' . ltrim( $path, '/' );
+}
+
+function template_path( $template ) {
+
+    $file = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'templates/' . ltrim( $template, '/' );
+
+    if( file_exists( $file ) ) {
+        return $file;
+    }
+
+    return false;
+
 }
