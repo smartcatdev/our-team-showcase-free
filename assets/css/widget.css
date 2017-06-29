@@ -1,9 +1,10 @@
-.widget#sc_our_team .sc_sidebar_team_member{
+#ots-widget .ots-team-member {
     width: 100%;
     overflow: hidden;
     margin: 0 0 10px 0;
 }
-.widget#sc_our_team .sc_sidebar_team_member .wp-post-image{
+
+#ots-widget .ots-team-member .ots-image {
     float: left;
     width: 25%;
     border: 1px solid #d0d0d0;
@@ -11,13 +12,14 @@
     box-sizing: border-box;
     margin: 0;
 }
-.widget#sc_our_team .sc_sidebar_team_member .sc_team_member_overlay{
+
+#ots-widget .ots-team-member .ots-overlay {
     float: left;
     width: 75%;
     padding: 0 0 0 10px;
     box-sizing: border-box;
 }
 
-.widget#sc_our_team .sc_sidebar_team_member .sc_team_member_overlay .sc_team_member_name{
+#ots-widget .ots-team-member .ots-name {
     font-weight: bold;
 }

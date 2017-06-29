@@ -15,8 +15,47 @@ class TeamWidget extends \WP_Widget {
     }
 
     public function widget( $args, $instance ) {
-        //  TODO write front end
-    }
+        echo $args[ 'before_widget' ];
+
+        if ( !empty( $title ) ) {
+            echo $args[ 'before_title' ] . esc_html( $title ) . $args[ 'after_title' ];
+        }
+
+        $members = get_members_in_order();
+
+        ?>
+
+        <?php if ( $members->have_posts() ) : ?>
+
+            <div id="ots-widget" class="widget">
+
+                <?php while ( $members->have_posts() ) : $members->the_post(); ?>
+
+                    <div itemscope itemtype="http://schema.org/Person" class="ots-team-member">
+
+                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
+                            <img class="ots-image" src="<?php echo esc_url( get_member_avatar( get_post() ) ); ?>" />
+                        </a>
+
+                        <div class="ots-overlay">
+
+                            <div itemprop="name" class="ots-name"><?php the_title() ?></div>
+                            <div itemprop="jobtitle" class="ots-jobtitle">
+                                <?php esc_html_e( get_post_meta( get_the_ID(), 'team_member_title', true ) ); ?>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <?php  wp_reset_postdata(); ?>
+
+                <?php endwhile; ?>
+
+            </div>
+
+        <?php endif; ?>
+
+    <?php }
 
     public function update( $new_instance, $old_instance ) {
 

@@ -20,7 +20,7 @@ jQuery( document ).ready(function($){
 
     }
     
-    $( '.ots-team-member' ).mouseenter( function() {
+    $( '#ots .ots-team-member' ).mouseenter( function() {
 
         $( this ).find( '.ots-overlay' ).stop( true, false ).fadeIn( 440 );
         $( this ).find( '.ots-image' ).addClass( 'zoomIn' );

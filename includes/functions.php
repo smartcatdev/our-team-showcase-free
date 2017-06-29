@@ -4,7 +4,7 @@ namespace ots;
 
 function get_members_in_order( $limit = false ) {
 
-    $limit = get_option( Options::DISPLAY_LIMIT );
+    $limit = $limit ? $limit : get_option( Options::DISPLAY_LIMIT );
 
     $args = array(
         'post_type'      => 'team_member',
