@@ -11,9 +11,7 @@ function do_migration() {
 
         // Map out all non-boolean values
         $map = array(
-            'template'        => Options::TEMPLATE,
             'margin'          => Options::MARGIN,
-            'single_template' => Options::SINGLE_TEMPLATE,
             'slug'            => Options::REWRITE_SLUG
         );
 
@@ -31,6 +29,34 @@ function do_migration() {
 
         foreach ( $checkboxes as $old => $new ) {
             update_option( $new, $options[ $old ] == 'yes' ? 'on' : '' );
+        }
+
+        switch( $options['template'] ) {
+
+            case 'grid':
+                update_option( Options::TEMPLATE, 'grid' );
+                break;
+
+            case 'grid_circles':
+                update_option( Options::TEMPLATE, 'grid-circles' );
+                break;
+
+            case 'grid_circles2':
+                update_option( Options::TEMPLATE, 'grid-circles-2' );
+                break;
+
+        }
+
+        switch( $options['single_template'] ) {
+
+            case 'standard':
+                update_option( Options::SINGLE_TEMPLATE, 'default' );
+                break;
+
+            case 'disable':
+                update_option( Options::SINGLE_TEMPLATE, 'disabled' );
+                break;
+
         }
 
         // Add hash to main color

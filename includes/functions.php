@@ -121,8 +121,8 @@ function get_templates() {
 function get_single_templates() {
 
     $templates = array(
-        'theme-default'  => __( 'Theme Default', 'ots' ),
-        'disabled'       => __( 'Disabled', 'ots' )
+        'default'       => __( 'Theme Default', 'ots' ),
+        'disabled'      => __( 'Disabled', 'ots' )
     );
 
     return apply_filters( 'ots_single_templates', $templates );
