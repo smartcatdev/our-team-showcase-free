@@ -4,43 +4,41 @@ namespace ots;
 
 ?>
 
-
 <?php get_header(); ?>
 
-<div class="ots-single-wrapper">
+    <div class="sc-single-wrapper">
 
-        <div class="ots-single-team-member">
+        <?php while ( have_posts() ) : the_post(); ?>
 
-            <div class="ots-single-left" itemscope itemtype="http://schema.org/Person">
+            <div class="sc_team_single_member <?php esc_attr_e( get_option( Options::SINGLE_TEMPLATE ) ); ?>">
 
-                <div class="ots-single-inner">
+                <div class="sc_single_side" itemscope itemtype="http://schema.org/Person">
 
-                    <img src="<?php echo get_member_avatar(); ?>" />
+                    <div class="inner">
 
-                    <h2 class="ots-single-name" itemprop="name"><?php echo the_title(); ?></h2>
-                    <h3 class="ots-single-jobtitle" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
+                        <?php the_post_thumbnail(); ?>
 
-                    <?php if( get_option( Options::SHOW_SINGLE_SOCIAL ) ) : ?>
+                        <h2 class="name" itemprop="name"><?php echo the_title(); ?></h2>
+                        <h3 class="title" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
 
-                        <ul class="ots-single-social-icons">
+                        <ul class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) ? '' : 'hidden'; ?>">
 
-                            <?php do_member_social_links( get_post(), '<li>', '</li>' ); ?>
+                            <?php do_member_social_links(); ?>
 
                         </ul>
 
-                    <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="sc_single_main">
+
+                    <?php the_content(); ?>
 
                 </div>
 
             </div>
 
-            <div class="ots-single-content">
-
-                <?php echo the_content(); ?>
-
-            </div>
-
-        </div>
+        <?php endwhile; ?>
 
     </div>
 

@@ -56,7 +56,7 @@ function social_link( $link, $icon = '' ) {
 
 }
 
-function do_member_social_links( \WP_Post $member, $before ='', $after = '' ) {
+function do_member_social_links( \WP_Post $member = null, $before ='', $after = '' ) {
 
     $links = array(
         'facebook'  => asset( 'images/social/facebook.png' ),
@@ -69,6 +69,8 @@ function do_member_social_links( \WP_Post $member, $before ='', $after = '' ) {
         'instagram' => asset( 'images/social/instagram.png' ),
         'website'   => asset( 'images/social/website.png' )
     );
+
+    $member = get_post( $member );
 
     foreach( $links as $meta_key => $icon ) {
 

@@ -26,8 +26,8 @@ add_action( 'wp_enqueue_scripts', 'ots\enqueue_single_scripts' );
 
 function include_single_template( $template ) {
 
-    if ( get_post_type() == 'team_member' &&
-        empty( locate_template( 'single-team_member.php', false, false ) ) ) {
+    if ( get_post_type() == 'team_member' /* &&
+        empty( locate_template( 'single-team_member.php', false, false ) ) */ ) {
 
         $template = template_path( 'single-team_member.php' );
 

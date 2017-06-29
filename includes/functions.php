@@ -30,6 +30,7 @@ function get_member_avatar( \WP_Post $member = null, $size = 'post-thumbnail' ) 
 
 }
 
+
 function sanitize_display_limit( $value ) {
 
     if( $value === 'on' || is_null( $value ) ) {
