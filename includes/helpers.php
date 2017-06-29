@@ -17,29 +17,17 @@ function posts_dropdown( $name, $id = '', $selected = '' ) {
         'posts_per_page' => -1
     ) );
 
-    ?>
+    echo '<select id="' . esc_attr( $id ) . '" name="' . esc_attr( $name ) . '" class="regular-text">';
 
-    <select id="<?php esc_attr_e( $id ); ?>"
-            name="<?php esc_attr_e( $name ); ?>"
-            class="regular-text">
+    echo '<option value="">' . __( 'Select an article', 'ots' ). '</option>';
 
-        <option value=""><?php _e( 'Select an article', 'ots' ); ?></option>
+    foreach( $posts as $post ) {
+        echo '<option value="' . esc_attr( $post->ID ) . '" ' . selected( $post->ID, $selected, false ) . '>' . esc_html( $post->post_title ) . '</option>';
+    }
 
-        <?php foreach( $posts as $post ) : ?>
+    echo '</select>';
 
-            <option value="<?php esc_attr_e( $post->ID ); ?>"
-
-                <?php selected( $post->ID, $selected ); ?>>
-
-                <?php esc_html_e( $post->post_title ); ?>
-
-            </option>
-
-        <?php endforeach; ?>
-
-    </select>
-
-<?php }
+}
 
 
 /**

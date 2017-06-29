@@ -422,24 +422,24 @@ function do_settings_page() {
  *
  * @since 4.0.0
  */
-function settings_select_box( array $args ) { ?>
+function settings_select_box( array $args ) {
+
+    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+    $disabled = isset( $args['disabled_options'] ) ? $args['disabled_options'] : array();
+
+    ?>
 
     <select name="<?php esc_attr_e( $args['name'] ); ?>"
 
-        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> >
+        <?php print_attrs( $attrs ); ?>>
 
         <?php foreach( $args['options'] as $value => $label ) : ?>
 
             <option value="<?php esc_attr_e( $value ); ?>"
+
                 <?php selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' ); ?>
 
-                <?php if( !empty( $args['disabled_options'] ) ) : ?>
-
-                    <?php disabled( true, in_array( $value, $args['disabled_options'] ) ); ?>
-
-                <?php endif; ?>
-
-                ><?php esc_html_e( $label ); ?></option>
+                <?php disabled( true, in_array( $value, $disabled ) ); ?> ><?php esc_html_e( $label ); ?></option>
 
         <?php endforeach; ?>
 
@@ -466,14 +466,18 @@ function settings_select_box( array $args ) { ?>
  *
  * @since 4.0.0
  */
-function settings_check_box( array $args ) { ?>
+function settings_check_box( array $args ) {
+
+    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+
+    ?>
 
     <label>
 
-        <input name="<?php esc_attr_e( $args['name'] ); ?>"
-               type="checkbox"
+        <input type="checkbox"
+               name="<?php esc_attr_e( $args['name'] ); ?>"
 
-            <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?>
+            <?php print_attrs( $attrs ); ?>
 
             <?php checked( 'on', $args['checked'] ); ?>/>
 
@@ -495,12 +499,16 @@ function settings_check_box( array $args ) { ?>
  *
  * @since 4.0.0
  */
-function settings_text_box( array $args ) { ?>
+function settings_text_box( array $args ) {
+
+    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+
+    ?>
 
     <input name="<?php esc_attr_e( $args['name'] ); ?>"
            value="<?php echo isset( $args['value'] ) ? esc_attr( $args['value'] ) : ''; ?>"
 
-        <?php if( isset( $args['attrs'] ) ) : print_attrs( $args['attrs'] ); endif; ?> />
+        <?php print_attrs( $attrs ); ?> />
 
     <?php if( isset( $args['description'] ) ) : ?>
 
