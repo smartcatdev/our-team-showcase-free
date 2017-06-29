@@ -15,11 +15,9 @@ class TeamWidget extends \WP_Widget {
     }
 
     public function widget( $args, $instance ) {
-        echo $args[ 'before_widget' ];
 
-        if ( !empty( $title ) ) {
-            echo $args[ 'before_title' ] . esc_html( $title ) . $args[ 'after_title' ];
-        }
+        echo $args[ 'before_widget' ];
+        echo $args[ 'before_title' ] . $instance['title'] . $args[ 'after_title' ];
 
         $members = get_members_in_order();
 
@@ -67,8 +65,7 @@ class TeamWidget extends \WP_Widget {
 
     }
 
-    public function form( $instance ) {
-        $title = ! empty( $instance['title'] ) ? $instance['title'] : ''; ?>
+    public function form( $instance ) { ?>
 
         <p>
 
@@ -78,7 +75,7 @@ class TeamWidget extends \WP_Widget {
                    class="widefat"
                    id="<?php echo $this->get_field_id( 'title' ); ?>"
                    name="<?php echo $this->get_field_name( 'title' ); ?>"
-                   value="<?php echo esc_attr( $title ); ?>" />
+                   value="<?php echo esc_attr( !empty( $instance['title'] ) ? $instance['title'] : __( 'Meet Our Team', 'ots' ) ); ?>" />
 
         </p>
 

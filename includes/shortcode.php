@@ -4,7 +4,7 @@ namespace ots;
 
 
 function enqueue_scripts() {
-    //TODO only enqueue on shortcode page
+
     wp_enqueue_style( 'ots-css', asset( 'css/style.css' ), null, VERSION );
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
@@ -24,11 +24,9 @@ function do_shortcode_output( $attributes = array() ) {
     $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
     $include = template_path( $args['template'] . '.php' );
 
-    // Helper for getting short code attributes
+    // Helper for getting short code attributes from inside a template
     $get_attr = function ( $attr, $value = false ) use ( $args ) {
-
         return array_key_exists( $attr, $args ) ? $args[ $attr ] : $value;
-
     };
 
     ob_start();
@@ -42,7 +40,7 @@ function do_shortcode_output( $attributes = array() ) {
 
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
 
-//TODO only print these on shortcode pages
+
 function print_dynamic_styles() { ?>
 
     <style id="ots-dynamic-styles">
