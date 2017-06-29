@@ -21,7 +21,7 @@ namespace ots;
                         <h2 class="name" itemprop="name"><?php echo the_title(); ?></h2>
                         <h3 class="title" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
 
-                        <ul class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) ? '' : 'hidden'; ?>">
+                        <ul class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ? '' : 'hidden'; ?>">
 
                             <?php do_member_social_links(); ?>
 
