@@ -2,23 +2,39 @@
     background: #f9f9f9;
 }
 
+.ad-header {
+    height: 80px;
+    background: rgb(0, 133, 186);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
 .ad-header .callouts {
     float: right;
-    line-height: 50px;
+    line-height: 80px;
+    margin: 0 10px;
 }
 
 .ad-header .cta {
     background: #0085ba;
-    border: none;
+    border: 1px solid #aaa;
     padding: 10px 20px;
     color: #fff;
     border-radius: 3px;
-    font-size: 14px;
     margin: 0 2px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.ad-header .cta-secondary {
+    display: none;
 }
 
 .ad-header h2 {
-    display: inline-block;
+    color: #fff;
+    font-size: 24px;
+    line-height: 80px;
+    margin: 0 20px;
 }
 
 .ots-admin-page .nav-tab {
@@ -119,6 +135,19 @@
     }
 
     .ots-admin-page .sidebar {
+        display: inline-block;
+    }
+
+    .ad-header h2 {
+        float: left;
+    }
+
+    .ad-header .callouts {
+        display: inline;
+        float: none;
+    }
+
+    .ad-header .cta-secondary {
         display: inline-block;
     }
 

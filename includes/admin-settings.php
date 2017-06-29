@@ -578,6 +578,7 @@ function display_limit_field() { ?>
     <input type="number"
            min="1"
            id="ots-display-limit-number"
+           placeholder="<?php esc_attr_e( '# of members to display', 'ots' ); ?>"
            name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
            value="<?php $value !== 'on' ? esc_attr_e( $value ) : ''; ?>"
 
