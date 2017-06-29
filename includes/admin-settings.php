@@ -176,6 +176,7 @@ function add_settings_fields() {
         'ots-team-view',
         array(
             'name'    => Options::GRID_COLUMNS,
+            'attrs'   => array( 'class' => 'regular-text' ),
             'selected' => get_option( Options::GRID_COLUMNS ),
             'options' => array(
                 2  => 2,
@@ -195,6 +196,7 @@ function add_settings_fields() {
         'ots-team-view',
         array(
             'name'     => Options::MARGIN,
+            'attrs'   => array( 'class' => 'regular-text' ),
             'selected' => get_option( Options::MARGIN ),
             'options'  => array(
                 0  => __( 'No Margin', 'ots' ),
@@ -394,7 +396,7 @@ function do_settings_page() {
 
                 <h2><?php _e( 'Our Team Showcase', 'ots' ); ?></h2>
 
-                <button class="cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
+                <button class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
 
             </div>
 

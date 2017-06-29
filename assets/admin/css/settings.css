@@ -1,3 +1,7 @@
+#wpcontent {
+    background: #f9f9f9;
+}
+
 .ad-header .cta-primary {
     background: #0085ba;
     border: none;
@@ -9,4 +13,68 @@
 
 .ad-header h2 {
     display: inline-block;
+}
+
+.ots-admin-page .nav-tab {
+    border-radius: 3px;
+    border: none;
+    background: #f9f9f9;
+}
+
+.ots-admin-page .nav-tab.nav-tab-active {
+    border: 1px solid #ccc;
+}
+
+.ots-admin-page .form-table {
+    background: #fff;
+    margin-top: -1px;
+    border-radius: 0 0 3px 3px;
+}
+
+.ots-admin-page .form-table tr {
+    border: 1px solid #ddd;
+}
+
+.ots-admin-page .form-table th {
+    padding-left: 10px;
+}
+
+.ots-admin-page .form-table td {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.ots-admin-page form h2 {
+    background: rgb(0, 133, 186);
+    border-radius: 3px 3px 0 0;
+    padding: 1em 0 1em 10px;
+    color: #fff;
+    margin: 10px 0 0;
+}
+
+.ots-admin-page form input,
+.ots-admin-page form select,
+.ots-admin-page form textarea {
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 3px 10px;
+    min-height: 30px;
+    line-height: 30px;
+}
+
+.ots-admin-page form input[type="checkbox"] {
+    min-height: inherit;
+}
+
+@media( min-width: 769px ) {
+
+    .ots-admin-page .nav-tab {
+        border-radius: 3px 3px 0 0;
+        background: #f9f9f9;
+    }
+
+    .ots-admin-page .nav-tab.nav-tab-active {
+        border-bottom: 1px solid #f9f9f9 !important;
+    }
 }
