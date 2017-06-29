@@ -413,15 +413,32 @@ function do_settings_page() {
 
             </h2>
 
-            <form method="post" action="options.php">
+            <div class="tabs-content">
 
-                <?php do_settings_sections( $active ); ?>
+                <form method="post" action="options.php">
 
-                <?php settings_fields( $active ); ?>
+                    <?php do_settings_sections( $active ); ?>
 
-                <?php submit_button(); ?>
+                    <?php settings_fields( $active ); ?>
 
-            </form>
+                    <?php submit_button(); ?>
+
+                </form>
+
+            </div>
+
+            <div class="sidebar">
+
+                <div class="widget">
+                    <h2><?php _e( 'Plugin Tutorial', 'ots' ); ?></h2>
+                    <p><?php //TODO Replace with widget CTAs ?>
+                        orem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non sem leo. Sed et iaculis odio. Proin id mauris ac elit ornare scelerisque. Duis molestie lectus vel odio eleifend congue. Pellentesque quis magna libero. Cras sed bibendum ipsum. Vestibulum ornare, augue et faucibus accumsan, dui mi tincidunt nulla, ac tincidunt lectus libero venenatis ante. Sed metus nunc, pellentesque quis lacinia sit amet, sollicitudin at leo. Maecenas nisl risus, viverra a sapien nec, volutpat suscipit purus. Donec sit amet nunc et ligula interdum tristique. Duis sed odio vulputate, blandit nibh ac, vulputate quam.
+
+                        Morbi purus nunc, aliquet a justo id, pulvinar mattis metus. Nunc ut molestie mi. Donec sollicitudin sit amet ipsum in vestibulum. Proin malesuada auctor ornare. Aliquam eu elit sed libero finibus tempor. Etiam eu lectus volutpat, euismod ligula id, congue orci. Vivamus consectetur varius sem, eu aliquet nibh dictum viverra. Donec efficitur, ligula nec interdum aliquet, enim nisi vestibulum dolor, eget aliquam leo ante a velit. Curabitur aliquet hendrerit maximus. Vivamus sit amet tellus turpis.
+                    </p>
+                </div>
+
+            </div>
 
         </div>
 

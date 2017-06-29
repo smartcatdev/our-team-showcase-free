@@ -49,7 +49,6 @@
     background: rgb(0, 133, 186);
     border-radius: 3px 3px 0 0;
     padding: 1em 0 1em 10px;
-    color: #fff;
     margin: 10px 0 0;
 }
 
@@ -67,7 +66,7 @@
     min-height: inherit;
 }
 
-@media( min-width: 769px ) {
+@media( min-width: 600px ) {
 
     .ots-admin-page .nav-tab {
         border-radius: 3px 3px 0 0;
@@ -77,4 +76,42 @@
     .ots-admin-page .nav-tab.nav-tab-active {
         border-bottom: 1px solid #f9f9f9 !important;
     }
+}
+
+.ots-admin-page .sidebar {
+    display: none;
+    width: 35%;
+    height: 200px;
+    margin: 10px;
+    float: right;
+}
+
+.ots-admin-page .sidebar .widget {
+    background: #fff;
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #ddd;
+}
+
+.ots-admin-page .sidebar .widget h2 {
+    margin: 0;
+    padding: 1em 10px;
+    background: rgb(0, 133, 186);
+    border-radius: 3px 3px 0 0;
+}
+
+.ots-admin-page .sidebar .widget p {
+    padding: 10px;
+}
+
+@media( min-width: 783px ) {
+
+    .ots-admin-page .tabs-content {
+        width: 62%;
+        float: left;
+    }
+
+    .ots-admin-page .sidebar {
+        display: inline-block;
+    }
+
 }
