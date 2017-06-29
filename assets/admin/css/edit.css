@@ -1,0 +1,11 @@
+@media ( min-width: 769px ) {
+
+    #team_member_image {
+        width: 20%;
+    }
+
+    #team_member_image,
+    .column-team_member_image {
+        text-align: center;
+    }
+}

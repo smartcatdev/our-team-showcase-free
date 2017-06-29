@@ -5,6 +5,7 @@ namespace ots;
 function enqueue_editor_scripts() {
 
     if( get_post_type() == 'team_member' ) {
+        wp_enqueue_style( 'ots-edit-css', asset( 'admin/css/edit.css' ), null, VERSION );
         wp_enqueue_style( 'ots-metabox-css', asset( 'admin/css/metabox.css' ), null, VERSION );
     }
 
@@ -111,7 +112,8 @@ function add_team_member_custom_colums( $columns ) {
 
     unset( $columns['date'] );
 
-    $columns['team_member_title'] = __( 'Title', 'ots' );
+    $columns['title'] = __( 'Name', 'ots' );
+    $columns['team_member_title'] = __( 'Job Title', 'ots' );
     $columns['team_member_image'] = __( 'Image', 'ots' );
 
     return $columns;
