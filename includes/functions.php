@@ -22,15 +22,33 @@ function get_members_in_order( $limit = false, $group = '' ) {
 
 }
 
-function get_member_avatar( \WP_Post $member = null, $size = 'post-thumbnail' ) {
+function get_member_avatar( $member = null, $size = 'post-thumbnail' ) {
 
-    $url = get_the_post_thumbnail_url( get_post( $member ), $size );
+    $url = get_the_post_thumbnail_url( $member, $size );
 
     if( !$url ) {
         $url = asset( 'images/default-avatar.png' );
     }
 
     return apply_filters( 'ots_member_avatar', $url, $member );
+
+}
+
+
+function member_avatar( $member = null, $size = 'post_thumbnail' ) {
+
+    if( has_post_thumbnail( $member ) ) {
+        the_post_thumbnail( $size );
+    } else {
+
+        $img = '<img src="%s" class="attachment-medium wp-post-image" width="%s" height="%s" />';
+
+        printf( $img, asset( 'images/default-avatar.png' ),
+            is_array( $size ) ? $size[0] : '',
+            is_array( $size ) ? $size[1] : ''
+        );
+
+    }
 
 }
 

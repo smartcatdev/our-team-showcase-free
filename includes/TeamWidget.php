@@ -31,7 +31,7 @@ class TeamWidget extends \WP_Widget {
 
                     <div itemscope itemtype="http://schema.org/Person" class="sc_sidebar_team_member">
 
-                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail(); ?></a>
+                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php member_avatar(); ?></a>
 
                         <div class="sc_team_member_overlay">
 

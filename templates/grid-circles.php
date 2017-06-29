@@ -18,7 +18,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                 <div class="sc_team_member_inner">
 
-                    <?php the_post_thumbnail(); ?>
+                    <?php member_avatar(); ?>
 
                     <?php if ( get_option( Options::DISPLAY_NAME ) == 'on' ) : ?>
 

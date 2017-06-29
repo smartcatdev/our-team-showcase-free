@@ -13,18 +13,6 @@ function enqueue_editor_scripts() {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
-function fallback_member_thumbnail( $html, $post_id ) {
-
-    if ( get_post( $post_id )->post_type == 'team_member' && empty( $html ) ) {
-        $html = sprintf( '<img src="%s" class="attachment-medium wp-post-image" />', asset('images/default-avatar.png' ) );
-    }
-
-    return $html;
-}
-
-add_filter( 'post_thumbnail_html', 'ots\fallback_member_thumbnail', 20, 5 );
-
-
 function include_single_template( $template ) {
 
     if ( get_post_type() == 'team_member' /* &&
@@ -142,7 +130,7 @@ function do_team_member_custom_columns( $column, $post_id ) {
             break;
 
         case 'team_member_image' :
-            echo get_the_post_thumbnail( $post_id, array( 50, 50 ) );
+            echo member_avatar( $post_id, array( 50, 50 ) );
             break;
 
     }

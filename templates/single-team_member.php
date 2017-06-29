@@ -16,7 +16,7 @@ namespace ots;
 
                     <div class="inner">
 
-                        <?php the_post_thumbnail(); ?>
+                        <?php member_avatar(); ?>
 
                         <h2 class="name" itemprop="name"><?php echo the_title(); ?></h2>
                         <h3 class="title" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
