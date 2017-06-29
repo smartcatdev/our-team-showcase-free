@@ -12,6 +12,34 @@ function enqueue_editor_scripts() {
 
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
+
+function enqueue_single_scripts() {
+
+    if( apply_filters( 'ots_load_default_single_styles', true ) ) {
+        wp_enqueue_style( 'ots-single-css', asset( 'css/single.css' ), null, VERSION );
+    }
+
+}
+
+add_action( 'wp_enqueue_scripts', 'ots\enqueue_single_scripts' );
+
+
+function include_single_template( $template ) {
+
+    if ( get_post_type() == 'team_member' &&
+        empty( locate_template( 'single-team_member.php', false, false ) ) ) {
+
+        $template = template_path( 'single-team_member.php' );
+
+    }
+
+    return apply_filters( 'ots_single_template_include', $template );
+
+}
+
+add_filter( 'template_include', 'ots\include_single_template' );
+
+
 /**
  * Register the team member custom post type.
  *

@@ -18,9 +18,9 @@ function get_members_in_order( $limit = false ) {
 
 }
 
-function get_member_avatar( \WP_Post $member, $size = 'post-thumbnail' ) {
+function get_member_avatar( \WP_Post $member = null, $size = 'post-thumbnail' ) {
 
-    $url = get_the_post_thumbnail_url( $member, $size );
+    $url = get_the_post_thumbnail_url( get_post( $member ), $size );
 
     if( !$url ) {
         $url = asset( 'images/default-avatar.png' );

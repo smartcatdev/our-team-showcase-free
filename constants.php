@@ -66,6 +66,11 @@ final class Options {
      */
     const DEFAULT_AVATAR = 'ots-global-default-avatar';
 
+    /**
+     * @since 4.0.0
+     */
+    const SHOW_SINGLE_SOCIAL = 'ots-global-show-single-social';
+
 }
 
 final class Defaults {
@@ -123,6 +128,11 @@ final class Defaults {
     /**
      * @since 4.0.0
      */
-    const S_TEMPLATE = '';
+    const SINGLE_TEMPLATE = '';
+
+    /**
+     * @since 4.0.0
+     */
+    const SHOW_SINGLE_SOCIAL = 'on';
 
 }

@@ -5,7 +5,7 @@ namespace ots;
 
 function enqueue_scripts() {
 
-    wp_enqueue_style( 'ots-css', asset( 'css/style.css' ), null, VERSION );
+    wp_enqueue_style( "ots-css", asset( "css/style.css" ), null, VERSION );
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }

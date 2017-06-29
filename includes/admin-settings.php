@@ -99,8 +99,14 @@ function register_settings() {
 
     register_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE, array(
         'type'              => 'string',
-        'default'           => Defaults::S_TEMPLATE,
+        'default'           => Defaults::SINGLE_TEMPLATE,
         'sanitize_callback' => 'ots\sanitize_single_template'
+    ) );
+
+    register_setting( 'ots-single-member-view', Options::SHOW_SINGLE_SOCIAL, array(
+        'type'              => 'string',
+        'default'           => Defaults::SHOW_SINGLE_SOCIAL,
+        'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
 
 }
@@ -322,6 +328,18 @@ function add_settings_fields() {
         )
     );
 
+    add_settings_field(
+        Options::SHOW_SINGLE_SOCIAL,
+        __( 'Show Single Social', 'ots' ),
+        'ots\settings_check_box',
+        'ots-single-member-view',
+        'ots-single-member-view',
+        array(
+            'name'    => Options::SHOW_SINGLE_SOCIAL,
+            'checked' => get_option( Options::SHOW_SINGLE_SOCIAL ),
+            'label'   => __( '', 'ots' )
+        )
+    );
 
     if( $display_field_previews ) {
 

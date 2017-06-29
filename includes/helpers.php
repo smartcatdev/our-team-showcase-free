@@ -56,7 +56,7 @@ function social_link( $link, $icon = '' ) {
 
 }
 
-function do_member_social_links( \WP_Post $member ) {
+function do_member_social_links( \WP_Post $member, $before ='', $after = '' ) {
 
     $links = array(
         'facebook'  => asset( 'images/social/facebook.png' ),
@@ -75,7 +75,7 @@ function do_member_social_links( \WP_Post $member ) {
         $link = get_post_meta( $member->ID, "team_member_$meta_key", true );
 
         if( !empty( $link ) ) {
-            echo social_link( $link, $icon );
+            echo $before . social_link( $link, $icon ) . $after;
         }
 
     }
