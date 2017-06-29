@@ -10,7 +10,7 @@ namespace ots;
 
         <?php while ( have_posts() ) : the_post(); ?>
 
-            <div class="sc_team_single_member <?php esc_attr_e( get_option( Options::SINGLE_TEMPLATE ) ); ?>">
+            <div class="sc_team_single_member standard">
 
                 <div class="sc_single_side" itemscope itemtype="http://schema.org/Person">
 

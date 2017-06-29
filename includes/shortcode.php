@@ -45,18 +45,30 @@ function print_dynamic_styles() { ?>
 
     <style id="ots-dynamic-styles">
 
-        #ots a {
-            color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
+        #sc_our_team a,
+        .sc_our_team_lightbox .name,
+        .sc_personal_quote span.sc_team_icon-quote-left{
+            color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }
 
-        .grid#ots .ots-team-member .ots-name,
-        .grid#ots .ots-team-member .ots-jobtitle,
-        .grid-circles#ots .ots-team-member .ots-name,
-        .grid-circles#ots .ots-team-member .ots-jobtitle {
-            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
+        .grid#sc_our_team .sc_team_member .sc_team_member_name,
+        .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name,
+        #sc_our_team_lightbox .progress,
+        .sc_our_team_panel .sc-right-panel .sc-name,
+        #sc_our_team .sc_team_member .icons span,
+        .sc_our_team_panel .sc-right-panel .sc-skills .progress,
+        #sc_our_team_lightbox .sc_our_team_lightbox .social span,
+        .sc_team_single_member .sc_team_single_skills .progress{
+            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }
 
-        #ots .ots-team-member {
+        .stacked#sc_our_team .smartcat_team_member{
+            border-color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
+        }
+
+        #sc_our_team .sc_team_member {
             margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
         }
 

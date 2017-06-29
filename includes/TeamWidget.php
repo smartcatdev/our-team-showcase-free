@@ -25,27 +25,28 @@ class TeamWidget extends \WP_Widget {
 
         <?php if ( $members->have_posts() ) : ?>
 
-            <div id="ots-widget" class="widget">
+            <div id="sc_our_team" class="widget">
 
                 <?php while ( $members->have_posts() ) : $members->the_post(); ?>
 
-                    <div itemscope itemtype="http://schema.org/Person" class="ots-team-member">
+                    <div itemscope itemtype="http://schema.org/Person" class="sc_sidebar_team_member">
 
-                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>">
-                            <img class="ots-image" src="<?php echo esc_url( get_member_avatar( get_post() ) ); ?>" />
-                        </a>
+                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php the_post_thumbnail(); ?></a>
 
-                        <div class="ots-overlay">
+                        <div class="sc_team_member_overlay">
 
-                            <div itemprop="name" class="ots-name"><?php the_title() ?></div>
-                            <div itemprop="jobtitle" class="ots-jobtitle">
+                            <div itemprop="name" class="sc_team_member_name"><?php the_title() ?></div>
+                            <div itemprop="jobtitle" class="sc_team_member_jobtitle">
                                 <?php esc_html_e( get_post_meta( get_the_ID(), 'team_member_title', true ) ); ?>
                             </div>
 
+<!--                            <div class='icons'>--><?php //do_member_social_links(); ?><!--</div>-->
+
                         </div>
+
                     </div>
 
-                    <?php  wp_reset_postdata(); ?>
+                    <?php wp_reset_postdata(); ?>
 
                 <?php endwhile; ?>
 

@@ -13,15 +13,16 @@ function enqueue_editor_scripts() {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
-function enqueue_single_scripts() {
+function fallback_member_thumbnail( $html, $post_id ) {
 
-    if( apply_filters( 'ots_load_default_single_styles', true ) ) {
-        wp_enqueue_style( 'ots-single-css', asset( 'css/single.css' ), null, VERSION );
+    if ( get_post( $post_id )->post_type == 'team_member' && empty( $html ) ) {
+        $html = sprintf( '<img src="%s" class="attachment-medium wp-post-image" />', asset('images/default-avatar.png' ) );
     }
 
+    return $html;
 }
 
-add_action( 'wp_enqueue_scripts', 'ots\enqueue_single_scripts' );
+add_filter( 'post_thumbnail_html', 'ots\fallback_member_thumbnail', 20, 5 );
 
 
 function include_single_template( $template ) {

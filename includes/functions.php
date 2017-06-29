@@ -2,7 +2,7 @@
 
 namespace ots;
 
-function get_members_in_order( $limit = false ) {
+function get_members_in_order( $limit = false, $group = '' ) {
 
     $limit = $limit ? $limit : get_option( Options::DISPLAY_LIMIT );
 
@@ -13,6 +13,10 @@ function get_members_in_order( $limit = false ) {
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
     );
+
+    if( !empty( $group ) ) {
+        $args['team_member_position'] = $group;
+    }
 
     return  new \WP_Query( $args );
 
