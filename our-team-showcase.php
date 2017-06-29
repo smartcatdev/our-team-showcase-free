@@ -15,15 +15,6 @@ namespace ots;
  * Include constants and Options definitions
  */
 include_once dirname( __FILE__ ) . '/constants.php';
-include_once dirname( __FILE__ ) . '/upgrade.php';
-include_once dirname( __FILE__ ) . '/includes/functions.php';
-include_once dirname( __FILE__ ) . '/includes/helpers.php';
-include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
-include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
-include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
-include_once dirname( __FILE__ ) . '/includes/shortcode.php';
-include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
-include_once dirname( __FILE__ ) . '/includes/widgets.php';
 
 
 /**
@@ -40,7 +31,29 @@ function load_text_domain() {
 add_action( 'plugins_loaded', 'ots\load_text_domain' );
 
 
+function ots() {
+
+    include_once dirname( __FILE__ ) . '/upgrade.php';
+    include_once dirname( __FILE__ ) . '/includes/functions.php';
+    include_once dirname( __FILE__ ) . '/includes/helpers.php';
+    include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
+    include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
+    include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
+    include_once dirname( __FILE__ ) . '/includes/shortcode.php';
+    include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
+    include_once dirname( __FILE__ ) . '/includes/widgets.php';
+
+    do_action( 'ots_loaded' );
+
+}
+
+add_action( 'plugins_loaded', 'ots\ots' );
+
+
+
 function activate() {
+
+    ots();
 
     register_team_member_post_type();
     register_team_member_position_taxonomy();
@@ -53,6 +66,8 @@ register_activation_hook( __FILE__, 'ots\activate' );
 
 
 function deactivate() {
+
+    ots();
 
     unregister_setting( 'ots-team-view', Options::TEMPLATE );
     unregister_setting( 'ots-team-view', Options::REWRITE_SLUG );
