@@ -394,9 +394,12 @@ function do_settings_page() {
 
             <div class="ad-header">
 
-                <h2><?php _e( 'Our Team Showcase', 'ots' ); ?></h2>
+                <div class="callouts">
+                    <button class="cta cta-secondary"><?php _e( 'View Demo  ', 'ots' ); ?></button>
+                    <button class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
+                </div>
 
-                <button class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
+                <h2><?php _e( 'Our Team Showcase', 'ots' ); ?></h2>
 
             </div>
 
