@@ -19,6 +19,11 @@ function enqueue_editor_scripts() {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
+/**
+ * Enqueue scripts for single-team_member.php.
+ *
+ * @since 4.0.0
+ */
 function enqueue_single_scripts() {
 
     if( get_post_type() == 'team_member' && apply_filters( 'ots_load_default_single_scripts', true ) ) {
@@ -63,8 +68,8 @@ function register_team_member_post_type() {
     $labels = array(
         'name'               => _x( 'Team Members', 'post type general name', 'ots' ),
         'singular_name'      => _x( 'Team Member', 'post type singular name', 'ots' ),
-        'menu_name'          => _x( 'Team Members', 'admin menu', 'ots' ),
-        'name_admin_bar'     => _x( 'Team Member', 'add new on admin bar', 'ots' ),
+        'menu_name'          => _x( 'Team', 'admin menu', 'ots' ),
+        'name_admin_bar'     => _x( 'Team', 'add new on admin bar', 'ots' ),
         'add_new'            => _x( 'Add New', 'team_member', 'ots' ),
         'add_new_item'       => __( 'Add New Member', 'ots' ),
         'new_item'           => __( 'New Member', 'ots' ),

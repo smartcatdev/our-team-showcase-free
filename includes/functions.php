@@ -189,7 +189,13 @@ function get_single_templates() {
 
 }
 
-
+/**
+ * Get all articles for a member.
+ *
+ * @param  null|int|\WP_Post $member The team member.
+ * @return array                     The article IDs.
+ * @since 4.0.0
+ */
 function get_member_articles( $member = null ) {
 
     $member = get_post( $member );

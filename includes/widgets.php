@@ -16,6 +16,11 @@ function register_widgets() {
 add_action( 'widgets_init', 'ots\register_widgets' );
 
 
+/**
+ * Enqueue scripts for the sidebar widget.
+ *
+ * @since 4.0.0
+ */
 function enqueue_widget_scripts() {
 
     if( apply_filters( 'ots_load_default_widget_scripts', true ) ) {
