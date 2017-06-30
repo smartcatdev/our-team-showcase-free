@@ -42,15 +42,9 @@ namespace ots;
 
                             <hr>
 
-                            <?php $articles = get_member_articles(); ?>
-
                             <div class="sc_member_articles">
 
-                                <?php foreach( $articles as $article ) : ?>
-
-                                    <?php $article = get_post( $article ); ?>
-
-                                    <?php if( !empty( $article ) ) : ?>
+                                <?php foreach( get_member_articles() as $article ) : ?>
 
                                         <div class="article">
 
@@ -61,8 +55,6 @@ namespace ots;
                                             </div>
 
                                         </div>
-
-                                    <?php endif; ?>
 
                                 <?php endforeach; ?>
 
