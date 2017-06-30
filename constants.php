@@ -103,7 +103,7 @@ final class Defaults {
     /**
      * @since 4.0.0
      */
-    const SOCIAL_LINK_ACTION = 'new_page';
+    const SOCIAL_LINK_ACTION = 'on';
 
     /**
      * @since 4.0.0
@@ -118,12 +118,12 @@ final class Defaults {
     /**
      * @since 4.0.0
      */
-    const DISPLAY_LIMIT = 0;
+    const DISPLAY_LIMIT = 'on';
 
     /**
      * @since 4.0.0
      */
-    const MAIN_COLOR = '1f7dcf';
+    const MAIN_COLOR = '#1f7dcf';
 
     /**
      * @since 4.0.0

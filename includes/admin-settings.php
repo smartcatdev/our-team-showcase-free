@@ -10,7 +10,7 @@ namespace ots;
  */
 function enqueue_settings_scripts( $hook ) {
 
-    if( strpos( $hook, 'ots-settings' ) ) {
+    if( strpos( $hook, 'ots-settings' ) !== false ) {
         wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
         wp_enqueue_style( 'ots-settings-css', asset( 'admin/css/settings.css' ), null, VERSION );
         wp_enqueue_style( 'wp-color-picker' );
@@ -98,7 +98,7 @@ function register_settings() {
 
     register_setting( 'ots-team-view', Options::MAIN_COLOR, array(
         'type'              => 'string',
-        'default'           => Defaults::DISPLAY_TITLE,
+        'default'           => Defaults::MAIN_COLOR,
         'sanitize_callback' => 'sanitize_hex_color'
     ) );
 
@@ -116,7 +116,7 @@ function register_settings() {
 
 }
 
-add_action( 'admin_init', 'ots\register_settings' );
+add_action( 'init', 'ots\register_settings' );
 
 
 /**

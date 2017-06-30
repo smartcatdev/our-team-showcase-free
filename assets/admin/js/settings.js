@@ -1,6 +1,6 @@
 jQuery( document ).ready( function ( $ ) {
 
-    var limit = $( '#ots-display-limit-number');
+    var limit = $( '#ots-display-limit-number' );
 
     $( '#ots-display-limit-all' ).change( function () {
 
@@ -9,6 +9,6 @@ jQuery( document ).ready( function ( $ ) {
     } );
 
 
-    $( 'input[name="ots-global-team-main-color"]' ).wpColorPicker();
+    $( 'input[name="ots-team-main-color"]' ).wpColorPicker();
 
 } );
