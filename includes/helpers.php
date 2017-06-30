@@ -50,7 +50,7 @@ function print_attrs( array $attrs ) {
  * Builds a single social link icon.
  *
  * @param  string $link   URL for the link's href.
- * @param  string $icon   URL of the icon to use for the link.
+ * @param  string $icon   URL of the icon to use for the link.s
  * @return string         The HTML for the link.
  * @since 4.0.0
  */
@@ -59,7 +59,7 @@ function social_link( $link, $icon = '' ) {
     // See if we're opening links in a new tab
     $target = get_option( Options::SOCIAL_LINK_ACTION ) == 'on' ? '_blank' : false;
 
-    return '<a ' . ( $target ? 'target="' . $target .'"' : '' ) . ' href="' . esc_url( $link ) . '">
+    return '<a ' . ( $target ? 'target="' . $target .'"' : '' ) . ' href="' . $link . '">
             <img src="' . esc_url( $icon ) . '" class="sc-social" /></a>';
 
 }
@@ -76,25 +76,25 @@ function social_link( $link, $icon = '' ) {
 function do_member_social_links( \WP_Post $member = null, $before ='', $after = '' ) {
 
     $links = array(
-        'facebook'  => asset( 'images/social/facebook.png' ),
-        'twitter'   => asset( 'images/social/twitter.png' ),
-        'linkedin'  => asset( 'images/social/linkedin.png' ),
-        'gplus'     => asset( 'images/social/gplus.png' ),
-        'email'     => asset( 'images/social/email.png' ),
-        'phone'     => asset( 'images/social/phone.png' ),
-        'pinterest' => asset( 'images/social/pinterest.png' ),
-        'instagram' => asset( 'images/social/instagram.png' ),
-        'website'   => asset( 'images/social/website.png' )
+        'facebook'  => array( '',        asset( 'images/social/facebook.png'  ) ),
+        'twitter'   => array( '',        asset( 'images/social/twitter.png'   ) ),
+        'linkedin'  => array( '',        asset( 'images/social/linkedin.png'  ) ),
+        'gplus'     => array( '',        asset( 'images/social/gplus.png'     ) ),
+        'email'     => array( 'mailto:', asset( 'images/social/email.png'     ) ),
+        'phone'     => array( 'tel:',    asset( 'images/social/phone.png'     ) ),
+        'pinterest' => array( '',        asset( 'images/social/pinterest.png' ) ),
+        'instagram' => array( '',        asset( 'images/social/instagram.png' ) ),
+        'website'   => array( '',        asset( 'images/social/website.png'   ) )
     );
 
     $member = get_post( $member );
 
-    foreach( $links as $meta_key => $icon ) {
+    foreach( $links as $meta_key => $data ) {
 
         $link = get_post_meta( $member->ID, "team_member_$meta_key", true );
 
         if( !empty( $link ) ) {
-            echo $before . social_link( $link, $icon ) . $after;
+            echo $before . social_link( $data[0] . $link, $data[1] ) . $after;
         }
 
     }
