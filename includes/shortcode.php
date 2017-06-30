@@ -11,10 +11,11 @@ function enqueue_scripts() {
 
     if( apply_filters( 'ots_load_default_scripts', true ) ) {
 
-        wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
+
         wp_enqueue_style( "ots-grid-css", asset( "css/grid.css" ), null, VERSION );
         wp_enqueue_style( "ots-grid-circles-css", asset( "css/grid-circles.css" ), null, VERSION );
         wp_enqueue_style( "ots-grid-circles-2-css", asset( "css/grid-circles-2.css" ), null, VERSION );
+        wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
 
     }
 
@@ -82,7 +83,7 @@ function print_dynamic_styles() { ?>
         }
 
         #sc_our_team .sc_team_member {
-            margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
         }
 
     </style>
