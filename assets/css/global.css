@@ -1,0 +1,110 @@
+.sc_team_member .sc_team_member_name a {
+    text-decoration: none;
+}
+
+.sc_team_single_disabled {
+    cursor: default;
+}
+
+#sc_our_team .sc_team_member .icons a {
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+#sc_our_team .sc_team_member .icons span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: #313131;
+    transition: 0.2s all ease-in-out;
+    -moz-transition: 0.2s all ease-in-out;
+    -webkit-transition: 0.2s all ease-in-out;
+    text-align: center;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-facebook:hover {
+    background: #3b5998;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-twitter:hover {
+    background: #00aced;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-linkedin:hover {
+    background: #007bb6;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-google-plus:hover {
+    background: #dd4b39;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-envelope-o:hover {
+    background: #0072b1;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-phone:hover {
+    background: #00bf8f;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-instagram:hover {
+    background: #125688;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-share-alt:hover {
+    background: #DAA819;
+}
+
+#sc_our_team .sc_team_member .icons span.sc_team_icon-pinterest-p:hover {
+    background: #cb2027;
+}
+
+#sc_our_team .sc_team_member_inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#sc_our_team .sc_team_member .sc_team_more img {
+    width: 50px;
+    height: 50px;
+    margin: 0;
+}
+
+
+@media (min-width: 768px){
+
+
+    #sc_our_team.sc-col3 .sc_team_member {
+        width: 33.3%;
+    }
+
+    #sc_our_team.sc-col4 .sc_team_member {
+        width: 25%;
+    }
+
+    #sc_our_team.sc-col2 .sc_team_member {
+        width: 50%;
+    }
+
+    #sc_our_team.sc-col5 .sc_team_member {
+        width: 20%;
+    }
+
+    #sc_our_team.sc-col10 .sc_team_member {
+        width: 10%;
+    }
+
+    #sc_our_team.sc-col5 .sc_team_member {
+        width: 17%;
+        margin: 1%;
+    }
+
+    #sc_our_team.sc-col10 .sc_team_member {
+        width: 10%;
+    }
+
+}

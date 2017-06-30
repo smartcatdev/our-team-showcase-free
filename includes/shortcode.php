@@ -9,7 +9,15 @@ namespace ots;
  */
 function enqueue_scripts() {
 
-    wp_enqueue_style( "ots-css", asset( "css/style.css" ), null, VERSION );
+    $template = get_option( Options::TEMPLATE );
+
+    if( apply_filters( 'ots_load_default_scripts', true ) ) {
+
+        wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
+        wp_enqueue_style( "ots-$template-css", asset( "css/$template.css" ), null, VERSION );
+
+    }
+
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }

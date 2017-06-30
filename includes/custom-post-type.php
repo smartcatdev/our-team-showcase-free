@@ -19,6 +19,17 @@ function enqueue_editor_scripts() {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
+function enqueue_single_scripts() {
+
+    if( get_post_type() == 'team_member' && apply_filters( 'ots_load_default_single_scripts', true ) ) {
+        wp_enqueue_style( 'ots-single-css', asset( 'css/single-team_member.css' ), null, VERSION );
+    }
+
+}
+
+add_action( 'wp_enqueue_scripts', 'ots\enqueue_single_scripts' );
+
+
 /**
  * Manually override the theme's tempalate.
  *

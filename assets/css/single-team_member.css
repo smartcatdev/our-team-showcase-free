@@ -1,0 +1,172 @@
+.sc-single-wrapper {
+    padding: 15px 0;
+    max-width: 1170px;
+    margin: 0 auto;
+}
+
+.sc_team_posts.sc_team_post .sc-team-member-posts {
+    overflow: hidden;
+}
+
+.sc_team_posts.sc_team_post .sc-team-member-posts > div {
+    overflow: hidden;
+}
+
+.sc-team-member-posts.stacked .width25 {
+    padding-left: 0;
+}
+
+.sc-team-member-posts > div {
+    margin: 0 0 15px 0;
+}
+
+.sc-team-member-posts a {
+    font-size: 18px;
+}
+
+.sc_team_single_member .sc_single_side .social span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    background: #313131;
+    transition: 0.2s all ease-in-out;
+    -moz-transition: 0.2s all ease-in-out;
+    -webkit-transition: 0.2s all ease-in-out;
+    text-align: center;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-facebook:hover {
+    background: #3b5998;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-twitter:hover {
+    background: #00aced;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-linkedin:hover {
+    background: #007bb6;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-google-plus:hover {
+    background: #dd4b39;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-envelope-o:hover {
+    background: #0072b1;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-phone:hover {
+    background: #00bf8f;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-instagram:hover {
+    background: #125688;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-share-alt:hover {
+    background: #DAA819;
+}
+
+.sc_team_single_member .sc_single_side .social span.sc_team_icon-pinterest-p:hover {
+    background: #cb2027;
+}
+
+.sc_team_single_member {
+    overflow: hidden;
+}
+
+.sc_team_single_member .sc_single_side .social {
+    margin: 10px 0 0 0;
+}
+
+.sc_team_single_member .sc_single_side .social li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.sc_team_single_member .sc_single_side .social li a {
+    text-decoration: none;
+}
+
+.sc_team_single_member .sc_single_side .social .sc-social {
+    width: 25px;
+    position: relative;
+    top: 7px;
+    padding-right: 5px;
+}
+
+.sc_team_single_member .sc_single_side .name {
+    font-size: 22px;
+    margin-top: 12px;
+    margin-bottom: 7px;
+    text-align: center;
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    color: #333;
+    font-weight: 400;
+}
+
+.sc_team_single_member .sc_single_side .title {
+    text-align: center;
+    font-weight: 400;
+}
+
+.sc_team_single_member .circle .wp-post-image {
+    border-radius: 100%;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.sc_team_single_member .inner {
+    background: rgba(150,150,150,0.2);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.smartcat_team_single_icons img.sc-social,
+.smartcat_team_single_icons img {
+    width: 25px !important;
+    margin-right: 10px !important;
+    box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.sc_team_single_member .wp-post-image {
+    width: 100%;
+}
+
+@media ( min-width: 768px ) {
+
+    .sc_team_single_member .sc_single_side .title {
+        font-size: 17px;
+    }
+
+    .sc_team_single_member .sc_single_side {
+        float: left;
+        width: 25%;
+        box-sizing: border-box;
+    }
+
+    .sc_team_single_member .sc_single_main {
+        float: left;
+        width: 71%;
+        margin-left: 2%;
+        padding: 15px;
+        box-sizing: border-box;
+        background: rgba(150,150,150,0.2);
+    }
+
+    .sc_team_single_member .wp-post-image {
+        width: 100%;
+    }
+
+}
