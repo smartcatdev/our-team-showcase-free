@@ -9,12 +9,12 @@ namespace ots;
  */
 function enqueue_scripts() {
 
-    $template = get_option( Options::TEMPLATE );
-
     if( apply_filters( 'ots_load_default_scripts', true ) ) {
 
         wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
-        wp_enqueue_style( "ots-$template-css", asset( "css/$template.css" ), null, VERSION );
+        wp_enqueue_style( "ots-grid-css", asset( "css/grid.css" ), null, VERSION );
+        wp_enqueue_style( "ots-grid-circles-css", asset( "css/grid-circles.css" ), null, VERSION );
+        wp_enqueue_style( "ots-grid-circles-2-css", asset( "css/grid-circles-2.css" ), null, VERSION );
 
     }
 

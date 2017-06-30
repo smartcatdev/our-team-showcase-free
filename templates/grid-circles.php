@@ -44,11 +44,15 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                     <div class="sc_team_member_overlay"></div>
 
-                    <div class="sc_team_more">
-                        <a href="<?php the_permalink() ?>" rel="bookmark" class="<?php esc_attr_e( $get_attr( 'single_template', '' ) ); ?>">
-                            <img src="<?php echo esc_url( asset( 'images/more.png' ) ); ?>"/>
-                        </a>
-                    </div>
+                    <?php if( $get_attr( 'single_template', 'default' ) !== 'disabled' ) : ?>
+
+                        <div class="sc_team_more">
+                            <a href="<?php the_permalink() ?>" rel="bookmark" class="<?php esc_attr_e( $get_attr( 'single_template', 'default' ) ); ?>">
+                                <img src="<?php echo esc_url( asset( 'images/more.png' ) ); ?>"/>
+                            </a>
+                        </div>
+
+                    <?php endif; ?>
 
                 </div>
 

@@ -23,7 +23,17 @@ $members = get_members_in_order( $get_attr( 'group' ) );
                     <?php if ( get_option( Options::DISPLAY_NAME ) == 'on' ) : ?>
 
                         <div itemprop="name" class="sc_team_member_name">
-                            <a href="<?php the_permalink() ?>" rel="bookmark" ><?php the_title() ?></a>
+
+                            <?php if( $get_attr( 'single_template', 'default' ) !== 'disabled' ) : ?>
+
+                                <a href="<?php  the_permalink(); ?>" rel="bookmark" ><?php the_title() ?></a>
+
+                            <?php else : ?>
+
+                                <?php the_title(); ?>
+
+                            <?php endif; ?>
+
                         </div>
 
                     <?php endif; ?>

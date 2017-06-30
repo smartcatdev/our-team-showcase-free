@@ -42,7 +42,15 @@ class TeamWidget extends \WP_Widget {
 
                     <div itemscope itemtype="http://schema.org/Person" class="sc_sidebar_team_member">
 
-                        <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php member_avatar(); ?></a>
+                        <?php if( get_option( Options::SINGLE_TEMPLATE ) !== 'disabled' ) : ?>
+
+                            <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php member_avatar(); ?></a>
+
+                        <?php else : ?>
+
+                            <?php member_avatar(); ?>
+
+                        <?php endif; ?>
 
                         <div class="sc_team_member_overlay">
 

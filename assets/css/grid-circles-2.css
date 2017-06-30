@@ -104,7 +104,7 @@
     -webkit-transform: rotate(360deg);
 }
 
-.grid_circles2#sc_our_team .sc_team_member .sc_team_member_name a {
+.grid_circles2#sc_our_team .sc_team_member .sc_team_member_name {
     color: #fff;
 }
 
