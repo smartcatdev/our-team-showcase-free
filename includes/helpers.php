@@ -46,6 +46,14 @@ function print_attrs( array $attrs ) {
 }
 
 
+/**
+ * Builds a single social link icon.
+ *
+ * @param  string $link   URL for the link's href.
+ * @param  string $icon   URL of the icon to use for the link.
+ * @return string         The HTML for the link.
+ * @since 4.0.0
+ */
 function social_link( $link, $icon = '' ) {
 
     // See if we're opening links in a new tab
@@ -56,6 +64,15 @@ function social_link( $link, $icon = '' ) {
 
 }
 
+
+/**
+ * Loops through a team member's social links and outputs them if they are not empty.
+ *
+ * @param \WP_Post|null $member
+ * @param string        $before HTML to display before the link.
+ * @param string        $after  HTML to display after the link.
+ * @since 4.0.0
+ */
 function do_member_social_links( \WP_Post $member = null, $before ='', $after = '' ) {
 
     $links = array(

@@ -2,7 +2,12 @@
 
 namespace ots;
 
-
+/**
+ * Enqueue scripts used in the plugin settings page.
+ *
+ * @param $hook
+ * @since 4.0.0
+ */
 function enqueue_settings_scripts( $hook ) {
 
     if( strpos( $hook, 'ots-settings' ) ) {
@@ -357,6 +362,12 @@ function add_settings_fields() {
 add_action( 'admin_init', 'ots\add_settings_fields' );
 
 
+/**
+ * Flush rewrite rules when the team member post type slug is changed.
+ *
+ * @param $option
+ * @since 4.0.0
+ */
 function team_member_slug_changed( $option ) {
 
     if( $option === Options::REWRITE_SLUG ) {
@@ -527,6 +538,7 @@ function settings_check_box( array $args ) {
 
 <?php }
 
+
 /**
  * Output a text box for a settings field.
  *
@@ -571,6 +583,11 @@ function do_pro_only_field() { ?>
 <?php }
 
 
+/**
+ * Output a number input and checkbox for the display limit field.
+ *
+ * @since 4.0.0
+ */
 function display_limit_field() { ?>
 
     <?php $value = get_option( Options::DISPLAY_LIMIT ); ?>

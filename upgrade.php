@@ -2,7 +2,11 @@
 
 namespace ots;
 
-
+/**
+ * Upgrades and migrates the plugin's settings.
+ *
+ * @since 4.0.0
+ */
 function do_migration() {
 
     $options = get_option( 'smartcat_team_options', false );

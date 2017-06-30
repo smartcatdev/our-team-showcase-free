@@ -6,6 +6,12 @@ if( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
     die;
 }
 
+/**
+ * Uninstall script. Deletes all options, terms and trashes posts.
+ *
+ * @since 4.0.0
+ */
+
 include_once dirname( __FILE__ ) . '/constants.php';
 include_once dirname( __FILE__ ) . '/includes/custom-post-type.php';
 

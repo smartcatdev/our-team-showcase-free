@@ -2,7 +2,18 @@
 
 namespace ots;
 
+/**
+ * Widget to display a list of team members.
+ *
+ * @package ots
+ * @since 4.0.0
+ */
+/**
+ * Class TeamWidget
+ * @package ots
+ */
 class TeamWidget extends \WP_Widget {
+
 
     public function __construct() {
 

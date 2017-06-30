@@ -2,7 +2,12 @@
 
 namespace ots;
 
-
+/**
+ * Enqueue scripts for reorder admin page.
+ *
+ * @param $hook
+ * @since 4.0.0
+ */
 function enqueue_reorder_scripts( $hook ) {
 
     if( strpos( $hook, 'ots-reorder-members' ) ) {
@@ -15,6 +20,11 @@ function enqueue_reorder_scripts( $hook ) {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_reorder_scripts' );
 
 
+/**
+ * Receives the orders array of team member IDs and loops through them to update their position meta.
+ *
+ * @since 4.0.0
+ */
 function save_team_members_order() {
 
     if( check_admin_referer( 'save_members_order', 'member_order_nonce' ) ) {
@@ -40,6 +50,11 @@ function save_team_members_order() {
 add_action( 'admin_post_ots_save_members_order', 'ots\save_team_members_order' );
 
 
+/**
+ * Output the admin page for reordering team members.
+ *
+ * @since 4.0.0
+ */
 function do_member_reorder_page() { ?>
 
     <?php $members = get_members_in_order(); ?>

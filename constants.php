@@ -9,67 +9,67 @@ final class Options {
     /**
      * @since 4.0.0
      */
-    const REWRITE_SLUG = 'ots-global-team-rewrite-slug';
+    const REWRITE_SLUG = 'ots-team-rewrite-slug';
 
     /**
      * @since 4.0.0
      */
-    const TEMPLATE = 'ots-global-team-template';
+    const TEMPLATE = 'ots-team-template';
 
     /**
      * @since 4.0.0
      */
-    const GRID_COLUMNS = 'ots-global-team-grid-columns';
+    const GRID_COLUMNS = 'ots-team-grid-columns';
 
     /**
      * @since 4.0.0
      */
-    const MARGIN = 'ots-global-team-margin';
+    const MARGIN = 'ots-team-margin';
 
     /**
      * @since 4.0.0
      */
-    const SHOW_SOCIAL = 'ots-global-team-show-social';
+    const SHOW_SOCIAL = 'ots-team-show-social';
 
     /**
      * @since 4.0.0
      */
-    const SOCIAL_LINK_ACTION = 'ots-global-team-social-link-action';
+    const SOCIAL_LINK_ACTION = 'ots-team-social-link-action';
 
     /**
      * @since 4.0.0
      */
-    const DISPLAY_NAME = 'ots-global-team-display-name';
+    const DISPLAY_NAME = 'ots-team-display-name';
 
     /**
      * @since 4.0.0
      */
-    const DISPLAY_TITLE = 'ots-global-team-display-title';
+    const DISPLAY_TITLE = 'ots-team-display-title';
 
     /**
      * @since 4.0.0
      */
-    const DISPLAY_LIMIT = 'ots-global-team-display-limit';
+    const DISPLAY_LIMIT = 'ots-team-display-limit';
 
     /**
      * @since 4.0.0
      */
-    const MAIN_COLOR = 'ots-global-team-main-color';
+    const MAIN_COLOR = 'ots-team-main-color';
 
     /**
      * @since 4.0.0
      */
-    const SINGLE_TEMPLATE = 'ots-global-single-template';
+    const SINGLE_TEMPLATE = 'ots-single-template';
 
     /**
      * @since 4.0.0
      */
-    const DEFAULT_AVATAR = 'ots-global-default-avatar';
+    const DEFAULT_AVATAR = 'ots-default-avatar';
 
     /**
      * @since 4.0.0
      */
-    const SHOW_SINGLE_SOCIAL = 'ots-global-show-single-social';
+    const SHOW_SINGLE_SOCIAL = 'ots-show-single-social';
 
 }
 
@@ -83,7 +83,7 @@ final class Defaults {
     /**
      * @since 4.0.0
      */
-    const TEMPLATE = '';
+    const TEMPLATE = 'grid';
 
     /**
      * @since 4.0.0
@@ -128,7 +128,7 @@ final class Defaults {
     /**
      * @since 4.0.0
      */
-    const SINGLE_TEMPLATE = '';
+    const SINGLE_TEMPLATE = 'default';
 
     /**
      * @since 4.0.0

@@ -31,7 +31,12 @@ function load_text_domain() {
 add_action( 'plugins_loaded', 'ots\load_text_domain' );
 
 
-function ots() {
+/**
+ * Includes required files and initializes the plugin.
+ *
+ * @since 4.0.0
+ */
+function init() {
 
     include_once dirname( __FILE__ ) . '/upgrade.php';
     include_once dirname( __FILE__ ) . '/includes/functions.php';
@@ -47,13 +52,17 @@ function ots() {
 
 }
 
-add_action( 'plugins_loaded', 'ots\ots' );
+add_action( 'plugins_loaded', 'ots\init' );
 
 
-
+/**
+ * Runs on plugin activation.
+ *
+ * @since 4.0.0
+ */
 function activate() {
 
-    ots();
+    init();
 
     register_team_member_post_type();
     register_team_member_position_taxonomy();
@@ -65,9 +74,14 @@ function activate() {
 register_activation_hook( __FILE__, 'ots\activate' );
 
 
+/**
+ * Runs on plugin deactivation.
+ *
+ * @since 4.0.0
+ */
 function deactivate() {
 
-    ots();
+    init();
 
     unregister_setting( 'ots-team-view', Options::TEMPLATE );
     unregister_setting( 'ots-team-view', Options::REWRITE_SLUG );
@@ -90,10 +104,24 @@ function deactivate() {
 register_deactivation_hook( __FILE__, 'ots\deactivate' );
 
 
+/**
+ * Get the URL of an asset from the assets folder.
+ *
+ * @param string $path
+ * @return string
+ * @since 4.0.0
+ */
 function asset( $path = '' ) {
     return trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/' . ltrim( $path, '/' );
 }
 
+
+/**
+ * Get the path of a template file.
+ *
+ * @param  string      $template The file name in the format of file.php.
+ * @return bool|string           False if the file does not exist, the path if it does.
+ */
 function template_path( $template ) {
 
     $file = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'templates/' . ltrim( $template, '/' );

@@ -2,7 +2,11 @@
 
 namespace ots;
 
-
+/**
+ * Enqueue shortcode scripts.
+ *
+ * @since 4.0.0
+ */
 function enqueue_scripts() {
 
     wp_enqueue_style( "ots-css", asset( "css/style.css" ), null, VERSION );
@@ -13,6 +17,13 @@ function enqueue_scripts() {
 add_action( 'wp_enqueue_scripts', 'ots\enqueue_scripts' );
 
 
+/**
+ * Render the shortcode content and supply default attributes.
+ *
+ * @param array $attributes
+ * @return string
+ * @since 4.0.0
+ */
 function do_shortcode_output( $attributes = array() ) {
 
     $defaults = array(
@@ -41,6 +52,11 @@ function do_shortcode_output( $attributes = array() ) {
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
 
 
+/**
+ * Print dynamic styles in the page header.
+ *
+ * @since 4.0.0
+ */
 function print_dynamic_styles() { ?>
 
     <style id="ots-dynamic-styles">
@@ -53,13 +69,8 @@ function print_dynamic_styles() { ?>
         .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
         .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
         .grid_circles#sc_our_team .sc_team_member .sc_team_member_name,
-        .sc_our_team_panel .sc-right-panel .sc-name,
         #sc_our_team .sc_team_member .icons span {
             background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
-        }
-
-        .stacked#sc_our_team .smartcat_team_member{
-            border-color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }
 
         #sc_our_team .sc_team_member {

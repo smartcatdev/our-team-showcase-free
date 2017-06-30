@@ -2,7 +2,15 @@
 
 namespace ots;
 
-function get_members_in_order( $limit = false, $group = '' ) {
+/**
+ * Return the team members in their correct order.
+ *
+ * @param  bool        $limit The limit for the number of members to return.
+ * @param  string|bool $group The category that the team members should belong to.
+ * @return \WP_Query          The team member's query.
+ * @since 4.0.0
+ */
+function get_members_in_order( $limit = false, $group = false ) {
 
     $limit = $limit ? $limit : get_option( Options::DISPLAY_LIMIT );
 
@@ -14,7 +22,7 @@ function get_members_in_order( $limit = false, $group = '' ) {
         'order'          => 'ASC',
     );
 
-    if( !empty( $group ) ) {
+    if( $group ) {
         $args['team_member_position'] = $group;
     }
 
@@ -22,6 +30,15 @@ function get_members_in_order( $limit = false, $group = '' ) {
 
 }
 
+
+/**
+ * Returns the link to a member's avatar or a generic default if one is not set.
+ *
+ * @param  int|\WP_Post|null $member The team member.
+ * @param  string            $size   The size of the thumbnail.
+ * @return string                    The URL of the avatar image.
+ * @since 4.0.0
+ */
 function get_member_avatar( $member = null, $size = 'post-thumbnail' ) {
 
     $url = get_the_post_thumbnail_url( $member, $size );
@@ -35,6 +52,13 @@ function get_member_avatar( $member = null, $size = 'post-thumbnail' ) {
 }
 
 
+/**
+ * Outputs a member's avatar as a post thumbnail
+ *
+ * @param int|\WP_Post|null $member The team member.
+ * @param string|array      $size The size of the thumbnail, can be array( width, height ).
+ * @since 4.0.0
+ */
 function member_avatar( $member = null, $size = 'post_thumbnail' ) {
 
     if( has_post_thumbnail( $member ) ) {
@@ -53,6 +77,14 @@ function member_avatar( $member = null, $size = 'post_thumbnail' ) {
 }
 
 
+/**
+ * Sanitizes the display limit setting.
+ *
+ * @private
+ * @param $value
+ * @return mixed|void
+ * @since 4.0.0
+ */
 function sanitize_display_limit( $value ) {
 
     if( $value === 'on' || is_null( $value ) ) {
@@ -83,6 +115,14 @@ function sanitize_checkbox( $value ) {
 }
 
 
+/**
+ * Sanitizes the single template setting.
+ *
+ * @private
+ * @param $template
+ * @return string
+ * @since 4.0.0
+ */
 function sanitize_template( $template ) {
 
     if( !array_key_exists( $template, get_templates() ) ) {
@@ -94,6 +134,14 @@ function sanitize_template( $template ) {
 }
 
 
+/**
+ * Sanitizes the single template setting.
+ *
+ * @private
+ * @param $template
+ * @return string
+ * @since 4.0.0
+ */
 function sanitize_single_template( $template ) {
 
     if( !array_key_exists( $template, get_single_templates() ) ) {
@@ -105,6 +153,12 @@ function sanitize_single_template( $template ) {
 }
 
 
+/**
+ * Returns a list of registered template slugs.
+ *
+ * @return array The template options.
+ * @since 4.0.0
+ */
 function get_templates() {
 
     $templates = array(
@@ -118,6 +172,12 @@ function get_templates() {
 }
 
 
+/**
+ * Returns a list of registered single template slugs.
+ *
+ * @return array The template options.
+ * @since 4.0.0
+ */
 function get_single_templates() {
 
     $templates = array(

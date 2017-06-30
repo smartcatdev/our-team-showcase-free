@@ -2,6 +2,11 @@
 
 namespace ots;
 
+/**
+ * Enqueue scripts for editing team member posts.
+ *
+ * @since 4.0.0
+ */
 function enqueue_editor_scripts() {
 
     if( get_post_type() == 'team_member' ) {
@@ -14,6 +19,13 @@ function enqueue_editor_scripts() {
 add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
+/**
+ * Manually override the theme's tempalate.
+ *
+ * @param $template
+ * @return string
+ * @since 4.0.0
+ */
 function include_single_template( $template ) {
 
     if ( get_post_type() == 'team_member' /* &&
@@ -108,6 +120,13 @@ function register_team_member_position_taxonomy() {
 add_action( 'init', 'ots\register_team_member_position_taxonomy' );
 
 
+/**
+ * Add custom columns to the team member posts table.
+ *
+ * @param $columns
+ * @return mixed
+ * @since 4.0.0
+ */
 function add_team_member_custom_colums( $columns ) {
 
     unset( $columns['date'] );
@@ -123,6 +142,13 @@ function add_team_member_custom_colums( $columns ) {
 add_filter( 'manage_edit-team_member_columns', 'ots\add_team_member_custom_colums' );
 
 
+/**
+ * Output custom columns in the team member posts table.
+ *
+ * @param $column
+ * @param $post_id
+ * @since 4.0.0
+ */
 function do_team_member_custom_columns( $column, $post_id ) {
 
     switch( $column ) {
@@ -163,6 +189,14 @@ function team_member_meta_boxes() {
 
 }
 
+/**
+ * Add default meta keys when creating a new team member.
+ *
+ * @param $post_id
+ * @param $post
+ * @param $update
+ * @since 4.0.0
+ */
 function set_default_post_meta( $post_id, $post, $update ) {
 
     if( !$update ) {
@@ -172,6 +206,7 @@ function set_default_post_meta( $post_id, $post, $update ) {
 }
 
 add_action( 'save_post_team_member', 'ots\set_default_post_meta', 10, 3 );
+
 
 /**
  * Sanitize and save the contact metabox fields.
