@@ -405,14 +405,22 @@ function do_settings_page() {
 
             <div class="ad-header">
 
-                <div class="callouts">
-                    <button class="cta cta-secondary"><?php _e( 'View Demo  ', 'ots' ); ?></button>
-                    <button class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></button>
-                </div>
+                <?php if( apply_filters( 'ots_show_settings_cta', true ) ) : ?>
 
-                <h2><?php _e( 'Our Team Showcase', 'ots' ); ?></h2>
+                    <div class="callouts">
+                        <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>
+                        <a href="#" class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></a>
+                    </div>
+
+                <?php endif; ?>
+
+                <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+
+                <div class="clear"></div>
 
             </div>
+
+            <h2 style="display: none"></h2>
 
             <?php settings_errors(); ?>
 
@@ -445,6 +453,15 @@ function do_settings_page() {
 
                 <div class="widget">
                     <h2><?php _e( 'Plugin Tutorial', 'ots' ); ?></h2>
+                    <p><?php //TODO Replace with widget CTAs ?>
+                        orem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non sem leo. Sed et iaculis odio. Proin id mauris ac elit ornare scelerisque. Duis molestie lectus vel odio eleifend congue. Pellentesque quis magna libero. Cras sed bibendum ipsum. Vestibulum ornare, augue et faucibus accumsan, dui mi tincidunt nulla, ac tincidunt lectus libero venenatis ante. Sed metus nunc, pellentesque quis lacinia sit amet, sollicitudin at leo. Maecenas nisl risus, viverra a sapien nec, volutpat suscipit purus. Donec sit amet nunc et ligula interdum tristique. Duis sed odio vulputate, blandit nibh ac, vulputate quam.
+
+                        Morbi purus nunc, aliquet a justo id, pulvinar mattis metus. Nunc ut molestie mi. Donec sollicitudin sit amet ipsum in vestibulum. Proin malesuada auctor ornare. Aliquam eu elit sed libero finibus tempor. Etiam eu lectus volutpat, euismod ligula id, congue orci. Vivamus consectetur varius sem, eu aliquet nibh dictum viverra. Donec efficitur, ligula nec interdum aliquet, enim nisi vestibulum dolor, eget aliquam leo ante a velit. Curabitur aliquet hendrerit maximus. Vivamus sit amet tellus turpis.
+                    </p>
+                </div>
+
+                <div class="widget">
+                    <h2><?php _e( 'Another Widget', 'ots' ); ?></h2>
                     <p><?php //TODO Replace with widget CTAs ?>
                         orem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non sem leo. Sed et iaculis odio. Proin id mauris ac elit ornare scelerisque. Duis molestie lectus vel odio eleifend congue. Pellentesque quis magna libero. Cras sed bibendum ipsum. Vestibulum ornare, augue et faucibus accumsan, dui mi tincidunt nulla, ac tincidunt lectus libero venenatis ante. Sed metus nunc, pellentesque quis lacinia sit amet, sollicitudin at leo. Maecenas nisl risus, viverra a sapien nec, volutpat suscipit purus. Donec sit amet nunc et ligula interdum tristique. Duis sed odio vulputate, blandit nibh ac, vulputate quam.
 
