@@ -497,31 +497,30 @@ function settings_select_box( array $args ) {
     $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
     $disabled = isset( $args['disabled_options'] ) ? $args['disabled_options'] : array();
 
-    ?>
+    echo '<select name="' . esc_attr( $args['name'] ) . '" ';
 
-    <select name="<?php esc_attr_e( $args['name'] ); ?>"
+        print_attrs( $attrs );
 
-        <?php print_attrs( $attrs ); ?>>
+    echo '>';
 
-        <?php foreach( $args['options'] as $value => $label ) : ?>
+    foreach( $args['options'] as $value => $label ) {
 
-            <option value="<?php esc_attr_e( $value ); ?>"
+        echo '<option value="' . esc_attr( $value ) . '" ';
 
-                <?php selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' ); ?>
+            selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' );
+            disabled( true, in_array( $value, $disabled ) );
 
-                <?php disabled( true, in_array( $value, $disabled ) ); ?> ><?php esc_html_e( $label ); ?></option>
+        echo ' >' . esc_html( $label ) . '</option>';
 
-        <?php endforeach; ?>
+    }
 
-    </select>
+    echo '</select>';
 
-    <?php if( isset( $args['description'] ) ) : ?>
+    if( isset( $args['description'] ) ) {
+        echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
+    }
 
-        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
-
-    <?php endif; ?>
-
-<?php }
+}
 
 
 /**
@@ -540,22 +539,16 @@ function settings_check_box( array $args ) {
 
     $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
 
-    ?>
+    echo '<label>
+              <input type="checkbox"
+                     name="' . esc_attr( $args['name'] ) . '" ';
 
-    <label>
+        print_attrs( $attrs );
+        checked( 'on', $args['checked'] );
 
-        <input type="checkbox"
-               name="<?php esc_attr_e( $args['name'] ); ?>"
+    echo ' />' . esc_html( $args['label'] ) . '</label>';
 
-            <?php print_attrs( $attrs ); ?>
-
-            <?php checked( 'on', $args['checked'] ); ?>/>
-
-        <?php esc_html_e( $args['label'] ); ?>
-
-    </label>
-
-<?php }
+}
 
 
 /**
@@ -574,18 +567,18 @@ function settings_text_box( array $args ) {
 
     $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
 
+    echo '<input name="' . esc_attr( $args['name'] ) . '" 
+                 value="' . ( isset( $args['value'] ) ? $args['value'] : '' ) . '" ';
+
+        print_attrs( $attrs );
+
+    echo ' />';
+
+    if( isset( $args['description'] ) ) {
+        echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
+    }
+
     ?>
-
-    <input name="<?php esc_attr_e( $args['name'] ); ?>"
-           value="<?php echo isset( $args['value'] ) ? esc_attr( $args['value'] ) : ''; ?>"
-
-        <?php print_attrs( $attrs ); ?> />
-
-    <?php if( isset( $args['description'] ) ) : ?>
-
-        <p class="description"><?php esc_html_e( $args['description'] ); ?></p>
-
-    <?php endif; ?>
 
 <?php }
 
@@ -595,11 +588,11 @@ function settings_text_box( array $args ) {
  *
  * @since 4.0.0
  */
-function do_pro_only_field() { ?>
+function do_pro_only_field() {
 
-    <p class="description"><?php _e( 'Pro version only', 'ots' ); ?></p>
+    echo '<p class="description">' . __( 'Pro version only', 'ots' ) . '</p>';
 
-<?php }
+}
 
 
 /**
@@ -607,14 +600,14 @@ function do_pro_only_field() { ?>
  *
  * @since 4.0.0
  */
-function display_limit_field() { ?>
+function display_limit_field() {
 
-    <?php $value = get_option( Options::DISPLAY_LIMIT ); ?>
+    $value = get_option( Options::DISPLAY_LIMIT ); ?>
 
     <input type="number"
            min="1"
            id="ots-display-limit-number"
-           placeholder="<?php esc_attr_e( '# of members to display', 'ots' ); ?>"
+           placeholder="<?php esc_attr_e( '# of members', 'ots' ); ?>"
            name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
            value="<?php $value !== 'on' ? esc_attr_e( $value ) : ''; ?>"
 
