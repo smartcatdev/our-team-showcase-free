@@ -34,39 +34,39 @@ namespace ots;
 
                     <?php the_content(); ?>
 
-                    <?php if( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
+                </div>
 
-                        <div class="articles">
+                <?php if( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
 
-                            <h2><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h2>
+                    <div class="articles">
 
-                            <hr>
+                        <h2><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h2>
 
-                            <div class="sc_member_articles">
+                        <hr>
 
-                                <?php foreach( get_member_articles() as $article ) : ?>
+                        <div class="sc_member_articles">
 
-                                        <div class="article">
+                            <?php foreach( get_member_articles() as $article ) : ?>
 
-                                            <div class="left"><?php echo get_the_post_thumbnail( $article ); ?></div>
+                                <div class="article">
 
-                                            <div class="body">
-                                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
-                                            </div>
+                                    <div class="left"><?php echo get_the_post_thumbnail( $article ); ?></div>
 
-                                        </div>
+                                    <div class="body">
+                                        <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+                                    </div>
 
-                                <?php endforeach; ?>
+                                </div>
 
-                            </div>
-
-                            <div class="clear"></div>
+                            <?php endforeach; ?>
 
                         </div>
 
-                    <?php endif; ?>
+                        <div class="clear"></div>
 
-                </div>
+                    </div>
+
+                <?php endif; ?>
 
             </div>
 

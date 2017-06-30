@@ -149,19 +149,34 @@
     width: 100%;
 }
 
-.sc_team_single_member .sc_member_articles .article .left {
+.sc_team_single_member .articles hr {
+    border-bottom: 1px solid #b9b9b9;
+    margin: 15px 0;
+}
+
+.sc_team_single_member .articles h2 {
+    margin: 0 10px;
+}
+
+.sc_team_single_member .articles .article {
+    background: #fff;
+    margin: 10px 0;
+    background: rgba(150,150,150,0.2);
+}
+
+.sc_team_single_member .articles .article .left {
     display: table-cell;
     width: 33%;
     padding: 10px;
     vertical-align: top;
 }
 
-.sc_team_single_member .sc_member_articles .article .body {
+.sc_team_single_member .articles .article .body {
     display: table-cell;
     padding: 10px;
 }
 
-.sc_team_single_member .sc_member_articles .article a {
+.sc_team_single_member .articles .article a {
     font-size: 20px;
 }
 
@@ -191,25 +206,39 @@
         width: 100%;
     }
 
-    .sc_team_single_member .sc_member_articles .article {
-        width: 29%;
-        display: inline-block;
-        float: left;
-        margin: 10px;
+    .sc_team_single_member .articles {
+        width: 71%;
+        margin-right: 2%;
+        margin-top: 20px;
+        float: right;
+        background: rgba(150,150,150,0.2);
+        padding: 15px;
     }
 
-    .sc_team_single_member .sc_member_articles .article .left,
-    .sc_team_single_member .sc_member_articles .article .body {
+    .sc_team_single_member .sc_member_articles {
+        display: table;
+    }
+
+    .sc_team_single_member .articles .article {
+        width: 29%;
+        display: table-cell;
+        float: left;
+        margin: 10px;
+        min-height: 280px;
+    }
+
+    .sc_team_single_member .articles .article .left,
+    .sc_team_single_member .articles .article .body {
         width: 100%;
         display: block;
     }
 
-    .sc_team_single_member .sc_member_articles .article .left {
+    .sc_team_single_member .articles .article .left {
         max-height: 200px;
     }
 
 
-    .sc_team_single_member .sc_member_articles .article .wp-post-image {
+    .sc_team_single_member .articles .article .wp-post-image {
         width: 100%;
     }
 }

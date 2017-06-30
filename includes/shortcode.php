@@ -71,7 +71,7 @@ function print_dynamic_styles() { ?>
     <style id="ots-dynamic-styles">
 
         #sc_our_team a,
-        .sc_team_single_member a {
+        .sc_team_single_member .articles a {
             color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }
 
