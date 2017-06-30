@@ -81,6 +81,7 @@
 
 .sc_team_single_member .sc_single_side .social {
     margin: 10px 0 0 0;
+    text-align: center;
 }
 
 .sc_team_single_member .sc_single_side .social li {
@@ -131,6 +132,10 @@
     margin-bottom: 15px;
 }
 
+.sc_team_single_member .sc_single_main {
+    margin: 10px;
+}
+
 .smartcat_team_single_icons img.sc-social,
 .smartcat_team_single_icons img {
     width: 25px !important;
@@ -142,6 +147,22 @@
 
 .sc_team_single_member .wp-post-image {
     width: 100%;
+}
+
+.sc_team_single_member .sc_member_articles .article .left {
+    display: table-cell;
+    width: 33%;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.sc_team_single_member .sc_member_articles .article .body {
+    display: table-cell;
+    padding: 10px;
+}
+
+.sc_team_single_member .sc_member_articles .article a {
+    font-size: 20px;
 }
 
 @media ( min-width: 768px ) {
@@ -160,6 +181,7 @@
         float: left;
         width: 71%;
         margin-left: 2%;
+        margin-top: 0;
         padding: 15px;
         box-sizing: border-box;
         background: rgba(150,150,150,0.2);
@@ -169,4 +191,25 @@
         width: 100%;
     }
 
+    .sc_team_single_member .sc_member_articles .article {
+        width: 29%;
+        display: inline-block;
+        float: left;
+        margin: 10px;
+    }
+
+    .sc_team_single_member .sc_member_articles .article .left,
+    .sc_team_single_member .sc_member_articles .article .body {
+        width: 100%;
+        display: block;
+    }
+
+    .sc_team_single_member .sc_member_articles .article .left {
+        max-height: 200px;
+    }
+
+
+    .sc_team_single_member .sc_member_articles .article .wp-post-image {
+        width: 100%;
+    }
 }

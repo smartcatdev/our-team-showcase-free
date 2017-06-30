@@ -34,6 +34,46 @@ namespace ots;
 
                     <?php the_content(); ?>
 
+                    <?php if( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
+
+                        <div class="articles">
+
+                            <h2><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h2>
+
+                            <hr>
+
+                            <?php $articles = get_member_articles(); ?>
+
+                            <div class="sc_member_articles">
+
+                                <?php foreach( $articles as $article ) : ?>
+
+                                    <?php $article = get_post( $article ); ?>
+
+                                    <?php if( !empty( $article ) ) : ?>
+
+                                        <div class="article">
+
+                                            <div class="left"><?php echo get_the_post_thumbnail( $article ); ?></div>
+
+                                            <div class="body">
+                                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+                                            </div>
+
+                                        </div>
+
+                                    <?php endif; ?>
+
+                                <?php endforeach; ?>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                        </div>
+
+                    <?php endif; ?>
+
                 </div>
 
             </div>

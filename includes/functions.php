@@ -188,3 +188,17 @@ function get_single_templates() {
     return apply_filters( 'ots_single_templates', $templates );
 
 }
+
+
+function get_member_articles( $member = null ) {
+
+    $member = get_post( $member );
+    $articles = array();
+
+    for( $ctr = 1; $ctr < 4; $ctr++ ) {
+        $articles[] = get_post_meta( $member->ID, "team_member_article$ctr", true );
+    }
+
+    return $articles;
+
+}

@@ -1,3 +1,7 @@
+.clear {
+    clear: both;
+}
+
 .sc_team_member .sc_team_member_name a {
     text-decoration: none;
 }
