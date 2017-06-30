@@ -247,7 +247,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::DISPLAY_NAME,
             'checked' => get_option( Options::DISPLAY_NAME ),
-            'label'   => __( '', 'ots' )
+            'label'   => __( 'Display team member\'s name' , 'ots' )
         )
     );
 
@@ -260,7 +260,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::DISPLAY_TITLE,
             'checked' => get_option( Options::DISPLAY_TITLE ),
-            'label'   => __( '', 'ots' )
+            'label'   => __( 'Display team member\'s job title', 'ots' )
         )
     );
 
@@ -344,7 +344,7 @@ function add_settings_fields() {
         array(
             'name'    => Options::SHOW_SINGLE_SOCIAL,
             'checked' => get_option( Options::SHOW_SINGLE_SOCIAL ),
-            'label'   => __( '', 'ots' )
+            'label'   => __( 'Show social icons for single members', 'ots' )
         )
     );
 
@@ -470,6 +470,8 @@ function do_settings_page() {
                 </div>
 
             </div>
+
+            <div class="clear"></div>
 
         </div>
 

@@ -71,13 +71,11 @@
 }
 
 .ots-admin-page .form-table th {
-    padding-left: 10px;
+    padding-left: 20px;
 }
 
 .ots-admin-page .form-table td {
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 10px 20px 20px 20px;
 }
 
 .ots-admin-page form h2 {
@@ -123,8 +121,7 @@
 .ots-admin-page .sidebar {
     display: none;
     width: 35%;
-    height: 200px;
-    margin: 10px;
+    margin-top: 10px;
     float: right;
 }
 
@@ -141,7 +138,7 @@
 }
 
 .ots-admin-page .sidebar .widget p {
-    padding: 10px;
+    padding: 10px 20px;
 }
 
 @media( min-width: 783px ) {
@@ -149,6 +146,10 @@
     .ots-admin-page .tabs-content {
         width: 62%;
         float: left;
+    }
+
+    .ots-admin-page .form-table td {
+        padding: 10px 20px 10px 10px;
     }
 
     .ots-admin-page .sidebar {
