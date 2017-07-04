@@ -11,7 +11,7 @@ function do_migration() {
 
     $options = get_option( 'smartcat_team_options', false );
 
-    if ( $options ) {
+    if ( get_option( Options::PLUGIN_VERSION, 0 ) < VERSION ) {
 
         // Map out all non-boolean values
         $map = array(
@@ -73,11 +73,11 @@ function do_migration() {
         // If show social icons was set to open a new tab, change it to a boolean
         update_option( Options::SOCIAL_LINK_ACTION, $options['social_link'] === 'new' ? 'on' : '' );
 
-        // Delete the old options array
-        delete_option( 'smartcat_team_options' );
+        // Update the plugin version
+        update_option( Options::PLUGIN_VERSION, VERSION );
 
     }
 
 }
 
-add_action( 'init', 'ots\do_migration' );
+add_action( 'admin_init', 'ots\do_migration' );

@@ -72,6 +72,10 @@ interface Options {
      */
     const SHOW_SINGLE_SOCIAL = 'ots-show-single-social';
 
+    /**
+     * @since 4.0.0
+     */
+    const PLUGIN_VERSION = 'ots-plugin-version';
 }
 
 interface Defaults {
