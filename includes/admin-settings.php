@@ -49,12 +49,6 @@ function register_settings() {
         'sanitize_callback' => 'ots\sanitize_template'
     ) );
 
-    register_setting( 'ots-team-view', Options::REWRITE_SLUG, array(
-        'type'              => 'string',
-        'default'           => Defaults::REWRITE_SLUG,
-        'sanitize_callback' => 'sanitize_title'
-    ) );
-
     register_setting( 'ots-team-view', Options::GRID_COLUMNS, array(
         'type'              => 'integer',
         'default'           => Defaults::GRID_COLUMNS,
@@ -113,6 +107,13 @@ function register_settings() {
         'default'           => Defaults::SHOW_SINGLE_SOCIAL,
         'sanitize_callback' => 'ots\sanitize_checkbox'
     ) );
+
+    register_setting( 'ots-single-member-view', Options::REWRITE_SLUG, array(
+        'type'              => 'string',
+        'default'           => Defaults::REWRITE_SLUG,
+        'sanitize_callback' => 'sanitize_title'
+    ) );
+
 
 }
 
