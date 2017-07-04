@@ -141,7 +141,7 @@ add_action( 'admin_init', 'ots\add_settings_sections' );
  */
 function add_settings_fields() {
 
-    $display_field_previews = apply_filters( 'ots_show_pro_fields_preview', true );
+    $display_field_previews = apply_filters( 'ots_enable_pro_preview', true );
 
     $templates = array( '' => __( 'Select a template', 'ots' ) ) + get_templates();
 
@@ -405,7 +405,7 @@ function do_settings_page() {
 
             <div class="ad-header">
 
-                <?php if( apply_filters( 'ots_show_settings_cta', true ) ) : ?>
+                <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
 
                     <div class="callouts">
                         <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>

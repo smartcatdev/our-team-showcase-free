@@ -193,7 +193,7 @@ function team_member_meta_boxes() {
 
     if( is_admin() ) {
 
-        $preview = apply_filters( 'ots_show_pro_fields_preview', true );
+        $preview = apply_filters( 'ots_enable_pro_preview', true );
 
         add_meta_box( 'team-member-contact', __( 'Contact Information', 'ots' ), 'ots\do_contact_meta_box' );
         add_meta_box( 'team-member-articles', __( 'Authored / Favorite Articles', 'ots' ), 'ots\do_articles_meta_box' );

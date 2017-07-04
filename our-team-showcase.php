@@ -94,6 +94,7 @@ function deactivate() {
     unregister_setting( 'ots-team-view', Options::DISPLAY_LIMIT );
     unregister_setting( 'ots-team-view', Options::MAIN_COLOR );
     unregister_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE );
+    unregister_setting( 'ots-single-member-view', Options::SHOW_SINGLE_SOCIAL );
 
 
     unregister_post_type( 'team_member' );
@@ -133,3 +134,27 @@ function template_path( $template ) {
     return false;
 
 }
+
+/**
+ * Add action links to plugins page.
+ *
+ * @param $links
+ * @return array
+ * @since 4.0.0
+ */
+function plugin_action_links( $links ) {
+
+    $upgrade  = array( 'upgrade'  => '<a href="#">' . __( 'Go Pro', 'ots' ) . '</a>' );
+    $settings = array( 'settings' => '<a href="' . admin_url( 'edit.php?post_type=team_member&page=ots-settings' ) . '">' . __( 'Settings', 'ots' ) . '</a>' );
+
+    $links = array_merge( $settings, $links );
+
+    if( apply_filters( 'ots_enable_pro_preview', true ) ) {
+        $links = array_merge( $upgrade, $links );
+    }
+
+    return $links;
+
+}
+
+add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ots\plugin_action_links' );
