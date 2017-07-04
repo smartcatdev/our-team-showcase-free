@@ -4,7 +4,8 @@ namespace ots;
 
 const VERSION = '4.0.0';
 
-final class Options {
+
+interface Options {
 
     /**
      * @since 4.0.0
@@ -73,7 +74,7 @@ final class Options {
 
 }
 
-final class Defaults {
+interface Defaults {
 
     /**
      * @since 4.0.0
