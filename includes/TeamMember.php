@@ -13,6 +13,9 @@ class TeamMember {
 
     protected $post;
 
+    protected static $prefix = 'team_member_';
+
+
     public function __construct( \WP_Post $member ) {
         $this->post = $member;
     }
@@ -26,26 +29,34 @@ class TeamMember {
     }
 
     public function __isset( $key ) {
-        return !empty( get_post_meta( $this->post->ID, $key ) );
+        return !empty( get_post_meta( $this->post->ID, $this->prefix( $key ) ) );
     }
 
     public function __unset( $key ) {
-        return delete_post_meta( $this->post->ID, $key );
+        return delete_post_meta( $this->post->ID, $this->prefix( $key ) );
     }
 
-    public function get_metadata( $key, $default = '', $multi = false ) {
-        $meta = get_post_meta( $this->post->ID, $key, $multi );
+    public function get_metadata( $key, $default = '', $single = true ) {
+        $meta = get_post_meta( $this->post->ID, $this->prefix( $key ), $single );
 
         return !empty( $meta ) ? $meta : $default;
 
     }
 
     public function set_metadata( $key, $val = '', $unique = false ) {
+
+        $key = $this->prefix( $key );
+
         if( !metadata_exists( 'post', $this->post->ID, $key ) ) {
             return add_post_meta( $this->post->ID, $key, $val, $unique );
         } else {
             return update_post_meta( $this->post->ID, $key, $val );
         }
+
+    }
+
+    protected function prefix( $key ) {
+        return self::$prefix . $key;
     }
 
 }
