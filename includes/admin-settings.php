@@ -526,6 +526,28 @@ function settings_select_box( array $args ) {
 }
 
 
+function settings_radio_buttons( array $args ) {
+
+    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+    $before = isset( $args['before'] ) ? $args['before'] : '';
+    $after = isset( $args['after'] ) ? $args['after'] : '';
+    $disabled = isset( $args['disabled_options'] ) ? $args['disabled_options'] : array();
+
+    foreach( $args['options'] as $value => $label ) {
+
+        echo $before . '<label><input type="radio" name="' . esc_attr( $args['name'] ) . '" value="' . $value . '" ';
+
+            print_attrs( $attrs );
+            checked( $value, isset( $args['selected'] ) ? $args['selected'] : '' );
+            disabled( true, in_array( $value, $disabled ) );
+
+        echo '/>' . $label . '</label>' . $after;
+
+    }
+
+}
+
+
 /**
  * Output a check box for a settings field.
  *
