@@ -126,9 +126,9 @@ add_action( 'init', 'ots\register_settings' );
  */
 function add_settings_sections() {
 
-    add_settings_section( 'general', __( 'General', 'ots' ), '', 'ots-team-view' );
     add_settings_section( 'layout', __( 'Layout', 'ots' ), '', 'ots-team-view' );
     add_settings_section( 'display', __( 'Display', 'ots' ), '', 'ots-team-view' );
+    add_settings_section( 'single-general', __( 'General', 'ots' ), '', 'ots-single-member-view' );
     add_settings_section( 'single-layout', __( 'Layout', 'ots' ), '', 'ots-single-member-view' );
     add_settings_section( 'single-display', __( 'Display', 'ots' ), '', 'ots-single-member-view' );
 
@@ -138,7 +138,7 @@ add_action( 'admin_init', 'ots\add_settings_sections' );
 
 
 /**
- * Add settings fields to pages and settings secctions.
+ * Add settings fields to pages and settings sections.
  *
  * @since 4.0.0
  */
@@ -161,31 +161,6 @@ function add_settings_fields() {
      *
      * @since 4.0.0
      */
-    add_settings_field(
-        Options::REWRITE_SLUG,
-        __( 'Team Member URL Slug', 'ots' ),
-        'ots\settings_text_box',
-        'ots-team-view',
-        'general',
-        array(
-            'name'    => Options::REWRITE_SLUG,
-            'value'   => get_option( Options::REWRITE_SLUG  ),
-            'attrs'   => array( 'class' => 'regular-text' )
-        )
-    );
-
-    add_settings_field(
-        Options::MAIN_COLOR,
-        __( 'Main Color', 'ots' ),
-        'ots\settings_text_box',
-        'ots-team-view',
-        'general',
-        array(
-            'name'    => Options::MAIN_COLOR,
-            'value'   => get_option( Options::MAIN_COLOR )
-        )
-    );
-
     add_settings_field(
         Options::TEMPLATE,
         __( 'Template', 'ots' ),
@@ -246,6 +221,18 @@ function add_settings_fields() {
         'ots\display_limit_field',
         'ots-team-view',
         'layout'
+    );
+
+    add_settings_field(
+        Options::MAIN_COLOR,
+        __( 'Main Color', 'ots' ),
+        'ots\settings_text_box',
+        'ots-team-view',
+        'display',
+        array(
+            'name'    => Options::MAIN_COLOR,
+            'value'   => get_option( Options::MAIN_COLOR )
+        )
     );
 
     add_settings_field(
@@ -323,6 +310,19 @@ function add_settings_fields() {
      *
      * @since 4.0.0
      */
+    add_settings_field(
+        Options::REWRITE_SLUG,
+        __( 'Team Member URL Slug', 'ots' ),
+        'ots\settings_text_box',
+        'ots-single-member-view',
+        'single-general',
+        array(
+            'name'    => Options::REWRITE_SLUG,
+            'value'   => get_option( Options::REWRITE_SLUG  ),
+            'attrs'   => array( 'class' => 'regular-text' )
+        )
+    );
+
     add_settings_field(
         Options::SINGLE_TEMPLATE,
         __( 'Template', 'ots' ),

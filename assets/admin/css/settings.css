@@ -95,8 +95,13 @@
     border-radius: 3px;
     border: 1px solid #ccc;
     padding: 3px 10px;
-    min-height: 30px;
     line-height: 30px;
+}
+
+.ots-admin-page form input:not([type="checkbox"]),
+.ots-admin-page form select,
+.ots-admin-page form textarea {
+    height: 30px;
 }
 
 .ots-admin-page .form-table .regular-text {
