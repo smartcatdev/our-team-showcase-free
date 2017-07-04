@@ -214,3 +214,22 @@ function get_member_articles( $member = null ) {
     return $articles;
 
 }
+
+/**
+ * Helper factory for instantiating team members.
+ *
+ * @param null|int|\WP_Post $member
+ * @return bool|TeamMember
+ * @since 4.0.0
+ */
+function team_member( $member = null ) {
+
+    $member = get_post( $member );
+
+    if( $member && $member->post_type == 'team_member' ) {
+        return new TeamMember( $member );
+    }
+
+    return false;
+
+}

@@ -46,6 +46,7 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
     include_once dirname( __FILE__ ) . '/includes/shortcode.php';
     include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
+    include_once dirname( __FILE__ ) . '/includes/TeamMember.php';
     include_once dirname( __FILE__ ) . '/includes/widgets.php';
 
     do_action( 'ots_loaded' );
