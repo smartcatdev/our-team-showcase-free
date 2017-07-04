@@ -126,8 +126,11 @@ add_action( 'init', 'ots\register_settings' );
  */
 function add_settings_sections() {
 
-    add_settings_section( 'ots-team-view', __( 'Team View', 'ots' ), '', 'ots-team-view' );
-    add_settings_section( 'ots-single-member-view', __( 'Single Member', 'ots' ), '', 'ots-single-member-view' );
+    add_settings_section( 'general', __( 'General', 'ots' ), '', 'ots-team-view' );
+    add_settings_section( 'layout', __( 'Layout', 'ots' ), '', 'ots-team-view' );
+    add_settings_section( 'display', __( 'Display', 'ots' ), '', 'ots-team-view' );
+    add_settings_section( 'single-layout', __( 'Layout', 'ots' ), '', 'ots-single-member-view' );
+    add_settings_section( 'single-display', __( 'Display', 'ots' ), '', 'ots-single-member-view' );
 
 }
 
@@ -159,11 +162,36 @@ function add_settings_fields() {
      * @since 4.0.0
      */
     add_settings_field(
+        Options::REWRITE_SLUG,
+        __( 'Team Member URL Slug', 'ots' ),
+        'ots\settings_text_box',
+        'ots-team-view',
+        'general',
+        array(
+            'name'    => Options::REWRITE_SLUG,
+            'value'   => get_option( Options::REWRITE_SLUG  ),
+            'attrs'   => array( 'class' => 'regular-text' )
+        )
+    );
+
+    add_settings_field(
+        Options::MAIN_COLOR,
+        __( 'Main Color', 'ots' ),
+        'ots\settings_text_box',
+        'ots-team-view',
+        'general',
+        array(
+            'name'    => Options::MAIN_COLOR,
+            'value'   => get_option( Options::MAIN_COLOR )
+        )
+    );
+
+    add_settings_field(
         Options::TEMPLATE,
         __( 'Template', 'ots' ),
         'ots\settings_select_box',
         'ots-team-view',
-        'ots-team-view',
+        'layout',
         array(
             'name'             => Options::TEMPLATE,
             'selected'         => get_option( Options::TEMPLATE ),
@@ -178,7 +206,7 @@ function add_settings_fields() {
         __( 'Grid Columns', 'ots' ),
         'ots\settings_select_box',
         'ots-team-view',
-        'ots-team-view',
+        'layout',
         array(
             'name'    => Options::GRID_COLUMNS,
             'attrs'   => array( 'class' => 'regular-text' ),
@@ -198,7 +226,7 @@ function add_settings_fields() {
         __( 'Margin', 'ots' ),
         'ots\settings_select_box',
         'ots-team-view',
-        'ots-team-view',
+        'layout',
         array(
             'name'     => Options::MARGIN,
             'attrs'   => array( 'class' => 'regular-text' ),
@@ -213,11 +241,19 @@ function add_settings_fields() {
     );
 
     add_settings_field(
+        Options::DISPLAY_LIMIT,
+        __( 'Display Limit', 'ots' ),
+        'ots\display_limit_field',
+        'ots-team-view',
+        'layout'
+    );
+
+    add_settings_field(
         Options::SHOW_SOCIAL,
         __( 'Show Social Icons', 'ots' ),
         'ots\settings_check_box',
         'ots-team-view',
-        'ots-team-view',
+        'display',
         array(
             'name'        => Options::SHOW_SOCIAL,
             'checked'     => get_option( Options::SHOW_SOCIAL ),
@@ -230,7 +266,7 @@ function add_settings_fields() {
         __( 'Social Links', 'ots' ),
         'ots\settings_check_box',
         'ots-team-view',
-        'ots-team-view',
+        'display',
         array(
             'name'    => Options::SOCIAL_LINK_ACTION,
             'checked' => get_option( Options::SOCIAL_LINK_ACTION ),
@@ -243,7 +279,7 @@ function add_settings_fields() {
         __( 'Display Name', 'ots' ),
         'ots\settings_check_box',
         'ots-team-view',
-        'ots-team-view',
+        'display',
         array(
             'name'    => Options::DISPLAY_NAME,
             'checked' => get_option( Options::DISPLAY_NAME ),
@@ -256,7 +292,7 @@ function add_settings_fields() {
         __( 'Display Title', 'ots' ),
         'ots\settings_check_box',
         'ots-team-view',
-        'ots-team-view',
+        'display',
         array(
             'name'    => Options::DISPLAY_TITLE,
             'checked' => get_option( Options::DISPLAY_TITLE ),
@@ -264,45 +300,12 @@ function add_settings_fields() {
         )
     );
 
-    add_settings_field(
-        Options::REWRITE_SLUG,
-        __( 'Team Member URL Slug', 'ots' ),
-        'ots\settings_text_box',
-        'ots-team-view',
-        'ots-team-view',
-        array(
-            'name'    => Options::REWRITE_SLUG,
-            'value'   => get_option( Options::REWRITE_SLUG  ),
-            'attrs'   => array( 'class' => 'regular-text' )
-        )
-    );
-
-    add_settings_field(
-        Options::DISPLAY_LIMIT,
-        __( 'Display Limit', 'ots' ),
-        'ots\display_limit_field',
-        'ots-team-view',
-        'ots-team-view'
-    );
-
-    add_settings_field(
-        Options::MAIN_COLOR,
-        __( 'Main Color', 'ots' ),
-        'ots\settings_text_box',
-        'ots-team-view',
-        'ots-team-view',
-        array(
-            'name'    => Options::MAIN_COLOR,
-            'value'   => get_option( Options::MAIN_COLOR )
-        )
-    );
-
     if( $display_field_previews ) {
 
-        add_settings_field( 'pro-max-word-count', __( 'Max Word Count', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
-        add_settings_field( 'pro-name-font-size', __( 'Name Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
-        add_settings_field( 'pro-title-font-size', __( 'Title Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
-        add_settings_field( 'pro-icon-style', __( 'Icon Style', 'ots' ),'ots\do_pro_only_field', 'ots-team-view', 'ots-team-view' );
+        add_settings_field( 'pro-max-word-count', __( 'Max Word Count', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'display' );
+        add_settings_field( 'pro-name-font-size', __( 'Name Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'display' );
+        add_settings_field( 'pro-title-font-size', __( 'Title Font Size', 'ots' ), 'ots\do_pro_only_field', 'ots-team-view', 'display' );
+        add_settings_field( 'pro-icon-style', __( 'Icon Style', 'ots' ),'ots\do_pro_only_field', 'ots-team-view', 'display' );
 
     }
 
@@ -325,7 +328,7 @@ function add_settings_fields() {
         __( 'Template', 'ots' ),
         'ots\settings_select_box',
         'ots-single-member-view',
-        'ots-single-member-view',
+        'single-layout',
         array(
             'name'             => Options::SINGLE_TEMPLATE,
             'selected'         => get_option( Options::SINGLE_TEMPLATE ),
@@ -340,7 +343,7 @@ function add_settings_fields() {
         __( 'Show Single Social', 'ots' ),
         'ots\settings_check_box',
         'ots-single-member-view',
-        'ots-single-member-view',
+        'single-display',
         array(
             'name'    => Options::SHOW_SINGLE_SOCIAL,
             'checked' => get_option( Options::SHOW_SINGLE_SOCIAL ),
@@ -350,10 +353,10 @@ function add_settings_fields() {
 
     if( $display_field_previews ) {
 
-        add_settings_field( 'pro-card-popup-margin-top', __( 'Card Popup Top Margin', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
-        add_settings_field( 'pro-display-skills-bar', __( 'Display Skills Bar', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
-        add_settings_field( 'pro-skills-title', __( 'Skills Title', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
-        add_settings_field( 'pro-image-style', __( 'Image Style', 'ots' ),'ots\do_pro_only_field', 'ots-single-member-view', 'ots-single-member-view' );
+        add_settings_field( 'pro-card-popup-margin-top', __( 'Card Popup Top Margin', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'single-layout' );
+        add_settings_field( 'pro-display-skills-bar', __( 'Display Skills Bar', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'single-display' );
+        add_settings_field( 'pro-skills-title', __( 'Skills Title', 'ots' ), 'ots\do_pro_only_field', 'ots-single-member-view', 'single-display' );
+        add_settings_field( 'pro-image-style', __( 'Image Style', 'ots' ),'ots\do_pro_only_field', 'ots-single-member-view', 'single-display' );
 
     }
 
