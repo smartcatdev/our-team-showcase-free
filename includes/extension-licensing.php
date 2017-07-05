@@ -45,9 +45,10 @@ if( !class_exists( 'SC_License_Manager' ) ) :
             add_action( 'admin_init', array( $this, 'register_settings' ) );
             add_action( 'admin_init', array( $this, 'activate_license' ) );
             add_action( 'admin_init', array( $this, 'deactivate_license' ) );
-            add_action( 'admin_notices', array( $this, 'license_notifications' ) );
+            add_action( 'admin_notices', array( $this, 'expired_license_notifications' ) );
+            add_action( 'admin_notices', array( $this, 'inactive_license_notifications' ) );
 
-            add_action( 'smartcat_extensions_license_check', array( $this, 'check_licenses' ) );
+            add_action( "{$this->id}_extensions_license_check", array( $this, 'check_licenses' ) );
 
             // Extensions hook onto this to register their licenses
             do_action( "{$this->id}_register_extensions", $this );
@@ -81,7 +82,7 @@ if( !class_exists( 'SC_License_Manager' ) ) :
          *
          * @since 1.0.0
          */
-        public function license_notifications() {
+        public function expired_license_notifications() {
 
             $notices = get_option( "{$this->id}-extension-notices", array() );
 
@@ -94,6 +95,33 @@ if( !class_exists( 'SC_License_Manager' ) ) :
                         <p>
                             <?php _e( 'Your license for ' . $this->extensions[ $ext ]['item'] . ' has expired. Please renew it at ' ); ?>
                             <a href="<?php esc_url( $this->extensions[ $ext ]['url'] ); ?>"><?php echo esc_url( $this->extensions[ $ext ]['url'] ); ?></a>
+                        </p>
+                    </div>
+
+                <?php }
+
+            }
+
+        }
+
+        /**
+         * Display any notifications for inactive licenses.
+         *
+         * @since 1.0.0
+         */
+        public function inactive_license_notifications() {
+
+            $notices = get_option( "{$this->id}-extension-notices", array() );
+
+            foreach( $this->extensions as $id => $ext ) {
+
+                // Make sure the license hasn't been marked as expired
+                if( get_option( $this->extensions[ $id ]['options']['status'] ) !== 'valid' && !array_key_exists( $id, $notices ) ) { ?>
+
+                    <div class="notice notice-warning is-dismissible">
+                        <p>
+                            <?php _e( '<strong>' . $this->extensions[ $id ]['item'] . '</strong> is active but license has not been activated!' ); ?>
+                            <a href="<?php menu_page_url( $this->page_args['menu_slug'] ); ?>"><?php _e( 'Activate now.' ); ?></a>
                         </p>
                     </div>
 
