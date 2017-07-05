@@ -36,33 +36,30 @@ function do_migration() {
             update_option( $new, $options[ $old ] == 'yes' ? 'on' : '' );
         }
 
-        switch( $options['template'] ) {
+        // Migrate the templates
+        $templates = array(
+            'grid'          => 'grid',
+            'grid_circles'  => 'grid-circles',
+            'grid_circles2' => 'grid-circles-2',
+        );
 
-            case 'grid':
-                update_option( Options::TEMPLATE, 'grid' );
-                break;
 
-            case 'grid_circles':
-                update_option( Options::TEMPLATE, 'grid-circles' );
-                break;
-
-            case 'grid_circles2':
-                update_option( Options::TEMPLATE, 'grid-circles-2' );
-                break;
-
+        if( array_key_exists( $options['template'], $templates ) ) {
+            update_option( Options::TEMPLATE, $templates[ $options['template'] ] );
         }
 
-        switch( $options['single_template'] ) {
 
-            case 'standard':
-                update_option( Options::SINGLE_TEMPLATE, 'default' );
-                break;
+        $single_templates = array(
+            'custom'   => 'custom-template',
+            'sidebar'  => 'single-sidebar',
+            'vcard'    => 'card',
+            'panel'    => 'slide-out-panel',
+        );
 
-            case 'disable':
-                update_option( Options::SINGLE_TEMPLATE, 'disabled' );
-                break;
-
+        if( array_key_exists( $options['single_template'], $single_templates ) ) {
+            update_option( Options::SINGLE_TEMPLATE, $single_templates[ $options['single_template'] ] );
         }
+
 
         // Add hash to main color
         update_option( Options::MAIN_COLOR, '#' . $options['text_color'] );
