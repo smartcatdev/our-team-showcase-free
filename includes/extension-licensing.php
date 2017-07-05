@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Provides common framework for managing extension updates and a license management page.
+ *
+ * @version 1.0.0
+ */
 if( !class_exists( 'SC_License_Manager' ) ) :
 
     class SC_License_Manager {
@@ -10,6 +15,14 @@ if( !class_exists( 'SC_License_Manager' ) ) :
         private $page_args;
         private $page_type;
 
+        /**
+         * SC_License_Manager constructor.
+         *
+         * @param string $id        The extension's unique ID.
+         * @param string $page_type The type of page for the license management page.
+         * @param array  $page_args Arguments to pass to add_{type}_page().
+         * @since 1.0.0
+         */
         public function __construct( $id, $page_type = 'options', $page_args = array() ) {
 
             $this->id = $id;
@@ -19,6 +32,11 @@ if( !class_exists( 'SC_License_Manager' ) ) :
             $this->init();
         }
 
+        /**
+         * Add hooks an initialize extension registration.
+         *
+         * @since 1.0.0
+         */
         private function init() {
 
             $this->schedule_cron();
@@ -31,34 +49,51 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
             add_action( 'smartcat_extensions_license_check', array( $this, 'check_licenses' ) );
 
+            // Extensions hook onto this to register their licenses
             do_action( "{$this->id}_register_extensions", $this );
 
         }
 
+        /**
+         * Setup a cron that will deactivate licenses of expired plugins.
+         *
+         * @since 1.0.0
+         */
         public function schedule_cron() {
-            if ( !wp_next_scheduled( 'smartcat_extensions_license_check' ) ) {
-                wp_schedule_event( time(), 'daily', 'smartcat_extensions_license_check' );
+            if ( !wp_next_scheduled( "{$this->id}_extensions_license_check" ) ) {
+                wp_schedule_event( time(), 'daily', "{$this->id}_extensions_license_check" );
             }
         }
 
-        public function remove_cron() {
+        /**
+         * Cron job will only be cleared if there are no extensions registered.
+         *
+         * @since 1.0.0
+         */
+        public function clear_cron() {
             if( empty( $this->extensions ) ) {
-                wp_clear_scheduled_hook( 'smartcat_extensions_license_check' );
+                wp_clear_scheduled_hook( "{$this->id}_extensions_license_check" );
             }
         }
 
+        /**
+         * Display any notifications for expired licenses.
+         *
+         * @since 1.0.0
+         */
         public function license_notifications() {
 
-            $notifications = get_option( 'smartcat-extension-notifications', array() );
+            $notices = get_option( "{$this->id}-extension-notices", array() );
 
-            foreach( $notifications as $ext ) {
+            foreach( $notices as $ext ) {
 
+                // Make sure the extension is still installed
                 if( array_key_exists( $ext, $this->extensions ) ) { ?>
 
                     <div class="notice notice-warning is-dismissible">
                         <p>
-                            <?php _e( 'Your license for ' . $this->extensions[ $ext ]['item'] . ' has expired. Please renew it at' ); ?>
-                            <a href="<?php esc_url( $this->extensions[ $ext ]['url'] ); ?>"></a>
+                            <?php _e( 'Your license for ' . $this->extensions[ $ext ]['item'] . ' has expired. Please renew it at ' ); ?>
+                            <a href="<?php esc_url( $this->extensions[ $ext ]['url'] ); ?>"><?php echo esc_url( $this->extensions[ $ext ]['url'] ); ?></a>
                         </p>
                     </div>
 
@@ -68,9 +103,14 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Deactivates expired licenses and sets the flag to notify the admin.
+         *
+         * @since 1.0.0
+         */
         public function check_licenses() {
 
-            $notices = get_option( 'smartcat-extension-notices', array() );
+            $notices = get_option( "{$this->id}-extension-notices", array() );
 
             foreach ( $this->extensions as $id => $extension ) {
 
@@ -88,17 +128,37 @@ if( !class_exists( 'SC_License_Manager' ) ) :
                         }
 
                     } else {
+
+                        // Refresh the expiration date
                         update_option( $extension['options']['expiration'], $license_data['expires'] );
+
                     }
 
                 }
 
             }
 
-            update_option( 'smartcat-extension-notices', $notices );
+            update_option( "{$this->id}-extension-notices", $notices );
 
         }
 
+        /**
+         * Add an extension license to be managed.
+         *
+         * @param string $id          The ID of the extension.
+         * @param string $store_url   The URL of the EDD Marketplace.
+         * @param string $plugin_file The file of the extension plugin.
+         * @param array  $option_keys {
+         *
+         *      The option keys where the license data will be stored.
+         *
+         *      string $license    The option to use to store the license key.
+         *      string $status     The option to use to store the license status.
+         *      string $expiration The option to use to store the license expiration date.
+         * }
+         * @param array  $edd_args EDD updater arguments. @see \EDD_SL_Plugin_Updater
+         * @since 1.0.0
+         */
         public function add_license( $id, $store_url, $plugin_file, array $option_keys, array $edd_args ) {
 
             if( !array_key_exists( $id, $this->extensions ) ) {
@@ -116,6 +176,11 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Adds the menu page to the WordPress admin if there is at least 1 extension registered.
+         *
+         * @since 1.0.0
+         */
         public function add_license_page() {
 
             if( !empty( $this->extensions ) ) {
@@ -124,6 +189,11 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Registers license options with the Settings API and configures their sanitize callback.
+         *
+         * @since 1.0.0
+         */
         public function register_settings() {
 
             foreach( $this->extensions as $extension ) {
@@ -147,6 +217,13 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Converts and organizes the associative $page_args array to a numerically indexed array for use with
+         * add_{type}_page().
+         *
+         * @since 1.0.0
+         * @return array The converted array.
+         */
         private function parse_page_args() {
 
             $page_args = array();
@@ -179,6 +256,11 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Handler for extension activation requests.
+         *
+         * @since 1.0.0
+         */
         public function activate_license() {
 
             if ( isset( $_POST["{$this->id}_activate_license"] ) &&
@@ -268,7 +350,7 @@ if( !class_exists( 'SC_License_Manager' ) ) :
                         update_option( $extension['options']['status'], $license_data['license'] );
                         update_option( $extension['options']['expiration'], $license_data['expires'] );
 
-                        $this->clear_expiration_notice(  $_POST["{$this->id}_activate_license"] );
+                        $this->clear_expiration_notice( $_POST["{$this->id}_activate_license"] );
 
                     }
 
@@ -281,10 +363,15 @@ if( !class_exists( 'SC_License_Manager' ) ) :
             }
         }
 
+        /**
+         * Handler for deactivation requests.
+         *
+         * @since 1.0.0
+         */
         public function deactivate_license() {
 
             if ( isset(  $_POST["{$this->id}_deactivate_license"] ) &&
-                check_admin_referer( "{$this->id}_license_deactivation", $_POST["{$this->id}_activate_license"] . '_deactivation_nonce' ) ) {
+                check_admin_referer( "{$this->id}_license_deactivation", $_POST["{$this->id}_deactivate_license"] . '_deactivation_nonce' ) ) {
 
                 if ( !array_key_exists( $_POST["{$this->id}_deactivate_license"], $this->extensions ) ) {
                     return;
@@ -332,6 +419,13 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Retrieves the license data for an extension.
+         *
+         * @param string                   $id The ID of the extension.
+         * @return array|bool|mixed|object
+         * @since 1.0.0
+         */
         public function get_license_data( $id ) {
 
             if( array_key_exists( $id, $this->extensions ) ) {
@@ -366,18 +460,29 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         }
 
+        /**
+         * Clears the expiration notification of an extension.
+         *
+         * @param string $id The ID of the extension.
+         * @since 1.0.0
+         */
         public function clear_expiration_notice( $id ) {
 
-            $notices = get_option( 'smartcat-extension-notices' );
+            $notices = get_option( "{$this->id}-extension-notices" );
 
             if( in_array( $id, $notices ) ) {
-                unset( $notices[ $id ] );
+                unset( $notices[ array_search( $id, $notices ) ] );
             }
 
-            update_option( 'smartcat-extension-notices', $notices );
+            update_option( "{$this->id}-extension-notices", $notices );
 
         }
 
+        /**
+         * Outputs the license management page.
+         *
+         * @since 1.0.0
+         */
         public function do_license_page() {
 
             settings_errors( "{$this->id}_extensions" ); ?>
@@ -406,6 +511,13 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         <?php }
 
+        /**
+         * Outputs a license management field for an extension.
+         *
+         * @param string $id        The ID of the extension.
+         * @param array  $extension The extension data.
+         * @since 1.0.0
+         */
         public function do_license_field( $id, $extension ) {
 
             $key    = get_option( $extension['options']['license'] );
