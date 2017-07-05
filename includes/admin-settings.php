@@ -232,7 +232,10 @@ function add_settings_fields() {
         'display',
         array(
             'name'    => Options::MAIN_COLOR,
-            'value'   => get_option( Options::MAIN_COLOR )
+            'value'   => get_option( Options::MAIN_COLOR ),
+            'attrs'   => array(
+                'class' => 'wp-color-picker'
+            )
         )
     );
 

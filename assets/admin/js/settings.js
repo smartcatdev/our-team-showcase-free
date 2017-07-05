@@ -20,6 +20,6 @@ jQuery( document ).ready( function ( $ ) {
     } );
 
 
-    $( 'input[name="ots-team-main-color"]' ).wpColorPicker();
+    $( '.wp-color-picker' ).wpColorPicker();
 
 } );
