@@ -15,6 +15,8 @@ if( !class_exists( 'SC_License_Manager' ) ) :
         private $page_args;
         private $page_type;
 
+        private $hook = '';
+
         /**
          * SC_License_Manager constructor.
          *
@@ -47,12 +49,17 @@ if( !class_exists( 'SC_License_Manager' ) ) :
             add_action( 'admin_init', array( $this, 'deactivate_license' ) );
             add_action( 'admin_notices', array( $this, 'expired_license_notifications' ) );
             add_action( 'admin_notices', array( $this, 'inactive_license_notifications' ) );
+            add_action( 'admin_print_styles', array( $this, 'print_styles' ) );
 
             add_action( "{$this->id}_extensions_license_check", array( $this, 'check_licenses' ) );
 
             // Extensions hook onto this to register their licenses
             do_action( "{$this->id}_register_extensions", $this );
 
+        }
+
+        private function is_license_page() {
+            return $this->hook == get_current_screen()->id;
         }
 
         /**
@@ -84,21 +91,25 @@ if( !class_exists( 'SC_License_Manager' ) ) :
          */
         public function expired_license_notifications() {
 
-            $notices = get_option( "{$this->id}-extension-notices", array() );
+            if( !$this->is_license_page() ) {
 
-            foreach( $notices as $ext ) {
+                $notices = get_option( "{$this->id}-extension-notices", array() );
 
-                // Make sure the extension is still installed
-                if( array_key_exists( $ext, $this->extensions ) ) { ?>
+                foreach( $notices as $ext ) {
 
-                    <div class="notice notice-warning is-dismissible">
-                        <p>
-                            <?php _e( 'Your license for ' . $this->extensions[ $ext ]['item'] . ' has expired. Please renew it at ' ); ?>
-                            <a href="<?php esc_url( $this->extensions[ $ext ]['url'] ); ?>"><?php echo esc_url( $this->extensions[ $ext ]['url'] ); ?></a>
-                        </p>
-                    </div>
+                    // Make sure the extension is still installed
+                    if( array_key_exists( $ext, $this->extensions ) ) { ?>
 
-                <?php }
+                        <div class="notice notice-warning is-dismissible">
+                            <p>
+                                <?php _e( 'Your license for ' . $this->extensions[ $ext ]['item'] . ' has expired. Please renew it at ' ); ?>
+                                <a href="<?php esc_url( $this->extensions[ $ext ]['url'] ); ?>"><?php echo esc_url( $this->extensions[ $ext ]['url'] ); ?></a>
+                            </p>
+                        </div>
+
+                    <?php }
+
+                }
 
             }
 
@@ -111,21 +122,25 @@ if( !class_exists( 'SC_License_Manager' ) ) :
          */
         public function inactive_license_notifications() {
 
-            $notices = get_option( "{$this->id}-extension-notices", array() );
+            if( !$this->is_license_page() ) {
 
-            foreach( $this->extensions as $id => $ext ) {
+                $notices = get_option( "{$this->id}-extension-notices", array() );
 
-                // Make sure the license hasn't been marked as expired
-                if( get_option( $this->extensions[ $id ]['options']['status'] ) !== 'valid' && !array_key_exists( $id, $notices ) ) { ?>
+                foreach( $this->extensions as $id => $ext ) {
 
-                    <div class="notice notice-warning is-dismissible">
-                        <p>
-                            <?php _e( '<strong>' . $this->extensions[ $id ]['item'] . '</strong> is active but license has not been activated!' ); ?>
-                            <a href="<?php menu_page_url( $this->page_args['menu_slug'] ); ?>"><?php _e( 'Activate now.' ); ?></a>
-                        </p>
-                    </div>
+                    // Make sure the license hasn't been marked as expired
+                    if( get_option( $this->extensions[ $id ]['options']['status'] ) !== 'valid' && !array_key_exists( $id, $notices ) ) { ?>
 
-                <?php }
+                        <div class="notice notice-warning is-dismissible">
+                            <p>
+                                <?php _e( '<strong>' . $this->extensions[ $id ]['item'] . '</strong> is active but license has not been activated!' ); ?>
+                                <a href="<?php menu_page_url( $this->page_args['menu_slug'] ); ?>"><?php _e( 'Activate now.' ); ?></a>
+                            </p>
+                        </div>
+
+                    <?php }
+
+                }
 
             }
 
@@ -212,7 +227,7 @@ if( !class_exists( 'SC_License_Manager' ) ) :
         public function add_license_page() {
 
             if( !empty( $this->extensions ) ) {
-                call_user_func_array( "add_{$this->page_type}_page", $this->parse_page_args() );
+                $this->hook = call_user_func_array( "add_{$this->page_type}_page", $this->parse_page_args() );
             }
 
         }
@@ -515,7 +530,7 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
             settings_errors( "{$this->id}_extensions" ); ?>
 
-            <div class="wrap <?php esc_attr_e( "{$this->id}-licenses" ); ?>">
+            <div class="wrap <?php esc_attr_e( "{$this->id}-licenses" ); ?> license-activation-page">
 
                 <h2><?php _e( $this->page_args['page_title'] ); ?></h2>
 
@@ -556,13 +571,15 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
             <div class="license-activation">
 
+                <div class="inner">
+
                 <h3><?php echo $extension['item']; ?></h3>
 
                 <p>
 
                     <input class="license-key"
                            type="text"
-                           name="<?php echo $extension['options']['license']; ?>"
+                           name="<?php esc_attr_e( $extension['options']['license'] ); ?>"
                            value="<?php esc_attr_e( $key ); ?>" />
 
                     <?php if( !empty( $key ) ) : ?>
@@ -606,10 +623,82 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
                 <?php endif; ?>
 
+                </div>
+
             </div>
 
 
         <?php }
+
+        public function print_styles() {
+
+            if( $this->is_license_page() ) : ?>
+
+                <style id="<?php esc_attr_e( "{$this->id}-license-management-styles" ); ?>">
+
+                    .license-activation-page .submit {
+                        margin-top: 0;
+                    }
+
+                    .license-activation {
+                        background: #fff;
+                        border: 1px solid #ddd;
+                        margin: 10px 0;
+                    }
+
+                    .license-activation h3 {
+                        margin: 0;
+                        padding: 10px;
+                        background: #f9f9f9;
+                        border-bottom: 1px solid #ddd;
+                    }
+
+                    .license-activation p {
+                        margin: 10px;
+                    }
+
+                    .license-activation .description {
+                        margin-top: 5px;
+                        display: block;
+                    }
+
+                    .license-activation input {
+                        width: 100%;
+                    }
+
+                    .license-activation .button {
+                        margin: 5px 0 !important;
+                        width: 100%;
+                    }
+
+                    .license-activation .license-expiration {
+                        padding: 10px 10px 20px 10px;
+                        border-top: 1px solid #ddd;
+                    }
+
+                    @media( min-width: 600px ) {
+
+                        .license-activation .button {
+                            width: inherit;
+                        }
+
+                    }
+
+                    @media( min-width: 783px ) {
+
+                        .license-activation {
+                            width: 30%;
+                            float: left;
+                            margin-right: 10px;
+                        }
+
+                    }
+
+                </style>
+
+            <?php endif;
+
+        }
 
     }
 
