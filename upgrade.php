@@ -27,6 +27,7 @@ function do_migration() {
         // Map out all boolean values
         $checkboxes = array(
             'social'          => Options::SHOW_SOCIAL,
+            'single_social'   => Options::SHOW_SINGLE_SOCIAL,
             'name'            => Options::DISPLAY_NAME,
             'title'           => Options::DISPLAY_TITLE,
         );
