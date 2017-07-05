@@ -48,12 +48,28 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
     include_once dirname( __FILE__ ) . '/includes/TeamMember.php';
     include_once dirname( __FILE__ ) . '/includes/widgets.php';
+    include_once dirname( __FILE__ ) . '/includes/extension-licensing.php';
 
+    $license_page_args = array(
+        'parent_slug' => 'edit.php?post_type=team_member',
+        'page_title'  => __( 'Our Team Showcase Licenses', 'ots' ),
+        'menu_title'  => __( 'Licenses', 'ots' ),
+        'capability'  => 'manage_options',
+        'menu_slug'   => 'ots-licenses'
+    );
+
+    $registration = new \SC_License_Manager( 'ots', 'submenu', $license_page_args );
+
+
+    // All done
     do_action( 'ots_loaded' );
 
 }
 
 add_action( 'plugins_loaded', 'ots\init' );
+
+
+
 
 
 /**
