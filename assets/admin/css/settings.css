@@ -84,7 +84,7 @@
 
 .ots-admin-page form h2 {
     background: #f9f9f9;
-    padding: 1em 10px;
+    padding: 0.8em 10px;
     margin: 10px 0 0;
     border: 1px solid #ddd;
 }
@@ -137,7 +137,7 @@
 
 .ots-admin-page .sidebar .widget h2 {
     margin: 0;
-    padding: 1em 20px;
+    padding: 0.8em 15px;
     background: #f9f9f9;
     border-bottom: 1px solid #ddd;
 }
@@ -154,7 +154,7 @@
     }
 
     .ots-admin-page .form-table td {
-        padding: 10px 20px 10px 10px;
+        padding: 5px 20px 5px 10px;
     }
 
     .ots-admin-page .form-table th {
@@ -162,7 +162,7 @@
     }
 
     .ots-admin-page form h2 {
-        padding: 1em 20px;
+        padding: 0.8em 15px;
     }
 
     .ots-admin-page .sidebar {
@@ -185,7 +185,7 @@
     }
 
     .ots-admin-page .nav-tab {
-        padding: 10px 20px;
+        padding: 10px 15px;
     }
 
     .ots-admin-page .nav-tab:first-of-type {
