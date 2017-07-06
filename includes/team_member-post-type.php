@@ -46,7 +46,11 @@ function include_single_template( $template ) {
 
     if ( get_post_type() == 'team_member' ) {
 
-        $template = apply_filters( 'ots_single_template_include', template_path( 'default' ) );
+        $single_template = get_option( Options::SINGLE_TEMPLATE );
+
+        if( $single_template === 'standard' ) {
+            $template = template_path( map_template( $single_template ) );
+        }
 
     }
 

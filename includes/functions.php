@@ -181,7 +181,7 @@ function get_templates() {
 function get_single_templates() {
 
     $templates = array(
-        'default'       => __( 'Theme Default', 'ots' ),
+        'standard'      => __( 'Theme Default', 'ots' ),
         'disable'       => __( 'Disabled', 'ots' )
     );
 
