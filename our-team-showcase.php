@@ -128,7 +128,7 @@ function template_path( $template ) {
     $template = trim( $template, '/' );
     $template = rtrim( $template, '.php' );
 
-    $base = trailingslashit( apply_filters( 'ots_template_path', dirname( __FILE__ ) . '/templates', $template ) );
+    $base = trailingslashit( dirname( __FILE__ ) . '/templates' );
 
     $file = $base . $template . '.php';
 

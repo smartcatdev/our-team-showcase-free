@@ -240,10 +240,8 @@ function map_template( $key ) {
     $templates = array(
         'grid_circles'   => 'grid-circles',
         'grid_circles2'  => 'grid-circles-2',
-        'standard'       => 'default'
+        'standard'       => 'single-team_member'
     );
-
-    $templates = apply_filters( 'ots_map_legacy_templates', $templates );
 
     if( array_key_exists( $key, $templates ) ) {
         $key = $templates[ $key ];

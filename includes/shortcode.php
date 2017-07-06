@@ -50,8 +50,8 @@ function do_shortcode_output( $attributes = array() ) {
 
     ob_start();
 
-    // Dynamically pull in the template file
-    $template = apply_filters( 'ots_template_include', template_path( map_template( $args['template'] ) ) );
+
+    $template = apply_filters( 'ots_template_include', $args['template'] );
 
     if( file_exists( $template ) ) {
         include_once $template;
@@ -59,13 +59,30 @@ function do_shortcode_output( $attributes = array() ) {
         include_once template_path( map_template( Defaults::TEMPLATE ) );
     }
 
-    do_action( 'ots_render_team_members', $args );
+    // Hook onto for output inside shortcode after the template as rendered
+    do_action( 'ots_after_team_members', $args );
+
 
     return apply_filters( 'ots_shortcode_output', ob_get_clean(), $args );
 
 }
 
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
+
+
+function include_template( $template ) {
+
+    $file = template_path( map_template( $template ) );
+
+    if( $file ) {
+        $template = $file;
+    }
+
+    return $template;
+
+}
+
+add_filter( 'ots_template_include', 'ots\include_template', 1 );
 
 
 /**

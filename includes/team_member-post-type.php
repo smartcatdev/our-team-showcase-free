@@ -20,7 +20,7 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
 /**
- * Enqueue scripts for default.php.
+ * Enqueue scripts for single-team_member.php.
  *
  * @since 4.0.0
  */
