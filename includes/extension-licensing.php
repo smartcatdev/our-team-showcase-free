@@ -617,7 +617,15 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
                     <div class="license-expiration">
 
-                        <?php echo __( 'Your license key expires on ' ) . date_i18n( get_option( 'date_format' ), strtotime( $exp, current_time( 'timestamp' ) ) ); ?>
+                        <?php if( $exp !== 'lifetime' ) : ?>
+
+                            <?php echo __( 'Your license key expires on ' ) . date_i18n( get_option( 'date_format' ), strtotime( $exp, current_time( 'timestamp' ) ) ); ?>
+
+                        <?php else : ?>
+
+                            <?php _e( 'This is a lifetime licence' ); ?>
+
+                        <?php endif; ?>
 
                     </div>
 
