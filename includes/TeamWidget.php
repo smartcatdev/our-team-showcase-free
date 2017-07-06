@@ -44,7 +44,9 @@ class TeamWidget extends \WP_Widget {
 
                         <?php if( get_option( Options::SINGLE_TEMPLATE ) !== 'disabled' ) : ?>
 
-                            <a href="<?php the_permalink() ?>" rel="bookmark" title="<?php the_title_attribute(); ?>"><?php member_avatar(); ?></a>
+                            <a href="<?php the_permalink(); ?>"
+                               title="<?php the_title_attribute(); ?>"
+                               rel="bookmark"><?php member_avatar(); ?></a>
 
                         <?php else : ?>
 

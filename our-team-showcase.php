@@ -125,7 +125,12 @@ function asset( $path = '' ) {
  */
 function template_path( $template ) {
 
-    $file = trailingslashit( plugin_dir_path( __FILE__ ) ) . 'templates/' . ltrim( $template, '/' );
+    $template = trim( $template, '/' );
+    $template = rtrim( $template, '.php' );
+
+    $base = trailingslashit( apply_filters( 'ots_template_path', dirname( __FILE__ ) . '/templates', $template ) );
+
+    $file = $base . $template . '.php';
 
     if( file_exists( $file ) ) {
         return $file;

@@ -24,9 +24,15 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                         <div itemprop="name" class="sc_team_member_name">
 
-                            <?php if( $get_attr( 'single_template', 'default' ) !== 'disabled' ) : ?>
+                            <?php $single_template = $get_attr( 'single_template', 'default' ); ?>
 
-                                <a href="<?php  the_permalink(); ?>" rel="bookmark" ><?php the_title() ?></a>
+                            <?php if( $single_template !== 'disabled' ) : ?>
+
+                                <a href="<?php echo add_query_arg( 'template', $single_template, get_the_permalink() ); ?>" rel="bookmark">
+
+                                    <?php the_title() ?>
+
+                                </a>
 
                             <?php else : ?>
 
@@ -48,7 +54,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                     <div class="sc_team_content"><?php the_content(); ?></div>
 
-                    <div class='icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>'>
+                    <div class="icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>">
                         <?php do_member_social_links(); ?>
                     </div>
 

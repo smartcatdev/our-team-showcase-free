@@ -42,7 +42,6 @@ function do_shortcode_output( $attributes = array() ) {
     );
 
     $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
-    $include = template_path( $args['template'] . '.php' );
 
     // Helper for getting short code attributes from inside a template
     $get_attr = function ( $attr, $value = false ) use ( $args ) {
@@ -52,9 +51,17 @@ function do_shortcode_output( $attributes = array() ) {
     ob_start();
 
     // Dynamically pull in the template file
-    include_once apply_filters( 'ots_template_include', $include, $attributes );
+    $template = apply_filters( 'ots_template_include', template_path( $args['template'] ) );
 
-    return ob_get_clean();
+    if( file_exists( $template ) ) {
+        include_once $template;
+    } else {
+        include_once template_path( Defaults::TEMPLATE );
+    }
+
+    do_action( 'ots_render_team_members', $args );
+
+    return apply_filters( 'ots_shortcode_output', ob_get_clean(), $args );
 
 }
 

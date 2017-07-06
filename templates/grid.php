@@ -22,9 +22,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                     <?php if ( get_option( Options::DISPLAY_NAME ) == 'on' ) : ?>
 
-                        <div itemprop="name" class="sc_team_member_name">
-                            <a href="<?php the_permalink() ?>" rel="bookmark" ><?php the_title() ?></a>
-                        </div>
+                        <div itemprop="name" class="sc_team_member_name"><?php the_title() ?></div>
 
                     <?php endif; ?>
 
@@ -38,17 +36,23 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                     <div class="sc_team_content"><?php the_content(); ?></div>
 
-                    <div class='icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>'>
+                    <div class="icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>">
                         <?php do_member_social_links(); ?>
                     </div>
 
                     <div class="sc_team_member_overlay"></div>
 
-                    <?php if( $get_attr( 'single_template', 'default' ) !== 'disabled' ) : ?>
+                    <?php $single_template = $get_attr( 'single_template', 'default' ); ?>
+
+                    <?php if( $single_template !== 'disabled' ) : ?>
 
                         <div class="sc_team_more">
-                            <a href="<?php the_permalink() ?>" rel="bookmark" class="<?php esc_attr_e( $get_attr( 'single_template', 'default' ) ); ?>">
+                            <a href="<?php echo add_query_arg( 'template', $single_template, get_the_permalink() ); ?>"
+                               class="<?php esc_attr_e( $single_template ); ?>"
+                               rel="bookmark">
+
                                 <img src="<?php echo esc_url( asset( 'images/more.png' ) ); ?>"/>
+
                             </a>
                         </div>
 
