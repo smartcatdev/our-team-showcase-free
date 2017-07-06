@@ -18,7 +18,7 @@ include_once dirname( __FILE__ ) . '/constants.php';
 
 
 /**
- * Load the plugin'js text domain.
+ * Load the plugin's text domain.
  *
  * @since 4.0.0
  */
@@ -69,9 +69,6 @@ function init() {
 add_action( 'plugins_loaded', 'ots\init' );
 
 
-
-
-
 /**
  * Runs on plugin activation.
  *
@@ -99,20 +96,6 @@ register_activation_hook( __FILE__, 'ots\activate' );
 function deactivate() {
 
     init();
-
-    unregister_setting( 'ots-team-view', Options::TEMPLATE );
-    unregister_setting( 'ots-team-view', Options::REWRITE_SLUG );
-    unregister_setting( 'ots-team-view', Options::GRID_COLUMNS );
-    unregister_setting( 'ots-team-view', Options::MARGIN );
-    unregister_setting( 'ots-team-view', Options::SHOW_SOCIAL );
-    unregister_setting( 'ots-team-view', Options::SOCIAL_LINK_ACTION );
-    unregister_setting( 'ots-team-view', Options::DISPLAY_NAME );
-    unregister_setting( 'ots-team-view', Options::DISPLAY_TITLE );
-    unregister_setting( 'ots-team-view', Options::DISPLAY_LIMIT );
-    unregister_setting( 'ots-team-view', Options::MAIN_COLOR );
-    unregister_setting( 'ots-single-member-view', Options::SINGLE_TEMPLATE );
-    unregister_setting( 'ots-single-member-view', Options::SHOW_SINGLE_SOCIAL );
-
 
     unregister_post_type( 'team_member' );
     unregister_taxonomy( 'team_member_position' );
