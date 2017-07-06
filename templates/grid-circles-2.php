@@ -28,7 +28,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                             <?php if( $single_template !== 'disabled' ) : ?>
 
-                                <a href="<?php echo add_query_arg( 'template', $single_template, get_the_permalink() ); ?>" rel="bookmark">
+                                <a href="<?php the_permalink(); ?>" rel="bookmark">
 
                                     <?php the_title() ?>
 

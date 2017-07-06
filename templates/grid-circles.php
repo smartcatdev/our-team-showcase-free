@@ -47,7 +47,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
                     <?php if( $single_template !== 'disable' ) : ?>
 
                         <div class="sc_team_more">
-                            <a href="<?php echo add_query_arg( 'template', $single_template, get_the_permalink() ); ?>"
+                            <a href="<?php the_permalink(); ?>"
                                class="<?php esc_attr_e( $single_template ); ?>"
                                rel="bookmark">
 
