@@ -16,7 +16,9 @@ function do_migration() {
         // Map out all non-boolean values
         $map = array(
             'margin'          => Options::MARGIN,
-            'slug'            => Options::REWRITE_SLUG
+            'slug'            => Options::REWRITE_SLUG,
+            'template'        => Options::TEMPLATE,
+            'single_template' => Options::SINGLE_TEMPLATE
         );
 
         foreach( $map as $old => $new ) {
@@ -34,30 +36,6 @@ function do_migration() {
 
         foreach ( $checkboxes as $old => $new ) {
             update_option( $new, $options[ $old ] == 'yes' ? 'on' : '' );
-        }
-
-        // Migrate the templates
-        $templates = array(
-            'grid'          => 'grid',
-            'grid_circles'  => 'grid-circles',
-            'grid_circles2' => 'grid-circles-2',
-        );
-
-
-        if( array_key_exists( $options['template'], $templates ) ) {
-            update_option( Options::TEMPLATE, $templates[ $options['template'] ] );
-        }
-
-
-        $single_templates = array(
-            'custom'   => 'custom-template',
-            'sidebar'  => 'single-sidebar',
-            'vcard'    => 'card',
-            'panel'    => 'slide-out-panel',
-        );
-
-        if( array_key_exists( $options['single_template'], $single_templates ) ) {
-            update_option( Options::SINGLE_TEMPLATE, $single_templates[ $options['single_template'] ] );
         }
 
 

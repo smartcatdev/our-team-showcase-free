@@ -44,7 +44,7 @@ $members = get_members_in_order( $get_attr( 'group' ) );
 
                     <?php $single_template = $get_attr( 'single_template', 'default' ); ?>
 
-                    <?php if( $single_template !== 'disabled' ) : ?>
+                    <?php if( $single_template !== 'disable' ) : ?>
 
                         <div class="sc_team_more">
                             <a href="<?php echo add_query_arg( 'template', $single_template, get_the_permalink() ); ?>"

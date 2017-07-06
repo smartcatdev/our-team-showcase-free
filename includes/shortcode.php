@@ -51,12 +51,12 @@ function do_shortcode_output( $attributes = array() ) {
     ob_start();
 
     // Dynamically pull in the template file
-    $template = apply_filters( 'ots_template_include', template_path( $args['template'] ) );
+    $template = apply_filters( 'ots_template_include', template_path( map_template( $args['template'] ) ) );
 
     if( file_exists( $template ) ) {
         include_once $template;
     } else {
-        include_once template_path( Defaults::TEMPLATE );
+        include_once template_path( map_template( Defaults::TEMPLATE ) );
     }
 
     do_action( 'ots_render_team_members', $args );

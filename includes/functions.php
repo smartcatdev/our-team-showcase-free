@@ -163,8 +163,8 @@ function get_templates() {
 
     $templates = array(
         'grid'           => __( 'Grid - Boxes', 'ots' ),
-        'grid-circles'   => __( 'Grid - Circles', 'ots' ),
-        'grid-circles-2' => __( 'Grid - Circles 2', 'ots' )
+        'grid_circles'   => __( 'Grid - Circles', 'ots' ),
+        'grid_circles2'  => __( 'Grid - Circles 2', 'ots' )
     );
 
     return apply_filters( 'ots_templates', $templates );
@@ -182,7 +182,7 @@ function get_single_templates() {
 
     $templates = array(
         'default'       => __( 'Theme Default', 'ots' ),
-        'disabled'      => __( 'Disabled', 'ots' )
+        'disable'       => __( 'Disabled', 'ots' )
     );
 
     return apply_filters( 'ots_single_templates', $templates );
@@ -231,5 +231,24 @@ function team_member( $member = null ) {
     }
 
     return false;
+
+}
+
+
+function map_template( $key ) {
+
+    $templates = array(
+        'grid_circles'   => 'grid-circles',
+        'grid_circles2'  => 'grid-circles-2',
+        'standard'       => 'default'
+    );
+
+    $templates = apply_filters( 'ots_map_legacy_templates', $templates );
+
+    if( array_key_exists( $key, $templates ) ) {
+        $key = $templates[ $key ];
+    }
+
+    return $key;
 
 }
