@@ -43,13 +43,12 @@ function do_shortcode_output( $attributes = array() ) {
 
     $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
 
-    // Helper for getting short code attributes from inside a template
-    $get_attr = function ( $attr, $value = false ) use ( $args ) {
-        return array_key_exists( $attr, $args ) ? $args[ $attr ] : $value;
-    };
+    // Cache the post query
+    $args['members'] = get_members_in_order( $args['group'] );
 
+    // Start the buffer
     ob_start();
-
+    extract( $args );
 
     $template = apply_filters( 'ots_template_include', $args['template'] );
 

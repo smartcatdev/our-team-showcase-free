@@ -2,8 +2,6 @@
 
 namespace ots;
 
-$members = get_members_in_order( $get_attr( 'group' ) );
-
 ?>
 
 <div id="sc_our_team" class="grid sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
@@ -41,8 +39,6 @@ $members = get_members_in_order( $get_attr( 'group' ) );
                     </div>
 
                     <div class="sc_team_member_overlay"></div>
-
-                    <?php $single_template = $get_attr( 'single_template', 'default' ); ?>
 
                     <?php if( $single_template !== 'disable' ) : ?>
 

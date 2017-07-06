@@ -2,8 +2,6 @@
 
 namespace ots;
 
-$members = get_members_in_order( $get_attr( 'group' ) );
-
 ?>
 
 <div id="sc_our_team" class="grid_circles2 sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
@@ -23,8 +21,6 @@ $members = get_members_in_order( $get_attr( 'group' ) );
                     <?php if ( get_option( Options::DISPLAY_NAME ) == 'on' ) : ?>
 
                         <div itemprop="name" class="sc_team_member_name">
-
-                            <?php $single_template = $get_attr( 'single_template', 'default' ); ?>
 
                             <?php if( $single_template !== 'disabled' ) : ?>
 
