@@ -37,11 +37,19 @@ function posts_dropdown( $name, $id = '', $selected = '' ) {
  * @since 4.0.0
  *
  */
-function print_attrs( array $attrs ) {
+function print_attrs( array $attrs, $echo = true ) {
+
+    $html = '';
 
     foreach( $attrs as $attr => $values ) {
-        echo ' ' . $attr . '="' . $values . '" ';
+        $html .= ' ' . $attr . '="' . $values . '" ';
     }
+
+    if( $echo ) {
+        echo $html;
+    }
+
+    return $html;
 
 }
 
@@ -54,13 +62,20 @@ function print_attrs( array $attrs ) {
  * @return string         The HTML for the link.
  * @since 4.0.0
  */
-function social_link( $link, $icon = '' ) {
+function social_link( $link, $icon = '', $attrs = array(), $before = '', $after = '' ) {
 
     // See if we're opening links in a new tab
     $target = get_option( Options::SOCIAL_LINK_ACTION ) == 'on' ? '_blank' : false;
 
-    return '<a ' . ( $target ? 'target="' . $target .'"' : '' ) . ' href="' . $link . '">
-            <img src="' . esc_url( $icon ) . '" class="sc-social" /></a>';
+    $html = '<a ' . print_attrs( $attrs, false ) . ' ' . ( $target ? 'target="' . $target .'"' : '' ) . ' href="' . $link . '">' . $before;
+
+    if( $icon ) {
+        $html .= '<img src="' . esc_url( $icon ) . '"/>';
+    }
+
+    $html .= $after . '</a>';
+
+    return $html;
 
 }
 
@@ -94,7 +109,7 @@ function do_member_social_links( \WP_Post $member = null, $before ='', $after = 
         $link = get_post_meta( $member->ID, "team_member_$meta_key", true );
 
         if( !empty( $link ) ) {
-            echo $before . social_link( $data[0] . $link, $data[1] ) . $after;
+            echo $before . social_link( $data[0] . $link, $data[1], array( 'class' => 'sc_social' ) ) . $after;
         }
 
     }

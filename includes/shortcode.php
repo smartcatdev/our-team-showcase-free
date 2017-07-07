@@ -46,12 +46,17 @@ function do_shortcode_output( $attributes = array() ) {
     // Cache the post query
     $args['members'] = get_members_in_order( $args['group'] );
 
+    // See if the template belongs to this plugin
+    $file = template_path( map_template( $args['template'] ) );
+
     // Start the buffer
     ob_start();
     extract( $args );
 
-    $template = apply_filters( 'ots_template_include', $args['template'] );
 
+    $template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
+
+    // If the template file doesn't exist, fallback to the default
     if( file_exists( $template ) ) {
         include_once $template;
     } else {
@@ -67,22 +72,6 @@ function do_shortcode_output( $attributes = array() ) {
 }
 
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
-
-
-function include_template( $template ) {
-
-    $file = template_path( map_template( $template ) );
-
-    if( $file ) {
-        $template = $file;
-    }
-
-    return $template;
-
-}
-
-add_filter( 'ots_template_include', 'ots\include_template', 1 );
-
 
 /**
  * Print dynamic styles in the page header.

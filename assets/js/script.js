@@ -9,14 +9,18 @@ jQuery( document ).ready( function( $ ){
 
     function do_resize() {
 
-        var member_height = $( '.sc_team_member' ).width();
+        var members = $( '#sc_our_team.grid .sc_team_member, ' +
+                         '#sc_our_team.grid_circles .sc_team_member,' +
+                         '#sc_our_team.grid_circles2 .sc_team_member');
 
-        $( '.sc_team_member' ).each( function( index, el ){
+        var member_height = members.width();
+
+        members.each( function( index, el ){
             $( el ).find( '.sc_team_member_inner' ).css( { height: member_height } );
         } );
 
 
-        $( '.sc_team_member' ).mouseenter( function() {
+        members.mouseenter( function() {
 
             $( this ).find( '.sc_team_member_overlay' ).stop( true, false ).fadeIn( 440 );
             $( this ).find( '.wp-post-image' ).addClass( 'zoomIn' );

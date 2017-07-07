@@ -235,18 +235,18 @@ function team_member( $member = null ) {
 }
 
 
-function map_template( $key ) {
+function map_template( $slug ) {
 
     $templates = array(
-        'grid_circles'   => 'grid-circles',
-        'grid_circles2'  => 'grid-circles-2',
-        'standard'       => 'single-team_member'
+        'grid_circles'   => 'grid-circles.php',
+        'grid_circles2'  => 'grid-circles-2.php',
+        'standard'       => 'single-team_member.php'
     );
 
-    if( array_key_exists( $key, $templates ) ) {
-        $key = $templates[ $key ];
+    if( array_key_exists( $slug, $templates ) ) {
+        $slug = $templates[ $slug ];
     }
 
-    return $key;
+    return $slug;
 
 }
