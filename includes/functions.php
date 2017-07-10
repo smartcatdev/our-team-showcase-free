@@ -16,14 +16,20 @@ function get_members_in_order( $limit = false, $group = false ) {
 
     $args = array(
         'post_type'      => 'team_member',
-        'posts_per_page' => $limit == 'on' ? -1 : $limit,
+        'posts_per_page' => $limit == 'on' || $limit == 'all' ? -1 : $limit,
         'meta_key'       => 'sc_member_order',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
     );
 
-    if( $group ) {
-        $args['team_member_position'] = $group;
+    if( !empty( $group ) ) {
+
+        $args['tax_query'][] = array(
+            'taxonomy'  => 'team_member_position',
+            'field'     => intval( $group ) > 0 ? 'term_id' : 'name',
+            'terms'     => $group
+        );
+
     }
 
     return  new \WP_Query( $args );

@@ -28,9 +28,12 @@ class TeamWidget extends \WP_Widget {
     public function widget( $args, $instance ) {
 
         echo $args[ 'before_widget' ];
-        echo $args[ 'before_title' ] . $instance['title'] . $args[ 'after_title' ];
+        echo $args[ 'before_title' ] . esc_html( $instance['sc_our_team_widget_title'] ) . $args[ 'after_title' ];
 
-        $members = get_members_in_order();
+        $limit = $instance['sc_our_team_widget_limit'];
+        $group = $instance['sc_our_team_widget_group'] !== 'ignore-group' ? $instance['sc_our_team_widget_group'] : '';
+
+        $members = get_members_in_order( $limit, $group );
 
         ?>
 
@@ -61,8 +64,6 @@ class TeamWidget extends \WP_Widget {
                                 <?php esc_html_e( get_post_meta( get_the_ID(), 'team_member_title', true ) ); ?>
                             </div>
 
-<!--                            <div class='icons'>--><?php //do_member_social_links(); ?><!--</div>-->
-
                         </div>
 
                     </div>
@@ -81,23 +82,94 @@ class TeamWidget extends \WP_Widget {
 
         $instance = $old_instance;
 
-        $instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
+        $title = $new_instance[ 'sc_our_team_widget_title' ];
+        $group = $new_instance[ 'sc_our_team_widget_group' ];
+        $limit = $new_instance[ 'sc_our_team_widget_limit' ];
+
+        $instance[ 'sc_our_team_widget_title' ] = strip_tags( $title );
+        $instance[ 'sc_our_team_widget_group' ] = strip_tags( $group );
+
+        if( $limit > 1 || strtolower( $limit ) === 'all' ) {
+            $instance['sc_our_team_widget_limit'] = $limit;
+        } else {
+            $instance['sc_our_team_widget_limit'] = 'ALL';
+        }
 
         return $instance;
 
     }
 
-    public function form( $instance ) { ?>
+    public function form( $instance ) {
+
+        $terms = get_terms( array(
+            'taxonomy'   => 'team_member_position',
+            'hide_empty' => false
+        ) );
+
+        $instance = wp_parse_args( $instance, array(
+            'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
+            'sc_our_team_widget_group' => 'ignore-group',
+            'sc_our_team_widget_limit' => 'ALL',
+        ) );
+
+        $title = $instance['sc_our_team_widget_title'];
+        $group = $instance['sc_our_team_widget_group'];
+        $limit = $instance['sc_our_team_widget_limit'];
+
+        ?>
 
         <p>
 
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title: ', 'ots' ); ?></label>
+            <label for="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_title' ) ); ?>"
+                   class="sc_our_team_widget_title_label">
+                <?php _e( 'Title: ', 'ots' ); ?>
+            </label>
 
             <input type="text"
                    class="widefat"
-                   id="<?php echo $this->get_field_id( 'title' ); ?>"
-                   name="<?php echo $this->get_field_name( 'title' ); ?>"
-                   value="<?php echo esc_attr( !empty( $instance['title'] ) ? $instance['title'] : __( 'Meet Our Team', 'ots' ) ); ?>" />
+                   id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_title' ) ); ?>"
+                   name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_title' ) ); ?>"
+                   value="<?php esc_attr_e( $title ); ?>" />
+
+        </p>
+        <p>
+
+            <label for="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_group' ) ); ?>"
+                   class="sc_our_team_widget_group_label">
+                <?php _e( 'Group', 'ots' ); ?>
+            </label>
+
+            <select id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_group' ) ); ?>"
+                    name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_group' ) ); ?>"
+                    class="widefat">
+
+                <option value="ignore-group"><?php _e( 'All Groups', 'ots' ); ?></option>
+
+                <?php foreach( $terms as $term ) : ?>
+
+                    <option value="<?php esc_attr_e( $term->term_id ); ?>" <?php selected( $group, $term->term_id ); ?>>
+
+                        <?php esc_html_e( $term->name ); ?>
+
+                    </option>
+
+                <?php endforeach; ?>
+
+            </select>
+
+        </p>
+        <p>
+
+            <label for="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
+                   class="sc_our_team_widget_limit_label">
+                <?php _e( 'Limit to Show (Number or "ALL")', 'ots' ); ?>
+            </label>
+
+            <input type="text"
+                   class="widefat"
+                   id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
+                   name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
+                   value="<?php esc_attr_e( $limit ); ?>" />
 
         </p>
 

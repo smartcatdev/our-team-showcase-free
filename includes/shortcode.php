@@ -44,7 +44,7 @@ function do_shortcode_output( $attributes = array() ) {
     $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
 
     // Cache the post query
-    $args['members'] = get_members_in_order( $args['group'] );
+    $args['members'] = get_members_in_order( false, $args['group'] );
 
     // See if the template belongs to this plugin
     $file = template_path( map_template( $args['template'] ) );
