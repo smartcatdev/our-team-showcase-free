@@ -4,6 +4,15 @@ namespace ots;
 
 ?>
 
+<style>
+
+    .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
+    .grid_circles#sc_our_team .sc_team_member .sc_team_member_name {
+        background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
+    }
+
+</style>
+
 <div id="sc_our_team" class="grid_circles sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
 
     <div class="clear"></div>

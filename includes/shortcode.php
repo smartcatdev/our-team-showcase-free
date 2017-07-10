@@ -11,10 +11,6 @@ function enqueue_scripts() {
 
     if( apply_filters( 'ots_load_default_scripts', true ) ) {
 
-
-        wp_enqueue_style( "ots-grid-css", asset( "css/grid.css" ), null, VERSION );
-        wp_enqueue_style( "ots-grid-circles-css", asset( "css/grid-circles.css" ), null, VERSION );
-        wp_enqueue_style( "ots-grid-circles-2-css", asset( "css/grid-circles-2.css" ), null, VERSION );
         wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
 
     }
@@ -49,12 +45,15 @@ function do_shortcode_output( $attributes = array() ) {
     // See if the template belongs to this plugin
     $file = template_path( map_template( $args['template'] ) );
 
+
     // Start the buffer
     ob_start();
     extract( $args );
 
-
     $template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
+
+    do_action( 'ots_before_team_members', $args );
+
 
     // If the template file doesn't exist, fallback to the default
     if( file_exists( $template ) ) {
@@ -63,15 +62,30 @@ function do_shortcode_output( $attributes = array() ) {
         include_once template_path( map_template( Defaults::TEMPLATE ) );
     }
 
+
     // Hook onto for output inside shortcode after the template as rendered
     do_action( 'ots_after_team_members', $args );
-
 
     return apply_filters( 'ots_shortcode_output', ob_get_clean(), $args );
 
 }
 
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
+
+
+function print_shortcode_scripts( $args ) {
+
+    $mapped = rtrim( map_template( $args['template'] ), '.php' );
+    $styles = asset( "css/$mapped.css", false );
+
+    if( file_exists( $styles ) ) {
+        echo '<style>' . file_get_contents( asset( "css/$mapped.css", false ) ) . '</style>';
+    }
+
+}
+
+add_action( 'ots_before_team_members', 'ots\print_shortcode_scripts' );
+
 
 /**
  * Print dynamic styles in the page header.
@@ -87,10 +101,6 @@ function print_dynamic_styles() { ?>
             color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }
 
-        .grid#sc_our_team .sc_team_member .sc_team_member_name,
-        .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
-        .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
-        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name,
         #sc_our_team .sc_team_member .icons span {
             background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
         }

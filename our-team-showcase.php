@@ -112,8 +112,16 @@ register_deactivation_hook( __FILE__, 'ots\deactivate' );
  * @return string
  * @since 4.0.0
  */
-function asset( $path = '' ) {
-    return trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/' . ltrim( $path, '/' );
+function asset( $path = '', $url = true ) {
+
+    if( $url ) {
+        $file = trailingslashit( plugin_dir_url( __FILE__ ) );
+    } else {
+        $file =  trailingslashit( plugin_dir_path( __FILE__ ) );
+    }
+
+    return $file . 'assets/' . ltrim( $path, '/' );
+
 }
 
 
