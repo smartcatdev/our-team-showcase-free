@@ -12,7 +12,7 @@ namespace ots;
 
         <?php while ( $members->have_posts() ) : $members->the_post(); ?>
 
-            <div itemscope itemtype="http://schema.org/Person" class="sc_team_member">
+            <div itemscope itemtype="http://schema.org/Person" class="sc_team_member" data-id="<?php the_ID(); ?>">
 
                 <div class="sc_team_member_inner">
 
@@ -44,7 +44,7 @@ namespace ots;
 
                         <div class="sc_team_more">
                             <a href="<?php the_permalink(); ?>"
-                               class="<?php esc_attr_e( $single_template ); ?>"
+                               class="team_member_link"
                                rel="bookmark">
 
                                 <img src="<?php echo esc_url( asset( 'images/more.png' ) ); ?>"/>

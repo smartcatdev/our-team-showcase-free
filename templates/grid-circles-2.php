@@ -12,7 +12,7 @@ namespace ots;
 
         <?php while ( $members->have_posts() ) : $members->the_post(); ?>
 
-            <div itemscope itemtype="http://schema.org/Person" class="sc_team_member">
+            <div itemscope itemtype="http://schema.org/Person" class="sc_team_member" data-id="<?php the_ID(); ?>">
 
                 <div class="sc_team_member_inner">
 
@@ -24,7 +24,7 @@ namespace ots;
 
                             <?php if( $single_template !== 'disabled' ) : ?>
 
-                                <a href="<?php the_permalink(); ?>" rel="bookmark">
+                                <a href="<?php the_permalink(); ?>" rel="bookmark" class="team_member_link">
 
                                     <?php the_title() ?>
 
