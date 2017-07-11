@@ -21,11 +21,11 @@ namespace ots;
                         <h2 class="name" itemprop="name"><?php echo the_title(); ?></h2>
                         <h3 class="title" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
 
-                        <ul class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ? '' : 'hidden'; ?>">
+                        <div class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ? '' : 'hidden'; ?>">
 
                             <?php do_member_social_links(); ?>
 
-                        </ul>
+                        </div>
 
                     </div>
                 </div>
@@ -50,11 +50,7 @@ namespace ots;
 
                                 <div class="article">
 
-                                    <div class="left"><?php echo get_the_post_thumbnail( $article ); ?></div>
-
-                                    <div class="body">
-                                        <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
-                                    </div>
+                                    <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
 
                                 </div>
 

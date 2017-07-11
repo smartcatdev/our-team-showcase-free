@@ -25,14 +25,13 @@
     display: none;
 }
 
-.grid_circles2#sc_our_team .sc_team_member:hover .icons{
+.grid_circles2#sc_our_team .sc_team_member:hover .icons {
     opacity: 1;
 }
 
-.grid_circles2#sc_our_team .sc_team_member .icons img{
+.grid_circles2#sc_our_team .sc_team_member .icons img {
     width: 25px;
     margin-right: 5px;
-
 }
 
 .grid_circles2#sc_our_team .sc_team_member .sc_team_member_name {
@@ -104,7 +103,7 @@
     -webkit-transform: rotate(360deg);
 }
 
-.grid_circles2#sc_our_team .sc_team_member .sc_team_member_name {
+.grid_circles2#sc_our_team .sc_team_member .sc_team_member_name a {
     color: #fff;
 }
 

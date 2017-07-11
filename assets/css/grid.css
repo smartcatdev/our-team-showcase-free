@@ -82,6 +82,7 @@
     -webkit-transition: 0.45s all ease-in-out;
     overflow: hidden;
     opacity: 0.9;
+    color: #fff;
 }
 
 .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle {
@@ -142,7 +143,6 @@
 
     .grid#sc_our_team .sc_team_member {
         float: left;
-        width: 25%;
     }
 
 }

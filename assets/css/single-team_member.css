@@ -84,13 +84,9 @@
     text-align: center;
 }
 
-.sc_team_single_member .sc_single_side .social li {
-    margin-bottom: 10px;
-    list-style: none;
-}
-
-.sc_team_single_member .sc_single_side .social li a {
-    text-decoration: none;
+.sc_team_single_member .sc_single_side .social img {
+    max-width: 30px;
+    margin: 2px;
 }
 
 .sc_team_single_member .sc_single_side .social .sc-social {
@@ -162,22 +158,7 @@
     background: #fff;
     margin: 10px 0;
     background: rgba(150,150,150,0.2);
-}
-
-.sc_team_single_member .articles .article .left {
-    display: table-cell;
-    width: 33%;
     padding: 10px;
-    vertical-align: top;
-}
-
-.sc_team_single_member .articles .article .body {
-    display: table-cell;
-    padding: 10px;
-}
-
-.sc_team_single_member .articles .article a {
-    font-size: 20px;
 }
 
 @media ( min-width: 768px ) {
@@ -215,30 +196,4 @@
         padding: 15px;
     }
 
-    .sc_team_single_member .sc_member_articles {
-        display: table;
-    }
-
-    .sc_team_single_member .articles .article {
-        width: 29%;
-        display: table-cell;
-        float: left;
-        margin: 10px;
-        min-height: 280px;
-    }
-
-    .sc_team_single_member .articles .article .left,
-    .sc_team_single_member .articles .article .body {
-        width: 100%;
-        display: block;
-    }
-
-    .sc_team_single_member .articles .article .left {
-        max-height: 200px;
-    }
-
-
-    .sc_team_single_member .articles .article .wp-post-image {
-        width: 100%;
-    }
 }

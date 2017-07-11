@@ -81,31 +81,3 @@ function print_shortcode_scripts( $args ) {
 
 add_action( 'ots_before_team_members', 'ots\print_shortcode_scripts' );
 
-
-/**
- * Print dynamic styles in the page header.
- *
- * @since 4.0.0
- */
-function print_dynamic_styles() { ?>
-
-    <style id="ots-dynamic-styles">
-
-        #sc_our_team a,
-        .sc_team_single_member .articles a {
-            color: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
-        }
-
-        #sc_our_team .sc_team_member .icons span {
-            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
-        }
-
-        #sc_our_team .sc_team_member {
-            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
-        }
-
-    </style>
-
-<?php }
-
-add_action( 'wp_print_styles', 'ots\print_dynamic_styles' );
