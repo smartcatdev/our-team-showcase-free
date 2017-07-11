@@ -43,6 +43,7 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/helpers.php';
     include_once dirname( __FILE__ ) . '/includes/team_member-post-type.php';
     include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
+    include_once dirname( __FILE__ ) . '/includes/documentation.php';
     include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
     include_once dirname( __FILE__ ) . '/includes/shortcode.php';
     include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
