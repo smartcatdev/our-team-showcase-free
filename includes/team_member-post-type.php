@@ -46,10 +46,9 @@ function include_single_template( $template ) {
 
     if ( get_post_type() == 'team_member' ) {
 
-        $single_template = get_option( Options::SINGLE_TEMPLATE );
-
-        if( $single_template === 'standard' ) {
-            $template = template_path( map_template( $single_template ) );
+        // Pull in the template
+        if( !use_theme_template() ) {
+            $template = template_path( 'single-team_member.php' );
         }
 
     }
@@ -59,6 +58,14 @@ function include_single_template( $template ) {
 }
 
 add_filter( 'template_include', 'ots\include_single_template' );
+
+
+function use_theme_template() {
+
+    return get_option( Options::SINGLE_TEMPLATE ) === 'standard' &&
+        file_exists( get_template_directory() . '/single-team_member.php' );
+
+}
 
 
 /**
