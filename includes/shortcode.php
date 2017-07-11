@@ -9,12 +9,7 @@ namespace ots;
  */
 function enqueue_scripts() {
 
-    if( apply_filters( 'ots_load_default_scripts', true ) ) {
-
-        wp_enqueue_style( "ots-css", asset( "css/global.css" ), null, VERSION );
-
-    }
-
+    wp_enqueue_style( 'ots-css', asset( 'css/global.css' ), null, VERSION );
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }

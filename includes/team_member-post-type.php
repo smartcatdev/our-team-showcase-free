@@ -26,7 +26,7 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
  */
 function enqueue_single_scripts() {
 
-    if( get_post_type() == 'team_member' && apply_filters( 'ots_load_default_single_scripts', true ) ) {
+    if( get_post_type() == 'team_member' ) {
         wp_enqueue_style( 'ots-single-css', asset( 'css/single-team_member.css' ), null, VERSION );
     }
 
