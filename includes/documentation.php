@@ -194,10 +194,11 @@ function doc_custom_templates() { ?>
     <p>
         <?php
 
-            printf( '%1$s <code>%2$s</code> %3$s <code>single-team_member.php</code> %4$s',
+            printf( '%1$s <code>%2$s</code> %3$s <code>%4$s</code> %5$s',
                 __( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ),
-                trailingslashit( get_template_directory() ) . 'single-team_member.php',
+                trailingslashit( get_template_directory() ) . 'team_members_template.php',
                 __( 'and copy the contents of', 'ots' ),
+                template_path( 'single-team_member.php' ),
                 __( 'into it. You can then edit this file to your liking.', 'ots' )
             );
 
