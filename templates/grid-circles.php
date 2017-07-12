@@ -11,8 +11,8 @@ namespace ots;
         background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
     }
 
-    #sc_our_team .sc_team_member {
-        padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px !important;
+    .grid_circles#sc_our_team .sc_team_member {
+        margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
     }
 
 </style>

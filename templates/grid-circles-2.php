@@ -6,8 +6,8 @@ namespace ots;
 
 <style>
 
-    #sc_our_team .sc_team_member {
-        padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px !important;
+    .grid_circles2#sc_our_team .sc_team_member {
+        margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
     }
 
 </style>
@@ -30,7 +30,7 @@ namespace ots;
 
                         <div itemprop="name" class="sc_team_member_name">
 
-                            <?php if( $single_template !== 'disabled' ) : ?>
+                            <?php if( $single_template !== 'disable' ) : ?>
 
                                 <a href="<?php the_permalink(); ?>" rel="bookmark" class="team_member_link">
 
