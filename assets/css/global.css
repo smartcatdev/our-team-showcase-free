@@ -23,7 +23,6 @@
     margin-right: 5px;
     margin-bottom: 5px;
     color: #fff;
-    background: #313131;
     transition: 0.2s all ease-in-out;
     -moz-transition: 0.2s all ease-in-out;
     -webkit-transition: 0.2s all ease-in-out;
@@ -32,42 +31,6 @@
 
 #sc_our_team .sc_team_member .icons img {
     display: inline-block;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-facebook:hover {
-    background: #3b5998;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-twitter:hover {
-    background: #00aced;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-linkedin:hover {
-    background: #007bb6;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-google-plus:hover {
-    background: #dd4b39;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-envelope-o:hover {
-    background: #0072b1;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-phone:hover {
-    background: #00bf8f;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-instagram:hover {
-    background: #125688;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-share-alt:hover {
-    background: #DAA819;
-}
-
-#sc_our_team .sc_team_member .icons span.sc_team_icon-pinterest-p:hover {
-    background: #cb2027;
 }
 
 #sc_our_team .sc_team_member_inner {

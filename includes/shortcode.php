@@ -97,6 +97,13 @@ function is_shortcode_page() {
 
 function print_dynamic_styles() { ?>
 
+    <!-- Global -->
+
+    <style>
+
+
+    </style>
+
     <!-- Grid -->
 
     <style>
