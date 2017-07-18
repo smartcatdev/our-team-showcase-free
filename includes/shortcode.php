@@ -7,14 +7,18 @@ namespace ots;
  *
  * @since 4.0.0
  */
-function enqueue_scripts() {
+function enqueue_shortcode_scripts() {
 
     wp_enqueue_style( 'ots-css', asset( 'css/global.css' ), null, VERSION );
+    wp_enqueue_style( 'ots-grid-css', asset( 'css/grid.css' ), null, VERSION );
+    wp_enqueue_style( 'ots-grid-circles-css', asset( 'css/grid-circles.css' ), null, VERSION );
+    wp_enqueue_style( 'ots-grid-circles-2-css', asset( 'css/grid-circles-2.css' ), null, VERSION );
+
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }
 
-add_action( 'wp_enqueue_scripts', 'ots\enqueue_scripts' );
+add_action( 'ots_page_redirect', 'ots\enqueue_shortcode_scripts' );
 
 
 /**
@@ -68,16 +72,71 @@ function do_shortcode_output( $attributes = array() ) {
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
 
 
-function print_shortcode_scripts( $args ) {
+function page_redirect() {
 
-    $mapped = rtrim( map_template( $args['template'] ), '.php' );
-    $styles = asset( "css/$mapped.css", false );
+    if( is_shortcode_page() ) {
 
-    if( file_exists( $styles ) ) {
-        echo '<style>' . file_get_contents( asset( "css/$mapped.css", false ) ) . '</style>';
+        // Cut down on calls to has_shortcode()
+        do_action( 'ots_page_redirect' );
+
     }
 
 }
 
-add_action( 'ots_before_team_members', 'ots\print_shortcode_scripts' );
+add_action( 'template_redirect', 'ots\page_redirect' );
 
+
+function is_shortcode_page() {
+
+    global $post;
+
+    return has_shortcode( $post->post_content, 'our-team' );
+
+}
+
+
+function print_dynamic_styles() { ?>
+
+    <!-- Grid -->
+
+    <style>
+
+        .grid#sc_our_team .sc_team_member .sc_team_member_name,
+        .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle {
+            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
+        }
+
+        .grid#sc_our_team .sc_team_member {
+            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+        }
+
+    </style>
+
+    <!-- Grid Circles -->
+
+    <style>
+
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
+        .grid_circles#sc_our_team .sc_team_member .sc_team_member_name {
+            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
+        }
+
+        .grid_circles#sc_our_team .sc_team_member {
+            margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+        }
+
+    </style>
+
+    <!-- Grid Circles 2 -->
+
+    <style>
+
+        .grid_circles2#sc_our_team .sc_team_member {
+            margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+        }
+
+    </style>
+
+<?php }
+
+add_action( 'wp_head', 'ots\print_dynamic_styles' );

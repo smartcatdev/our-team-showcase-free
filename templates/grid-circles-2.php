@@ -4,14 +4,6 @@ namespace ots;
 
 ?>
 
-<style>
-
-    .grid_circles2#sc_our_team .sc_team_member {
-        margin: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
-    }
-
-</style>
-
 <div id="sc_our_team" class="grid_circles2 sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
 
     <div class="clear"></div>

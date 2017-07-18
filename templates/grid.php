@@ -4,19 +4,6 @@ namespace ots;
 
 ?>
 
-<style>
-
-    .grid#sc_our_team .sc_team_member .sc_team_member_name,
-    .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle {
-        background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ) ?>;
-    }
-
-    .grid#sc_our_team .sc_team_member {
-        padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
-    }
-
-</style>
-
 <div id="sc_our_team" class="grid sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
 
     <div class="clear"></div>
