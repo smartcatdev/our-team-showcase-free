@@ -39,7 +39,7 @@ function add_documentation_fields() {
     add_settings_field( 'templates', __( 'Team View Templates', 'ots' ), 'ots\doc_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Short-codes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'single-templates', __( 'Single Member View Templates', 'ots' ), 'ots\doc_single_templates', 'ots-getting-started', 'templates' );
-    add_settings_field( 'custom-templates', sprintf( '%1$s - <i>%2$s</i>', __( 'Custom Templates', 'ots' ), __( 'Pro Version', 'ots' ) ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'custom-templates', __( 'Custom Templates - <i>Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
 
 }
@@ -51,15 +51,7 @@ function doc_usage() { ?>
 
     <div>
         <p>
-            <?php
-
-                printf(
-                    '%1$s <code>[our-team]</code> %2$s',
-                    __( 'To display a team showcase on any page of your site, simply place the short-code,', 'ots' ),
-                    __( 'where you want it to appear within the page.', 'ots' )
-                );
-
-            ?>
+            <?php _e( 'To display a team showcase on any page of your site, simply place the short-code <code>[our-team]</code> where you want it to appear within the page.', 'ots' ); ?>
         </p>
         <p>
             <?php _e( 'You can also indicate a specific group to display, as well as override the settings for the full team and single member templates through the short-code:', 'ots' ); ?>
@@ -87,18 +79,7 @@ function doc_templates() { ?>
     </p>
     <p>
         <i>
-            <?php
-
-                printf(
-                    '%1$s <strong>%2$s</strong> %3$s <strong>%4$s</strong> %5$s',
-                    __( 'Please note that', 'ots' ),
-                    __( 'Carousel, Honeycomb, Stacked', 'ots' ),
-                    __( 'and', 'ots' ),
-                    __( 'Directory', 'ots' ),
-                    __( 'are only available in the Pro version.', 'ots' )
-                );
-
-            ?>
+            <?php _e( 'Please note that <strong>Carousel, Honeycomb, Stacked</strong> and <strong>Directory</strong> are only available in the Pro version.', 'ots' ); ?>
         </i>
     </p>
 
@@ -192,17 +173,7 @@ function doc_custom_templates() { ?>
         <strong><?php _e( 'Overriding the Custom Template', 'ots' ); ?></strong>
     </p>
     <p>
-        <?php
-
-            printf( '%1$s <code>%2$s</code> %3$s <code>%4$s</code> %5$s',
-                __( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ),
-                trailingslashit( get_template_directory() ) . 'team_members_template.php',
-                __( 'and copy the contents of', 'ots' ),
-                template_path( 'single-team_member.php' ),
-                __( 'into it. You can then edit this file to your liking.', 'ots' )
-            );
-
-        ?>
+        <?php _e( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ); ?><code><?php echo trailingslashit( get_template_directory() ) . 'team_members_template.php'; ?></code> <?php _e( 'and copy the contents of', 'ots' ); ?> <code><?php echo template_path( 'single-team_member.php' ); ?></code> <?php  _e( 'into it. You can then edit this file to your liking.', 'ots' ); ?>
     </p>
 
 <?php }

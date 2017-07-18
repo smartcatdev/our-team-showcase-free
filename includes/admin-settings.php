@@ -470,21 +470,16 @@ function do_settings_page() {
             <div class="sidebar">
 
                 <div class="widget">
-                    <h2><?php _e( 'Plugin Tutorial', 'ots' ); ?></h2>
-                    <p><?php //TODO Replace with widget CTAs ?>
-                        orem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non sem leo. Sed et iaculis odio. Proin id mauris ac elit ornare scelerisque. Duis molestie lectus vel odio eleifend congue. Pellentesque quis magna libero. Cras sed bibendum ipsum. Vestibulum ornare, augue et faucibus accumsan, dui mi tincidunt nulla, ac tincidunt lectus libero venenatis ante. Sed metus nunc, pellentesque quis lacinia sit amet, sollicitudin at leo. Maecenas nisl risus, viverra a sapien nec, volutpat suscipit purus. Donec sit amet nunc et ligula interdum tristique. Duis sed odio vulputate, blandit nibh ac, vulputate quam.
-
-                        Morbi purus nunc, aliquet a justo id, pulvinar mattis metus. Nunc ut molestie mi. Donec sollicitudin sit amet ipsum in vestibulum. Proin malesuada auctor ornare. Aliquam eu elit sed libero finibus tempor. Etiam eu lectus volutpat, euismod ligula id, congue orci. Vivamus consectetur varius sem, eu aliquet nibh dictum viverra. Donec efficitur, ligula nec interdum aliquet, enim nisi vestibulum dolor, eget aliquam leo ante a velit. Curabitur aliquet hendrerit maximus. Vivamus sit amet tellus turpis.
-                    </p>
-                </div>
-
-                <div class="widget">
-                    <h2><?php _e( 'Another Widget', 'ots' ); ?></h2>
-                    <p><?php //TODO Replace with widget CTAs ?>
-                        orem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum non sem leo. Sed et iaculis odio. Proin id mauris ac elit ornare scelerisque. Duis molestie lectus vel odio eleifend congue. Pellentesque quis magna libero. Cras sed bibendum ipsum. Vestibulum ornare, augue et faucibus accumsan, dui mi tincidunt nulla, ac tincidunt lectus libero venenatis ante. Sed metus nunc, pellentesque quis lacinia sit amet, sollicitudin at leo. Maecenas nisl risus, viverra a sapien nec, volutpat suscipit purus. Donec sit amet nunc et ligula interdum tristique. Duis sed odio vulputate, blandit nibh ac, vulputate quam.
-
-                        Morbi purus nunc, aliquet a justo id, pulvinar mattis metus. Nunc ut molestie mi. Donec sollicitudin sit amet ipsum in vestibulum. Proin malesuada auctor ornare. Aliquam eu elit sed libero finibus tempor. Etiam eu lectus volutpat, euismod ligula id, congue orci. Vivamus consectetur varius sem, eu aliquet nibh dictum viverra. Donec efficitur, ligula nec interdum aliquet, enim nisi vestibulum dolor, eget aliquam leo ante a velit. Curabitur aliquet hendrerit maximus. Vivamus sit amet tellus turpis.
-                    </p>
+                    <h2><?php _e( 'Quick Reference', 'ots' ); ?></h2>
+                    <div class="content">
+                        <ul>
+                            <li><?php _e( 'Image recommended size is 400x400 px. To achieve the best appearance, please ensure all team member images are the same size.', 'ots' ); ?></li>
+                            <li><?php _e( 'To display the team members, add <code>[our-team]</code> short-code in a widget, post or page', 'ots' ); ?></li>
+                            <li><?php _e( 'To display members from a specific group, add <code>[our-team group="name of your group"]</code>', 'ots' ); ?></li>
+                            <li><?php _e( 'To override the template choice from the short-code, add <code>[our-team template="grid"]</code>. <i>Template options include: grid, grid_circles, grid_circles2, carousel, hc and stacked.</i>', 'ots' ); ?></li>
+                            <li><?php _e( 'To override the single template choice from the short-code add <code>[our-team single_template="vcard"]</code>. Alternatively you can set it to panel', 'ots' ); ?></li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>

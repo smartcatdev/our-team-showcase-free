@@ -11,7 +11,7 @@
 }
 
 .ots-admin-page .notice {
-    margin: 10px 10px 10px 20px;
+    margin: 10px 10px 10px 20px !important;
 }
 
 .ots-admin-page .ad-header {
@@ -165,6 +165,10 @@
     border: 1px solid #ddd;
 }
 
+.ots-admin-page .sidebar .widget .content {
+    padding: 5px 20px;
+}
+
 .ots-admin-page .sidebar .widget h2 {
     margin: 0;
     padding: 0.8em 15px;
@@ -172,8 +176,18 @@
     border-bottom: 1px solid #ddd;
 }
 
-.ots-admin-page .sidebar .widget p {
-    padding: 10px 20px;
+.ots-admin-page .sidebar .widget ul {
+    display: table;
+}
+
+.ots-admin-page .sidebar .widget ul > li {
+    display: table-row;
+}
+
+.ots-admin-page .sidebar .widget ul > li:before {
+    content: " - ";
+    display: table-cell;
+    padding: 8px 5px;
 }
 
 @media( min-width: 783px ) {
