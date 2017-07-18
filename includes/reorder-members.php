@@ -57,7 +57,7 @@ add_action( 'admin_post_ots_save_members_order', 'ots\save_team_members_order' )
  */
 function do_member_reorder_page() { ?>
 
-    <?php $members = get_members_in_order(); ?>
+    <?php $members = get_members_in_order( false ); ?>
 
     <div class="wrap">
 

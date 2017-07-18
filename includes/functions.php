@@ -10,13 +10,15 @@ namespace ots;
  * @return \WP_Query          The team member's query.
  * @since 4.0.0
  */
-function get_members_in_order( $limit = false, $group = false ) {
+function get_members_in_order( $limit = null, $group = false ) {
 
-    $limit = $limit ? $limit : get_option( Options::DISPLAY_LIMIT );
+    if ( is_null( $limit ) ) {
+        $limit = get_option( Options::DISPLAY_LIMIT );
+    }
 
     $args = array(
         'post_type'      => 'team_member',
-        'posts_per_page' => $limit == 'on' || $limit == 'all' ? -1 : $limit,
+        'posts_per_page' =>  $limit === false || $limit == 'on' || $limit == 'all' ? -1 : $limit,
         'meta_key'       => 'sc_member_order',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
