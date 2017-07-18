@@ -104,14 +104,18 @@ function do_member_social_links( \WP_Post $member = null, $before ='', $after = 
 
     $member = get_post( $member );
 
+    $rendered = '';
+
     foreach( $links as $meta_key => $data ) {
 
         $link = get_post_meta( $member->ID, "team_member_$meta_key", true );
 
         if( !empty( $link ) ) {
-            echo $before . social_link( $data[0] . $link, $data[1], array( 'class' => 'sc_social' ) ) . $after;
+            $rendered .= $before . social_link( $data[0] . $link, $data[1], array( 'class' => 'sc_social' ) ) . $after;
         }
 
     }
+
+    echo apply_filters( 'ots_parse_social_links', $rendered, $member );
 
 }
