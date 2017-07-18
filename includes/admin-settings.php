@@ -415,8 +415,19 @@ function do_settings_page() {
                 <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
 
                     <div class="callouts">
-                        <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>
-                        <a href="#" class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></a>
+
+                        <a href="https://smartcatdesign.net/our-team-showcase-demo/"
+                           class="cta cta-secondary"
+                            target="_blank">
+                            <?php _e( 'View Demo', 'ots' ); ?>
+                        </a>
+
+                        <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
+                           class="cta cta-primary"
+                            target="_blank">
+                            <?php _e( 'Go Pro', 'ots' ); ?>
+                        </a>
+
                     </div>
 
                 <?php endif; ?>

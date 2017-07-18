@@ -139,4 +139,4 @@ function print_dynamic_styles() { ?>
 
 <?php }
 
-add_action( 'wp_head', 'ots\print_dynamic_styles' );
+add_action( 'wp_print_styles', 'ots\print_dynamic_styles' );

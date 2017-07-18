@@ -158,8 +158,13 @@ function template_path( $template ) {
  */
 function plugin_action_links( $links ) {
 
-    $upgrade  = array( 'upgrade'  => '<a href="#">' . __( 'Go Pro', 'ots' ) . '</a>' );
-    $settings = array( 'settings' => '<a href="' . admin_url( 'edit.php?post_type=team_member&page=ots-settings' ) . '">' . __( 'Settings', 'ots' ) . '</a>' );
+    $upgrade  = array(
+        'upgrade'  => '<a target="_blank" href="https://smartcatdesign.net/downloads/our-team-showcase/">' . __( 'Go Pro', 'ots' ) . '</a>'
+    );
+
+    $settings = array(
+        'settings' => '<a href="' . admin_url( 'edit.php?post_type=team_member&page=ots-settings' ) . '">' . __( 'Settings', 'ots' ) . '</a>'
+    );
 
     $links = array_merge( $settings, $links );
 
