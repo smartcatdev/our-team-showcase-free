@@ -242,37 +242,37 @@ function do_documentation_page() {
 
     <div class="wrap ots-admin-page ots-documentation">
 
+        <div class="ad-header">
+
+            <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
+
+                <div class="callouts">
+                    <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>
+                    <a href="#" class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></a>
+                </div>
+
+            <?php endif; ?>
+
+            <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+
+            <div class="clear"></div>
+
+        </div>
+
+        <h2 style="display: none"></h2>
+
+        <h2 class="nav-tab-wrapper">
+
+            <?php foreach( $tabs as $tab => $title ) : ?>
+
+                <a href="<?php echo $screen->parent_file . '&page=ots-docs&tab=' . $tab; ?>"
+                   class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
+
+            <?php endforeach; ?>
+
+        </h2>
+
         <div class="inner">
-
-            <div class="ad-header">
-
-                <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
-
-                    <div class="callouts">
-                        <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>
-                        <a href="#" class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></a>
-                    </div>
-
-                <?php endif; ?>
-
-                <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
-
-                <div class="clear"></div>
-
-            </div>
-
-            <h2 style="display: none"></h2>
-
-            <h2 class="nav-tab-wrapper">
-
-                <?php foreach( $tabs as $tab => $title ) : ?>
-
-                    <a href="<?php echo $screen->parent_file . '&page=ots-docs&tab=' . $tab; ?>"
-                       class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
-
-                <?php endforeach; ?>
-
-            </h2>
 
             <form><?php do_settings_sections( $active ); ?></form>
 

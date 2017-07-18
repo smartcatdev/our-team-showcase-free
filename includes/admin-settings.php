@@ -408,50 +408,50 @@ function do_settings_page() {
 
     <div class="wrap ots-admin-page">
 
+        <div class="ad-header">
+
+            <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
+
+                <div class="callouts">
+
+                    <a href="https://smartcatdesign.net/our-team-showcase-demo/"
+                       class="cta cta-secondary"
+                       target="_blank">
+                        <?php _e( 'View Demo', 'ots' ); ?>
+                    </a>
+
+                    <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
+                       class="cta cta-primary"
+                       target="_blank">
+                        <?php _e( 'Go Pro', 'ots' ); ?>
+                    </a>
+
+                </div>
+
+            <?php endif; ?>
+
+            <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+
+            <div class="clear"></div>
+
+        </div>
+
+        <h2 style="display: none"></h2>
+
+        <?php settings_errors(); ?>
+
+        <h2 class="nav-tab-wrapper">
+
+            <?php foreach( $tabs as $tab => $title ) : ?>
+
+                <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
+                   class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
+
+            <?php endforeach; ?>
+
+        </h2>
+
         <div class="inner">
-
-            <div class="ad-header">
-
-                <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
-
-                    <div class="callouts">
-
-                        <a href="https://smartcatdesign.net/our-team-showcase-demo/"
-                           class="cta cta-secondary"
-                            target="_blank">
-                            <?php _e( 'View Demo', 'ots' ); ?>
-                        </a>
-
-                        <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
-                           class="cta cta-primary"
-                            target="_blank">
-                            <?php _e( 'Go Pro', 'ots' ); ?>
-                        </a>
-
-                    </div>
-
-                <?php endif; ?>
-
-                <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
-
-                <div class="clear"></div>
-
-            </div>
-
-            <h2 style="display: none"></h2>
-
-            <?php settings_errors(); ?>
-
-            <h2 class="nav-tab-wrapper">
-
-                <?php foreach( $tabs as $tab => $title ) : ?>
-
-                    <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
-                       class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
-
-                <?php endforeach; ?>
-
-            </h2>
 
             <div class="tabs-content">
 
