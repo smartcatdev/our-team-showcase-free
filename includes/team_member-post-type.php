@@ -159,6 +159,7 @@ function add_team_member_custom_colums( $columns ) {
 
     $columns['title'] = __( 'Name', 'ots' );
     $columns['team_member_title'] = __( 'Job Title', 'ots' );
+    $columns['team_member_group'] = __( 'Group', 'ots' );
     $columns['team_member_image'] = __( 'Image', 'ots' );
 
     return $columns;
@@ -186,6 +187,17 @@ function do_team_member_custom_columns( $column, $post_id ) {
         case 'team_member_image' :
             echo member_avatar( $post_id, array( 50, 50 ) );
             break;
+
+        case 'team_member_group':
+
+            $terms = get_the_terms( get_post( $post_id ), 'team_member_position' );
+
+            if ( !empty( $terms ) ) {
+                echo $terms[0]->name;
+            }
+
+            break;
+
 
     }
 
