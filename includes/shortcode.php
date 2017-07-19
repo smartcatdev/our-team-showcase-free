@@ -101,6 +101,9 @@ function print_dynamic_styles() { ?>
 
     <style>
 
+        .sc_team_single_member .sc_single_side .social span {
+            background: <?php esc_html_e( get_option( Options::MAIN_COLOR ) ); ?>;
+        }
 
     </style>
 
