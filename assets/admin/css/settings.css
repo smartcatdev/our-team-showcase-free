@@ -105,6 +105,7 @@
     margin: 0;
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: left;
 }
 
 .ots-admin-page .nav-tab {
