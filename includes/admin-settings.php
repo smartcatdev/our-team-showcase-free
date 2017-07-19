@@ -13,6 +13,7 @@ function enqueue_settings_scripts( $hook ) {
     if( strpos( $hook, 'ots' ) !== false ) {
         wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
         wp_enqueue_style( 'ots-settings-css', asset( 'admin/css/settings.css' ), null, VERSION );
+        wp_enqueue_style( 'ots-settings-fonts', asset( 'fonts/fonts.css' ), null, VERSION );
         wp_enqueue_style( 'wp-color-picker' );
     }
 
@@ -410,27 +411,39 @@ function do_settings_page() {
 
         <div class="ad-header">
 
-            <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
+            <div class="title-bar">
 
-                <div class="callouts">
+                <div class="inner">
 
-                    <a href="https://smartcatdesign.net/our-team-showcase-demo/"
-                       class="cta cta-secondary"
-                       target="_blank">
-                        <?php _e( 'View Demo', 'ots' ); ?>
-                    </a>
+                    <div class="branding">
+                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.png' ) ); ?>" />
+                    </div>
 
-                    <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
-                       class="cta cta-primary"
-                       target="_blank">
-                        <?php _e( 'Go Pro', 'ots' ); ?>
-                    </a>
+                    <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
 
                 </div>
 
-            <?php endif; ?>
+                <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
 
-            <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+                    <div class="inner">
+
+                        <a href="https://smartcatdesign.net/our-team-showcase-demo/"
+                           class="cta cta-secondary"
+                           target="_blank">
+                            <?php _e( 'View Demo', 'ots' ); ?>
+                        </a>
+
+                        <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
+                           class="cta cta-primary"
+                           target="_blank">
+                            <?php _e( 'Go Pro', 'ots' ); ?>
+                        </a>
+
+                    </div>
+
+                <?php endif; ?>
+
+            </div>
 
             <div class="clear"></div>
 
