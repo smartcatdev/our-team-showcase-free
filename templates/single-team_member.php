@@ -21,13 +21,18 @@ namespace ots;
                         <h2 class="name" itemprop="name"><?php echo the_title(); ?></h2>
                         <h3 class="title" itemprop="jobtitle"><?php echo get_post_meta( get_the_ID(), 'team_member_title', true ); ?></h3>
 
-                        <div class="social <?php echo get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ? '' : 'hidden'; ?>">
+                        <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
 
-                            <?php do_member_social_links(); ?>
+                            <div class="social">
 
-                        </div>
+                                <?php do_member_social_links(); ?>
+
+                            </div>
+
+                        <?php endif; ?>
 
                     </div>
+
                 </div>
 
                 <div class="sc_single_main">
