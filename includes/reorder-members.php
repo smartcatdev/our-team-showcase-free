@@ -27,27 +27,27 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_reorder_scripts' );
  */
 function save_team_members_order() {
 
-    if( check_admin_referer( 'save_members_order', 'member_order_nonce' ) ) {
+        if( isset( $_POST['member_order_nonce'] ) &&
+            wp_verify_nonce( $_POST['member_order_nonce'], 'save_members_order' ) ) {
 
-        $ids = array();
+            $ids = array();
 
-        // Extract the URL encoded IDs
-        parse_str( $_POST['members_order'], $ids );
+            // Extract the URL encoded IDs
+            parse_str( $_POST['members_order'], $ids );
 
 
-        for( $ctr = 1; $ctr < count( $ids['member'] ) + 1; $ctr++ ) {
-            update_post_meta( $ids['member'][ $ctr - 1 ], 'sc_member_order', $ctr );
+            for( $ctr = 1; $ctr < count( $ids['member'] ) + 1; $ctr++ ) {
+                update_post_meta( $ids['member'][ $ctr - 1 ], 'sc_member_order', $ctr );
+            }
+
+
+            add_settings_error( 'ots-reorder', 'save-order', __( 'Order Successfully updated', 'ots' ), 'updated' );
+
         }
-
-
-        // Redirect back where we came from
-        wp_safe_redirect( $_POST['_wp_http_referer'] );
-
-    }
 
 }
 
-add_action( 'admin_post_ots_save_members_order', 'ots\save_team_members_order' );
+add_action( 'admin_init', 'ots\save_team_members_order' );
 
 
 /**
@@ -61,11 +61,13 @@ function do_member_reorder_page() { ?>
 
     <div class="wrap">
 
+        <?php settings_errors( 'ots-reorder' ); ?>
+
         <h2><?php _e( 'Drag & Drop to Re-Order Team Members', 'ots' ); ?></h2>
 
         <?php if( $members->have_posts() ) : ?>
 
-            <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
+            <form method="post">
 
                 <ul id="ots-team-member-order">
 

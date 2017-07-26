@@ -20,7 +20,7 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 
 
 /**
- * Enqueue scripts for single-team_member.php.
+ * Enqueue scripts for team_members_template.php.
  *
  * @since 4.0.0
  */
@@ -47,8 +47,8 @@ function include_single_template( $template ) {
     if ( get_post_type() == 'team_member' ) {
 
         // Pull in the template
-        if( !use_theme_template() ) {
-            $template = template_path( 'single-team_member.php' );
+        if( override_theme_template() ) {
+            $template = 'single.php';
         }
 
     }
@@ -60,10 +60,10 @@ function include_single_template( $template ) {
 add_filter( 'template_include', 'ots\include_single_template' );
 
 
-function use_theme_template() {
+function override_theme_template() {
 
     return get_option( Options::SINGLE_TEMPLATE ) === 'standard' &&
-        file_exists( get_template_directory() . '/single-team_member.php' );
+        file_exists( get_template_directory() . '/team_members_template.php' );
 
 }
 
@@ -285,7 +285,7 @@ function save_articles_meta_box( $post_id ) {
     if( isset( $_POST['articles_mata_box_nonce'] ) &&
         wp_verify_nonce( $_POST['articles_mata_box_nonce'], 'articles_meta_box' ) ) {
 
-        update_post_meta( $post_id, 'team_member_article_bool', sanitize_checkbox( $_POST['team_member_article_bool'] ) );
+        update_post_meta( $post_id, 'team_member_article_bool', isset( $_POST['team_member_article_bool'] ) ? 'on' : '' );
         update_post_meta( $post_id, 'team_member_article_title', sanitize_text_field( $_POST['team_member_article_title'] ) );
 
         foreach( $_POST['team_member_articles'] as $index => $article ) {

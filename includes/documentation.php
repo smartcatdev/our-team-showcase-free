@@ -131,7 +131,7 @@ function doc_single_templates() { ?>
         <strong><?php _e( 'Custom Template', 'ots' ); ?></strong>
     </p>
     <p>
-        <?php _e( 'This will load the single member page from a custom template file (single-team_member.php).', 'ots' ); ?>
+        <?php _e( 'This will load the single member page from a custom template file (team_members_template.php).', 'ots' ); ?>
     </p>
     <p>
         <strong>
@@ -173,7 +173,7 @@ function doc_custom_templates() { ?>
         <strong><?php _e( 'Overriding the Custom Template', 'ots' ); ?></strong>
     </p>
     <p>
-        <?php _e( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ); ?><code><?php echo trailingslashit( get_template_directory() ) . 'team_members_template.php'; ?></code> <?php _e( 'and copy the contents of', 'ots' ); ?> <code><?php echo template_path( 'single-team_member.php' ); ?></code> <?php  _e( 'into it. You can then edit this file to your liking.', 'ots' ); ?>
+        <?php _e( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ); ?><code><?php echo trailingslashit( get_template_directory() ) . 'team_members_template.php'; ?></code> <?php _e( 'and copy the contents of', 'ots' ); ?> <code><?php echo template_path( 'team_members_template.php' ); ?></code> <?php  _e( 'into it. You can then edit this file to your liking.', 'ots' ); ?>
     </p>
 
 <?php }
@@ -215,16 +215,39 @@ function do_documentation_page() {
 
         <div class="ad-header">
 
-            <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
+            <div class="title-bar">
 
-                <div class="callouts">
-                    <a href="#" class="cta cta-secondary"><?php _e( 'View Demo', 'ots' ); ?></a>
-                    <a href="#" class="cta cta-primary"><?php _e( 'Go Pro', 'ots' ); ?></a>
+                <div class="inner">
+
+                    <div class="branding">
+                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.png' ) ); ?>" />
+                    </div>
+
+                    <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+
                 </div>
 
-            <?php endif; ?>
+			    <?php if( apply_filters( 'ots_enable_pro_preview', true ) ) : ?>
 
-            <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
+                    <div class="inner">
+
+                        <a href="https://smartcatdesign.net/our-team-showcase-demo/"
+                           class="cta cta-secondary"
+                           target="_blank">
+						    <?php _e( 'View Demo', 'ots' ); ?>
+                        </a>
+
+                        <a href="https://smartcatdesign.net/downloads/our-team-showcase/"
+                           class="cta cta-primary"
+                           target="_blank">
+						    <?php _e( 'Go Pro', 'ots' ); ?>
+                        </a>
+
+                    </div>
+
+			    <?php endif; ?>
+
+            </div>
 
             <div class="clear"></div>
 
