@@ -153,7 +153,7 @@ add_action( 'init', 'ots\register_team_member_position_taxonomy' );
  * @return mixed
  * @since 4.0.0
  */
-function add_team_member_custom_colums( $columns ) {
+function add_team_member_custom_columns( $columns ) {
 
     unset( $columns['date'] );
 
@@ -166,7 +166,7 @@ function add_team_member_custom_colums( $columns ) {
 
 }
 
-add_filter( 'manage_edit-team_member_columns', 'ots\add_team_member_custom_colums' );
+add_filter( 'manage_edit-team_member_columns', 'ots\add_team_member_custom_columns' );
 
 
 /**
@@ -204,6 +204,56 @@ function do_team_member_custom_columns( $column, $post_id ) {
 }
 
 add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom_columns', 10, 2 );
+
+
+function single_member_content( $content ) {
+
+    ob_start();
+
+    if ( is_single() && get_post_type() == 'team_member' &&
+         get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ?>
+
+        <hr>
+
+        <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
+
+            <div class="social"><?php do_member_social_links(); ?></div>
+
+	    <?php endif; ?>
+
+	    <?php if ( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
+
+            <div class="articles">
+
+                <h2><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h2>
+
+                <div class="sc_member_articles">
+
+				    <?php foreach ( get_member_articles() as $article ) : ?>
+
+                        <div class="article">
+
+                            <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+
+                        </div>
+
+				    <?php endforeach; ?>
+
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+
+	    <?php endif; ?>
+
+    <?php endif;
+
+    return $content . ob_get_clean();
+
+}
+
+add_filter( 'the_content', 'ots\single_member_content' );
 
 
 /**
