@@ -9,7 +9,6 @@ namespace ots;
  */
 function enqueue_shortcode_scripts() {
 
-    wp_enqueue_style( 'ots-css', asset( 'css/global.css' ), null, VERSION );
     wp_enqueue_style( 'ots-grid-css', asset( 'css/grid.css' ), null, VERSION );
     wp_enqueue_style( 'ots-grid-circles-css', asset( 'css/grid-circles.css' ), null, VERSION );
     wp_enqueue_style( 'ots-grid-circles-2-css', asset( 'css/grid-circles-2.css' ), null, VERSION );

@@ -70,6 +70,15 @@ function init() {
 add_action( 'plugins_loaded', 'ots\init' );
 
 
+function enqueue_scripts() {
+
+	wp_enqueue_style( 'ots-css', asset( 'css/global.css' ), null, VERSION );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'ots\enqueue_scripts' );
+
+
 /**
  * Runs on plugin activation.
  *

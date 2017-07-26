@@ -27,7 +27,7 @@ add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
 function enqueue_single_scripts() {
 
     if( get_post_type() == 'team_member' ) {
-        wp_enqueue_style( 'ots-single-css', asset( 'css/single-team_member.css' ), null, VERSION );
+        wp_enqueue_style( 'ots-single-css', asset( 'css/single.css' ), null, VERSION );
     }
 
 }
@@ -213,29 +213,37 @@ function single_member_content( $content ) {
     if ( is_single() && get_post_type() == 'team_member' &&
          get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ?>
 
-        <hr>
-
         <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
 
-            <div class="social"><?php do_member_social_links(); ?></div>
+            <div class="smartcat_team_single_icons"><?php do_member_social_links(); ?></div>
 
 	    <?php endif; ?>
 
+        <hr>
+
 	    <?php if ( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
 
-            <div class="articles">
+            <div class="sc_team_posts sc_team_post">
 
-                <h2><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h2>
+                <h3 class="skills-title"><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h3>
 
-                <div class="sc_member_articles">
+                <div class="sc-team-member-posts">
 
 				    <?php foreach ( get_member_articles() as $article ) : ?>
 
-                        <div class="article">
+                        <div class="width25 left">
+
+                            <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
+
+                        </div>
+
+                        <div class="width75 left">
 
                             <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
 
                         </div>
+
+                        <div class="clear"></div>
 
 				    <?php endforeach; ?>
 
