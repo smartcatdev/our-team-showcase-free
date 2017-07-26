@@ -173,7 +173,7 @@ function doc_custom_templates() { ?>
         <strong><?php _e( 'Overriding the Custom Template', 'ots' ); ?></strong>
     </p>
     <p>
-        <?php _e( 'To override the file, do not edit it from the plugin. Instead, create the file ', 'ots' ); ?><code><?php echo trailingslashit( get_template_directory() ) . 'team_members_template.php'; ?></code> <?php _e( 'and copy the contents of', 'ots' ); ?> <code><?php echo template_path( 'team_members_template.php' ); ?></code> <?php  _e( 'into it. You can then edit this file to your liking.', 'ots' ); ?>
+        <?php _e( 'To override the file, do not edit it from the plugin. Instead, create the file <code>/{THEME_ROOT}/team_members_template.php</code> and copy the contents of <code>/{PLUGIN_DIR}/templates/team_members_template.php</code> into it. You can then edit this file to your liking.', 'ots' ); ?>
     </p>
 
 <?php }

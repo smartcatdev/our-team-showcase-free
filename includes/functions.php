@@ -247,8 +247,7 @@ function map_template( $slug ) {
 
     $templates = array(
         'grid_circles'   => 'grid-circles.php',
-        'grid_circles2'  => 'grid-circles-2.php',
-        'standard'       => 'team_members_template.php'
+        'grid_circles2'  => 'grid-circles-2.php'
     );
 
     if( array_key_exists( $slug, $templates ) ) {
