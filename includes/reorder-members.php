@@ -11,8 +11,10 @@ namespace ots;
 function enqueue_reorder_scripts( $hook ) {
 
     if( strpos( $hook, 'ots-reorder-members' ) ) {
+
         wp_enqueue_script( 'ots-reorder-js', asset( 'admin/js/reorder.js' ), array( 'jquery', 'jquery-ui-sortable' ), VERSION );
         wp_enqueue_style( 'ots-reorder-css', asset( 'admin/css/reorder.css' ), null, VERSION );
+
     }
 
 }

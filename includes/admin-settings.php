@@ -10,11 +10,16 @@ namespace ots;
  */
 function enqueue_settings_scripts( $hook ) {
 
+	wp_enqueue_style( 'ots-admin-css', asset( 'admin/css/admin.css' ), null, VERSION );
+
     if( strpos( $hook, 'ots' ) !== false ) {
+
         wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
+
         wp_enqueue_style( 'ots-settings-css', asset( 'admin/css/settings.css' ), null, VERSION );
         wp_enqueue_style( 'ots-settings-fonts', asset( 'fonts/fonts.css' ), null, VERSION );
         wp_enqueue_style( 'wp-color-picker' );
+
     }
 
 }

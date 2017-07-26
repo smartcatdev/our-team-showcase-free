@@ -1,0 +1,12 @@
+#menu-posts-team_member .wp-menu-image:before {
+    color: #758355 !important;
+}
+
+#menu-posts-team_member:hover .wp-menu-image:before,
+#menu-posts-team_member.wp-menu-open .wp-menu-image:before {
+    color: #a7bb6c !important;
+}
+
+#menu-posts-team_member ul.wp-submenu > li:last-of-type a:not(.current) {
+    color: #a7bb6c !important;
+}
