@@ -115,6 +115,12 @@ function register_settings() {
         'sanitize_callback' => 'sanitize_title'
     ) );
 
+	register_setting( 'ots-advanced', Options::NUKE, array(
+		'type'              => 'string',
+		'default'           => '',
+		'sanitize_callback' => 'ots\sanitize_checkbox'
+	) );
+
 
 }
 
@@ -133,6 +139,7 @@ function add_settings_sections() {
     add_settings_section( 'single-general', __( 'General', 'ots' ), '', 'ots-single-member-view' );
     add_settings_section( 'single-layout', __( 'Layout', 'ots' ), '', 'ots-single-member-view' );
     add_settings_section( 'single-display', __( 'Display', 'ots' ), '', 'ots-single-member-view' );
+    add_settings_section( 'advanced', __( 'Advanced', 'ots' ), '', 'ots-advanced' );
 
 }
 
@@ -365,6 +372,22 @@ function add_settings_fields() {
 
     }
 
+    /**
+     * Advanced settings
+     */
+	add_settings_field(
+		Options::NUKE,
+		__( 'Erase Data', 'ots' ),
+		'ots\settings_check_box',
+		'ots-advanced',
+		'advanced',
+		array(
+			'name'    => Options::NUKE,
+			'checked' => get_option( Options::NUKE ),
+			'label'   => __( 'Erase all data on uninstall', 'ots' )
+		)
+	);
+
 }
 
 add_action( 'admin_init', 'ots\add_settings_fields' );
@@ -378,7 +401,7 @@ add_action( 'admin_init', 'ots\add_settings_fields' );
  */
 function team_member_slug_changed( $option ) {
 
-    if( $option === Options::REWRITE_SLUG ) {
+    if ( $option === Options::REWRITE_SLUG ) {
         register_team_member_post_type();
         flush_rewrite_rules();
     }
@@ -397,13 +420,13 @@ function do_settings_page() {
 
     $tabs = apply_filters( 'ots_settings_page_tabs',  array(
         'ots-team-view'          => __( 'Team View', 'ots' ),
-        'ots-single-member-view' => __( 'Single Member View', 'ots' )
+        'ots-single-member-view' => __( 'Single Member View', 'ots' ),
+        'ots-advanced'           => __( 'Advanced', 'ots' )
     ) );
 
     reset( $tabs );
 
     $active = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : key( $tabs );
-    $screen = get_current_screen();
 
     ?>
 
@@ -457,7 +480,7 @@ function do_settings_page() {
 
             <?php foreach( $tabs as $tab => $title ) : ?>
 
-                <a href="<?php echo $screen->parent_file . '&page=ots-settings&tab=' . $tab; ?>"
+                <a href="<?php echo add_query_arg( 'tab', $tab ); ?>"
                    class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
 
             <?php endforeach; ?>

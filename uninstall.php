@@ -16,33 +16,38 @@ include_once dirname( __FILE__ ) . '/constants.php';
 include_once dirname( __FILE__ ) . '/includes/team_member-post-type.php';
 
 
-// Trash all team member posts
-$posts = get_posts( array(
-    'post_type'      => 'team_member',
-    'posts_per_page' => -1
-) );
 
-foreach( $posts as $post ) {
-    wp_trash_post( $post->ID );
-}
+if ( get_option( Options::NUKE ) == 'on' ) {
 
+	// Trash all team member posts
+	$posts = get_posts( array(
+		'post_type'      => 'team_member',
+		'posts_per_page' => -1
+	) );
 
-// Delete all terms from the taxonomy
-register_team_member_position_taxonomy();
-
-$terms = get_terms( array(
-    'taxonomy'   => 'team_member_position',
-    'hide_empty' => false,
-) );
-
-foreach( $terms as $term ) {
-    wp_delete_term( $term->term_id, 'team_member_position' );
-}
+	foreach( $posts as $post ) {
+		wp_trash_post( $post->ID );
+	}
 
 
-// Delete all plugin settings
-$options = new \ReflectionClass( Options::class );
+	// Delete all terms from the taxonomy
+	register_team_member_position_taxonomy();
 
-foreach( $options->getConstants() as $option ) {
-    delete_option( $option );
+	$terms = get_terms( array(
+		'taxonomy'   => 'team_member_position',
+		'hide_empty' => false,
+	) );
+
+	foreach( $terms as $term ) {
+		wp_delete_term( $term->term_id, 'team_member_position' );
+	}
+
+
+	// Delete all plugin settings
+	$options = new \ReflectionClass( Options::class );
+
+	foreach( $options->getConstants() as $option ) {
+		delete_option( $option );
+	}
+
 }

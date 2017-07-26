@@ -76,6 +76,12 @@ interface Options {
      * @since 4.0.0
      */
     const PLUGIN_VERSION = 'ots-plugin-version';
+
+	/**
+	 * @since 4.0.0
+	 */
+	const NUKE = 'ots-nuke-install';
+
 }
 
 interface Defaults {
