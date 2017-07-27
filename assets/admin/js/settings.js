@@ -1,25 +1,25 @@
-jQuery( document ).ready( function ( $ ) {
+jQuery(document).ready(function ($) {
 
-    var limit = $( '#ots-display-limit-number' );
+    var limit = $('#ots-display-limit-number');
 
 
-    $( '#ots-display-limit-all' ).change( function ( e ) {
+    $('#ots-display-limit-all').change(function (e) {
 
-        limit.prop( 'disabled', !limit.prop( 'disabled' ) );
+        limit.prop('disabled', !limit.prop('disabled'));
 
-        if( ! $( e.target ).prop( 'checked' ) ) {
+        if (!$(e.target).prop('checked')) {
 
-            limit.focus().val( 1 );
+            limit.focus().val(1);
 
         } else {
 
-            limit.val( '' );
+            limit.val('');
 
         }
 
-    } );
+    });
 
 
-    $( '.wp-color-picker' ).wpColorPicker();
+    $('.wp-color-picker').wpColorPicker();
 
-} );
+});

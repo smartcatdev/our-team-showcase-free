@@ -2,22 +2,6 @@
 
 namespace ots;
 
-/**
- * Enqueue scripts for editing team member posts.
- *
- * @since 4.0.0
- */
-function enqueue_editor_scripts() {
-
-    if( get_post_type() == 'team_member' ) {
-        wp_enqueue_style( 'ots-edit-css', asset( 'admin/css/edit.css' ), null, VERSION );
-        wp_enqueue_style( 'ots-metabox-css', asset( 'admin/css/metabox.css' ), null, VERSION );
-    }
-
-}
-
-add_action( 'admin_enqueue_scripts', 'ots\enqueue_editor_scripts' );
-
 
 /**
  * Enqueue scripts for single.php.

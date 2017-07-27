@@ -15,8 +15,8 @@ function enqueue_settings_scripts( $hook ) {
     if( strpos( $hook, 'ots' ) !== false ) {
 
         wp_enqueue_script( 'ots-settings-js', asset( 'admin/js/settings.js' ), array( 'jquery', 'wp-color-picker' ), VERSION );
+	    wp_enqueue_script( 'ots-reorder-js', asset( 'admin/js/reorder.js' ), array( 'jquery', 'jquery-ui-sortable' ), VERSION );
 
-        wp_enqueue_style( 'ots-settings-css', asset( 'admin/css/settings.css' ), null, VERSION );
         wp_enqueue_style( 'ots-settings-fonts', asset( 'fonts/fonts.css' ), null, VERSION );
         wp_enqueue_style( 'wp-color-picker' );
 

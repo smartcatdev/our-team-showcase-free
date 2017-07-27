@@ -2,16 +2,6 @@
 
 namespace ots;
 
-function enqueue_docs_scripts( $hook ) {
-
-    if( strpos( $hook, 'ots-docs' ) !== false ) {
-        wp_enqueue_style( 'ots-docs-css', asset( 'admin/css/docs.css' ), null, VERSION );
-    }
-
-}
-
-add_action( 'admin_enqueue_scripts', 'ots\enqueue_docs_scripts' );
-
 
 function add_documentation_pages() {
 
