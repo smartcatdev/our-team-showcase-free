@@ -32,8 +32,6 @@ namespace ots;
 
                     <?php endif; ?>
 
-                    <div class="sc_team_content"><?php the_content(); ?></div>
-
                     <div class="icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>">
                         <?php do_member_social_links(); ?>
                     </div>

@@ -11,7 +11,7 @@
     -moz-transition: 0.45s all ease-in-out;
     -webkit-transition: 0.45s all ease-in-out;
     bottom: 20%;
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
     display: block;
     width: 100%;
     z-index: 9;
@@ -31,7 +31,6 @@
 
 .grid_circles#sc_our_team .sc_team_member .icons img {
     width: 25px;
-    margin-right: 5px;
 }
 
 .grid_circles#sc_our_team .sc_team_member .sc_team_member_jobtitle,
@@ -44,7 +43,7 @@
     position: absolute;
     top: 40%;
     left: 0;
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
     width: 70%;
     display: block;
     transition: 0.45s all ease-in-out;
@@ -57,10 +56,10 @@
     position: absolute;
     top: 40%;
     left: 0;
-    margin: 24px auto;
+    margin: 24px auto 24px auto;
     width: 75%;
     display: block;
-    color: #ffffff;
+    color: #fff;
     transition: 0.30s all ease-in-out;
     -moz-transition: 0.30s all ease-in-out;
     -webkit-transition: 0.30s all ease-in-out;
@@ -68,12 +67,12 @@
 }
 
 #sc_our_team.grid_circles .sc_team_member {
-    margin-bottom: 10px !important;
+    margin: 10px auto 10px auto;
 }
 
 .grid_circles#sc_our_team .sc_team_member .sc_team_more {
     position: absolute;
-    margin-top: -25px;
+    margin: -25px 0 0 0;
     width: 100%;
     transition: 0.45s all ease-in-out;
     -moz-transition: 0.45s all ease-in-out;
@@ -97,17 +96,15 @@
     overflow: hidden;
     border-radius: 100%;
     text-align: center;
-    box-shadow:
-            0 0 0 4px #fff,
-            0 0 0 7px #E2E2E2;
+    box-shadow: 0 0 0 4px #fff, 0 0 0 7px #E2E2E2;
     position: relative;
 }
 
 .grid_circles#sc_our_team .sc_team_member .wp-post-image {
     border: none;
-    padding: 0;
+    padding: 0 0 0 0;
     float: none;
-    margin: 0;
+    margin: 0 0 0 0;
     width: 100%;
     height: 100%;
 }
@@ -119,52 +116,47 @@
     top: 0;
     height: 100%;
     background: rgba(50,50,50,0.7);
-    color: #ffffff;
+    color: #fff;
     display: none;
     border-radius: 100%;
 }
 
 .grid_circles#sc_our_team .sc_team_member .sc_team_member_overlay .sc_team_member_name {
-    margin-top: 30px;
+    margin: 30px 0 0 0;
     font-size: 18px;
-}
-
-.grid_circles#sc_our_team .sc_team_member .sc_team_member_overlay .icons a {
-    margin-right: 5px;
 }
 
 .grid_circles#sc_our_team .icons img {
     width: 25px;
 }
 
-@media (min-width: 768px){
+@media(min-width: 768px){
 
     #sc_our_team.grid_circles.sc-col3 .sc_team_member {
         width: 31%;
-        margin: 1%;
+        margin: 1% 1% 1% 1%;
     }
 
     #sc_our_team.grid_circles.sc-col4 .sc_team_member {
         width: 23%;
-        margin: 1%;
+        margin: 1% 1% 1% 1%;
     }
 
     #sc_our_team.grid_circles.sc-col2 .sc_team_member {
         width: 48%;
-        margin: 1%;
+        margin: 1% 1% 1% 1%;
     }
 
 }
 
-@media( min-width: 767px ) and ( max-width: 980px ) {
+@media(min-width: 767px) and (max-width: 980px) {
 
     #sc_our_team.grid_circles.sc-col4 .sc_team_member,
     #sc_our_team.grid_circles.sc-col3 .sc_team_member,
     #sc_our_team.grid_circles.sc-col2 .sc_team_member,
     #sc_our_team.grid_circles.sc-col5 .sc_team_member {
         width: 45%;
-        margin-right: 4%;
-        margin-bottom: 15px;
+        margin: 0 4% 15px 0;
     }
 
 }
@@ -176,8 +168,7 @@
     #sc_our_team.grid_circles.sc-col2 .sc_team_member,
     #sc_our_team.grid_circles.sc-col5 .sc_team_member {
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 0;
+        margin: 0 0 0 0;
     }
 
 }

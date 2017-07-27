@@ -215,19 +215,23 @@ function single_member_content( $content ) {
 
 				    <?php foreach ( get_member_articles() as $article ) : ?>
 
-                        <div class="width25 left">
+                        <div class="sc-team-member-post">
 
-                            <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
+                            <div class="width25 left">
+
+                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
+
+                            </div>
+
+                            <div class="width75 left">
+
+                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+
+                            </div>
+
+                            <div class="clear"></div>
 
                         </div>
-
-                        <div class="width75 left">
-
-                            <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
-
-                        </div>
-
-                        <div class="clear"></div>
 
 				    <?php endforeach; ?>
 

@@ -8,9 +8,9 @@
     float: left;
     width: 25%;
     border: 1px solid #d0d0d0;
-    padding: 3px;
+    padding: 3px 3px 3px 3px;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0 0 0 0;
 }
 
 .widget#sc_our_team .sc_sidebar_team_member .sc_team_member_overlay {

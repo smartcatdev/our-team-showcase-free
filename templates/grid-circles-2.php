@@ -43,12 +43,10 @@ namespace ots;
                     <?php if ( get_option( Options::DISPLAY_TITLE ) == 'on' ) : ?>
 
                         <div itemprop="jobtitle" class="sc_team_member_jobtitle">
-                            <?php esc_html_e( get_post_meta( get_the_ID(), 'team_member_title', true ) ); ?>
+                            <span><?php esc_html_e( get_post_meta( get_the_ID(), 'team_member_title', true ) ); ?></span>
                         </div>
 
                     <?php endif; ?>
-
-                    <div class="sc_team_content"><?php the_content(); ?></div>
 
                     <div class="icons <?php echo get_option( Options::SHOW_SOCIAL ) ? '' : 'hidden'; ?>">
                         <?php do_member_social_links(); ?>

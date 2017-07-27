@@ -6,7 +6,7 @@
 .grid#sc_our_team .sc_team_member {
     overflow: hidden;
     box-sizing: border-box;
-    padding: 5px;
+    padding: 5px 5px 5px 5px;
 
 }
 
@@ -34,7 +34,7 @@
 .grid#sc_our_team .sc_team_member .icons {
     z-index: 9;
     position: absolute;
-    bottom: -40px;
+    bottom: -100px;
     display: block;
     width: 100%;
     text-align: center;
@@ -53,8 +53,6 @@
 
 .grid#sc_our_team .sc_team_member .icons img {
     width: 25px;
-    margin-right: 5px;
-
 }
 
 .grid#sc_our_team .sc_team_member .sc_team_member_jobtitle,
@@ -66,14 +64,14 @@
 .grid#sc_our_team .sc_team_member img.wp-post-image {
     width: 100%;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
     float: none;
     border: none;
-    padding: 0;
+    padding: 0 0 0 0;
 }
 
 .grid#sc_our_team .sc_team_member .sc_team_member_name {
-    padding: 0 30px;
+    padding: 0 30px 0 30px;
     position: absolute;
     left: 0;
     bottom: 40px;
@@ -89,8 +87,8 @@
     position: absolute;
     bottom: 16px;
     left: 0;
-    padding: 0 30px;
-    color: #ffffff;
+    padding: 0 30px 0 30px;
+    color: #fff;
     transition: 0.35s all ease-in-out;
     -moz-transition: 0.35s all ease-in-out;
     -webkit-transition: 0.35s all ease-in-out;
@@ -114,13 +112,13 @@
     bottom: 0;
     padding: 0 10px;
     color: #fff;
-    background: rgba(50,50,50,0.5);
+    background: rgba(50, 50, 50, 0.5);
     display: none;
 }
 
 .grid#sc_our_team .sc_team_member .sc_team_more {
     position: absolute;
-    margin-top: -25px;
+    margin: -25px 0 0 0;
     width: 100%;
     transition: 0.45s all ease-in-out;
     -moz-transition: 0.45s all ease-in-out;
@@ -139,7 +137,7 @@
     color: #fff;
 }
 
-@media ( min-width: 768px ) {
+@media(min-width: 768px) {
 
     .grid#sc_our_team .sc_team_member {
         float: left;
@@ -147,7 +145,7 @@
 
 }
 
-@media( min-width: 767px ) and ( max-width: 980px ) {
+@media(min-width: 767px) and (max-width: 980px) {
 
     #sc_our_team.grid.sc-col4 .sc_team_member,
     #sc_our_team.grid.sc-col4 .sc_team_member,
@@ -158,13 +156,12 @@
     #sc_our_team.grid.sc-col5 .sc_team_member,
     #sc_our_team.grid.sc-col5 .sc_team_member {
         width: 45%;
-        margin-right: 4%;
-        margin-bottom: 15px;
+        margin: 0 4% 15px 0;
     }
 
 }
 
-@media( max-width : 767px ) {
+@media(max-width: 767px) {
 
     #sc_our_team.grid.sc-col4 .sc_team_member,
     #sc_our_team.grid.sc-col4 .sc_team_member,
@@ -175,8 +172,7 @@
     #sc_our_team.grid.sc-col5 .sc_team_member,
     #sc_our_team.grid.sc-col5 .sc_team_member {
         width: 100%;
-        margin-right: 0;
-        margin-bottom: 0;
+        margin: 0 0 0 0;
     }
 
 }
