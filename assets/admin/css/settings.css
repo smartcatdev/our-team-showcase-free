@@ -395,6 +395,10 @@
 
 /* Add-ons Page */
 
+.ots-admin-page.ots-add-ons {
+    background: #f1f1f1;
+}
+
 .ots-add-ons .ots-add-on {
     display: inline-block;
     position: relative;
@@ -429,7 +433,7 @@
     .ots-add-ons .ots-add-on {
         max-width: 310px;
         float: left;
-        margin: 10px;
+        margin: 0 10px 10px 0;
         min-height: 520px;
     }
 
