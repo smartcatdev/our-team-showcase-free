@@ -511,7 +511,7 @@ if( !class_exists( 'SC_License_Manager' ) ) :
          */
         public function clear_expiration_notice( $id ) {
 
-            $notices = get_option( "{$this->id}-extension-notices" );
+            $notices = get_option( "{$this->id}-extension-notices", array() );
 
             if( in_array( $id, $notices ) ) {
                 unset( $notices[ array_search( $id, $notices ) ] );
