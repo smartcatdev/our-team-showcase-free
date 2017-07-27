@@ -9,11 +9,6 @@
     color: #a7bb6c !important;
 }
 
-#menu-posts-team_member ul.wp-submenu > li:last-of-type a:not(.current) {
-    color: #a7bb6c !important;
-}
-
-
 /* edit.php */
 
 .ots-meta-box {
