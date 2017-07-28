@@ -8,7 +8,6 @@
     margin: -20px 0 0 -20px;
     padding-top: 20px;
     font-family: 'Lato', 'sans-serif' !important;
-    background: #f9f9f9;
 }
 
 .ots-admin-page h2,
@@ -227,6 +226,10 @@
 }
 
 @media( min-width: 783px ) {
+
+    .ots-admin-page {
+        background: #f9f9f9;
+    }
 
     .ots-admin-page .ad-header {
         margin-bottom: 10px;
