@@ -648,8 +648,11 @@ function settings_check_box( array $args ) {
 
     $args = wp_parse_args( $args, $defaults );
 
+    echo '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="off" />';
+
     echo '<label>
               <input type="checkbox"
+                     value="on"
                      name="' . esc_attr( $args['name'] ) . '" ';
 
         print_attrs( $args['attrs'] );

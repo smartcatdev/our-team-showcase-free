@@ -90,7 +90,7 @@ function member_avatar( $member = null, $size = 'post_thumbnail' ) {
  *
  * @private
  * @param $value
- * @return mixed|void
+ * @return int
  * @since 4.0.0
  */
 function sanitize_display_limit( $value ) {
@@ -114,7 +114,7 @@ function sanitize_display_limit( $value ) {
  */
 function sanitize_checkbox( $value ) {
 
-    if( !empty( $value ) && $value !== 'on' ) {
+    if( !empty( $value ) && ( $value !== 'on' && $value !== 'off' ) ) {
         return false;
     }
 
