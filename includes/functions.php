@@ -242,7 +242,13 @@ function team_member( $member = null ) {
 
 }
 
-
+/**
+ * Map an old template slug to its renamed template file.
+ *
+ * @param string  $slug The slug of the template.
+ * @return string The mapped name if found, else the value of $slug.
+ * @since 4.0.0
+ */
 function map_template( $slug ) {
 
     $templates = array(

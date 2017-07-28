@@ -33,9 +33,10 @@ function posts_dropdown( $name, $id = '', $selected = '' ) {
 /**
  * Prints an array as attributes where key = " attributes ".
  *
- * @param array $attrs
+ * @param array   $attrs A mixed array off arrays and strings.
+ * @param boolean $echo  Whether to echo the rendered output.
+ * @return string The rendered output.
  * @since 4.0.0
- *
  */
 function print_attrs( array $attrs, $echo = true ) {
 
@@ -58,7 +59,10 @@ function print_attrs( array $attrs, $echo = true ) {
  * Builds a single social link icon.
  *
  * @param  string $link   URL for the link's href.
- * @param  string $icon   URL of the icon to use for the link.s
+ * @param  string $icon   URL of the icon to use for the links.
+ * @param  array  $attrs  An array of attributes.
+ * @param  string $before Html to print before each <img> tag.
+ * @param  string $after  Html to print after each <img> tag.
  * @return string         The HTML for the link.
  * @since 4.0.0
  */

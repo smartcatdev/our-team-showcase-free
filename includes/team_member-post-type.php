@@ -28,11 +28,11 @@ add_action( 'wp_enqueue_scripts', 'ots\enqueue_single_scripts' );
  */
 function include_single_template( $template ) {
 
-    if ( get_post_type() == 'team_member' ) {
+    if ( is_single() && get_post_type() == 'team_member' ) {
 
         // Pull in the template
         if( override_theme_template() ) {
-            $template = 'single.php';
+            $template = locate_template( 'single.php' );
         }
 
     }
@@ -44,10 +44,16 @@ function include_single_template( $template ) {
 add_filter( 'template_include', 'ots\include_single_template' );
 
 
+/**
+ * Override the default single-team_member template used by themes to avoid breakage.
+ *
+ * @return bool
+ * @since 4.0.0
+ */
 function override_theme_template() {
 
     return get_option( Options::SINGLE_TEMPLATE ) === 'standard' &&
-        file_exists( get_template_directory() . '/team_members_template.php' );
+        file_exists( get_template_directory() . '/single-team_member.php' );
 
 }
 
@@ -190,6 +196,13 @@ function do_team_member_custom_columns( $column, $post_id ) {
 add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom_columns', 10, 2 );
 
 
+/**
+ * Append articles and social links when using single.php.
+ *
+ * @param $content
+ * @return string
+ * @since 4.0.0
+ */
 function single_member_content( $content ) {
 
     ob_start();
@@ -293,10 +306,9 @@ add_action( 'save_post_team_member', 'ots\set_default_post_meta', 10, 3 );
 
 
 /**
- * Sanitize and save the contact metabox fields.
+ * Sanitize and save the contact meta box fields.
  *
  * @param $post_id
- * @param \WP_Post $post
  * @since 4.0.0
  */
 function save_contact_meta_box( $post_id ) {
@@ -320,10 +332,9 @@ add_action( 'save_post_team_member', 'ots\save_contact_meta_box' );
 
 
 /**
- * Sanitize and save the articles metabox fields.
+ * Sanitize and save the articles meta box fields.
  *
  * @param $post_id
- * @param \WP_Post $post
  * @since 4.0.0
  */
 function save_articles_meta_box( $post_id ) {
@@ -346,7 +357,7 @@ add_action( 'save_post_team_member', 'ots\save_articles_meta_box' );
 
 
 /**
- * Output the contact info metabox.
+ * Output the contact info meta box.
  *
  * @param \WP_Post $post
  * @since 4.0.0
@@ -472,6 +483,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
 
 <?php }
 
+
 /**
  * Output the articles metabox.
  *
@@ -536,8 +548,9 @@ function do_articles_meta_box( \WP_Post $post ) { ?>
 
 <?php }
 
+
 /**
- * Output the skills metabox. Note all fields are disabled by default and this metabox has no save handler.
+ * Output the skills meta box. Note all fields are disabled by default and this meta box has no save handler.
  *
  * @param \WP_Post $post
  * @param array $meta_box

@@ -638,6 +638,12 @@ if( !class_exists( 'SC_License_Manager' ) ) :
 
         <?php }
 
+
+	    /**
+	     * Print default styles for license page.
+         *
+         * @since 1.0.0
+	     */
         public function print_styles() {
 
             if( $this->is_license_page() ) : ?>

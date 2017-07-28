@@ -3,7 +3,7 @@
 namespace ots;
 
 /**
- * Enqueue shortcode scripts.
+ * Enqueue short-code scripts.
  *
  * @since 4.0.0
  */
@@ -21,7 +21,7 @@ add_action( 'ots_page_redirect', 'ots\enqueue_shortcode_scripts' );
 
 
 /**
- * Render the shortcode content and supply default attributes.
+ * Render the short-code content and supply default attributes.
  *
  * @param array $attributes
  * @return string
@@ -71,6 +71,11 @@ function do_shortcode_output( $attributes = array() ) {
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
 
 
+/**
+ * Sets up a hook to be called when the current page or post is using the short-code.
+ *
+ * @since 4.0.0
+ */
 function page_redirect() {
 
     if( is_shortcode_page() ) {
@@ -85,6 +90,12 @@ function page_redirect() {
 add_action( 'template_redirect', 'ots\page_redirect' );
 
 
+/**
+ * Checks if the current page uses the short-code.
+ *
+ * @return bool Whether or not the current page uses the short-code.
+ * @since 4.0.0
+ */
 function is_shortcode_page() {
 
     global $post;
@@ -94,6 +105,11 @@ function is_shortcode_page() {
 }
 
 
+/**
+ * Print user configurable styles.
+ *
+ * @since 4.0.0
+ */
 function print_dynamic_styles() { ?>
 
     <!-- Global -->

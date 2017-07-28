@@ -539,10 +539,12 @@ function do_settings_page() {
  * Output a select box for a settings field.
  *
  * @param array $args {
- *  string $name     The name of the setting as registered with the settings API.
- *  array  $attrs    An array of HTML attributes for the field.
- *  array  $options  An array of key value pairs that are used for the options.
- *  string $selected The current value of the select box.
+ *  string $name             The name of the setting as registered with the settings API.
+ *  array  $attrs            An array of HTML attributes for the field.
+ *  array  $options          An array of key value pairs that are used for the options.
+ *  string $selected         The current value of the select box.
+ *  string $description      A description for the field.
+ *  array  $disabled_options An array of options that are disabled by default.
  * }
  *
  * @since 4.0.0
@@ -579,7 +581,21 @@ function settings_select_box( array $args ) {
 
 }
 
-
+/**
+ * Output a radio group for a settings field.
+ *
+ * @param array $args {
+ *  string $name             The name of the setting as registered with the settings API.
+ *  array  $attrs            An array of HTML attributes for the field.
+ *  array  $options          An array of key value pairs that are used for the options.
+ *  string $selected         The current value of the select box.
+ *  string $before           Html to output before the opening <label> tag.
+ *  string $after            Html to output after the closing </label> tag.
+ *  array  $disabled_options An array of options to be disabled by default.
+ * }
+ *
+ * @since 4.0.0
+ */
 function settings_radio_buttons( array $args ) {
 
     $defaults = array(
@@ -637,6 +653,7 @@ function settings_check_box( array $args ) {
                      name="' . esc_attr( $args['name'] ) . '" ';
 
         print_attrs( $args['attrs'] );
+
         checked( 'on', $args['checked'] );
 
     echo ' />' . esc_html( $args['label'] ) . '</label>';
@@ -673,7 +690,7 @@ function settings_text_box( array $args ) {
 
     echo ' />';
 
-    if( isset( $args['description'] ) ) {
+    if( !empty( $args['description'] ) ) {
         echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
     }
 

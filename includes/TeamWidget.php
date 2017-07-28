@@ -25,6 +25,13 @@ class TeamWidget extends \WP_Widget {
 
     }
 
+	/**
+     * Render the widget.
+     *
+	 * @param array $args
+	 * @param array $instance
+     * @since 4.0.0
+	 */
     public function widget( $args, $instance ) {
 
         echo $args[ 'before_widget' ];
@@ -78,6 +85,15 @@ class TeamWidget extends \WP_Widget {
 
     <?php }
 
+
+	/**
+     * Save updated widget settings.
+     *
+	 * @param array $new_instance
+	 * @param array $old_instance
+	 * @return array
+     * @since 4.0.0
+	 */
     public function update( $new_instance, $old_instance ) {
 
         $instance = $old_instance;
@@ -99,6 +115,12 @@ class TeamWidget extends \WP_Widget {
 
     }
 
+	/**
+     * Output the widget settings form.
+     *
+	 * @param array $instance
+     * @since 4.0.0
+	 */
     public function form( $instance ) {
 
         $terms = get_terms( array(

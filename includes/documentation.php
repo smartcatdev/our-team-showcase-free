@@ -3,6 +3,11 @@
 namespace ots;
 
 
+/**
+ * Registers the documentation page.
+ *
+ * @since 4.0.0
+ */
 function add_documentation_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Documentation', 'ots' ), __( 'Documentation', 'ots' ), 'manage_options', 'ots-docs', 'ots\do_documentation_page' );
@@ -12,6 +17,11 @@ function add_documentation_pages() {
 add_action( 'admin_menu', 'ots\add_documentation_pages' );
 
 
+/**
+ * Add sections to the documentation page.
+ *
+ * @since 4.0.0
+ */
 function add_documentation_sections() {
 
     add_settings_section( 'plugin-usage', __( 'Plugin Usage', 'ots' ), '', 'ots-getting-started' );
@@ -23,6 +33,11 @@ function add_documentation_sections() {
 add_action( 'admin_init', 'ots\add_documentation_sections' );
 
 
+/**
+ * Add each document topic to its respective section.
+ *
+ * @since 4.0.0
+ */
 function add_documentation_fields() {
 
     add_settings_field( 'usage', __( 'Usage', 'ots' ), 'ots\doc_usage', 'ots-getting-started', 'plugin-usage' );
@@ -36,7 +51,11 @@ function add_documentation_fields() {
 
 add_action( 'admin_init', 'ots\add_documentation_fields' );
 
-
+/**
+ * Render the usage topic.
+ *
+ * @since 4.0.0
+ */
 function doc_usage() { ?>
 
     <div>
@@ -61,6 +80,11 @@ function doc_usage() { ?>
 <?php }
 
 
+/**
+ * Render the templates topic.
+ *
+ * @since 4.0.0
+ */
 function doc_templates() { ?>
 
     <p>
@@ -76,6 +100,11 @@ function doc_templates() { ?>
 <?php }
 
 
+/**
+ * Render the short-code topic.
+ *
+ * @since 4.0.0
+ */
 function doc_shortcode_templates() { ?>
 
     <p>
@@ -109,6 +138,12 @@ function doc_shortcode_templates() { ?>
 
 <?php }
 
+
+/**
+ * Render the single templates topic.
+ *
+ * @since 4.0.0
+ */
 function doc_single_templates() { ?>
 
     <p>
@@ -154,6 +189,11 @@ function doc_single_templates() { ?>
 <?php }
 
 
+/**
+ * Render the custom templates topic.
+ *
+ * @since 4.0.0
+ */
 function doc_custom_templates() { ?>
 
     <p>
@@ -186,6 +226,11 @@ function doc_sidebar_widget() { ?>
 <?php }
 
 
+/**
+ * Render the documentation page.
+ *
+ * @since 4.0.0
+ */
 function do_documentation_page() {
 
     $tabs = array(
@@ -197,7 +242,6 @@ function do_documentation_page() {
     reset( $tabs );
 
     $active = isset( $_GET['tab'] ) && array_key_exists( $_GET['tab'], $tabs ) ? $_GET['tab'] : key( $tabs );
-    $screen = get_current_screen();
 
     ?>
 
@@ -249,7 +293,7 @@ function do_documentation_page() {
 
             <?php foreach( $tabs as $tab => $title ) : ?>
 
-                <a href="<?php echo $screen->parent_file . '&page=ots-docs&tab=' . $tab; ?>"
+                <a href="<?php echo esc_url( add_query_arg( 'tab', $tab ) ); ?>"
                    class="nav-tab <?php echo $active == $tab ? 'nav-tab-active' : ''; ?>"><?php esc_html_e( $title ); ?></a>
 
             <?php endforeach; ?>

@@ -2,6 +2,12 @@
 
 namespace ots;
 
+
+/**
+ * Registers the add-ons submenu page.
+ *
+ * @since 4.0.0
+ */
 function add_addons_pages() {
 
 	add_submenu_page( 'edit.php?post_type=team_member', __( 'Add-ons', 'ots' ), __( 'Add-ons', 'ots' ), 'manage_options', 'ots-add-ons', 'ots\do_addons_page' );
@@ -11,6 +17,11 @@ function add_addons_pages() {
 add_action( 'admin_menu', 'ots\add_addons_pages' );
 
 
+/**
+ * Renders the add-ons admin page.
+ *
+ * @since 4.0.0
+ */
 function do_addons_page() { ?>
 
 	<div class="wrap ots-admin-page ots-add-ons">
