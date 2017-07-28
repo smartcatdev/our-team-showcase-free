@@ -187,7 +187,8 @@ function add_settings_fields() {
             'selected'         => get_option( Options::TEMPLATE ),
             'attrs'            => array( 'class' => 'regular-text' ),
             'options'          => $templates + $preview_templates,
-            'disabled_options' => array_keys( $preview_templates )
+            'disabled_options' => array_keys( $preview_templates ),
+            'description'      => __( 'Template that displays team members where the short-code is output', 'ots' )
         )
     );
 
@@ -198,16 +199,17 @@ function add_settings_fields() {
         'ots-team-view',
         'layout',
         array(
-            'name'    => Options::GRID_COLUMNS,
-            'attrs'   => array( 'class' => 'regular-text' ),
+            'name'     => Options::GRID_COLUMNS,
+            'attrs'    => array( 'class' => 'regular-text' ),
             'selected' => get_option( Options::GRID_COLUMNS ),
-            'options' => array(
+            'options'  => array(
                 2  => 2,
                 3  => 3,
                 4  => 4,
                 5  => 5,
                 10 => 10
-            )
+            ),
+            'description' => __( 'The maximum number of members to display per row', 'ots' )
         )
     );
 
@@ -219,14 +221,15 @@ function add_settings_fields() {
         'layout',
         array(
             'name'     => Options::MARGIN,
-            'attrs'   => array( 'class' => 'regular-text' ),
+            'attrs'    => array( 'class' => 'regular-text' ),
             'selected' => get_option( Options::MARGIN ),
             'options'  => array(
                 0  => __( 'No Margin', 'ots' ),
                 5  => 5,
                 10 => 10,
                 15 => 15
-            )
+            ),
+            'description' => __( 'The spacing between each team member', 'ots' )
         )
     );
 
@@ -335,9 +338,10 @@ function add_settings_fields() {
         'ots-single-member-view',
         'single-general',
         array(
-            'name'    => Options::REWRITE_SLUG,
-            'value'   => get_option( Options::REWRITE_SLUG  ),
-            'attrs'   => array( 'class' => 'regular-text' )
+            'name'        => Options::REWRITE_SLUG,
+            'value'       => get_option( Options::REWRITE_SLUG  ),
+            'attrs'       => array( 'class' => 'regular-text' ),
+            'description' => __( 'The URL slug for all single team members: ', 'ots' ) . home_url( '/{slug}/member-name' )
         )
     );
 
@@ -352,7 +356,8 @@ function add_settings_fields() {
             'selected'         => get_option( Options::SINGLE_TEMPLATE ),
             'attrs'            => array( 'class' => 'regular-text' ),
             'options'          => $templates + $preview_templates,
-            'disabled_options' => array_keys( $preview_templates )
+            'disabled_options' => array_keys( $preview_templates ),
+            'description' => __( 'Can be either a custom template (redirect) or an inline template (no redirect)', 'ots' )
         )
     );
 
@@ -732,7 +737,7 @@ function display_limit_field() {
 
     <?php _e( ' - or - ', 'ots' ); ?>
 
-    <label style="display: inline-block; margin: 10px 0;">
+    <label>
 
         <input type="checkbox"
                id="ots-display-limit-all"
@@ -743,5 +748,7 @@ function display_limit_field() {
         <?php _e( 'Display all', 'ots' ); ?>
 
     </label>
+
+    <p class="description"><?php _e( 'The maximum number of members to display', 'ots' ); ?></p>
 
 <?php }
