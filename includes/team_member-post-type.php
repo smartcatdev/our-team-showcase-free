@@ -205,20 +205,18 @@ add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom
  */
 function single_member_content( $content ) {
 
-    ob_start(); ?>
+    if ( is_single() && get_post_type() == 'team_member' &&
+                 get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ob_start(); ?>
 
-    <div id="sc_our_team">
+        <div id="sc_our_team">
 
-        <div class="sc_team_member">
+            <div class="sc_team_member">
 
-        <?php echo $content; ?>
-
-            <?php if ( is_single() && get_post_type() == 'team_member' &&
-                 get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ?>
+                <?php echo $content; ?>
 
                 <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
 
-                    <div class="icons"><?php do_member_social_links(); ?></div>
+                    <div class="smartcat_team_single_icons"><?php do_member_social_links(); ?></div>
 
                 <?php endif; ?>
 
@@ -262,13 +260,15 @@ function single_member_content( $content ) {
 
                 <?php endif; ?>
 
-            <?php endif; ?>
+            </div>
 
         </div>
 
-    </div>
+        <?php $content = ob_get_clean(); ?>
 
-    <?php return ob_get_clean();
+    <?php endif; ?>
+
+    <?php return $content;
 
 }
 
