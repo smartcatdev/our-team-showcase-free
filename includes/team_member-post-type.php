@@ -205,60 +205,70 @@ add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom
  */
 function single_member_content( $content ) {
 
-    ob_start();
+    ob_start(); ?>
 
-    if ( is_single() && get_post_type() == 'team_member' &&
-         get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ?>
+    <div id="sc_our_team">
 
-        <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
+        <div class="sc_team_member">
 
-            <div class="smartcat_team_single_icons"><?php do_member_social_links(); ?></div>
+        <?php echo $content; ?>
 
-	    <?php endif; ?>
+            <?php if ( is_single() && get_post_type() == 'team_member' &&
+                 get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ?>
 
-        <hr>
+                <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
 
-	    <?php if ( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
+                    <div class="icons"><?php do_member_social_links(); ?></div>
 
-            <div class="sc_team_posts sc_team_post">
+                <?php endif; ?>
 
-                <h3 class="skills-title"><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h3>
+                <hr>
 
-                <div class="sc-team-member-posts">
+                <?php if ( get_post_meta( get_the_ID(), 'team_member_article_bool', true ) === 'on' ) : ?>
 
-				    <?php foreach ( get_member_articles() as $article ) : ?>
+                    <div class="sc_team_posts sc_team_post">
 
-                        <div class="sc-team-member-post">
+                        <h3 class="skills-title"><?php esc_attr_e( get_post_meta( get_the_ID(), 'team_member_article_title', true ) ); ?></h3>
 
-                            <div class="width25 left">
+                        <div class="sc-team-member-posts">
 
-                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
+                            <?php foreach ( get_member_articles() as $article ) : ?>
 
-                            </div>
+                                <div class="sc-team-member-post">
 
-                            <div class="width75 left">
+                                    <div class="width25 left">
 
-                                <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+                                        <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
 
-                            </div>
+                                    </div>
 
-                            <div class="clear"></div>
+                                    <div class="width75 left">
+
+                                        <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
+
+                                    </div>
+
+                                    <div class="clear"></div>
+
+                                </div>
+
+                            <?php endforeach; ?>
 
                         </div>
 
-				    <?php endforeach; ?>
+                        <div class="clear"></div>
 
-                </div>
+                    </div>
 
-                <div class="clear"></div>
+                <?php endif; ?>
 
-            </div>
+            <?php endif; ?>
 
-	    <?php endif; ?>
+        </div>
 
-    <?php endif;
+    </div>
 
-    return $content . ob_get_clean();
+    <?php return ob_get_clean();
 
 }
 
