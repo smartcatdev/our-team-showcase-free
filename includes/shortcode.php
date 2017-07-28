@@ -100,7 +100,7 @@ function is_shortcode_page() {
 
     global $post;
 
-    return has_shortcode( $post->post_content, 'our-team' );
+    return is_a( $post, '\WP_Post' ) && has_shortcode( $post->post_content, 'our-team' );
 
 }
 
