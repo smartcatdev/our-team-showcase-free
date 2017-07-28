@@ -549,21 +549,23 @@ function do_settings_page() {
  */
 function settings_select_box( array $args ) {
 
-    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
-    $disabled = isset( $args['disabled_options'] ) ? $args['disabled_options'] : array();
+    $defaults = array(
+        'attrs'            => array(),
+        'disabled_options' => array(),
+        'selected'         => '',
+        'description'      => ''
+    );
 
-    echo '<select name="' . esc_attr( $args['name'] ) . '" ';
+    $args = wp_parse_args( $args, $defaults );
 
-        print_attrs( $attrs );
-
-    echo '>';
+    echo '<select name="' . esc_attr( $args['name'] ) . '" ' . print_attrs( $args['attrs'], false ) . '>';
 
     foreach( $args['options'] as $value => $label ) {
 
         echo '<option value="' . esc_attr( $value ) . '" ';
 
-            selected( $value, isset( $args['selected'] ) ? $args['selected'] : '' );
-            disabled( true, in_array( $value, $disabled ) );
+            selected( $value, $args['selected'] );
+            disabled( true, in_array( $value, $args['disabled_options']  ) );
 
         echo ' >' . esc_html( $label ) . '</option>';
 
@@ -571,7 +573,7 @@ function settings_select_box( array $args ) {
 
     echo '</select>';
 
-    if( isset( $args['description'] ) ) {
+    if( !empty( $args['description'] ) ) {
         echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
     }
 
@@ -580,20 +582,28 @@ function settings_select_box( array $args ) {
 
 function settings_radio_buttons( array $args ) {
 
-    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
-    $before = isset( $args['before'] ) ? $args['before'] : '';
-    $after = isset( $args['after'] ) ? $args['after'] : '';
-    $disabled = isset( $args['disabled_options'] ) ? $args['disabled_options'] : array();
+    $defaults = array(
+        'attrs'            => array(),
+        'before'           => '',
+        'after'            => '',
+        'selected'         => '',
+        'disabled_options' => array()
+    );
+
+    $args = wp_parse_args( $args, $defaults );
 
     foreach( $args['options'] as $value => $label ) {
 
-        echo $before . '<label><input type="radio" name="' . esc_attr( $args['name'] ) . '" value="' . $value . '" ';
+        echo $args['before'] .
 
-            print_attrs( $attrs );
-            checked( $value, isset( $args['selected'] ) ? $args['selected'] : '' );
-            disabled( true, in_array( $value, $disabled ) );
+                '<label><input type="radio" name="' . esc_attr( $args['name'] ) . '" value="' . $value . '" ';
 
-        echo '/>' . $label . '</label>' . $after;
+                print_attrs( $args['attrs'] );
+
+                checked( $value, $args['selected'] );
+                disabled( true, in_array( $value, $args['disabled_options'] ) );
+
+        echo '/>' . $label . '</label>' . $args['after'];
 
     }
 
@@ -614,13 +624,19 @@ function settings_radio_buttons( array $args ) {
  */
 function settings_check_box( array $args ) {
 
-    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+    $defaults = array(
+        'attrs'   => array(),
+        'checked' => false,
+        'label'   => ''
+    );
+
+    $args = wp_parse_args( $args, $defaults );
 
     echo '<label>
               <input type="checkbox"
                      name="' . esc_attr( $args['name'] ) . '" ';
 
-        print_attrs( $attrs );
+        print_attrs( $args['attrs'] );
         checked( 'on', $args['checked'] );
 
     echo ' />' . esc_html( $args['label'] ) . '</label>';
@@ -642,12 +658,18 @@ function settings_check_box( array $args ) {
  */
 function settings_text_box( array $args ) {
 
-    $attrs = isset( $args['attrs'] ) ? $args['attrs'] : array();
+    $defaults = array(
+        'attrs'       => array(),
+        'value'       => '',
+        'description' => ''
+    );
+
+    $args = wp_parse_args( $args, $defaults );
 
     echo '<input name="' . esc_attr( $args['name'] ) . '" 
-                 value="' . ( isset( $args['value'] ) ? $args['value'] : '' ) . '" ';
+                 value="' . $args['value'] . '" ';
 
-        print_attrs( $attrs );
+        print_attrs( $args['attrs'] );
 
     echo ' />';
 
@@ -655,9 +677,7 @@ function settings_text_box( array $args ) {
         echo '<p class="description">' . esc_html( $args['description'] ) . '</p>';
     }
 
-    ?>
-
-<?php }
+}
 
 
 /**

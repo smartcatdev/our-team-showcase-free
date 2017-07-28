@@ -42,7 +42,7 @@ function print_attrs( array $attrs, $echo = true ) {
     $html = '';
 
     foreach( $attrs as $attr => $values ) {
-        $html .= ' ' . $attr . '="' . $values . '" ';
+        $html .= ' ' . $attr . '="' . ( is_array( $values ) ? implode( ' ', $values ) : $values ) . '" ';
     }
 
     if( $echo ) {
