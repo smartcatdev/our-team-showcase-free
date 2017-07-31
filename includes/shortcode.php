@@ -132,7 +132,7 @@ function print_dynamic_styles() { ?>
         }
 
         .grid#sc_our_team .sc_team_member {
-            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px;
+            padding: <?php esc_html_e( get_option( Options::MARGIN ) ); ?>px !important;
         }
 
     </style>

@@ -34,6 +34,14 @@ class TeamWidget extends \WP_Widget {
 	 */
     public function widget( $args, $instance ) {
 
+        $defaults = array(
+            'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
+            'sc_our_team_widget_limit' => -1,
+            'sc_our_team_widget_group' => ''
+        );
+
+        $instance = wp_parse_args( $instance, $defaults );
+
         echo $args[ 'before_widget' ];
         echo $args[ 'before_title' ] . esc_html( $instance['sc_our_team_widget_title'] ) . $args[ 'after_title' ];
 
