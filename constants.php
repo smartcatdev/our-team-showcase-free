@@ -139,7 +139,7 @@ interface Defaults {
     /**
      * @since 4.0.0
      */
-    const SINGLE_TEMPLATE = 'default';
+    const SINGLE_TEMPLATE = 'standard';
 
     /**
      * @since 4.0.0

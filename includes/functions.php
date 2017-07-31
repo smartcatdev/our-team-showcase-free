@@ -263,3 +263,25 @@ function map_template( $slug ) {
     return $slug;
 
 }
+
+
+function get_groups() {
+
+	$args = array(
+		'taxonomy'   => 'team_member_position',
+		'hide_empty' => false
+	);
+
+	$groups = array();
+
+
+	foreach( get_terms( $args ) as $term ) {
+
+		$groups[ $term->term_id ] = $term->name;
+
+	}
+
+
+	return $groups;
+
+}

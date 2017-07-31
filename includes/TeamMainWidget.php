@@ -18,11 +18,11 @@ class TeamMainWidget extends \WP_Widget {
 	private function parse_args( $instance ) {
 
 		$defaults = array(
-			'title'    => __( 'Meet Our Team', 'ots' ),
-			'group'    => '',
-			'limit'    => 'ALL',
-			'template' => 'grid',
-			'single'   => 'standard'
+			'title'             => __( 'Meet Our Team', 'ots' ),
+			'group'             => '',
+			'limit'             => 'ALL',
+			'template'          => Defaults::TEMPLATE,
+			'single_template'   => Defaults::SINGLE_TEMPLATE
 		);
 
 		return wp_parse_args( $instance, $defaults );
@@ -33,7 +33,35 @@ class TeamMainWidget extends \WP_Widget {
 
 		$instance = $this->parse_args( $instance );
 
+		echo $args[ 'before_widget' ];
+		echo $args[ 'before_title' ] . esc_html( $instance['title'] ) . $args[ 'after_title' ];
 
+		$instance['members'] = get_members_in_order( strtolower( $instance['limit'] ), $instance['group'] );
+
+		// See if the template belongs to this plugin
+		$file = template_path( map_template( $instance['template'] ) );
+
+
+		// Start the buffer
+		ob_start();
+		extract( $instance );
+
+		$template = apply_filters( 'ots_template_include', $file ? $file : $instance['template'] );
+
+		do_action( 'ots_before_team_members', $instance );
+
+
+		// If the template file doesn't exist, fallback to the default
+		if( file_exists( $template ) ) {
+			include_once $template;
+		} else {
+			include_once template_path( map_template( Defaults::TEMPLATE ) );
+		}
+
+		// Hook onto for output inside shortcode after the template as rendered
+		do_action( 'ots_after_team_members', $instance );
+
+		echo ob_get_clean();
 
 	}
 
@@ -45,16 +73,19 @@ class TeamMainWidget extends \WP_Widget {
         $group    = $new_instance['group'];
         $limit    = $new_instance['limit'];
         $template = $new_instance['template'];
-        $single   = $new_instance['single'];
+        $single   = $new_instance['single_template'];
 
-        $instance['title']    = strip_tags( $title );
-        $instance['group']    = strip_tags( $group );
+
+        $groups = get_groups();
+
+        $instance['title'] = strip_tags( $title );
+        $instance['group'] = array_key_exists( $group, $groups ) ? $group : '';
 
         $group_templates  = get_templates();
         $single_templates = get_single_templates();
 
-        $template['template'] = array_key_exists( $template, $group_templates ) ? $template : Defaults::TEMPLATE;
-        $template['single']   = array_key_exists( $single, $single_templates )  ? $single   : Defaults::SINGLE_TEMPLATE;
+        $instance['template']        = array_key_exists( $template, $group_templates ) ? $template : Defaults::TEMPLATE;
+        $instance['single_template'] = array_key_exists( $single, $single_templates )  ? $single   : Defaults::SINGLE_TEMPLATE;
 
 		if( $limit > 1 || strtolower( $limit ) === 'all' ) {
 			$instance['limit'] = $limit;
@@ -68,20 +99,7 @@ class TeamMainWidget extends \WP_Widget {
 
 	public function form( $instance ) {
 
-		$terms = get_terms( array(
-			'taxonomy'   => 'team_member_position',
-			'hide_empty' => false
-		) );
-
-		$instance = wp_parse_args( $instance, array(
-			'title'    => __( 'Meet Our Team', 'ots' ),
-			'group'    => '',
-			'limit'    => 'ALL',
-			'template' => 'grid',
-			'single'   => 'standard'
-		) );
-
-		?>
+		$instance = $this->parse_args( $instance ); ?>
 
 		<p>
 
@@ -103,23 +121,21 @@ class TeamMainWidget extends \WP_Widget {
 				<?php _e( 'Group', 'ots' ); ?>
 			</label>
 
-			<select id="<?php esc_attr_e( $this->get_field_id( 'group' ) ); ?>"
-			        name="<?php esc_attr_e( $this->get_field_name( 'group' ) ); ?>"
-			        class="widefat">
+			<?php
 
-				<option value="ignore-group"><?php _e( 'All Groups', 'ots' ); ?></option>
+                $args = array(
+                    'name'     => $this->get_field_name( 'group' ),
+                    'selected' => $instance['group'],
+                    'options'  => array( '' => __( 'All Groups', 'ots' ) ) + get_groups(),
+                    'attrs'    => array(
+                        'class' => 'widefat',
+                        'id'    => $this->get_field_id( 'group' )
+                    )
+                );
 
-				<?php foreach( $terms as $term ) : ?>
+                settings_select_box( $args );
 
-					<option value="<?php esc_attr_e( $term->term_id ); ?>" <?php selected( $instance['group'], $term->term_id ); ?>>
-
-						<?php esc_html_e( $term->name ); ?>
-
-					</option>
-
-				<?php endforeach; ?>
-
-			</select>
+			?>
 
 		</p>
 		<p>
@@ -131,7 +147,7 @@ class TeamMainWidget extends \WP_Widget {
 
 			<input class="widefat"
 			       id="<?php esc_attr_e( $this->get_field_id( 'limit' ) ); ?>"
-			       name="<?php esc_attr_e( $this->get_field_name( 'imit' ) ); ?>"
+			       name="<?php esc_attr_e( $this->get_field_name( 'limit' ) ); ?>"
 			       value="<?php esc_attr_e( $instance['limit'] ); ?>" />
 
 		</p>
@@ -161,7 +177,7 @@ class TeamMainWidget extends \WP_Widget {
 		</p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'single' ) ); ?>"
+			<label for="<?php esc_attr_e( $this->get_field_id( 'single_template' ) ); ?>"
 			       class="sc_our_team_widget_limit_label">
 				<?php _e( 'Single Template', 'ots' ); ?>
 			</label>
@@ -169,12 +185,12 @@ class TeamMainWidget extends \WP_Widget {
 			<?php
 
 				$args = array(
-					'name'     => $this->get_field_name( 'single' ),
-					'selected' => $instance['single'],
+					'name'     => $this->get_field_name( 'single_template' ),
+					'selected' => $instance['single_template'],
 					'options'  => array( '' => __( 'Select a template', 'ots' ) ) + get_single_templates(),
 					'attrs'    => array(
 						'class' => 'widefat',
-						'id'    => $this->get_field_id( 'single' )
+						'id'    => $this->get_field_id( 'single_template' )
 					)
 				);
 
