@@ -47,7 +47,8 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/add-ons.php';
     include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
     include_once dirname( __FILE__ ) . '/includes/shortcode.php';
-    include_once dirname( __FILE__ ) . '/includes/TeamWidget.php';
+    include_once dirname( __FILE__ ) . '/includes/TeamMainWidget.php';
+    include_once dirname( __FILE__ ) . '/includes/TeamSidebarWidget.php';
     include_once dirname( __FILE__ ) . '/includes/TeamMember.php';
     include_once dirname( __FILE__ ) . '/includes/widgets.php';
     include_once dirname( __FILE__ ) . '/includes/extension-licensing.php';

@@ -12,7 +12,7 @@ namespace ots;
  * Class TeamWidget
  * @package ots
  */
-class TeamWidget extends \WP_Widget {
+class TeamSidebarWidget extends \WP_Widget {
 
 
     public function __construct() {
@@ -25,6 +25,18 @@ class TeamWidget extends \WP_Widget {
 
     }
 
+    private function parse_args( $instance ) {
+
+	    $defaults = array(
+		    'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
+		    'sc_our_team_widget_limit' => 'ALL',
+		    'sc_our_team_widget_group' => ''
+	    );
+
+	    return wp_parse_args( $instance, $defaults );
+
+    }
+
 	/**
      * Render the widget.
      *
@@ -34,13 +46,7 @@ class TeamWidget extends \WP_Widget {
 	 */
     public function widget( $args, $instance ) {
 
-        $defaults = array(
-            'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
-            'sc_our_team_widget_limit' => -1,
-            'sc_our_team_widget_group' => ''
-        );
-
-        $instance = wp_parse_args( $instance, $defaults );
+        $instance = $this->parse_args( $instance );
 
         echo $args[ 'before_widget' ];
         echo $args[ 'before_title' ] . esc_html( $instance['sc_our_team_widget_title'] ) . $args[ 'after_title' ];
@@ -48,7 +54,7 @@ class TeamWidget extends \WP_Widget {
         $limit = $instance['sc_our_team_widget_limit'];
         $group = $instance['sc_our_team_widget_group'] !== 'ignore-group' ? $instance['sc_our_team_widget_group'] : '';
 
-        $members = get_members_in_order( $limit, $group );
+        $members = get_members_in_order( strtolower( $limit ), $group );
 
         ?>
 
@@ -106,12 +112,12 @@ class TeamWidget extends \WP_Widget {
 
         $instance = $old_instance;
 
-        $title = $new_instance[ 'sc_our_team_widget_title' ];
-        $group = $new_instance[ 'sc_our_team_widget_group' ];
-        $limit = $new_instance[ 'sc_our_team_widget_limit' ];
+        $title = $new_instance['sc_our_team_widget_title'];
+        $group = $new_instance['sc_our_team_widget_group'];
+        $limit = $new_instance['sc_our_team_widget_limit'];
 
-        $instance[ 'sc_our_team_widget_title' ] = strip_tags( $title );
-        $instance[ 'sc_our_team_widget_group' ] = strip_tags( $group );
+        $instance['sc_our_team_widget_title'] = strip_tags( $title );
+        $instance['sc_our_team_widget_group'] = strip_tags( $group );
 
         if( $limit > 1 || strtolower( $limit ) === 'all' ) {
             $instance['sc_our_team_widget_limit'] = $limit;
@@ -128,6 +134,7 @@ class TeamWidget extends \WP_Widget {
      *
 	 * @param array $instance
      * @since 4.0.0
+     * @return void
 	 */
     public function form( $instance ) {
 
@@ -136,11 +143,7 @@ class TeamWidget extends \WP_Widget {
             'hide_empty' => false
         ) );
 
-        $instance = wp_parse_args( $instance, array(
-            'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
-            'sc_our_team_widget_group' => 'ignore-group',
-            'sc_our_team_widget_limit' => 'ALL',
-        ) );
+        $instance = $this->parse_args( $instance );
 
         $title = $instance['sc_our_team_widget_title'];
         $group = $instance['sc_our_team_widget_group'];
@@ -155,8 +158,7 @@ class TeamWidget extends \WP_Widget {
                 <?php _e( 'Title: ', 'ots' ); ?>
             </label>
 
-            <input type="text"
-                   class="widefat"
+            <input class="widefat"
                    id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_title' ) ); ?>"
                    name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_title' ) ); ?>"
                    value="<?php esc_attr_e( $title ); ?>" />
@@ -195,8 +197,7 @@ class TeamWidget extends \WP_Widget {
                 <?php _e( 'Limit to Show (Number or "ALL")', 'ots' ); ?>
             </label>
 
-            <input type="text"
-                   class="widefat"
+            <input class="widefat"
                    id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
                    name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
                    value="<?php esc_attr_e( $limit ); ?>" />
