@@ -44,7 +44,7 @@ function add_documentation_fields() {
     add_settings_field( 'templates', __( 'Team View Templates', 'ots' ), 'ots\doc_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Short-codes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'single-templates', __( 'Single Member View Templates', 'ots' ), 'ots\doc_single_templates', 'ots-getting-started', 'templates' );
-    add_settings_field( 'custom-templates', __( 'Custom Templates - <i>Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'custom-templates', __( 'Custom Templates - <i class="ots-pro">Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
 
 }

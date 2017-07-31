@@ -294,9 +294,9 @@
 }
 
 .ots-documentation .form-table th {
-    padding: 15px 0 5px 0;
-    margin: 0 20px 0 20px;
+    padding: 15px 20px 5px 20px;
     font-size: 16px;
+    width: 80%;
 }
 
 .ots-documentation .form-table td {
@@ -323,9 +323,9 @@
     display: inline-block;
     background: #fff;
     border: 1px solid #ddd;
-    height: 290px;
+    height: 180px;
     vertical-align: top;
-    width: 100%;
+    width: 31%;
     cursor: pointer;
     transition: transform 0.5s ease, box-shadow 0.5s ease;
     position: relative;
@@ -367,7 +367,7 @@
 }
 
 .ots-member .inner .thumbnail {
-    height: 200px;
+    height: 100px;
     width: 100%;
     text-align: center;
     background-size: cover;
@@ -389,7 +389,7 @@
 @media screen and (min-width: 768px) {
 
     .ots-member {
-        max-width: 31%;
+        max-width: 14%;
         margin: 10px 5px;
     }
 
@@ -398,7 +398,7 @@
 @media screen and (min-width: 1025px) {
 
     .ots-member {
-        max-width: 18.5%;
+        max-width: 10%;
     }
 
 }

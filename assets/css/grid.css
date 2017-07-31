@@ -63,6 +63,7 @@
 
 .grid#sc_our_team .sc_team_member img.wp-post-image {
     width: 100%;
+    max-width: inherit;
     display: block;
     margin: 0 auto 0 auto;
     float: none;

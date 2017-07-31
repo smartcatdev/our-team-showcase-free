@@ -216,7 +216,7 @@ function single_member_content( $content ) {
 
                 <?php if ( get_option( Options::SHOW_SINGLE_SOCIAL ) == 'on' ) : ?>
 
-                    <div class="smartcat_team_single_icons"><?php do_member_social_links(); ?></div>
+                    <div class="icons"><?php do_member_social_links(); ?></div>
 
                 <?php endif; ?>
 
@@ -289,8 +289,8 @@ function team_member_meta_boxes() {
         add_meta_box( 'team-member-contact', __( 'Contact Information', 'ots' ), 'ots\do_contact_meta_box' );
         add_meta_box( 'team-member-articles', __( 'Authored / Favorite Articles', 'ots' ), 'ots\do_articles_meta_box' );
 
-        add_meta_box( 'team-member-skills', __( 'Attributes / Skills / Ratings' . ( $preview ? ' - Pro version only' : '' ), 'ots' ), 'ots\do_skills_meta_box', null, 'advanced', 'default', array( 'preview' => $preview ) );
-        add_meta_box( 'team-member-tags', __( 'Interests / Tags / Additional Skills' . ( $preview ? ' - Pro version only' : '' ), 'ots' ), 'ots\do_tags_meta_box', null, 'advanced', 'default', array( 'preview' => $preview ) );
+        add_meta_box( 'team-member-skills', __( 'Attributes / Skills / Ratings' . ( $preview ? ' - <i class="ots-pro">Pro version only</i>' : '' ), 'ots' ), 'ots\do_skills_meta_box', null, 'advanced', 'default', array( 'preview' => $preview ) );
+        add_meta_box( 'team-member-tags', __( 'Interests / Tags / Additional Skills' . ( $preview ? ' - <i class="ots-pro">Pro version only</i>' : '' ), 'ots' ), 'ots\do_tags_meta_box', null, 'advanced', 'default', array( 'preview' => $preview ) );
 
     }
 

@@ -321,6 +321,7 @@ function add_settings_fields() {
 
     $preview_templates = !$display_field_previews ? array() : array(
         'custom'     => __( 'Custom Template (Pro)', 'ots' ),
+        'sidebar'    => __( 'Single with a Sidebar (Pro)', 'ots' ),
         'card-popup' => __( 'Card - Popup (Pro)', 'ots' ),
         'side-panel' => __( 'Side Panel (Pro)', 'ots' )
     );
