@@ -36,7 +36,7 @@ function get_members_in_order( $limit = null, $group = false ) {
 
     }
 
-    return  new \WP_Query( $args );
+    return new \WP_Query( $args );
 
 }
 

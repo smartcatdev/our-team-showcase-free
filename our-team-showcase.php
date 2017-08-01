@@ -74,7 +74,7 @@ add_action( 'plugins_loaded', 'ots\init' );
 
 function enqueue_scripts() {
 
-	wp_enqueue_style( 'ots-css', asset( 'css/global.css' ), null, VERSION );
+	wp_enqueue_style( 'ots-css', asset( 'css/common.css' ), null, VERSION );
 
 }
 

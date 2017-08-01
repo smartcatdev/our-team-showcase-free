@@ -9,10 +9,7 @@ namespace ots;
  */
 function enqueue_shortcode_scripts() {
 
-    wp_enqueue_style( 'ots-grid-css', asset( 'css/grid.css' ), null, VERSION );
-    wp_enqueue_style( 'ots-grid-circles-css', asset( 'css/grid-circles.css' ), null, VERSION );
-    wp_enqueue_style( 'ots-grid-circles-2-css', asset( 'css/grid-circles-2.css' ), null, VERSION );
-
+    wp_enqueue_style( 'ots-team-view-css', asset( 'css/team-view.css' ), null, VERSION );
     wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }
@@ -94,7 +91,7 @@ function do_team_view_output( array $args = array() ) {
  */
 function page_redirect() {
 
-    if( is_shortcode_page() ) {
+    if( is_team_view_page() ) {
 
         // Cut down on calls to has_shortcode()
         do_action( 'ots_page_redirect' );
@@ -112,7 +109,7 @@ add_action( 'template_redirect', 'ots\page_redirect' );
  * @return bool Whether or not the current page uses the short-code.
  * @since 4.0.0
  */
-function is_shortcode_page() {
+function is_team_view_page() {
 
     global $post;
 
