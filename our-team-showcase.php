@@ -46,7 +46,7 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/documentation.php';
     include_once dirname( __FILE__ ) . '/includes/add-ons.php';
     include_once dirname( __FILE__ ) . '/includes/reorder-members.php';
-    include_once dirname( __FILE__ ) . '/includes/shortcode.php';
+    include_once dirname( __FILE__ ) . '/includes/team-view.php';
     include_once dirname( __FILE__ ) . '/includes/TeamMainWidget.php';
     include_once dirname( __FILE__ ) . '/includes/TeamSidebarWidget.php';
     include_once dirname( __FILE__ ) . '/includes/TeamMember.php';

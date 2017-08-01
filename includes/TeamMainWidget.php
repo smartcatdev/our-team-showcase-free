@@ -36,32 +36,7 @@ class TeamMainWidget extends \WP_Widget {
 		echo $args[ 'before_widget' ];
 		echo $args[ 'before_title' ] . esc_html( $instance['title'] ) . $args[ 'after_title' ];
 
-		$instance['members'] = get_members_in_order( strtolower( $instance['limit'] ), $instance['group'] );
-
-		// See if the template belongs to this plugin
-		$file = template_path( map_template( $instance['template'] ) );
-
-
-		// Start the buffer
-		ob_start();
-		extract( $instance );
-
-		$template = apply_filters( 'ots_template_include', $file ? $file : $instance['template'] );
-
-		do_action( 'ots_before_team_members', $instance );
-
-
-		// If the template file doesn't exist, fallback to the default
-		if( file_exists( $template ) ) {
-			include_once $template;
-		} else {
-			include_once template_path( map_template( Defaults::TEMPLATE ) );
-		}
-
-		// Hook onto for output inside shortcode after the template as rendered
-		do_action( 'ots_after_team_members', $instance );
-
-		echo ob_get_clean();
+		echo do_team_view_output( $instance );
 
 	}
 

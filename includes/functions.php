@@ -16,6 +16,8 @@ function get_members_in_order( $limit = null, $group = false ) {
         $limit = get_option( Options::DISPLAY_LIMIT );
     }
 
+    $limit = strtolower( $limit );
+
     $args = array(
         'post_type'      => 'team_member',
         'posts_per_page' =>  $limit === false || $limit == 'on' || $limit == 'all' ? -1 : $limit,

@@ -17,7 +17,7 @@ function enqueue_shortcode_scripts() {
 
 }
 
-add_action( 'ots_page_redirect', 'ots\enqueue_shortcode_scripts' );
+add_action( 'wp_enqueue_scripts', 'ots\enqueue_shortcode_scripts' );
 
 
 /**
@@ -31,44 +31,60 @@ function do_shortcode_output( $attributes = array() ) {
 
     $defaults = array(
         'group'           => '',
+        'limit'           => -1,
         'template'        => get_option( Options::TEMPLATE ),
         'single_template' => get_option( Options::SINGLE_TEMPLATE )
     );
 
-    $args = shortcode_atts( apply_filters( 'ots_default_shortcode_atts', $defaults ), $attributes );
-
-    // Cache the post query
-    $args['members'] = get_members_in_order( null, $args['group'] );
-
-    // See if the template belongs to this plugin
-    $file = template_path( map_template( $args['template'] ) );
-
-
-    // Start the buffer
-    ob_start();
-    extract( $args );
-
-    $template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
-
-    do_action( 'ots_before_team_members', $args );
-
-
-    // If the template file doesn't exist, fallback to the default
-    if( file_exists( $template ) ) {
-        include_once $template;
-    } else {
-        include_once template_path( map_template( Defaults::TEMPLATE ) );
-    }
-
-
-    // Hook onto for output inside shortcode after the template as rendered
-    do_action( 'ots_after_team_members', $args );
-
-    return apply_filters( 'ots_shortcode_output', ob_get_clean(), $args );
+    return do_team_view_output( shortcode_atts( $defaults, $attributes ) );
 
 }
 
 add_shortcode( 'our-team', 'ots\do_shortcode_output' );
+
+
+function do_team_view_output( array $args = array() ) {
+
+	$defaults = array(
+		'group'           => '',
+		'limit'           => -1,
+		'template'        => Defaults::TEMPLATE,
+		'single_template' => Defaults::SINGLE_TEMPLATE
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	// Cache the post query
+	$args['members'] = get_members_in_order( $args['limit'], $args['group'] );
+
+	// See if the template belongs to this plugin
+	$file = template_path( map_template( $args['template'] ) );
+
+
+	// Start the buffer
+	ob_start();
+	extract( $args );
+
+	$template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
+
+	do_action( 'ots_before_team_members', $args );
+
+
+	// If the template file doesn't exist, fallback to the default
+	if( file_exists( $template ) ) {
+		include_once $template;
+	} else {
+		include_once template_path( map_template( Defaults::TEMPLATE ) );
+	}
+
+
+	// Hook onto for output inside shortcode after the template as rendered
+	do_action( 'ots_after_team_members', $args );
+
+
+	return apply_filters( 'ots_team_view_output', ob_get_clean(), $args );
+
+}
 
 
 /**
