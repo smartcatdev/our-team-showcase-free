@@ -15,6 +15,16 @@ class TeamMainWidget extends \WP_Widget {
 
 	}
 
+	private function single_templates() {
+
+	    $default = array(
+	      'disable' => __( 'Disabled', 'ots' )
+        );
+
+	    return apply_filters( 'ots_inline_templates', $default );
+
+    }
+
 	private function parse_args( $instance ) {
 
 		$defaults = array(
@@ -62,10 +72,10 @@ class TeamMainWidget extends \WP_Widget {
         $instance['group'] = array_key_exists( $group, $groups ) ? $group : '';
 
         $group_templates  = get_templates();
-        $single_templates = get_single_templates();
+        $single_templates = $this->single_templates();
 
-        $instance['template']        = array_key_exists( $template, $group_templates ) ? $template : Defaults::TEMPLATE;
-        $instance['single_template'] = array_key_exists( $single, $single_templates )  ? $single   : Defaults::SINGLE_TEMPLATE;
+        $instance['template']        = array_key_exists( $template, $group_templates )  ? $template : Defaults::TEMPLATE;
+        $instance['single_template'] = array_key_exists( $single,   $single_templates ) ? $single   : Defaults::SINGLE_TEMPLATE;
 
 		if( $limit > 1 || strtolower( $limit ) === 'all' ) {
 			$instance['limit'] = $limit;
@@ -165,25 +175,50 @@ class TeamMainWidget extends \WP_Widget {
 		</p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'single_template' ) ); ?>">
-				<?php _e( 'Single Template', 'ots' ); ?>
-			</label>
+            <?php $templates = $this->single_templates(); ?>
 
-			<?php
+            <?php if ( count( $templates ) == 1 ) : ?>
 
-				$args = array(
-					'name'     => $this->get_field_name( 'single_template' ),
-					'selected' => $instance['single_template'],
-					'options'  => array( '' => __( 'Select a template', 'ots' ) ) + get_single_templates(),
-					'attrs'    => array(
-						'class' => 'widefat',
-						'id'    => $this->get_field_id( 'single_template' )
-					)
-				);
+                <input type="hidden"
+                       value="disable"
+                       name="<?php esc_attr_e( $this->get_field_name( 'single_template' ) ); ?>"/>
 
-				settings_select_box( $args );
+                <label>
 
-			?>
+                    <input type="checkbox"
+                           value="standard"
+                           name="<?php esc_attr_e( $this->get_field_name( 'single_template' ) ); ?>"
+
+                        <?php checked( 'disable', $instance['single_template'] ); ?>/>
+
+                    <?php _e( 'Enable linking to single members', 'ots' ); ?>
+
+                </label>
+
+            <?php else : ?>
+
+
+            <label for="<?php esc_attr_e( $this->get_field_id( 'single_template' ) ); ?>">
+                <?php _e( 'Single Template', 'ots' ); ?>
+            </label>
+
+                <?php
+
+                    $args = array(
+                        'name'     => $this->get_field_name( 'single_template' ),
+                        'selected' => $instance['single_template'],
+                        'options'  => array( '' => __( 'Single Member', 'ots' ) ) + $templates,
+                        'attrs'    => array(
+                            'class' => 'widefat',
+                            'id'    => $this->get_field_id( 'single_template' )
+                        )
+                    );
+
+                    settings_select_box( $args );
+
+                ?>
+
+            <?php endif; ?>
 
 		</p>
 
