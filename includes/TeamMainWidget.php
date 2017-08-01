@@ -77,7 +77,7 @@ class TeamMainWidget extends \WP_Widget {
         $instance['template']        = array_key_exists( $template, $group_templates )  ? $template : Defaults::TEMPLATE;
         $instance['single_template'] = array_key_exists( $single,   $single_templates ) ? $single   : Defaults::SINGLE_TEMPLATE;
 
-		if( $limit > 1 || strtolower( $limit ) === 'all' ) {
+		if( $limit > 0 || strtolower( $limit ) === 'all' ) {
 			$instance['limit'] = $limit;
 		} else {
 			$instance['limit'] = 'ALL';

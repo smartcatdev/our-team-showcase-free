@@ -13,10 +13,15 @@ namespace ots;
 function get_members_in_order( $limit = null, $group = false ) {
 
     if ( is_null( $limit ) ) {
+
         $limit = get_option( Options::DISPLAY_LIMIT );
+
+    } else if ( is_string( $limit ) ) {
+
+    	$limit = strtolower( $limit );
+
     }
 
-    $limit = strtolower( $limit );
 
     $args = array(
         'post_type'      => 'team_member',
