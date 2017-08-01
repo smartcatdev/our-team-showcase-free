@@ -28,6 +28,7 @@ function enqueue_team_view_scripts() {
 function do_shortcode_output( $attributes = array() ) {
 
     $defaults = array(
+        'id'              => '',
         'group'           => '',
         'limit'           => -1,
         'template'        => get_option( Options::TEMPLATE ),
@@ -44,6 +45,7 @@ add_shortcode( 'our-team', 'ots\do_shortcode_output' );
 function do_team_view_output( array $args = array() ) {
 
 	$defaults = array(
+		'id'              => '',
 		'group'           => '',
 		'limit'           => -1,
 		'template'        => Defaults::TEMPLATE,
@@ -63,21 +65,29 @@ function do_team_view_output( array $args = array() ) {
 	ob_start();
 	extract( $args );
 
-	$template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
+	echo '<div class="ots-team-view" id="' . esc_attr( $args['id'] ) . '">';
 
-	do_action( 'ots_before_team_members', $args );
+        $template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
 
-
-	// If the template file doesn't exist, fallback to the default
-	if( file_exists( $template ) ) {
-		include_once $template;
-	} else {
-		include_once template_path( map_template( Defaults::TEMPLATE ) );
-	}
+        do_action( 'ots_before_team_members', $args );
 
 
-	// Hook onto for output inside shortcode after the template as rendered
-	do_action( 'ots_after_team_members', $args );
+        // If the template file doesn't exist, fallback to the default
+        if( file_exists( $template ) ) {
+
+            include $template;
+
+        } else {
+
+            include template_path( map_template( Defaults::TEMPLATE ) );
+
+        }
+
+
+        // Hook onto for output inside shortcode after the template as rendered
+        do_action( 'ots_after_team_members', $args );
+
+	echo '</div>';
 
 
 	return apply_filters( 'ots_team_view_output', ob_get_clean(), $args );
