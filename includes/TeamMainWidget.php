@@ -18,6 +18,7 @@ class TeamMainWidget extends \WP_Widget {
 	private function parse_args( $instance ) {
 
 		$defaults = array(
+            'id'                => '',
 			'title'             => __( 'Meet Our Team', 'ots' ),
 			'group'             => '',
 			'limit'             => 'ALL',
@@ -46,6 +47,7 @@ class TeamMainWidget extends \WP_Widget {
 
 	    $instance = $old_instance;
 
+	    $id       = $new_instance['id'];
         $title    = $new_instance['title'];
         $group    = $new_instance['group'];
         $limit    = $new_instance['limit'];
@@ -55,6 +57,7 @@ class TeamMainWidget extends \WP_Widget {
 
         $groups = get_groups();
 
+		$instance['id']    = sanitize_title( $id );
         $instance['title'] = strip_tags( $title );
         $instance['group'] = array_key_exists( $group, $groups ) ? $group : '';
 
@@ -80,9 +83,8 @@ class TeamMainWidget extends \WP_Widget {
 
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'title' ) ); ?>"
-			       class="sc_our_team_widget_title_label">
-				<?php _e( 'Title: ', 'ots' ); ?>
+			<label for="<?php esc_attr_e( $this->get_field_id( 'title' ) ); ?>">
+				<?php _e( 'Title', 'ots' ); ?>
 			</label>
 
 			<input class="widefat"
@@ -91,10 +93,21 @@ class TeamMainWidget extends \WP_Widget {
 			       value="<?php esc_attr_e( $instance['title'] ); ?>" />
 
 		</p>
+        <p>
+
+            <label for="<?php esc_attr_e( $this->get_field_id( 'id' ) ); ?>">
+				<?php _e( 'ID', 'ots' ); ?>
+            </label>
+
+            <input class="widefat"
+                   id="<?php esc_attr_e( $this->get_field_id( 'id' ) ); ?>"
+                   name="<?php esc_attr_e( $this->get_field_name( 'id' ) ); ?>"
+                   value="<?php esc_attr_e( $instance['id'] ); ?>" />
+
+        </p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'group' ) ); ?>"
-			       class="sc_our_team_widget_group_label">
+			<label for="<?php esc_attr_e( $this->get_field_id( 'group' ) ); ?>">
 				<?php _e( 'Group', 'ots' ); ?>
 			</label>
 
@@ -117,8 +130,7 @@ class TeamMainWidget extends \WP_Widget {
 		</p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'limit' ) ); ?>"
-			       class="sc_our_team_widget_limit_label">
+			<label for="<?php esc_attr_e( $this->get_field_id( 'limit' ) ); ?>">
 				<?php _e( 'Limit to Show (Number or "ALL")', 'ots' ); ?>
 			</label>
 
@@ -130,8 +142,7 @@ class TeamMainWidget extends \WP_Widget {
 		</p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'template' ) ); ?>"
-			       class="sc_our_team_widget_limit_label">
+			<label for="<?php esc_attr_e( $this->get_field_id( 'template' ) ); ?>">
 				<?php _e( 'Template', 'ots' ); ?>
 			</label>
 
@@ -154,8 +165,7 @@ class TeamMainWidget extends \WP_Widget {
 		</p>
 		<p>
 
-			<label for="<?php esc_attr_e( $this->get_field_id( 'single_template' ) ); ?>"
-			       class="sc_our_team_widget_limit_label">
+			<label for="<?php esc_attr_e( $this->get_field_id( 'single_template' ) ); ?>">
 				<?php _e( 'Single Template', 'ots' ); ?>
 			</label>
 
