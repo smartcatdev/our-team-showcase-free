@@ -7,14 +7,15 @@ namespace ots;
  *
  * @since 4.0.0
  */
-function enqueue_shortcode_scripts() {
+function enqueue_team_view_scripts() {
 
-    wp_enqueue_style( 'ots-team-view-css', asset( 'css/team-view.css' ), null, VERSION );
-    wp_enqueue_script( 'ots-js', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
+    wp_enqueue_style( 'ots-team-view' );
+    wp_enqueue_script( 'ots' );
+
+    // Plugins can hook on here to have their scripts loaded only on shortcode or widget pages
+    do_action( 'ots_enqueue_scripts' );
 
 }
-
-add_action( 'wp_enqueue_scripts', 'ots\enqueue_shortcode_scripts' );
 
 
 /**
@@ -93,8 +94,7 @@ function page_redirect() {
 
     if( is_team_view_page() ) {
 
-        // Cut down on calls to has_shortcode()
-        do_action( 'ots_page_redirect' );
+        enqueue_team_view_scripts();
 
     }
 

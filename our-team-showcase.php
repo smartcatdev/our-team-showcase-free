@@ -72,13 +72,20 @@ function init() {
 add_action( 'plugins_loaded', 'ots\init' );
 
 
-function enqueue_scripts() {
+function register_scripts() {
 
-	wp_enqueue_style( 'ots-css', asset( 'css/common.css' ), null, VERSION );
+	// We need this on all pages
+	wp_enqueue_style( 'ots-common',     asset( 'css/common.css' ),    null, VERSION );
+
+	wp_register_style( 'ots-team-view', asset( 'css/team-view.css' ), null, VERSION );
+	wp_register_style( 'ots-widget',    asset( 'css/widgets.css' ),   null, VERSION );
+	wp_register_style( 'ots-single',    asset( 'css/single.css'  ),   null, VERSION );
+
+	wp_register_script( 'ots', asset( 'js/script.js' ), array( 'jquery' ), VERSION );
 
 }
 
-add_action( 'wp_enqueue_scripts', 'ots\enqueue_scripts' );
+add_action( 'init', 'ots\register_scripts' );
 
 
 /**

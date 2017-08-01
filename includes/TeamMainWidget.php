@@ -31,6 +31,8 @@ class TeamMainWidget extends \WP_Widget {
 
 	public function widget( $args, $instance ) {
 
+	    enqueue_team_view_scripts();
+
 		$instance = $this->parse_args( $instance );
 
 		echo $args[ 'before_widget' ];

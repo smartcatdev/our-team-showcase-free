@@ -24,7 +24,7 @@ add_action( 'widgets_init', 'ots\register_widgets' );
  */
 function enqueue_widget_scripts() {
 
-	wp_enqueue_style( 'ots-widget-css', asset( 'css/widgets.css' ), null, VERSION );
+	wp_enqueue_style( 'ots-widget-css' );
 
 }
 

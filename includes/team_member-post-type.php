@@ -11,7 +11,7 @@ namespace ots;
 function enqueue_single_scripts() {
 
     if( get_post_type() == 'team_member' ) {
-        wp_enqueue_style( 'ots-single-css', asset( 'css/single-team-member.css' ), null, VERSION );
+        wp_enqueue_style( 'ots-single' );
     }
 
 }
