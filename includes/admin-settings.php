@@ -734,7 +734,7 @@ function display_limit_field() {
            name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
            value="<?php $value !== 'on' ? esc_attr_e( $value ) : ''; ?>"
 
-           <?php disabled( $value, 'on' ); ?> >
+           <?php disabled( $value, 'all' ); ?> >
 
     <?php _e( ' - or - ', 'ots' ); ?>
 
@@ -742,9 +742,10 @@ function display_limit_field() {
 
         <input type="checkbox"
                id="ots-display-limit-all"
+               value="all"
                name="<?php esc_attr_e( Options::DISPLAY_LIMIT ); ?>"
 
-                <?php checked( $value, 'on' ); ?> >
+                <?php checked( $value, 'all' ); ?> >
 
         <?php _e( 'Display all', 'ots' ); ?>
 

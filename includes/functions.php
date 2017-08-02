@@ -16,16 +16,12 @@ function get_members_in_order( $limit = null, $group = false ) {
 
         $limit = get_option( Options::DISPLAY_LIMIT );
 
-    } else if ( is_string( $limit ) ) {
-
-    	$limit = strtolower( $limit );
-
     }
 
 
     $args = array(
         'post_type'      => 'team_member',
-        'posts_per_page' =>  $limit === false || $limit == 'on' || $limit == 'all' ? -1 : $limit,
+        'posts_per_page' =>  $limit === false || strtolower( $limit == 'all' ) ? -1 : $limit,
         'meta_key'       => 'sc_member_order',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
@@ -102,7 +98,7 @@ function member_avatar( $member = null, $size = 'post_thumbnail' ) {
  */
 function sanitize_display_limit( $value ) {
 
-    if( $value === 'on' || is_null( $value ) ) {
+    if( $value === 'all' || is_null( $value ) ) {
         return $value;
     } else if( intval( $value ) < 1 ) {
         return get_option( Options::DISPLAY_LIMIT );
