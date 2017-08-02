@@ -54,7 +54,7 @@ class TeamSidebarWidget extends \WP_Widget {
         $limit = $instance['sc_our_team_widget_limit'];
         $group = $instance['sc_our_team_widget_group'] !== 'ignore-group' ? $instance['sc_our_team_widget_group'] : '';
 
-        $members = get_members_in_order( strtolower( $limit ), $group );
+        $members = get_members_in_order( $limit, $group );
 
         ?>
 
@@ -119,10 +119,10 @@ class TeamSidebarWidget extends \WP_Widget {
         $instance['sc_our_team_widget_title'] = strip_tags( $title );
         $instance['sc_our_team_widget_group'] = strip_tags( $group );
 
-        if( $limit > 1 || strtolower( $limit ) === 'all' ) {
+        if( strtolower( $limit ) === 'all' || $limit > 0 ) {
             $instance['sc_our_team_widget_limit'] = $limit;
         } else {
-            $instance['sc_our_team_widget_limit'] = 'ALL';
+            $instance['sc_our_team_widget_limit'] = 'all';
         }
 
         return $instance;
@@ -190,19 +190,36 @@ class TeamSidebarWidget extends \WP_Widget {
             </select>
 
         </p>
-        <p>
+        <div class="ots-widget-limit">
+            <p>
+                <label for="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
+                       class="sc_our_team_widget_limit_label">
+                    <?php _e( 'Limit to Show', 'ots' ); ?>
+                </label>
 
-            <label for="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
-                   class="sc_our_team_widget_limit_label">
-                <?php _e( 'Limit to Show (Number or "ALL")', 'ots' ); ?>
-            </label>
+                    <input class="widefat ots-limit-number"
+                           type="number"
+                           id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
+                           name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
+                           value="<?php echo $limit !== 'all' ? esc_attr_e( $limit ) : ''; ?>"
 
-            <input class="widefat"
-                   id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
-                   name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
-                   value="<?php esc_attr_e( $limit ); ?>" />
+                        <?php disabled( 'all', $limit ); ?> />
 
-        </p>
+            </p>
+            <p>
+                <?php _e( '- or -', 'ots' ); ?>
+
+                <label>
+                    <input type="checkbox"
+                           class="ots-widget-display-all"
+                           name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
+
+                        <?php checked( 'all', $limit ); ?>
+                        <?php disabled( true, is_numeric( $limit ) ); ?>/><?php _e( 'Display All', 'ots' ); ?>
+
+                </label>
+            </p>
+        </div>
 
     <?php }
 

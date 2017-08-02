@@ -88,6 +88,16 @@ function register_scripts() {
 add_action( 'init', 'ots\register_scripts' );
 
 
+function enqueue_customizer_scripts() {
+
+
+	wp_enqueue_script( 'ots-customizer', asset( 'admin/js/customizer.js' ), array( 'jquery', 'customize-controls' ), false );
+
+}
+
+add_action( 'customize_controls_enqueue_scripts', 'ots\enqueue_customizer_scripts' );
+
+
 /**
  * Runs on plugin activation.
  *

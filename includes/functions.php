@@ -21,7 +21,7 @@ function get_members_in_order( $limit = null, $group = false ) {
 
     $args = array(
         'post_type'      => 'team_member',
-        'posts_per_page' =>  $limit === false || strtolower( $limit == 'all' ) ? -1 : $limit,
+        'posts_per_page' =>  empty( $limit ) || strtolower( $limit == 'all' ) ? -1 : $limit,
         'meta_key'       => 'sc_member_order',
         'orderby'        => 'meta_value_num',
         'order'          => 'ASC',
