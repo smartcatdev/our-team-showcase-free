@@ -30,7 +30,7 @@ function do_shortcode_output( $attributes = array() ) {
     $defaults = array(
         'id'              => '',
         'group'           => '',
-        'limit'           => -1,
+        'limit'           => get_option( Options::DISPLAY_LIMIT ),
         'template'        => get_option( Options::TEMPLATE ),
         'single_template' => get_option( Options::SINGLE_TEMPLATE )
     );
