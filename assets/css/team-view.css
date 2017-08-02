@@ -151,12 +151,8 @@
 @media(min-width: 767px) and (max-width: 980px) {
 
     #sc_our_team.grid.sc-col4 .sc_team_member,
-    #sc_our_team.grid.sc-col4 .sc_team_member,
-    #sc_our_team.grid.sc-col3 .sc_team_member,
     #sc_our_team.grid.sc-col3 .sc_team_member,
     #sc_our_team.grid.sc-col2 .sc_team_member,
-    #sc_our_team.grid.sc-col2 .sc_team_member,
-    #sc_our_team.grid.sc-col5 .sc_team_member,
     #sc_our_team.grid.sc-col5 .sc_team_member {
         width: 45%;
         margin: 0 4% 15px 0;
@@ -167,12 +163,8 @@
 @media(max-width: 767px) {
 
     #sc_our_team.grid.sc-col4 .sc_team_member,
-    #sc_our_team.grid.sc-col4 .sc_team_member,
-    #sc_our_team.grid.sc-col3 .sc_team_member,
     #sc_our_team.grid.sc-col3 .sc_team_member,
     #sc_our_team.grid.sc-col2 .sc_team_member,
-    #sc_our_team.grid.sc-col2 .sc_team_member,
-    #sc_our_team.grid.sc-col5 .sc_team_member,
     #sc_our_team.grid.sc-col5 .sc_team_member {
         width: 100%;
         margin: 0 0 0 0;
@@ -354,7 +346,6 @@
     #sc_our_team.grid_circles.sc-col2 .sc_team_member,
     #sc_our_team.grid_circles.sc-col5 .sc_team_member {
         width: 100%;
-        margin: 0 0 0 0;
     }
 
 }
@@ -428,7 +419,6 @@
 
 .grid_circles2#sc_our_team .sc_team_member .sc_team_member_jobtitle span {
     display: inline-block;
-    border-top: 1px solid #898989;
     padding: 5px 0 0 0;
 }
 
