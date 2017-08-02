@@ -42,9 +42,11 @@ function add_documentation_fields() {
 
     add_settings_field( 'usage', __( 'Usage', 'ots' ), 'ots\doc_usage', 'ots-getting-started', 'plugin-usage' );
     add_settings_field( 'templates', __( 'Team View Templates', 'ots' ), 'ots\doc_templates', 'ots-getting-started', 'templates' );
-    add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Short-codes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Shortcodes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'shortcode-ids', __( 'Setting The ID of a Shortcode Instance', 'ots' ), 'ots\doc_shortcode_ids', 'ots-getting-started', 'templates' );
     add_settings_field( 'single-templates', __( 'Single Member View Templates', 'ots' ), 'ots\doc_single_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'custom-templates', __( 'Custom Templates - <i class="ots-pro">Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
+	add_settings_field( 'main-widget', __( 'Main Widget', 'ots' ), 'ots\doc_main_widget', 'ots-getting-started', 'widgets' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
 
 }
@@ -139,6 +141,15 @@ function doc_shortcode_templates() { ?>
 <?php }
 
 
+function doc_shortcode_ids() { ?>
+
+    <p>
+        <?php _e( 'Each shortcode instance can optionally be given a unique <i>HTML identifier</i>. In the shortcode this makes it easier to modify the behaviour or appearance of individual shortcode instances on the same page. To set the shortcode ID, simply pass the <code>id="your-unique-id"</code> parameter along with any other shortcode options.', 'ots' ); ?>
+    </p>
+
+<?php }
+
+
 /**
  * Render the single templates topic.
  *
@@ -160,7 +171,7 @@ function doc_single_templates() { ?>
     </p>
     <p>
         <strong>
-            <?php _e( 'Card Popup (single_template="vcard")', 'ots' ); ?> - <i><?php _e( 'Pro Version', 'ots' ); ?></i>
+            <?php _e( 'Card Popup (single_template="vcard")', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
         </strong>
     </p>
     <p class="media">
@@ -173,7 +184,7 @@ function doc_single_templates() { ?>
     </p>
     <p>
         <strong>
-            <?php _e( 'Side Panel (single_template="panel")', 'ots' ); ?> - <i><?php _e( 'Pro Version', 'ots' ); ?></i>
+            <?php _e( 'Side Panel (single_template="panel")', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
         </strong>
     </p>
     <p class="media">
@@ -209,10 +220,22 @@ function doc_custom_templates() { ?>
 <?php }
 
 
+function doc_main_widget() { ?>
+
+    <p>
+        <?php _e( 'The plugin also includes a widget that can output the same templates as the shortcode in your theme\'s widget areas. Simply go to Appearance - Widgets and find the widget titled "Our Team Widget".', 'ots' ); ?>
+    </p>
+    <p>
+        <?php _e( 'You can drag & drop the widget into any widget placeholder and then configure to your liking.', 'ots' ); ?>
+    </p>
+
+<?php }
+
+
 function doc_sidebar_widget() { ?>
 
     <p>
-        <?php _e( 'The plugin comes with an easy to use widget designed for appearing in your site Sidebar. Go to Appearance - Widgets and find the widget titled "Our Team Sidebar Widget".', 'ots' ); ?>
+		<?php _e( 'The plugin comes with an easy to use widget designed for appearing in your site Sidebar. Go to Appearance - Widgets and find the widget titled "Our Team Sidebar Widget".', 'ots' ); ?>
     </p>
     <p class="media">
         <a href="<?php echo esc_url( asset( 'images/demo/sidebar-widget.jpg' ) ); ?>" target="_blank">
@@ -220,7 +243,7 @@ function doc_sidebar_widget() { ?>
         </a>
     </p>
     <p>
-        <?php _e( 'You can drag & drop the widget into any widget placeholder.', 'ots' ); ?>
+		<?php _e( 'You can drag & drop the widget into any widget placeholder.', 'ots' ); ?>
     </p>
 
 <?php }

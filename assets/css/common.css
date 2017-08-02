@@ -21,6 +21,10 @@
 .sc_team_single_disabled {
     cursor: default;
 }
+.sc-team-member-posts a {
+    font-size: 18px;
+}
+
 
 #sc_our_team .sc_team_member .icons a {
     margin: 0 auto 5px auto;
