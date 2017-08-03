@@ -44,7 +44,7 @@ function do_migration() {
 
         // If the value was -1 set it to 'on' to display all
         update_option( Options::GRID_COLUMNS, $options['columns'] < 0 ? 'on' : $options['columns'] );
-        update_option( Options::DISPLAY_LIMIT, $options['member_count'] < 0 ? 'on' : $options['member_count'] );
+        update_option( Options::DISPLAY_LIMIT, $options['member_count'] < 0 ? 'all' : $options['member_count'] );
 
         // If show social icons was set to open a new tab, change it to a boolean
         update_option( Options::SOCIAL_LINK_ACTION, $options['social_link'] === 'new' ? 'on' : '' );
