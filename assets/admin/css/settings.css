@@ -169,10 +169,6 @@
         margin-left: 0;
     }
 
-    .ad-header .cta-secondary {
-        display: inline;
-    }
-
     .ad-header .title-bar .inner:last-of-type {
         padding-right: 20px;
         text-align: right;
@@ -233,6 +229,10 @@
 
     .ots-admin-page .ad-header {
         margin-bottom: 10px;
+    }
+
+    .ad-header .cta-secondary {
+        display: inline;
     }
 
     .ots-admin-page .inner {
