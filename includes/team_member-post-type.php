@@ -52,7 +52,9 @@ add_filter( 'template_include', 'ots\include_single_template' );
  */
 function override_theme_template() {
 
-    return get_option( Options::SINGLE_TEMPLATE ) === 'standard' &&
+    $template = get_option( Options::SINGLE_TEMPLATE );
+
+    return ( $template === 'standard' || !template_path( $template ) ) &&
         file_exists( get_template_directory() . '/single-team_member.php' );
 
 }
