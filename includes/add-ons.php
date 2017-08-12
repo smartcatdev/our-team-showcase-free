@@ -26,7 +26,7 @@ function do_addons_page() { ?>
 
 	<div class="wrap ots-admin-page ots-add-ons">
 
-		<div class="ad-header">
+		<div class="ots-admin-header">
 
 			<div class="title-bar">
 
@@ -44,7 +44,7 @@ function do_addons_page() { ?>
 
 					<div class="inner">
 
-						<a href="https://smartcatdesign.net/our-team-showcase-demo/"
+						<a href="http://wordpressteamplugin.com/templates/"
 						   class="cta cta-secondary"
 						   target="_blank">
 							<?php _e( 'View Demo', 'ots' ); ?>
@@ -75,8 +75,8 @@ function do_addons_page() { ?>
                 <h2><?php _e( 'Our Team Showcase Pro', 'ots' ); ?></h2>
                 <p><?php _e( 'Feature-loaded Pro version of Our Team Showcase adds additional professional templates to your Team Showcase, including a Staff Directory, Honeycomb Layout, Carousel, Stacked Layout, as well as 3 impressive Single Member views: Slide-in Side Panel, Popup V-Card and a Custom Page Single View. It also adds new features such as Team Member Skills, Tags/hobbies, Favorite Content and more!', 'ots' ); ?></p>
                 <div class="cta">
-                    <a target="_blank" href="https://smartcatdesign.net/our-team-showcase-demo/" class="button button-default"><?php _e( 'View Demo', 'ots' ); ?></a>
-                    <a target="_blank" href="https://smartcatdesign.net/downloads/our-team-showcase/" class="button button-primary">Learn More</a>
+                    <a target="_blank" href="http://wordpressteamplugin.com/templates/" class="button button-default"><?php _e( 'View Demo', 'ots' ); ?></a>
+                    <a target="_blank" href="https://smartcatdesign.net/downloads/our-team-showcase/" class="button button-primary">Go Pro</a>
                 </div>
             </div>
 
@@ -86,7 +86,7 @@ function do_addons_page() { ?>
                 <p><?php _e( 'Restrict pages & posts to Team Members. Login/Logout/Member Profiles. Creates a private portal on your site for your team members to login, view restricted content, edit their own profile details & profile picture, while giving the site admin complete control, user management, content restriction by group/department and more!', 'ots' ); ?></p>
                 <div class="cta">
                     <a target="_blank" href="http://wordpressteamplugin.com/member-portal/login/" class="button button-default"><?php _e( 'View Demo', 'ots' ); ?></a>
-                    <a target="_blank" href="https://smartcatdesign.net/downloads/member-login-portal/" class="button button-primary"><?php _e( 'Learn More', 'ots' ); ?></a>
+                    <a target="_blank" href="https://smartcatdesign.net/downloads/member-login-portal/" class="button button-primary"><?php _e( 'Get Portal', 'ots' ); ?></a>
                 </div>
             </div>
 

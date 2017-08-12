@@ -444,7 +444,7 @@ function do_settings_page() {
 
     <div class="wrap ots-admin-page">
 
-        <div class="ad-header">
+        <div class="ots-admin-header">
 
             <div class="title-bar">
 
@@ -462,7 +462,7 @@ function do_settings_page() {
 
                     <div class="inner">
 
-                        <a href="https://smartcatdesign.net/our-team-showcase-demo/"
+                        <a href="http://wordpressteamplugin.com/templates/"
                            class="cta cta-secondary"
                            target="_blank">
                             <?php _e( 'View Demo', 'ots' ); ?>

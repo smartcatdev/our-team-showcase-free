@@ -22,7 +22,7 @@
     margin: 10px 10px 10px 20px !important;
 }
 
-.ots-admin-page .ad-header {
+.ots-admin-page .ots-admin-header {
     margin: 10px 10px 0 20px;
 }
 
@@ -35,41 +35,41 @@
     border-bottom: none !important;
 }
 
-.ad-header {
+.ots-admin-header {
     background: #3a3a3a;
     margin-bottom: 10px;
     padding: 10px;
 }
 
-.ad-header .branding img {
+.ots-admin-header .branding img {
     width: 100%;
 }
 
-.ad-header .branding {
+.ots-admin-header .branding {
     max-width: 160px;
     display: none;
     margin-bottom: 5px;
 }
 
-.ad-header .title-bar {
+.ots-admin-header .title-bar {
     display: table;
     margin: 0 5px;
     padding: 10px 0;
     width: 100%;
 }
 
-.ad-header .title-bar .inner {
+.ots-admin-header .title-bar .inner {
     padding: 0;
     display: table-cell;
     vertical-align: middle;
     background: transparent;
 }
 
-.ad-header .title-bar .inner:last-of-type {
+.ots-admin-header .title-bar .inner:last-of-type {
     min-width: 130px;
 }
 
-.ad-header .cta {
+.ots-admin-header .cta {
     background: #0085ba;
     border: 2px solid #fff;
     padding: 15px 25px;
@@ -84,20 +84,20 @@
     font-weight: 100;
 }
 
-.ad-header a.cta {
+.ots-admin-header a.cta {
     text-decoration: none;
 }
 
-.ad-header .cta:hover {
+.ots-admin-header .cta:hover {
     background: #00719e;
 }
 
-.ad-header .cta-secondary {
+.ots-admin-header .cta-secondary {
     display: none;
     background: transparent;
 }
 
-.ad-header .page-title {
+.ots-admin-header .page-title {
     color: #fff;
     font-size: 42px;
     line-height: 38px;
@@ -169,16 +169,16 @@
         margin-left: 0;
     }
 
-    .ad-header .title-bar .inner:last-of-type {
+    .ots-admin-header .title-bar .inner:last-of-type {
         padding-right: 20px;
         text-align: right;
     }
 
-    .ad-header .title-bar .inner .cta {
+    .ots-admin-header .title-bar .inner .cta {
         margin-left: 5px;
     }
 
-    .ad-header .branding {
+    .ots-admin-header .branding {
         display: block;
     }
 
@@ -227,11 +227,11 @@
         background: #f9f9f9;
     }
 
-    .ots-admin-page .ad-header {
+    .ots-admin-page .ots-admin-header {
         margin-bottom: 10px;
     }
 
-    .ad-header .cta-secondary {
+    .ots-admin-header .cta-secondary {
         display: inline;
     }
 
