@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Our Team Showcase
  * Plugin URI: http://URI_Of_Page_Describing_Plugin_and_Updates
- * Description: A brief description of the Plugin.
+ * Description: Display your team members in a very attractive way as a widget or page with the shortcode [our-team]
  * Version: 4.0.0
  * Author: Smartcat
  * Author URI: https://smartcatdesign.net
