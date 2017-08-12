@@ -4,14 +4,14 @@ Donate link: https://smartcatdesign.net/downloads/our-team-showcase/
 Tags: team, staff, directory, employees, widget, shortcode, members, carousel, honeycomb, stack, grid, custom, template, social, profile, custom post type, portfolio, profile,meet team, skills, cv,v-card, portal
 Requires at least: 4.6
 Tested up to: 4.8.1
-Stable tag: 3.0.0
+Stable tag: 4.0.0
 License: GPLv2 or later
 
 The best way to display your employees, team members, or any type of list. Multiple appealing templates,SEO friendly, re-order functionality.
 
 == Description ==
 
-[View Demo](https://smartcatdesign.net/our-team-showcase-demo/)
+[View Demo](http://wordpressteamplugin.com/templates/)
 
 Our Team Showcase allows you to easily create and display your team members & staff and show them on your site with ease. Your visitors will see a beautiful & animated
 list of your team, with their pictures, links to social icons, and link to each member page. 
