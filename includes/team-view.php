@@ -56,6 +56,7 @@ function do_team_view_output( array $args = array() ) {
 
 	// Cache the post query
 	$args['members'] = get_members_in_order( $args['limit'], $args['group'] );
+	$args['guid'] = uniqid( 'ots-' );
 
 	// See if the template belongs to this plugin
 	$file = template_path( map_template( $args['template'] ) );
@@ -65,7 +66,7 @@ function do_team_view_output( array $args = array() ) {
 	ob_start();
 	extract( $args );
 
-	echo '<div class="ots-team-view" id="' . esc_attr( $args['id'] ) . '">';
+	echo '<div class="ots-team-view" id="' . esc_attr( $args['id'] ) . '" data-id="' . esc_attr( $args['guid'] ) . '">';
 
         $template = apply_filters( 'ots_template_include', $file ? $file : $args['template'] );
 
