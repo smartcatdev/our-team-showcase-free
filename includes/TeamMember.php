@@ -29,7 +29,11 @@ class TeamMember {
     }
 
     public function __isset( $key ) {
-        return !empty( get_post_meta( $this->post->ID, $this->prefix( $key ) ) );
+
+    	$meta = get_post_meta( $this->post->ID, $this->prefix( $key ) );
+
+        return !empty( $meta );
+
     }
 
     public function __unset( $key ) {

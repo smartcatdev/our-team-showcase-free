@@ -216,8 +216,12 @@ function get_member_articles( $member = null ) {
 
         $article = get_post_meta( $member->ID, "team_member_article$ctr", true );
 
-        if( !empty( $article ) && !empty( $post = get_post( $article ) ) ) {
-            $articles[] = $post;
+        if( !empty( $article ) ) {
+
+        	if ( !empty( $post = get_post( $article ) ) ) {
+		        $articles[] = $post;
+	        }
+
         }
 
     }
