@@ -13,11 +13,8 @@ namespace ots;
 function get_members_in_order( $limit = null, $group = false ) {
 
     if ( is_null( $limit ) ) {
-
         $limit = get_option( Options::DISPLAY_LIMIT );
-
     }
-
 
     $args = array(
         'post_type'      => 'team_member',
@@ -29,10 +26,23 @@ function get_members_in_order( $limit = null, $group = false ) {
 
     if( !empty( $group ) ) {
 
-        $args['tax_query'][] = array(
-            'taxonomy'  => 'team_member_position',
-            'field'     => intval( $group ) > 0 ? 'term_id' : 'name',
-            'terms'     => $group
+        $args['tax_query'] = array(
+        	'relation' => 'OR',
+        	array(
+	            'taxonomy'  => 'team_member_position',
+	            'field'     => 'name',
+	            'terms'     => $group
+	        ),
+	        array(
+		        'taxonomy'  => 'team_member_position',
+		        'field'     => 'slug',
+		        'terms'     => $group
+	        ),
+	        array(
+		        'taxonomy'  => 'team_member_position',
+		        'field'     => 'term_id',
+		        'terms'     => $group
+	        ),
         );
 
     }
