@@ -9,8 +9,8 @@ namespace ots;
  */
 function register_widgets() {
 
-    register_widget( TeamSidebarWidget::class );
-    register_widget( TeamMainWidget::class );
+    register_widget( '\ots\TeamSidebarWidget' );
+    register_widget( '\ots\TeamMainWidget' );
 
 }
 

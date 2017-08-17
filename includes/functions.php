@@ -228,7 +228,9 @@ function get_member_articles( $member = null ) {
 
         if( !empty( $article ) ) {
 
-        	if ( !empty( $post = get_post( $article ) ) ) {
+	        $post = get_post( $article );
+
+        	if ( !empty( $post ) ) {
 		        $articles[] = $post;
 	        }
 
