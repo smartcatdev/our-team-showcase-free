@@ -35,7 +35,7 @@ function do_shortcode_output( $attributes = array() ) {
         'single_template' => get_option( Options::SINGLE_TEMPLATE )
     );
 
-    return do_team_view_output( shortcode_atts( $defaults, $attributes ) );
+    return do_team_view_output( shortcode_atts( $defaults, $attributes, 'our-team' ) );
 
 }
 
@@ -53,6 +53,11 @@ function do_team_view_output( array $args = array() ) {
 	);
 
 	$args = wp_parse_args( $args, $defaults );
+
+    // Allow for passing multiple groups
+	if ( !empty( $args['group'] ) && !is_array( $args['group'] ) ) {
+	    $args['group'] =  explode( ',', $args['group'] );
+    }
 
 	// Cache the post query
 	$args['members'] = get_members_in_order( $args['limit'], $args['group'] );

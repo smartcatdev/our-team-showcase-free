@@ -309,7 +309,7 @@ function team_member_meta_boxes() {
 function set_default_post_meta( $post_id, $post, $update ) {
 
     if( !$update ) {
-        update_post_meta( $post_id, 'sc_member_order', 1 );
+        update_post_meta( $post_id, 'sc_member_order', PHP_INT_MAX );
     }
 
 }

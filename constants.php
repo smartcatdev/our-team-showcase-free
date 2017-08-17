@@ -129,7 +129,7 @@ interface Defaults {
     /**
      * @since 4.0.0
      */
-    const DISPLAY_LIMIT = 'on';
+    const DISPLAY_LIMIT = 'all';
 
     /**
      * @since 4.0.0
