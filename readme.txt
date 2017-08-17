@@ -88,6 +88,11 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.0.1 =
+1. Patch plugin code to be backwards compatible with older PHP versions
+2. Added the ability to display multiple groups in one shortcode
+3. New members now are added last
+
 = 4.0.0 = 
 Plugin re-write. Settings and team member data will be maintained
 
