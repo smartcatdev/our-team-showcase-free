@@ -227,7 +227,7 @@ function get_member_articles( $member = null ) {
         $article = get_post_meta( $member->ID, "team_member_article$ctr", true );
 
         if( !empty( $article ) ) {
-
+          
 	        $post = get_post( $article );
 
         	if ( !empty( $post ) ) {
