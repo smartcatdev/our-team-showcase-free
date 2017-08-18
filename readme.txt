@@ -90,6 +90,7 @@ Team Member Details & Icons:
 
 = 4.0.2 = 
 1. Bug fixes
+2. Full compatibility with PHP5.4
 
 = 4.0.1 =
 1. Patch plugin code to be backwards compatible with older PHP versions
