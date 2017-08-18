@@ -88,6 +88,9 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.0.2 = 
+1. Bug fixes
+
 = 4.0.1 =
 1. Patch plugin code to be backwards compatible with older PHP versions
 2. Added the ability to display multiple groups in one shortcode
