@@ -44,6 +44,15 @@
     .column-team_member_image {
         text-align: center;
     }
+
+    #ots-member-other-icon {
+        width: 28%;
+    }
+
+    #ots-member-other {
+        width: 70%;
+        float: right;
+    }
 }
 
 .ots-pro {
