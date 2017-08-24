@@ -4,7 +4,7 @@ Donate link: https://smartcatdesign.net/downloads/our-team-showcase/
 Tags: team, staff, directory, employees, widget, shortcode, members, carousel, honeycomb, stack, grid, custom, template, social, profile, custom post type, portfolio, profile,meet team, skills, cv,v-card, portal
 Requires at least: 4.6
 Tested up to: 4.8.1
-Stable tag: 4.0.2
+Stable tag: 4.1.0
 License: GPLv2 or later
 
 The best way to display your employees, team members, or any type of list. Multiple appealing templates,SEO friendly, re-order functionality.
