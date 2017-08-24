@@ -330,6 +330,8 @@ function save_contact_meta_box( $post_id ) {
 
         update_post_meta( $post_id, 'team_member_title', sanitize_text_field( $_POST['team_member_title'] ) );
         update_post_meta( $post_id, 'team_member_phone', sanitize_text_field( $_POST['team_member_phone'] ) );
+        update_post_meta( $post_id, 'team_member_other', sanitize_text_field( $_POST['team_member_other'] ) );
+        update_post_meta( $post_id, 'team_member_other_icon', sanitize_key( $_POST['team_member_other_icon'] ) );
         update_post_meta( $post_id, 'team_member_email', sanitize_email( $_POST['team_member_email'] ) );
 
         foreach( $_POST['team_member_links'] as $network => $link ) {
@@ -489,6 +491,27 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                        name="team_member_links[website]"
                        class="regular-text"
                        value="<?php esc_attr_e( $member->website ); ?>" />
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <label for="ots-member-other"><?php _e( 'Other', 'ots' ); ?></label>
+            </th>
+            <td>
+
+                <?php $other_icon = $member->other_icon; ?>
+
+                <select id="ots-member-other-icon" name="team_member_other_icon">
+                    <option value=""><?php _e( 'Select an Icon', 'ots' ); ?></option>
+                    <option value="etsy" <?php selected( $other_icon, 'etsy' ); ?>><?php _e( 'Etsy', 'ots' ); ?></option>
+                    <option value="whatsapp" <?php selected( $other_icon, 'whatsapp' ); ?>><?php _e( 'Whatsapp', 'ots' ); ?></option>
+                    <option value="skype" <?php selected( $other_icon, 'skype' ); ?>><?php _e( 'Skype', 'ots' ); ?></option>
+                    <option value="vimeo" <?php selected( $other_icon, 'vimeo' ); ?>><?php _e( 'Vimeo', 'ots' ); ?></option>
+                    <option value="soundcloud" <?php selected( $other_icon, 'soundcloud' ); ?>><?php _e( 'Soundcloud', 'ots' ); ?></option>
+                </select>
+                <input id="ots-member-other"
+                       name="team_member_other"
+                       value="<?php esc_attr_e( $member->other ); ?>" />
             </td>
         </tr>
     </table>

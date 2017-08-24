@@ -94,6 +94,9 @@ function social_link( $link, $icon = '', $attrs = array(), $before = '', $after 
  */
 function do_member_social_links( \WP_Post $member = null, $before ='', $after = '' ) {
 
+    $member = get_post( $member );
+    $other  = get_post_meta( $member->ID, 'team_member_other_icon', true );
+
     $links = array(
         'facebook'  => array( '',        asset( 'images/social/facebook.png'  ) ),
         'twitter'   => array( '',        asset( 'images/social/twitter.png'   ) ),
@@ -103,10 +106,12 @@ function do_member_social_links( \WP_Post $member = null, $before ='', $after = 
         'phone'     => array( 'tel:',    asset( 'images/social/phone.png'     ) ),
         'pinterest' => array( '',        asset( 'images/social/pinterest.png' ) ),
         'instagram' => array( '',        asset( 'images/social/instagram.png' ) ),
-        'website'   => array( '',        asset( 'images/social/website.png'   ) )
+        'website'   => array( '',        asset( 'images/social/website.png'   ) ),
     );
 
-    $member = get_post( $member );
+    if ( !empty( $other ) ) {
+        $links['other'] =  array( '', asset( 'images/social/' . $other . '.png' ) );
+    }
 
     $rendered = '';
 
