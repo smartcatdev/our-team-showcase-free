@@ -524,6 +524,7 @@ function do_settings_page() {
                             <li><?php _e( 'Image recommended size is 400x400 px. To achieve the best appearance, please ensure all team member images are the same size.', 'ots' ); ?></li>
                             <li><?php _e( 'To display the team members, add <code>[our-team]</code> short-code in a widget, post or page', 'ots' ); ?></li>
                             <li><?php _e( 'To display members from a specific group, add <code>[our-team group="name of your group"]</code>', 'ots' ); ?></li>
+                            <li><?php _e( 'To display members from a multiple groups, add <code>[our-team group="group1,group2"]</code>', 'ots' ); ?></li>
                             <li><?php _e( 'To override the template choice from the short-code, add <code>[our-team template="grid"]</code>. <i>Template options include: grid, grid_circles, grid_circles2, carousel, hc and stacked.</i>', 'ots' ); ?></li>
                             <li><?php _e( 'To override the single template choice from the short-code add <code>[our-team single_template="vcard"]</code>. Alternatively you can set it to panel', 'ots' ); ?></li>
                         </ul>

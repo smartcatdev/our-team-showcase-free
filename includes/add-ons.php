@@ -73,7 +73,7 @@ function do_addons_page() { ?>
             <div class="ots-add-on">
                 <img src="<?php echo esc_url( asset( 'images/add-ons/ots-pro.jpg' ) ); ?>" />
                 <h2><?php _e( 'Our Team Showcase Pro', 'ots' ); ?></h2>
-                <p><?php _e( 'Feature-loaded Pro version of Our Team Showcase adds additional professional templates to your Team Showcase, including a Staff Directory, Honeycomb Layout, Carousel, Stacked Layout, as well as 3 impressive Single Member views: Slide-in Side Panel, Popup V-Card and a Custom Page Single View. It also adds new features such as Team Member Skills, Tags/hobbies, Favorite Content and more!', 'ots' ); ?></p>
+                <p><?php _e( 'Feature-loaded Pro version of Our Team Showcase adds additional professional templates to your Team Showcase, including a Staff Directory, Honeycomb Layout, Carousel, Stacked Layout, as well as 4 impressive Single Member views: Slide-in Side Panel, Single with team sidebar,  Popup V-Card and a Custom Page Single View. It also adds new features such as Team Member Skills, Tags/hobbies, Favorite Content and more!', 'ots' ); ?></p>
                 <div class="cta">
                     <a target="_blank" href="http://wordpressteamplugin.com/templates/" class="button button-default"><?php _e( 'View Demo', 'ots' ); ?></a>
                     <a target="_blank" href="https://smartcatdesign.net/downloads/our-team-showcase/" class="button button-primary">Go Pro</a>

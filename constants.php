@@ -2,7 +2,7 @@
 
 namespace ots;
 
-const VERSION = '4.0.2';
+const VERSION = '4.1.0';
 
 
 interface Options {

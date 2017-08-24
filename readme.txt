@@ -88,6 +88,10 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.1.0 =
+1. Added a new field for additional social network
+2. Shortcode now supports multiple groups
+
 = 4.0.2 = 
 1. Bug fixes
 2. Full compatibility with PHP5.4
