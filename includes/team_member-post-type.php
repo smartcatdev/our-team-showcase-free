@@ -207,8 +207,9 @@ add_action( 'manage_team_member_posts_custom_column', 'ots\do_team_member_custom
  */
 function single_member_content( $content ) {
 
+    // Use {} to prevent whitespace leaks after headers have been sent
     if ( is_single() && get_post_type() == 'team_member' &&
-                 get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) : ob_start(); ?>
+        get_option( Options::SINGLE_TEMPLATE ) == 'standard' ) {  ob_start(); ?>
 
         <div id="sc_our_team">
 
@@ -266,11 +267,11 @@ function single_member_content( $content ) {
 
         </div>
 
-        <?php $content = ob_get_clean(); ?>
+        <?php $content = ob_get_clean();
 
-    <?php endif; ?>
+    }
 
-    <?php return $content;
+    return $content;
 
 }
 
