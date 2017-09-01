@@ -4,7 +4,7 @@ namespace ots;
 
 ?>
 
-<div id="sc_our_team" class="grid sc-col<?php esc_attr_e( get_option( Options::GRID_COLUMNS ) ); ?>">
+<div id="sc_our_team" class="grid sc-col<?php esc_attr_e( $columns ); ?>">
 
     <div class="clear"></div>
 
