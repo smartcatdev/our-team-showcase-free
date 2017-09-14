@@ -44,7 +44,7 @@ if ( get_option( Options::NUKE ) == 'on' ) {
 
 
 	// Delete all plugin settings
-	$options = new \ReflectionClass( Options::class );
+	$options = new \ReflectionClass( '\ots\Options' );
 
 	foreach( $options->getConstants() as $option ) {
 		delete_option( $option );
