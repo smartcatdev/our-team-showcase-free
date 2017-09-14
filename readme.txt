@@ -88,6 +88,10 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.1.1 =
+1. fix bug with error when saving posts
+2. fix php error for un-install
+
 = 4.1.0 =
 1. Added a new field for additional social network
 2. Shortcode now supports multiple groups
