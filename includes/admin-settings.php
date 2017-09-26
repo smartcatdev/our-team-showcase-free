@@ -781,6 +781,7 @@ function settings_toggle( array $args ) {
 
     checked( 'on', $args['checked'] );
 
-    echo ' /><span class="slider ' . esc_attr( $args['slider'] ) . '"></label> ' . esc_html( $args['label'] );
+    echo ' /><span class="slider ' . esc_attr( $args['slider'] ) . '"></label> ';
+    echo '<span class="label">' . esc_html( $args['label'] ) . '</span>';
 
 }
