@@ -20,9 +20,11 @@
 }
 
 .ots-meta-box input[disabled],
+.ots-meta-box input[readonly],
 .ots-meta-box select[disabled],
 .ots-meta-box textarea[disabled] {
     border: 1px solid #bbb;
+    background: #fff;
 }
 
 .ots-member-skill-rating {
