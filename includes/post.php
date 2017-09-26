@@ -151,7 +151,7 @@ function add_team_member_custom_columns( $columns ) {
 
     $columns['title'] = __( 'Name', 'ots' );
     $columns['team_member_title'] = __( 'Job Title', 'ots' );
-    $columns['team_member_group'] = __( 'Group', 'ots' );
+    $columns['team_member_group'] = __( 'Groups', 'ots' );
     $columns['team_member_image'] = __( 'Image', 'ots' );
 
     return $columns;
@@ -173,7 +173,7 @@ function do_team_member_custom_columns( $column, $post_id ) {
     switch( $column ) {
 
         case 'team_member_title' :
-            echo get_post_meta( $post_id, 'team_member_title', true );
+            echo get_post_meta( $post_id, 'team_member_title', true ) ?: '-';
             break;
 
         case 'team_member_image' :
@@ -182,14 +182,21 @@ function do_team_member_custom_columns( $column, $post_id ) {
 
         case 'team_member_group':
 
-            $terms = get_the_terms( get_post( $post_id ), 'team_member_position' );
+            $groups = get_the_terms( get_post( $post_id ), 'team_member_position' );
 
-            if ( !empty( $terms ) ) {
-                echo $terms[0]->name;
+            if ( !empty( $groups ) ) {
+
+                $str = '';
+
+                foreach ( $groups as $group ) {
+                    $str .= "$group->name - ";
+                }
+
+                echo rtrim( $str, ' - ' );
+
             }
 
             break;
-
 
     }
 

@@ -5,15 +5,16 @@ namespace ots;
 /**
  * Convenience method to generate a dropdown of posts.
  *
- * @param $name
- * @param string $id
- * @param string $selected
+ * @param              $name
+ * @param string       $id
+ * @param string       $selected
+ * @param string|array $post_type
  * @since 4.0.0
  */
-function posts_dropdown( $name, $id = '', $selected = '' ) {
+function posts_dropdown( $name, $id = '', $selected = '', $post_type = 'post' ) {
 
     $posts = get_posts( array(
-        'post_type'      => 'post',
+        'post_type'      => $post_type,
         'posts_per_page' => -1
     ) );
 

@@ -41,7 +41,7 @@ function init() {
     include_once dirname( __FILE__ ) . '/upgrade.php';
     include_once dirname( __FILE__ ) . '/includes/functions.php';
     include_once dirname( __FILE__ ) . '/includes/helpers.php';
-    include_once dirname( __FILE__ ) . '/includes/team_member-post-type.php';
+    include_once dirname( __FILE__ ) . '/includes/post.php';
     include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
     include_once dirname( __FILE__ ) . '/includes/documentation.php';
     include_once dirname( __FILE__ ) . '/includes/add-ons.php';
