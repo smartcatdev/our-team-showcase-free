@@ -59,6 +59,10 @@ class TeamMember {
 
     }
 
+    public function get_id() {
+        return $this->post->ID;
+    }
+
     protected function prefix( $key ) {
         return self::$prefix . $key;
     }
