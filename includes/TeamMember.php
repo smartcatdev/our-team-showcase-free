@@ -73,6 +73,13 @@ class TeamMember {
     }
 
 
+    public function get_bio() {
+
+        return $this->post->post_content;
+
+    }
+
+
     public function get_groups() {
 
         return get_the_terms( get_post( $this->get_id() ), 'team_member_position' );
