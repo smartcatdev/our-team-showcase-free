@@ -129,3 +129,33 @@ function do_member_social_links( \WP_Post $member = null, $before ='', $after = 
     echo apply_filters( 'ots_parse_social_links', $rendered, $member );
 
 }
+
+
+function member_groups( $member = null, $separator = ' - ', $echo = true ) {
+
+    $member = team_member( $member );
+    $str    = '';
+
+    if ( $member ) {
+
+        $groups = $member->get_groups();
+
+        if ( !empty( $groups ) ) {
+
+            foreach ( $groups as $group ) {
+                $str .= $group->name . $separator;
+            }
+
+            $str = rtrim( $str, $separator );
+
+            if ( $echo ) {
+                esc_html_e( $str );
+            }
+
+        }
+
+    }
+
+    return $str;
+
+}
