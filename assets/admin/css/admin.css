@@ -10,6 +10,9 @@
 }
 
 /* edit.php */
+.ots-toggle {
+    margin-bottom: 8px;
+}
 
 .ots-meta-box {
     border: none !important;
@@ -17,6 +20,14 @@
 
 .ots-meta-box .regular-text {
     width: 100%;
+}
+
+.ots-meta-box input,
+.ots-meta-box textarea {
+    border: 1px solid #ddd;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    padding: 5px 8px;
+    transition: 50ms border-color ease-in-out;
 }
 
 .ots-meta-box input[disabled],
@@ -27,6 +38,33 @@
     background: #fff;
 }
 
+.ots-meta-box input[type=checkbox],
+.ots-meta-box input[type=radio] {
+    margin-top: 4px;
+}
+
+div[id^="team-"] .inside {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.ots-meta-box th {
+    font-weight: 500;
+}
+
+.ots-meta-box th,
+.ots-meta-box td {
+    display: block;
+    float: none;
+    padding: 5px 10px;
+}
+
+.ots-meta-box tr {
+    border-bottom: 1px solid #ddd !important;
+    display: block;
+    padding: 5px 0;
+}
+
 .ots-member-skill-rating {
     width: 22%;
     float: right;
@@ -34,6 +72,16 @@
 
 .ots-member-skill-title {
     width: 75%;
+}
+
+@media ( min-width: 767px ) {
+
+    .ots-meta-box input[type=checkbox],
+    .ots-meta-box input[type=radio] {
+        margin-top: 0;
+        margin-bottom: 2px;
+    }
+
 }
 
 @media ( min-width: 769px ) {
