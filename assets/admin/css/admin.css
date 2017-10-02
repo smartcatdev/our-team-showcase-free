@@ -48,6 +48,10 @@ div[id^="team-"] .inside {
     padding: 0 !important;
 }
 
+.ots-meta-box tr:nth-child(odd) {
+    background: #fafafa;
+}
+
 .ots-meta-box th {
     font-weight: 500;
 }
@@ -66,12 +70,22 @@ div[id^="team-"] .inside {
 }
 
 .ots-member-skill-rating {
-    width: 22%;
-    float: right;
+    width: 30%;
+    margin-left: 4px;
+    height: 30px !important;
 }
 
 .ots-member-skill-title {
-    width: 75%;
+    width: 66%;
+}
+
+#ots-member-other-icon {
+    margin-bottom: 10px;
+}
+
+#ots-member-other-icon,
+#ots-member-other {
+   width: 100%;
 }
 
 @media ( min-width: 767px ) {
@@ -103,6 +117,11 @@ div[id^="team-"] .inside {
         width: 70%;
         float: right;
     }
+
+    .ots-member-skill-rating {
+        width: 32%;
+    }
+
 }
 
 .ots-pro {
