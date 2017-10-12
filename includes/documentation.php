@@ -28,6 +28,10 @@ function add_documentation_sections() {
     add_settings_section( 'templates',  __( 'Templates', 'ots' ), '', 'ots-getting-started' );
     add_settings_section( 'widgets', __( 'Widgets', 'ots' ), '', 'ots-getting-started' );
 
+    add_settings_section( 'manage-members', __( 'Managing Members', 'ots-pro' ), '', 'ots-portal' );
+    add_settings_section( 'restrict-posts', __( 'Restricting Posts and Pages', 'ots-pro' ), '', 'ots-portal' );
+    add_settings_section( 'portal-usage', __( 'Using the Portal', 'ots-pro' ), '', 'ots-portal' );
+
 }
 
 add_action( 'admin_init', 'ots\add_documentation_sections' );
@@ -48,6 +52,15 @@ function add_documentation_fields() {
     add_settings_field( 'custom-templates', __( 'Custom Templates - <i class="ots-pro">Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
 	add_settings_field( 'main-widget', __( 'Main Widget', 'ots' ), 'ots\doc_main_widget', 'ots-getting-started', 'widgets' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
+
+    add_settings_field( 'manage-members', __( 'Enable or Disable Portal Access', 'ots-pro' ), 'ots\doc_manage_members', 'ots-portal', 'manage-members' );
+    add_settings_field( 'redirect-posts', __( 'Redirecting Users From Restricted Content', 'ots-pro' ), 'ots\doc_redirect_posts', 'ots-portal', 'restrict-posts' );
+    add_settings_field( 'restrict-posts', __( 'Restricting Posts and Pages to Members Only', 'ots-pro' ), 'ots\doc_restrict_posts', 'ots-portal', 'restrict-posts' );
+    add_settings_field( 'restrict-groups', __( 'Restricting Posts and Pages by Group', 'ots-pro' ), 'ots\doc_restrict_groups', 'ots-portal', 'restrict-posts' );
+    add_settings_field( 'portal-overview', __( 'Portal Overview', 'ots-pro' ), 'ots\doc_portal_overview', 'ots-portal', 'portal-usage' );
+    add_settings_field( 'editing-profile', __( 'Editing Your Profile', 'ots-pro' ), 'ots\doc_editing_profile', 'ots-portal', 'portal-usage' );
+    add_settings_field( 'viewing-profile', __( 'Viewing Others Profiles', 'ots-pro' ), 'ots\doc_viewing_profile', 'ots-portal', 'portal-usage' );
+    add_settings_field( 'reset-password', __( 'Resetting Your Password', 'ots-pro' ), 'ots\doc_reset_password', 'ots-portal', 'portal-usage' );
 
 }
 
@@ -249,6 +262,161 @@ function doc_sidebar_widget() { ?>
 <?php }
 
 
+function doc_manage_members() { ?>
+
+    <div>
+        <p>
+            <?php _e( 'Member Portal access can be enabled or disabled for each team member with the Member Portal meta box. Once enabled, they will be able to log in and start using the portal.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-1.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-1.png' ) ); ?>">
+            </a>
+        </p>
+        <p>
+            <?php _e( 'Each members status will display in the <i>Portal Status</i> column the Team Members list table for easy viewing.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-2.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-2.png' ) ); ?>">
+            </a>
+        </p>
+        <p>
+            <?php _e( 'The <i>Team Portal</i> widget in the plugin settings page will display helpful information about the status of your member portal. Here you also have the option to enable portal access for all members.', 'ots' ); ?>
+        </p>
+        <p>
+            <i>
+                <?php _e( 'Note: When bulk enabling access, all newly activated members will have a new password auto generated and sent to their contact email address', 'ots' ); ?>
+            </i>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-3.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-3.png' ) ); ?>">
+            </a>
+        </p>
+    </div>
+
+<?php }
+
+
+function doc_redirect_posts() { ?>
+
+    <div>
+        <p>
+            <?php _e( 'If a user does not have sufficient privileges to view a particular post or page, you can customize the page that they will be redirected to, each can be overridden on a post level.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.png' ) ); ?>">
+            </a>
+        </p>
+    </div>
+
+<?php }
+
+
+function doc_restrict_posts() { ?>
+
+    <div>
+        <p>
+            <?php _e( 'In the <i>Member Portal Restriction</i> meta box you can control who can see a post or page.', 'ots' ); ?>
+        </p>
+        <p>
+            <?php _e( 'Restricting a post to <strong>All logged in members</strong> under Access will cause the post to no longer be public and only viewable only by members who are logged in.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.png' ) ); ?>">
+            </a>
+        </p>
+    </div>
+
+<?php }
+
+
+function doc_restrict_groups() { ?>
+
+    <div>
+        <p>
+            <?php _e( 'Posts and Pages can also be restricted to one or more groups so that only members of those groups will be able to view them.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.png' ) ); ?>">
+            </a>
+        </p>
+        <p>
+            <?php _e( 'The <strong>Portal Status</strong> of each post is also conveniently viewable in the Posts list table.', 'ots' ); ?>
+        </p>
+        <p class="media">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.png' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.png' ) ); ?>">
+            </a>
+        </p>
+    </div>
+
+<?php }
+
+
+function doc_reset_password() { ?>
+
+    <p>
+        <?php _e( 'If a user has forgotten or lost their password, they can request a new one by selecting the <strong>Forgot Password</strong> link on the login page. A new password will be automatically be generated and sent to their contact email.', 'ots' ); ?>
+    </p>
+
+<?php }
+
+function doc_portal_overview() { ?>
+
+    <div>
+        <p><?php _e( 'On the portal homepage, members can view previews of recent posts which they can like or comment on. The sidebar contains a list of all pages that the user can access from within the portal and a list of members who are in the same group.', 'ots' ); ?></p>
+        <p class="media">
+            <img> <code>portal home screenshot</code>
+        </p>
+        <p>
+            <?php _e( 'Users can also click into each post to read the full content and if it is the first time a user is viewing the post, the number of views will be incremented.', 'ots' ); ?>
+        </p>
+        <p>
+            <i><?php _e( 'Tip: Hover over a post\'s views or likes to see which members have viewed or liked the post.', 'ots' ); ?></i>
+        </p>
+        <p class="media">
+            <img> <code>screenshot of likes & views tooltip</code>
+        </p>
+        <p><?php _e( 'Members can navigate through the portal using the slide-out navigation menu which provides quick links back to the portal home, the user\'s profile page and to log out of the portal.', 'ots' ); ?></p>
+        <p class="media">
+            <img> <code>screenshot of nav drawer</code>
+        </p>
+    </div>
+
+<?php }
+
+
+function doc_editing_profile() { ?>
+
+    <div>
+        <p><?php _e( 'On the edit profile page users have the ability to update all aspects of their profile including their name, bio and contact information. Users can also change their password and set their profile image and cover photo.', 'ots' ); ?></p>
+        <p>
+            <i><?php _e( 'Note: Changes made here will also be reflected on the public site.', 'ots' ); ?></i>
+        </p>
+        <p class="media">
+            <img> <code>screenshot of profile edit page</code>
+        </p>
+    </div>
+
+<?php }
+
+function doc_viewing_profile() { ?>
+
+    <div>
+        <p><?php _e( 'When logged into the portal, users will be able to see a customized version of the single Team Member template that integrates with the team portal\'s appearance.', 'ots' ); ?></p>
+        <p class="media">
+            <img> <code>screenshot of team member page</code>
+        </p>
+    </div>
+
+<?php }
+
+
 /**
  * Render the documentation page.
  *
@@ -257,7 +425,8 @@ function doc_sidebar_widget() { ?>
 function do_documentation_page() {
 
     $tabs = array(
-        'ots-getting-started' => __( 'Getting Started', 'ots' )
+        'ots-getting-started' => __( 'Getting Started', 'ots' ),
+        'ots-portal'          => __( 'Team Portal', 'ots-pro' )
     );
 
     $tabs = apply_filters( 'ots_documentation_tabs', $tabs );
