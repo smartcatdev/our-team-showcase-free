@@ -88,6 +88,12 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.2.0 =
+1. Added the ability to set the number of columns from the shortcode
+2. Updated documentation
+3. Bug fixes
+4. Updated Pro version - Now it includes a private portal for the team
+
 = 4.1.1 =
 1. fix bug with error when saving posts
 2. fix php error for un-install

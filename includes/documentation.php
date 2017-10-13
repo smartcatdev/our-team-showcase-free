@@ -269,16 +269,16 @@ function doc_manage_members() { ?>
             <?php _e( 'Member Portal access can be enabled or disabled for each team member with the Member Portal meta box. Once enabled, they will be able to log in and start using the portal.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-1.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-1.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-1.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-1.jpg' ) ); ?>">
             </a>
         </p>
         <p>
             <?php _e( 'Each members status will display in the <i>Portal Status</i> column the Team Members list table for easy viewing.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-2.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-2.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-2.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-2.jpg' ) ); ?>">
             </a>
         </p>
         <p>
@@ -290,8 +290,8 @@ function doc_manage_members() { ?>
             </i>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-3.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-3.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/manage-members-3.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/manage-members-3.jpg' ) ); ?>">
             </a>
         </p>
     </div>
@@ -306,8 +306,8 @@ function doc_redirect_posts() { ?>
             <?php _e( 'If a user does not have sufficient privileges to view a particular post or page, you can customize the page that they will be redirected to, each can be overridden on a post level.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-1.jpg' ) ); ?>">
             </a>
         </p>
     </div>
@@ -325,8 +325,8 @@ function doc_restrict_posts() { ?>
             <?php _e( 'Restricting a post to <strong>All logged in members</strong> under Access will cause the post to no longer be public and only viewable only by members who are logged in.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-2.jpg' ) ); ?>">
             </a>
         </p>
     </div>
@@ -341,16 +341,16 @@ function doc_restrict_groups() { ?>
             <?php _e( 'Posts and Pages can also be restricted to one or more groups so that only members of those groups will be able to view them.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-3.jpg' ) ); ?>">
             </a>
         </p>
         <p>
             <?php _e( 'The <strong>Portal Status</strong> of each post is also conveniently viewable in the Posts list table.', 'ots' ); ?>
         </p>
         <p class="media">
-            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.png' ) ); ?>">
-                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.png' ) ); ?>">
+            <a target="_blank" href="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.jpg' ) ); ?>">
+                <img src="<?php echo esc_url( asset( 'images/doc/restrict-posts-4.jpg' ) ); ?>">
             </a>
         </p>
     </div>
@@ -446,7 +446,7 @@ function do_documentation_page() {
                 <div class="inner">
 
                     <div class="branding">
-                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.png' ) ); ?>" />
+                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.jpg' ) ); ?>" />
                     </div>
 
                     <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
