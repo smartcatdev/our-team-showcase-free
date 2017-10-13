@@ -32,6 +32,7 @@ class TeamMainWidget extends \WP_Widget {
 			'title'             => __( 'Meet Our Team', 'ots' ),
 			'group'             => '',
 			'limit'             => 'all',
+			'columns'           => Defaults::GRID_COLUMNS,
 			'template'          => Defaults::TEMPLATE,
 			'single_template'   => Defaults::SINGLE_TEMPLATE
 		);
@@ -61,6 +62,7 @@ class TeamMainWidget extends \WP_Widget {
         $title    = $new_instance['title'];
         $group    = $new_instance['group'];
         $limit    = $new_instance['limit'];
+        $columns  = $new_instance['columns'];
         $template = $new_instance['template'];
         $single   = $new_instance['single_template'];
 
@@ -73,6 +75,8 @@ class TeamMainWidget extends \WP_Widget {
 
         $group_templates  = get_templates();
         $single_templates = $this->single_templates();
+
+        $instance['columns'] = absint( $columns ) > 0 ? $columns : Defaults::GRID_COLUMNS;
 
         $instance['template']        = array_key_exists( $template, $group_templates )  ? $template : Defaults::TEMPLATE;
         $instance['single_template'] = array_key_exists( $single,   $single_templates ) ? $single   : Defaults::SINGLE_TEMPLATE;
@@ -208,6 +212,18 @@ class TeamMainWidget extends \WP_Widget {
 
 			?>
 
+        </p>
+        <p>
+            <label for="<?php esc_attr_e( $this->get_field_id( 'columns' ) ); ?>"
+                   class="sc_our_team_widget_columns_label">
+                <?php _e( 'Grid Columns', 'ots' ); ?>
+            </label>
+
+            <input class="widefat ots-grid-columns"
+                   type="number"
+                   id="<?php esc_attr_e( $this->get_field_id( 'columns' ) ); ?>"
+                   name="<?php esc_attr_e( $this->get_field_name( 'columns' ) ); ?>"
+                   value="<?php echo esc_attr_e( absint( $instance['columns'] ) ); ?>" />
         </p>
         <div class="ots-widget-limit">
             <p>

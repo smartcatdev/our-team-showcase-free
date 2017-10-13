@@ -30,6 +30,7 @@ function do_shortcode_output( $attributes = array() ) {
     $defaults = array(
         'id'              => '',
         'group'           => '',
+        'columns'         => get_option( Options::GRID_COLUMNS ),
         'limit'           => get_option( Options::DISPLAY_LIMIT ),
         'template'        => get_option( Options::TEMPLATE ),
         'single_template' => get_option( Options::SINGLE_TEMPLATE )
@@ -48,6 +49,7 @@ function do_team_view_output( array $args = array() ) {
 		'id'              => '',
 		'group'           => '',
 		'limit'           => -1,
+		'columns'         => Defaults::GRID_COLUMNS,
 		'template'        => Defaults::TEMPLATE,
 		'single_template' => Defaults::SINGLE_TEMPLATE
 	);
