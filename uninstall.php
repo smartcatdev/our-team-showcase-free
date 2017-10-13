@@ -13,7 +13,7 @@ if( !defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  */
 
 include_once dirname( __FILE__ ) . '/constants.php';
-include_once dirname( __FILE__ ) . '/includes/team_member-post-type.php';
+include_once dirname( __FILE__ ) . '/includes/team-member.php';
 
 
 

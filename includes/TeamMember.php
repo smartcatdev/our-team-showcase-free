@@ -59,6 +59,51 @@ class TeamMember {
 
     }
 
+    public function get_id() {
+
+        return $this->post->ID;
+
+    }
+
+
+    public function get_name() {
+
+        return $this->post->post_title;
+
+    }
+
+
+    public function get_bio() {
+
+        return $this->post->post_content;
+
+    }
+
+
+    public function get_groups() {
+
+        return get_the_terms( get_post( $this->get_id() ), 'team_member_position' );
+
+    }
+
+
+    public function in_group( $id ) {
+
+        $groups = $this->get_groups();
+
+        foreach ( $groups as $group ) {
+
+            if ( $group->term_id == $id ) {
+                return true;
+            }
+
+        }
+
+        return false;
+
+    }
+
+
     protected function prefix( $key ) {
         return self::$prefix . $key;
     }

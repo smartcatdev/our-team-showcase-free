@@ -151,7 +151,7 @@ function add_team_member_custom_columns( $columns ) {
 
     $columns['title'] = __( 'Name', 'ots' );
     $columns['team_member_title'] = __( 'Job Title', 'ots' );
-    $columns['team_member_group'] = __( 'Group', 'ots' );
+    $columns['team_member_group'] = __( 'Groups', 'ots' );
     $columns['team_member_image'] = __( 'Image', 'ots' );
 
     return $columns;
@@ -173,7 +173,7 @@ function do_team_member_custom_columns( $column, $post_id ) {
     switch( $column ) {
 
         case 'team_member_title' :
-            echo get_post_meta( $post_id, 'team_member_title', true );
+            echo get_post_meta( $post_id, 'team_member_title', true ) ?: '-';
             break;
 
         case 'team_member_image' :
@@ -182,14 +182,21 @@ function do_team_member_custom_columns( $column, $post_id ) {
 
         case 'team_member_group':
 
-            $terms = get_the_terms( get_post( $post_id ), 'team_member_position' );
+            $groups = get_the_terms( get_post( $post_id ), 'team_member_position' );
 
-            if ( !empty( $terms ) ) {
-                echo $terms[0]->name;
+            if ( !empty( $groups ) ) {
+
+                $str = '';
+
+                foreach ( $groups as $group ) {
+                    $str .= "$group->name - ";
+                }
+
+                echo rtrim( $str, ' - ' );
+
             }
 
             break;
-
 
     }
 
@@ -414,6 +421,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-phone"
                        name="team_member_phone"
                        class="regular-text"
+                       placeholder="(123) 456-7890"
                        value="<?php esc_attr_e( $member->phone ); ?>" />
             </td>
         </tr>
@@ -425,6 +433,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-facebook"
                        name="team_member_links[facebook]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->facebook ); ?>" />
             </td>
         </tr>
@@ -436,6 +445,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-twitter"
                        name="team_member_links[twitter]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->twitter ); ?>" />
             </td>
         </tr>
@@ -447,6 +457,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-linkedin"
                        name="team_member_links[linkedin]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->linkedin ); ?>" />
             </td>
         </tr>
@@ -458,6 +469,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-gplus"
                        name="team_member_links[gplus]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->gplus ); ?>" />
             </td>
         </tr>
@@ -469,6 +481,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-instagram"
                        name="team_member_links[instagram]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->instagram ); ?>" />
             </td>
         </tr>
@@ -480,6 +493,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-pinterest"
                        name="team_member_links[pinterest]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->pinterest ); ?>" />
             </td>
         </tr>
@@ -491,6 +505,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 <input id="ots-member-website"
                        name="team_member_links[website]"
                        class="regular-text"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->website ); ?>" />
             </td>
         </tr>
@@ -512,6 +527,7 @@ function do_contact_meta_box( \WP_Post $post ) { ?>
                 </select>
                 <input id="ots-member-other"
                        name="team_member_other"
+                       placeholder="http://"
                        value="<?php esc_attr_e( $member->other ); ?>" />
             </td>
         </tr>

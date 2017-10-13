@@ -531,6 +531,8 @@ function do_settings_page() {
                     </div>
                 </div>
 
+                <?php do_action( 'ots_admin_sidebar_widgets' ); ?>
+
             </div>
 
             <div class="clear"></div>
@@ -755,3 +757,31 @@ function display_limit_field() {
     <p class="description"><?php _e( 'The maximum number of members to display', 'ots' ); ?></p>
 
 <?php }
+
+
+function settings_toggle( array $args ) {
+
+    $defaults = array(
+        'attrs'   => array(),
+        'checked' => false,
+        'label'   => '',
+        'slider'  => ''
+    );
+
+    $args = wp_parse_args( $args, $defaults );
+
+    echo '<input type="hidden" name="' . esc_attr( $args['name'] ) . '" value="off" />';
+
+    echo '<label class="switch">
+              <input type="checkbox"
+                     value="on"
+                     name="' . esc_attr( $args['name'] ) . '" ';
+
+    print_attrs( $args['attrs'] );
+
+    checked( 'on', $args['checked'] );
+
+    echo ' /><span class="slider ' . esc_attr( $args['slider'] ) . '"></label> ';
+    echo '<span class="label">' . esc_html( $args['label'] ) . '</span>';
+
+}

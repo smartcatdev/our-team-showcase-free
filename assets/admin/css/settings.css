@@ -150,12 +150,15 @@
     border-radius: 3px;
     border: 1px solid #ccc;
     padding: 3px 10px;
+}
+
+.ots-admin-page form input,
+.ots-admin-page form select {
     line-height: 30px;
 }
 
 .ots-admin-page form input:not([type="checkbox"]):not([type="radio"]),
-.ots-admin-page form select,
-.ots-admin-page form textarea {
+.ots-admin-page form select {
     height: 30px;
 }
 

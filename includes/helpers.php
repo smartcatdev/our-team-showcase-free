@@ -5,15 +5,16 @@ namespace ots;
 /**
  * Convenience method to generate a dropdown of posts.
  *
- * @param $name
- * @param string $id
- * @param string $selected
+ * @param              $name
+ * @param string       $id
+ * @param string       $selected
+ * @param string|array $post_type
  * @since 4.0.0
  */
-function posts_dropdown( $name, $id = '', $selected = '' ) {
+function posts_dropdown( $name, $id = '', $selected = '', $post_type = 'post' ) {
 
     $posts = get_posts( array(
-        'post_type'      => 'post',
+        'post_type'      => $post_type,
         'posts_per_page' => -1
     ) );
 
@@ -126,5 +127,35 @@ function do_member_social_links( \WP_Post $member = null, $before ='', $after = 
     }
 
     echo apply_filters( 'ots_parse_social_links', $rendered, $member );
+
+}
+
+
+function member_groups( $member = null, $separator = ' - ', $echo = true ) {
+
+    $member = team_member( $member );
+    $str    = '';
+
+    if ( $member ) {
+
+        $groups = $member->get_groups();
+
+        if ( !empty( $groups ) ) {
+
+            foreach ( $groups as $group ) {
+                $str .= $group->name . $separator;
+            }
+
+            $str = rtrim( $str, $separator );
+
+            if ( $echo ) {
+                esc_html_e( $str );
+            }
+
+        }
+
+    }
+
+    return $str;
 
 }
