@@ -77,10 +77,17 @@ interface Options {
      */
     const PLUGIN_VERSION = 'ots-plugin-version';
 
-	/**
-	 * @since 4.0.0
-	 */
-	const NUKE = 'ots-nuke-install';
+    /**
+     * @since 4.0.0
+     */
+    const NUKE = 'ots-nuke-install';
+    
+    /**
+     * @since 4.2.0
+     */
+    const FIRST_INSTALL_REDIRECT = 'ots-first-install-redirect';
+    
+
 
 }
 
@@ -145,5 +152,10 @@ interface Defaults {
      * @since 4.0.0
      */
     const SHOW_SINGLE_SOCIAL = 'on';
+
+    /**
+     * @since 4.2.0
+     */
+    const FIRST_INSTALL_REDIRECT = 0;
 
 }

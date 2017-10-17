@@ -205,3 +205,22 @@ function plugin_action_links( $links ) {
 }
 
 add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'ots\plugin_action_links' );
+
+/**
+ * 
+ * @since 4.2.0
+ */
+function install_redirect() {
+    
+    $first_install = get_option( Options::FIRST_INSTALL_REDIRECT, Defaults::FIRST_INSTALL_REDIRECT );
+    
+    error_log( $first_install );
+    
+    if( $first_install != 1 ) {
+        update_option( Options::FIRST_INSTALL_REDIRECT, 1 );
+        exit( wp_redirect( admin_url( 'edit.php?post_type=team_member&page=ots-settings' ) ) );
+    }
+    
+    
+}
+add_action( 'admin_init', 'ots\install_redirect' );
