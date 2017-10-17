@@ -250,12 +250,18 @@ function doc_custom_templates() { ?>
 
 function doc_main_widget() { ?>
 
+    <p class="alignright">
+        <img src="<?php echo esc_url( asset( 'images/doc/ots-widget.jpg' ) ); ?>"/>
+    </p>
+    
     <p>
         <?php _e( 'The plugin also includes a widget that can output the same templates as the shortcode in your theme\'s widget areas. Simply go to Appearance - Widgets and find the widget titled "Our Team Widget".', 'ots' ); ?>
     </p>
     <p>
         <?php _e( 'You can drag & drop the widget into any widget placeholder and then configure to your liking.', 'ots' ); ?>
     </p>
+    
+    
 
 <?php }
 
@@ -292,7 +298,9 @@ function doc_whatis_hub() { ?>
     
     <br>
     
-
+    <p class="media">
+        <img src="<?php echo esc_url( asset( 'images/doc/portal-1.jpg' ) ); ?>"/>
+    </p>
     
     
 <?php }
