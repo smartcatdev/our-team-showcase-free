@@ -30,7 +30,7 @@ function add_documentation_sections() {
 
     add_settings_section( 'manage-members', __( 'Managing Members', 'ots-pro' ), '', 'ots-portal' );
     add_settings_section( 'restrict-posts', __( 'Restricting Posts and Pages', 'ots-pro' ), '', 'ots-portal' );
-    add_settings_section( 'portal-usage', __( 'Using the Portal', 'ots-pro' ), '', 'ots-portal' );
+    add_settings_section( 'portal-usage', __( 'Using the Community Hub', 'ots-pro' ), '', 'ots-portal' );
 
 }
 
@@ -47,17 +47,19 @@ function add_documentation_fields() {
     add_settings_field( 'usage', __( 'Usage', 'ots' ), 'ots\doc_usage', 'ots-getting-started', 'plugin-usage' );
     add_settings_field( 'templates', __( 'Team View Templates', 'ots' ), 'ots\doc_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Shortcodes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'shortcode-columns', __( 'Setting The number of columns Using Shortcodes', 'ots' ), 'ots\doc_shortcode_columns', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-ids', __( 'Setting The ID of a Shortcode Instance', 'ots' ), 'ots\doc_shortcode_ids', 'ots-getting-started', 'templates' );
     add_settings_field( 'single-templates', __( 'Single Member View Templates', 'ots' ), 'ots\doc_single_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'custom-templates', __( 'Custom Templates - <i class="ots-pro">Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
 	add_settings_field( 'main-widget', __( 'Main Widget', 'ots' ), 'ots\doc_main_widget', 'ots-getting-started', 'widgets' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
 
-    add_settings_field( 'manage-members', __( 'Enable or Disable Portal Access', 'ots-pro' ), 'ots\doc_manage_members', 'ots-portal', 'manage-members' );
+    add_settings_field( 'whatis-hub', __( 'What is the Community Hub ?', 'ots-pro' ), 'ots\doc_whatis_hub', 'ots-portal', 'manage-members' );
+    add_settings_field( 'manage-members', __( 'Enable or Disable Community Access', 'ots-pro' ), 'ots\doc_manage_members', 'ots-portal', 'manage-members' );
     add_settings_field( 'redirect-posts', __( 'Redirecting Users From Restricted Content', 'ots-pro' ), 'ots\doc_redirect_posts', 'ots-portal', 'restrict-posts' );
     add_settings_field( 'restrict-posts', __( 'Restricting Posts and Pages to Members Only', 'ots-pro' ), 'ots\doc_restrict_posts', 'ots-portal', 'restrict-posts' );
     add_settings_field( 'restrict-groups', __( 'Restricting Posts and Pages by Group', 'ots-pro' ), 'ots\doc_restrict_groups', 'ots-portal', 'restrict-posts' );
-    add_settings_field( 'portal-overview', __( 'Portal Overview', 'ots-pro' ), 'ots\doc_portal_overview', 'ots-portal', 'portal-usage' );
+    add_settings_field( 'portal-overview', __( 'Community Hub Overview', 'ots-pro' ), 'ots\doc_portal_overview', 'ots-portal', 'portal-usage' );
     add_settings_field( 'editing-profile', __( 'Editing Your Profile', 'ots-pro' ), 'ots\doc_editing_profile', 'ots-portal', 'portal-usage' );
     add_settings_field( 'viewing-profile', __( 'Viewing Others Profiles', 'ots-pro' ), 'ots\doc_viewing_profile', 'ots-portal', 'portal-usage' );
     add_settings_field( 'reset-password', __( 'Resetting Your Password', 'ots-pro' ), 'ots\doc_reset_password', 'ots-portal', 'portal-usage' );
@@ -79,7 +81,8 @@ function doc_usage() { ?>
         </p>
         <p>
             <?php _e( 'You can also indicate a specific group to display, as well as override the settings for the full team and single member templates through the short-code:', 'ots' ); ?>
-            <code>[our-team group="slug" template="grid" single_template="panel"]</code>
+            <br>
+            <code>[our-team group="slug" template="grid" single_template="panel" columns="3"]</code>
         </p>
         <p>
             <i>
@@ -104,7 +107,7 @@ function doc_templates() { ?>
 
     <p>
         <?php _e( 'To view the Template options for Our Team Showcase, visit the ', 'ots' ); ?>
-        <a target="_blank" href="https://smartcatdesign.net/our-team-showcase-demo/"><?php _e( 'Our Team Showcase Demo Page', 'ots' ); ?></a>.
+        <a target="_blank" href="http://wordpressteamplugin.com/templates/"><?php _e( 'Our Team Showcase Demo Page', 'ots' ); ?></a>.
     </p>
     <p>
         <i>
@@ -124,7 +127,7 @@ function doc_shortcode_templates() { ?>
 
     <p>
         <?php _e( 'The default template, "Grid - Boxes", can be changed to one of several other options. Each one will display your team showcase in a different visual arrangement. The template can be changed in the ', 'ots' ); ?>
-        <a target="_blank" href="<?php menu_page_url( 'ots-settings' ); ?>"><?php _e( 'plugin settings', 'ots' ); ?></a>.
+        <a href="<?php menu_page_url( 'ots-settings' ); ?>"><?php _e( 'plugin settings', 'ots' ); ?></a>.
     </p>
     <p>
         <?php _e( 'If you wish to display the Showcase in more than one configuration on the site, you can also modify the short-code to specify a different template for that version of output of the plugin.', 'ots' ); ?>
@@ -162,6 +165,18 @@ function doc_shortcode_ids() { ?>
 
 <?php }
 
+function doc_shortcode_columns() { ?>
+
+    <p>
+        <?php _e( 'You can set the number of columns from the settings page of the plugin, alternatively, you can also set it from the shortcode directly.', 'ots' ); ?>
+    </p>
+    
+    <p>
+        <code>[our-team template="grid3" columns="4"]</code>
+    </p>
+
+<?php }
+
 
 /**
  * Render the single templates topic.
@@ -184,7 +199,7 @@ function doc_single_templates() { ?>
     </p>
     <p>
         <strong>
-            <?php _e( 'Card Popup (single_template="vcard")', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
+            <?php _e( 'Card Popup <code>[our-team single_template="vcard"]</code>', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
         </strong>
     </p>
     <p class="media">
@@ -197,7 +212,7 @@ function doc_single_templates() { ?>
     </p>
     <p>
         <strong>
-            <?php _e( 'Side Panel (single_template="panel")', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
+            <?php _e( 'Side Panel <code>[our-team single_template="panel"]</code>', 'ots' ); ?> - <i class="ots-pro"><?php _e( 'Pro Version', 'ots' ); ?></i>
         </strong>
     </p>
     <p class="media">
@@ -261,6 +276,26 @@ function doc_sidebar_widget() { ?>
 
 <?php }
 
+function doc_whatis_hub() { ?>
+
+    <p>
+        <?php _e( 'Our Community Hub is an add-on for Our Team Showcase, which creates a private, password-protected area on your site that can be only accessed by your team members.', 'ots' ); ?> 
+    </p>
+    
+    <p>
+        <?php _e( 'Allow your team members to <strong>login and update</strong> their own user profiles', 'ots' ); ?><br>
+        <?php _e( 'Secure posts and pages so that they can only be accessed by your team members', 'ots' ); ?> <br>
+        <?php _e( 'A social hub for your company where you can share news, events and updates', 'ots' ); ?> <br>
+        
+    </p>
+    <h2><?php _e( 'Our Community Hub creates a private, password-protected area on your site, where team members can login, view protected posts & pages, write comments, "like" and "favorite" content.' ); ?></h2>
+    
+    <br>
+    
+
+    
+    
+<?php }
 
 function doc_manage_members() { ?>
 
@@ -426,7 +461,7 @@ function do_documentation_page() {
 
     $tabs = array(
         'ots-getting-started' => __( 'Getting Started', 'ots' ),
-        'ots-portal'          => __( 'Team Portal', 'ots-pro' )
+        'ots-portal'          => __( 'Community Hub', 'ots-pro' )
     );
 
     $tabs = apply_filters( 'ots_documentation_tabs', $tabs );

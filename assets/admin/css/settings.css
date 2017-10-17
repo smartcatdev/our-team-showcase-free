@@ -445,7 +445,7 @@
 @media(min-width: 768px) {
 
     .ots-add-ons .ots-add-on {
-        max-width: 310px;
+        max-width: 800px;
         float: left;
         margin: 0 10px 10px 0;
         min-height: 520px;
