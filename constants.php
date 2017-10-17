@@ -82,13 +82,6 @@ interface Options {
      */
     const NUKE = 'ots-nuke-install';
     
-    /**
-     * @since 4.2.0
-     */
-    const FIRST_INSTALL_REDIRECT = 'ots-first-install-redirect';
-    
-
-
 }
 
 interface Defaults {
@@ -153,9 +146,5 @@ interface Defaults {
      */
     const SHOW_SINGLE_SOCIAL = 'on';
 
-    /**
-     * @since 4.2.0
-     */
-    const FIRST_INSTALL_REDIRECT = 0;
 
 }
