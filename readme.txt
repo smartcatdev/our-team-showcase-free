@@ -4,7 +4,7 @@ Donate link: https://smartcatdesign.net/downloads/our-team-showcase/
 Tags: team, staff, directory, employees, widget, shortcode, members, carousel, honeycomb, stack, grid, custom, template, social, profile, custom post type, portfolio, profile,meet team, skills, cv,v-card, portal
 Requires at least: 4.6
 Tested up to: 4.8.1
-Stable tag: 4.1.0
+Stable tag: 4.1.1
 License: GPLv2 or later
 
 The best way to display your employees, team members, or any type of list. Multiple appealing templates,SEO friendly, re-order functionality.
@@ -57,6 +57,8 @@ Pro Version Features:
 * Search & Sort employee directory
 * Looks great on desktop & mobile
 * Team Member Skills, Hobbies, Tags
+* **Community Hub** (New - October 2017) creates a private member login page on your site so you can share 
+posts and pages only with your team
 
 Team Member Details & Icons:
 
@@ -71,6 +73,11 @@ Team Member Details & Icons:
 * Instagram
 * Pinterest
 * Website/URL
+* Whatsapp
+* Skype
+* Vimeo
+* Soundcloud
+* Skills
 * Links to up to 3 Articles
 
 
@@ -81,12 +88,22 @@ Team Member Details & Icons:
 4. PRO VERSION - Honeycomb Demo
 5. PRO VERSION - stacked list Demo
 6. PRO VERSION - Carousel Demo
+7. Community Hub - Dashboard
+8. Community Hub - Team Member Profile
+9. Community Hub - Single Post
+
 
 == Installation ==
 1. Download the plugin, then upload the zipped file to your site from the WordPress dashboard plugin uploader menu
 2. OR - Upload the unpacked folder folder via FTP into /wp-content/plugins
 
 == Changelog == 
+
+= 4.2.0 =
+1. Added the ability to set the number of columns from the shortcode
+2. Updated documentation
+3. Bug fixes
+4. Updated Pro version - Now it includes a the Community Hub for the team
 
 = 4.1.1 =
 1. fix bug with error when saving posts

@@ -11,7 +11,7 @@ function do_migration() {
 
     $options = get_option( 'smartcat_team_options', false );
 
-    if ( get_option( Options::PLUGIN_VERSION, 0 ) < '4.0.0' ) {
+    if ( $options && get_option( Options::PLUGIN_VERSION, 0 ) < '4.0.0' ) {
 
         // Map out all non-boolean values
         $map = array(

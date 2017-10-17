@@ -2,7 +2,7 @@
 
 namespace ots;
 
-const VERSION = '4.1.1';
+const VERSION = '4.2.0';
 
 
 interface Options {
@@ -77,11 +77,11 @@ interface Options {
      */
     const PLUGIN_VERSION = 'ots-plugin-version';
 
-	/**
-	 * @since 4.0.0
-	 */
-	const NUKE = 'ots-nuke-install';
-
+    /**
+     * @since 4.0.0
+     */
+    const NUKE = 'ots-nuke-install';
+    
 }
 
 interface Defaults {
@@ -145,5 +145,6 @@ interface Defaults {
      * @since 4.0.0
      */
     const SHOW_SINGLE_SOCIAL = 'on';
+
 
 }
