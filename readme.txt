@@ -77,7 +77,6 @@ Team Member Details & Icons:
 * Skype
 * Vimeo
 * Soundcloud
-* Skills
 * Links to up to 3 Articles
 
 
