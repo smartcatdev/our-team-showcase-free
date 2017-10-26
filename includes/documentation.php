@@ -489,7 +489,7 @@ function do_documentation_page() {
                 <div class="inner">
 
                     <div class="branding">
-                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.jpg' ) ); ?>" />
+                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.png' ) ); ?>" />
                     </div>
 
                     <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>

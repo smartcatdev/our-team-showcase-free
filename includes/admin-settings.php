@@ -37,6 +37,7 @@ function add_menu_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Re-Order Members', 'ots' ), __( 'Re-Order Members', 'ots' ), 'manage_options', 'ots-reorder-members', 'ots\do_member_reorder_page' );
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
+    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Import/Export', 'ots' ), __( 'Import/Export', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
 
 }
 
@@ -433,7 +434,7 @@ function do_settings_page() {
     $tabs = apply_filters( 'ots_settings_page_tabs',  array(
         'ots-team-view'          => __( 'Team View', 'ots' ),
         'ots-single-member-view' => __( 'Single Member View', 'ots' ),
-        'ots-advanced'           => __( 'Advanced', 'ots' )
+        'ots-advanced'           => __( 'Advanced', 'ots' ),
     ) );
 
     reset( $tabs );
@@ -791,3 +792,4 @@ function settings_toggle( array $args ) {
     echo '<span class="label">' . esc_html( $args['label'] ) . '</span>';
 
 }
+

@@ -82,6 +82,17 @@ interface Options {
      */
     const NUKE = 'ots-nuke-install';
     
+    
+    /**
+     * @since 4.3.0
+     */
+    const EXPORT_BUTTON = 'ots-export-button';
+    
+    /**
+     * @since 4.3.0
+     */
+    const IMPORT_BUTTON = 'ots-import-button';
+    
 }
 
 interface Defaults {

@@ -42,6 +42,7 @@ function init() {
     include_once dirname( __FILE__ ) . '/includes/functions.php';
     include_once dirname( __FILE__ ) . '/includes/helpers.php';
     include_once dirname( __FILE__ ) . '/includes/team-member.php';
+    include_once dirname( __FILE__ ) . '/includes/tools.php';
     include_once dirname( __FILE__ ) . '/includes/admin-settings.php';
     include_once dirname( __FILE__ ) . '/includes/documentation.php';
     include_once dirname( __FILE__ ) . '/includes/add-ons.php';
