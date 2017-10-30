@@ -187,3 +187,13 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.tool-status-failed,
+.tool-status-failed th{
+    color: red !important;
+}
+
+.tool-status-success,
+.tool-status-success th {
+    color: green !important;
+}

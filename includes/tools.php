@@ -15,7 +15,7 @@ add_action( 'admin_post_ots_export_team', function() {
     if( $team->post_count <= 0 ) {
         
         $message['export_response'] = 'Failed';
-        $message['export_output'] = urlencode( __( 'There are no team members to export', 'ots' ) );
+        $message['export_output'] = urlencode( 'There are no team members to export' );
         
     }else {
         
@@ -41,7 +41,7 @@ add_action( 'admin_post_ots_export_team', function() {
                 'google'            => $member->pinterest,
                 'website'           => $member->website,
                 'other_icon'        => $member->other_icon,
-                'other_url'         => $member->other_url,
+                'other'             => $member->other,
                 'article_bool'      => $member->article_bool,
                 'article_title'     => $member->article_title,
                 'article1'          => $member->article1,
@@ -82,13 +82,13 @@ add_action( 'admin_post_ots_export_team', function() {
         }else {
 
             $message['export_response'] = 'Failed';
-            $message['export_output'] = urlencode( __( 'Cannot create file, check your server permissions', 'ots' ) );
+            $message['export_output'] = urlencode( 'Cannot create file, check your server permissions' );
             $message['csv'] = $csv;
         }
         
-        wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
-        
     }
+    
+    wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
     
 });
 
@@ -116,8 +116,8 @@ add_action( 'admin_post_ots_import_team', function() {
     // Ensure user has selected an import file
     if( empty( $_FILES['ots_file_import'] ) ) {
         
-        $message['import_response'] = __( 'Failed', 'ots' );
-        $message['import_output'] = __( 'Missing import file.', 'ots' );
+        $message['import_response'] = 'Failed';
+        $message['import_output'] = urlencode( 'Missing import file.' );
         wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
         return;
         
@@ -126,8 +126,8 @@ add_action( 'admin_post_ots_import_team', function() {
     // Ensure the file is of the right type
     if( empty( $_FILES['ots_file_import']['type'] ) || ! in_array( strtolower( $_FILES['ots_file_import']['type'] ), $accepted_mime_types ) ) {
         
-        $message['import_response'] = __( 'Failed', 'ots' );
-        $message['import_output'] = __( 'The file you have uploaded cannot be processed. Please upload a CSV file.', 'ots' );
+        $message['import_response'] = 'Failed';
+        $message['import_output'] = urlencode( 'The file you have uploaded cannot be processed. Please upload a CSV file.' );
         wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
         return;
         
@@ -184,8 +184,8 @@ add_action( 'admin_post_ots_import_team', function() {
         
     }
     
-    $message['import_response'] = __( 'Success', 'ots' );
-    $message['import_output'] = __( 'Import successful! %s member(s) imported', $total_imported, 'ots' );
+    $message['import_response'] = 'Success';
+    $message['import_output'] = urlencode( 'Import successful! ' . $total_imported . ' member(s) imported' );
     
     
     wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
@@ -428,10 +428,16 @@ function do_import_export_page() { ?>
                             
                             <?php $response = isset( $_GET['export_response'] ) ? $_GET['export_response'] : false; ?>
                             <?php if( $response ) : ?> 
-                            <tr>
+                            <tr class="tool-status-<?php echo esc_attr( strtolower( $response ) ); ?>">
                                 <th><?php echo esc_attr( $response ); ?></th>
                                 <td>
-                                    <a href="<?php echo esc_url( $_GET['export_output'] ) ?>" class="button button-primary"><?php _e( 'Download', 'ots' ); ?></a>
+                                    <?php if( $response == 'Failed' ) : ?>
+                                        <?php echo $_GET['export_output']; ?>
+                                    <?php else : ?>
+                                            <a href="<?php echo esc_url( $_GET['export_output'] ) ?>" class="button button-primary"><?php _e( 'Download', 'ots' ); ?></a>
+                                    <?php endif; ?>
+                                    
+
                                 </td>
                             </tr>
                             <?php endif; ?>
@@ -441,7 +447,7 @@ function do_import_export_page() { ?>
                     </table>
                 </form>
 
-                <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php?action=ots_import_team' ) ) ?>" enctype="multipart/form-data">
+                <form method="post" id="ots-import-form" action="<?php echo esc_url( admin_url( 'admin-post.php?action=ots_import_team' ) ) ?>" enctype="multipart/form-data">
 
                     <h2><?php _e( 'Import', 'ots' ); ?></h2>
                     <table class="form-table">
@@ -458,13 +464,23 @@ function do_import_export_page() { ?>
                             <?php $response = isset( $_GET['import_response'] ) ? $_GET['import_response'] : false; ?>
                             <?php if( $response ) : ?> 
                             
-                            <tr>
+                            <tr class="tool-status-<?php echo esc_attr( strtolower( $response ) ); ?>">
                                 <th><?php echo $response; ?></th>
                                 <td><?php echo $_GET[ 'import_output' ] ?: ''; ?></td>
                             </tr>
                             
                             <?php endif; ?>
                             
+                            
+                            <tr>
+                                <td colspan="2">
+                                    <?php _e( '1. Please note that the Import tool will attempt to import member images, this requires the plugin to '
+                                            . 'create the image files on the destination website - the web server must have access to create files in PHP '
+                                            . 'otherwise the import will fail', 'ots' ); ?>
+                                    <br>
+                                    <?php _e( '2. The Import feature will not import posts from the "Favorite articles" - It will simply assign the member\'s favorite posts to the IDs', 'ots' ); ?>
+                                </td>
+                            </tr>
                             
                         </tbody>
                     </table>
