@@ -146,7 +146,7 @@ add_action( 'admin_post_ots_import_team', function() {
                 'post_status'   => 'publish'
             ) );
 
-        } catch (Exception $ex) {
+        } catch ( \Exception $ex ) { 
 
             continue;
 
@@ -193,6 +193,10 @@ add_action( 'admin_post_ots_import_team', function() {
 
 
 function import_photo( TeamMember $member, $photo_url ) {
+    
+    if( ! $photo_url ) {
+        return;
+    }
     
     $dir = wp_upload_dir();
     
