@@ -29,6 +29,7 @@ add_action( 'admin_post_ots_export_team', function() {
             $members[ $member->get_id() ] = array(
                 'name'              => $member->get_name(),
                 'title'             => $member->title,
+                'bio'               => $member->get_bio(),
                 'photo_url'         => get_the_post_thumbnail_url( $member->get_id() ),
                 'email'             => $member->email,
                 'phone'             => $member->phone,
@@ -57,8 +58,8 @@ add_action( 'admin_post_ots_export_team', function() {
                 'skill_value4'      => $member->skill_value4,
                 'skill5'            => $member->skill5,
                 'skill_value5'      => $member->skill_value5,
-                'display_tags'      => $member->tags_bool,
-                'tag_title'         => $member->tags_title,
+                'tags_bool'         => $member->tags_bool,
+                'tags_title'        => $member->tags_title,
                 'tags'              => $member->tags,
                 'quote'             => $member->quote,
             );
@@ -156,17 +157,26 @@ add_action( 'admin_post_ots_import_team', function() {
 
         foreach( $row as $key => $val ) {
 
-            if( $key == 'name' ) {
+            switch( $key ) {
                 
-            }elseif( $key == 'photo_url' ) {
+                case 'name' : 
+                    $member->set_name( $val );
+                    break;
                 
-            }else {
-                $member->$key = $val;
+                case 'photo_url' :
+                    import_photo( $member, $val );
+                    break;
+                
+                case 'bio' :
+                    $member->set_bio( $val );
+                    break;
+                
+                default :
+                    $member->$key = $val;
+                    break;
+                
             }
             
-                
-            
-
 
         }
 
@@ -181,6 +191,62 @@ add_action( 'admin_post_ots_import_team', function() {
     
 });
 
+
+function import_photo( TeamMember $member, $photo_url ) {
+    
+    $dir = wp_upload_dir();
+    
+    $contents = file_get_contents( $photo_url );
+    $extension = substr( strrchr( $photo_url,'.' ), 1 );
+    $uploadfile = $dir['path'] . '/' . $member->get_id() . '.' . $extension;
+
+    $savefile = fopen( $uploadfile, 'w' );
+    fwrite( $savefile, $contents );
+    fclose( $savefile );
+    
+    $attachment = array(
+        'post_title'        => $member->get_id() . '.' . $extension,
+        'post_content'      => '',
+        'post_mime_type'    => get_mime_type( $extension ),
+        'post_status'       => 'publish',
+        'post_parent'       => $member->get_id()
+    );
+
+    $attach_id = wp_insert_attachment( $attachment, $uploadfile, $member->get_id() );
+
+    $attach_data = wp_generate_attachment_metadata( $attach_id, $uploadfile, $member->get_id() );
+    wp_update_attachment_metadata( $attach_id, $attach_data );
+
+    update_post_meta( $member->get_id(), '_thumbnail_id', $attach_id );
+    
+}
+
+function get_mime_type( $extension ) {
+    
+    $mime = null;
+    
+    switch ( $extension ) {
+        
+        case 'jpg' || 'jpeg' :
+            
+            $mime = 'image/jpeg';
+            break;
+        
+        case 'png' :
+            
+            $mime = 'image/png';
+            break;
+        
+        default :
+            
+            $mime = 'image/jpeg';
+            break;
+        
+    }
+    
+    return $mime;
+    
+}
 
 /**
  * 

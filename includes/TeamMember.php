@@ -94,6 +94,15 @@ class TeamMember {
         ) );
         
     }
+    
+    public function set_bio( $bio ) {
+        
+        wp_update_post( array(
+            'ID'            => $this->get_id(),
+            'post_content'  => $bio
+        ) );
+        
+    }
 
 
     public function in_group( $id ) {
