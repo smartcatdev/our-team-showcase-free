@@ -38,6 +38,7 @@ add_action( 'admin_post_ots_export_team', function() {
                 'linkedin'          => $member->linkedin,
                 'instagram'         => $member->instagram,
                 'pinterest'         => $member->pinterest,
+                'google'            => $member->pinterest,
                 'website'           => $member->website,
                 'other_icon'        => $member->other_icon,
                 'other_url'         => $member->other_url,
@@ -218,7 +219,7 @@ function import_photo( TeamMember $member, $photo_url ) {
 
     $attach_id = wp_insert_attachment( $attachment, $uploadfile, $member->get_id() );
 
-    $attach_data = wp_generate_attachment_metadata( $attach_id, $uploadfile, $member->get_id() );
+    $attach_data = wp_generate_attachment_metadata( $attach_id, $uploadfile );
     wp_update_attachment_metadata( $attach_id, $attach_data );
 
     update_post_meta( $member->get_id(), '_thumbnail_id', $attach_id );
