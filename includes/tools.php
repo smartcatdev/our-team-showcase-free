@@ -38,7 +38,7 @@ add_action( 'admin_post_ots_export_team', function() {
                 'linkedin'          => $member->linkedin,
                 'instagram'         => $member->instagram,
                 'pinterest'         => $member->pinterest,
-                'google'            => $member->pinterest,
+                'gplus'             => $member->gplus,
                 'website'           => $member->website,
                 'other_icon'        => $member->other_icon,
                 'other'             => $member->other,
@@ -474,11 +474,7 @@ function do_import_export_page() { ?>
                             
                             <tr>
                                 <td colspan="2">
-                                    <?php _e( '1. Please note that the Import tool will attempt to import member images, this requires the plugin to '
-                                            . 'create the image files on the destination website - the web server must have access to create files in PHP '
-                                            . 'otherwise the import will fail', 'ots' ); ?>
-                                    <br>
-                                    <?php _e( '2. The Import feature will not import posts from the "Favorite articles" - It will simply assign the member\'s favorite posts to the IDs', 'ots' ); ?>
+                                    <a href="<?php echo admin_url( 'edit.php?post_type=team_member&page=ots-docs&tab=ots-import-export' ); ?>"><?php _e( 'Click here', 'ots' ); ?></a> <?php _e( 'to learn more about uploading members and CSV file structure', 'ots' ) ?>
                                 </td>
                             </tr>
                             
