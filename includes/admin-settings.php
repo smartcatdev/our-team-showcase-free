@@ -37,6 +37,7 @@ function add_menu_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Re-Order Members', 'ots' ), __( 'Re-Order Members', 'ots' ), 'manage_options', 'ots-reorder-members', 'ots\do_member_reorder_page' );
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
+    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Import/Export', 'ots' ), __( 'Import/Export', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
 
 }
 
@@ -433,7 +434,7 @@ function do_settings_page() {
     $tabs = apply_filters( 'ots_settings_page_tabs',  array(
         'ots-team-view'          => __( 'Team View', 'ots' ),
         'ots-single-member-view' => __( 'Single Member View', 'ots' ),
-        'ots-advanced'           => __( 'Advanced', 'ots' )
+        'ots-advanced'           => __( 'Advanced', 'ots' ),
     ) );
 
     reset( $tabs );
@@ -517,6 +518,16 @@ function do_settings_page() {
 
             <div class="sidebar">
 
+                <div class="widget">
+                    <h2><?php _e( 'We need your help!', 'ots' ); ?></h2>
+                    <div class="content">
+                        <ul>
+                            <li><?php _e( 'Do you like this plugin ? Please take 1 minute and leave us a 5-star review. Your support of this plugin means more features and improvements!', 'ots' ); ?></li>
+                            <li><a href="https://wordpress.org/support/plugin/our-team-enhanced/reviews/#new-post" target="_BLANK"><?php _e( 'Click here to leave a review.', 'ots' ); ?></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
                 <div class="widget">
                     <h2><?php _e( 'Quick Reference', 'ots' ); ?></h2>
                     <div class="content">
@@ -791,3 +802,4 @@ function settings_toggle( array $args ) {
     echo '<span class="label">' . esc_html( $args['label'] ) . '</span>';
 
 }
+

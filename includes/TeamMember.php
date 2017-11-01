@@ -85,6 +85,24 @@ class TeamMember {
         return get_the_terms( get_post( $this->get_id() ), 'team_member_position' );
 
     }
+    
+    public function set_name( $name ) {
+        
+        wp_update_post( array(
+            'ID'            => $this->get_id(),
+            'post_title'    => $name
+        ) );
+        
+    }
+    
+    public function set_bio( $bio ) {
+        
+        wp_update_post( array(
+            'ID'            => $this->get_id(),
+            'post_content'  => $bio
+        ) );
+        
+    }
 
 
     public function in_group( $id ) {

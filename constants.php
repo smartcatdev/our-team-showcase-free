@@ -2,7 +2,7 @@
 
 namespace ots;
 
-const VERSION = '4.2.0';
+const VERSION = '4.3.0';
 
 
 interface Options {
@@ -81,6 +81,17 @@ interface Options {
      * @since 4.0.0
      */
     const NUKE = 'ots-nuke-install';
+    
+    
+    /**
+     * @since 4.3.0
+     */
+    const EXPORT_BUTTON = 'ots-export-button';
+    
+    /**
+     * @since 4.3.0
+     */
+    const IMPORT_BUTTON = 'ots-import-button';
     
 }
 

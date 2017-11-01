@@ -31,7 +31,11 @@ function add_documentation_sections() {
     add_settings_section( 'manage-members', __( 'Managing Members', 'ots-pro' ), '', 'ots-portal' );
     add_settings_section( 'restrict-posts', __( 'Restricting Posts and Pages', 'ots-pro' ), '', 'ots-portal' );
     add_settings_section( 'portal-usage', __( 'Using the Community Hub', 'ots-pro' ), '', 'ots-portal' );
+    
+    add_settings_section( 'export-general', __( 'Exporting Team Members', 'ots-pro' ), '', 'ots-import-export' );
+    add_settings_section( 'import-general', __( 'Importing Team Members', 'ots-pro' ), '', 'ots-import-export' );
 
+    
 }
 
 add_action( 'admin_init', 'ots\add_documentation_sections' );
@@ -63,6 +67,9 @@ function add_documentation_fields() {
     add_settings_field( 'editing-profile', __( 'Editing Your Profile', 'ots-pro' ), 'ots\doc_editing_profile', 'ots-portal', 'portal-usage' );
     add_settings_field( 'viewing-profile', __( 'Viewing Others Profiles', 'ots-pro' ), 'ots\doc_viewing_profile', 'ots-portal', 'portal-usage' );
     add_settings_field( 'reset-password', __( 'Resetting Your Password', 'ots-pro' ), 'ots\doc_reset_password', 'ots-portal', 'portal-usage' );
+    
+    add_settings_field( 'export-basics', __( 'Export Team Members', 'ots-pro' ), 'ots\doc_export_team', 'ots-import-export', 'export-general' );
+    add_settings_field( 'import-basics', __( 'Import Team Members', 'ots-pro' ), 'ots\doc_import_team', 'ots-import-export', 'import-general' );
 
 }
 
@@ -460,6 +467,45 @@ function doc_viewing_profile() { ?>
 <?php }
 
 
+function doc_export_team() { ?>
+    
+    <div>
+        <p><?php _e( 'The Export feature allows you to export all your team data to a CSV file. This allows you to view the team members in Excel - as well as migrate the team data to a different site or software that you may be using.', 'ots' ); ?></p>
+        <p><?php _e( 'To use this feature, go to Import/Export menu item under Team and click the Export button. The plugin will generate an export file and store it in the Uploads folder. You can click the Download button to download a copy of the file.', 'ots' ); ?></p>
+    </div>
+    
+<?php }
+
+function doc_import_team() { ?>
+    
+    <div>
+        <p><?php _e( 'The Import feature allows you to import team members from a csv file. For companies with large staff directories this can be a very effective way of bulk adding new members to the team.', 'ots' ); ?></p>
+        <p><?php _e( 'To use this feature, go to Import/Export menu item under Team, select the CSV file that contains your team member data from your computer and click the Import button.', 'ots' ); ?></p>
+
+        <p>
+            <a href="https://raw.githubusercontent.com/smartcatdev/docs/master/ots/demo-data.csv" class="button button-primary" download><?php _e( 'Download Sample CSV', 'ots' ); ?></a>
+        </p>
+
+        
+        <h3><?php _e( 'Important notes', 'ots' ); ?></h3>
+        
+        <p>
+        <?php _e( '1. Please note that the Import tool will attempt to import member images, this requires the plugin to '
+                                            . 'create the image files on the destination website - the web server must have access to create files in PHP '
+                                            . 'otherwise the import will fail', 'ots' ); ?>
+        </p>
+        <p>
+        <?php _e( '2. The Import feature will not import posts from the "Favorite articles" - It will simply assign the member\'s favorite posts to the IDs', 'ots' ); ?>    
+        </p>
+        
+        <p>
+        <?php _e( '3. The Import feature will not import member groups, or attempt to create them. This is mainly for team member only at this time.', 'ots' ); ?>    
+        </p>
+        
+    </div>
+    
+<?php }
+
 /**
  * Render the documentation page.
  *
@@ -469,7 +515,8 @@ function do_documentation_page() {
 
     $tabs = array(
         'ots-getting-started' => __( 'Getting Started', 'ots' ),
-        'ots-portal'          => __( 'Community Hub', 'ots-pro' )
+        'ots-portal'          => __( 'Community Hub', 'ots-pro' ),
+        'ots-import-export'          => __( 'Import & Export', 'ots-pro' )
     );
 
     $tabs = apply_filters( 'ots_documentation_tabs', $tabs );
@@ -489,7 +536,7 @@ function do_documentation_page() {
                 <div class="inner">
 
                     <div class="branding">
-                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.jpg' ) ); ?>" />
+                        <img src="<?php echo esc_url( asset( 'images/branding/smartcat-medium.png' ) ); ?>" />
                     </div>
 
                     <p class="page-title"><?php _e( 'Our Team Showcase', 'ots' ); ?></p>
@@ -544,3 +591,4 @@ function do_documentation_page() {
     </div>
 
 <?php }
+
