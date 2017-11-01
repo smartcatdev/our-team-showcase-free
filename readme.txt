@@ -7,7 +7,7 @@ Tested up to: 4.8.1
 Stable tag: 4.2.0
 License: GPLv2 or later
 
-The best way to display your employees, team members, or any type of list. Multiple appealing templates,SEO friendly, re-order functionality.
+The best way to display your employees, team members, or any type of list. Multiple appealing templates,SEO friendly, re-order, import/export functionality
 
 == Description ==
 
@@ -45,6 +45,7 @@ Available Customizations:
 * Output your team members anywhere with the shortcode [our-team]
 * Team Member contact info & links to social sites
 * Favorite/Recommended content for each Team Member
+* Ability to export and import team member data
 * Easy to setup
 
 Pro Version Features:
