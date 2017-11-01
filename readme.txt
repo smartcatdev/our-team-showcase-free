@@ -98,6 +98,10 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.3.0 =
+1. Added Import & Export tools
+2. Fixes and cleanup
+
 = 4.2.0 =
 1. Added the ability to set the number of columns from the shortcode
 2. Updated documentation
