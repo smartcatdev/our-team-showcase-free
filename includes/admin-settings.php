@@ -519,6 +519,16 @@ function do_settings_page() {
             <div class="sidebar">
 
                 <div class="widget">
+                    <h2><?php _e( 'We need your help!', 'ots' ); ?></h2>
+                    <div class="content">
+                        <ul>
+                            <li><?php _e( 'Do you like this plugin ? Please take 1 minute and leave us a 5-star review. Your support of this plugin means more features and improvements!', 'ots' ); ?></li>
+                            <li><a href="https://wordpress.org/support/plugin/our-team-enhanced/reviews/#new-post" target="_BLANK"><?php _e( 'Click here to leave a review.', 'ots' ); ?></a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="widget">
                     <h2><?php _e( 'Quick Reference', 'ots' ); ?></h2>
                     <div class="content">
                         <ul>
