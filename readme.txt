@@ -99,6 +99,9 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.3.1 =
+1. Bug fix impacting group filtering since WP4.9
+
 = 4.3.0 =
 1. Added Import & Export tools
 2. Fixes and cleanup
