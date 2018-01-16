@@ -7,8 +7,9 @@ add_action( 'admin_post_ots_export_team', function() {
     $message = array();
     
     $team = new \WP_Query( array(
-        'post_type'     => 'team_member',
-        'post_status'   => 'publish'
+        'post_type'         => 'team_member',
+        'post_status'       => 'publish',
+        'posts_per_page'    => -1
     ) );
     
     
@@ -280,16 +281,21 @@ function create_file( $file_path, $contents, $mode = 'w' ) {
 
 function maybe_delete_members() {
     
-    if( isset( $_POST['ots-import-replace-button'] ) ) {
+    if( isset( $_POST['ots_delete_existing'] ) && $_POST['ots_delete_existing'] == 'on' ) {
+        
+        error_log( 'made it' );
         
         $team = new \WP_Query( array(
-            'post_type'     => 'team_member'
+            'post_type'         => 'team_member',
+            'post_status'       => 'publish',
+            'posts_per_page'    => -1
         ) );
 
 
         if( $team->post_count > 0 ) {
-            
+            error_log( 'found some: ' . $team->post_count );
             foreach( $team->posts as $member ) {
+                error_log( 'deleted: ' . $member->ID );
                 wp_delete_post( $member->ID );
             }
 
@@ -456,8 +462,10 @@ function do_import_export_page() { ?>
                                 <th scope="row"><?php _e( 'Import Team Members', 'ots' ) ?></th>
                                 <td>
                                     <input type="file" name="ots_file_import"/><br><br>
-                                    <?php submit_button( __( 'Import', 'ots' ), 'secondary', 'ots-import-button', false, false ); ?>
-                                    <?php submit_button( __( 'Import & Replace Existing', 'ots' ), 'primary', 'ots-import-replace-button', false, false ); ?>
+                                    
+                                    <input type="checkbox" name="ots_delete_existing" id="ots-import-replace-existing"/>
+                                    <label><?php _e( 'Delete existing ?', 'ots' ); ?></label><br><br>
+                                    <?php submit_button( __( 'Import', 'ots' ), 'primary', 'ots-import--button', false, false ); ?>
                                 </td>
                             </tr>
                             
