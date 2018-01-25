@@ -3,7 +3,7 @@ Contributors: smartcat
 Donate link: https://smartcatdesign.net/downloads/our-team-showcase/
 Tags: team, staff, directory, employees, widget, shortcode, members, carousel, honeycomb, stack, grid, custom, template, social, profile, custom post type, portfolio, profile,meet team, skills, cv,v-card, portal
 Requires at least: 4.6
-Tested up to: 4.8.1
+Tested up to: 4.9.2
 Stable tag: 4.3.0
 License: GPLv2 or later
 
@@ -98,6 +98,11 @@ Team Member Details & Icons:
 2. OR - Upload the unpacked folder folder via FTP into /wp-content/plugins
 
 == Changelog == 
+
+= 4.3.2 =
+1. Updates to the Import & Export tool
+2. Bug fix with group filtering
+3. Added new search & filtering tools to the Pro version
 
 = 4.3.1 =
 1. Bug fix impacting group filtering since WP4.9
