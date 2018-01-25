@@ -244,13 +244,13 @@ function single_member_content( $content ) {
 
                                 <div class="sc-team-member-post">
 
-                                    <div class="width25 left">
+                                    <div class="width25 sc-left">
 
                                         <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_post_thumbnail( $article, 'medium' ); ?></a>
 
                                     </div>
 
-                                    <div class="width75 left">
+                                    <div class="width75 sc-left">
 
                                         <a href="<?php the_permalink( $article ); ?>"><?php echo get_the_title( $article ); ?></a>
 
