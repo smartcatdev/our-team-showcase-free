@@ -165,6 +165,8 @@ function add_settings_fields() {
     $templates = array( '' => __( 'Select a template', 'ots' ) ) + get_templates();
 
     $preview_templates = !$display_field_previews ? array() : array(
+        'grid2'    => __( 'Grid - Boxes 2 (Pro)', 'ots' ),
+        'grid3'    => __( 'Grid - Boxes 3 (Pro)', 'ots' ),
         'list-stacked'    => __( 'List - Stacked (Pro)', 'ots' ),
         'honey-comb'      => __( 'Honey Comb (Pro)', 'ots' ),
         'carousel'        => __( 'Carousel (Pro)', 'ots' ),
