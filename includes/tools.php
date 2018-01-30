@@ -283,8 +283,6 @@ function maybe_delete_members() {
     
     if( isset( $_POST['ots_delete_existing'] ) && $_POST['ots_delete_existing'] == 'on' ) {
         
-        error_log( 'made it' );
-        
         $team = new \WP_Query( array(
             'post_type'         => 'team_member',
             'post_status'       => 'publish',
@@ -293,9 +291,8 @@ function maybe_delete_members() {
 
 
         if( $team->post_count > 0 ) {
-            error_log( 'found some: ' . $team->post_count );
+            
             foreach( $team->posts as $member ) {
-                error_log( 'deleted: ' . $member->ID );
                 wp_delete_post( $member->ID );
             }
 
