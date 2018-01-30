@@ -52,6 +52,8 @@ Pro Version Features:
 
 * 4 Additional team templates: Carousel, Honeycomb, Stacked & Company Directory
 * 3 Single member display templates
+* Team Member **Search bar**. Search by name, group, bio
+* Team Member Filter. **Filter members** by one or multiple groups
 * Animated sliding Panel & Card
 * Click-to-call team member phone number
 * Team member personal quote
