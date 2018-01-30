@@ -2,7 +2,7 @@
     clear: both;
 }
 
-.left {
+.sc-left {
     float: left;
     box-sizing: border-box;
 }
@@ -106,4 +106,20 @@
         padding: 0 15px 0 15px;
     }
 
+}
+
+.sc-hidden-member {
+    opacity: 0;
+    width: 0;
+    transform: translate(-50px,0);
+    transition: 0.3s all ease-in-out;
+    -moz-transition: 0.3s all ease-in-out;
+    -webkit-transition: 0.3s all ease-in-out;
+}
+
+.sc-reveal-member {
+    
+    transform: translate( -50px, 0 );
+    -moz-transform: translate( -50px, 0 );
+    -webkit-transform: translate( -50px, 0 );
 }

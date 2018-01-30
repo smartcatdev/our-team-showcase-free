@@ -12,7 +12,12 @@ namespace ots;
 
         <?php while ( $members->have_posts() ) : $members->the_post(); ?>
 
-            <div itemscope itemtype="http://schema.org/Person" class="sc_team_member" data-id="<?php the_ID(); ?>">
+            <?php $groups = \ots\member_groups( null, ';', false ); ?>
+    
+            <div itemscope itemtype="http://schema.org/Person" 
+                 class="sc_team_member" 
+                 data-id="<?php the_ID(); ?>"
+                data-group="<?php echo !empty( $groups ) ? $groups : 'groupless'; ?>">
 
                 <div class="sc_team_member_inner">
 

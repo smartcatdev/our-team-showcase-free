@@ -27,14 +27,14 @@ function enqueue_team_view_scripts() {
  */
 function do_shortcode_output( $attributes = array() ) {
 
-    $defaults = array(
+    $defaults = apply_filters( 'ots_default_shortcode_atts', array(
         'id'              => '',
         'group'           => '',
         'columns'         => get_option( Options::GRID_COLUMNS ),
         'limit'           => get_option( Options::DISPLAY_LIMIT ),
         'template'        => get_option( Options::TEMPLATE ),
-        'single_template' => get_option( Options::SINGLE_TEMPLATE )
-    );
+        'single_template' => get_option( Options::SINGLE_TEMPLATE ),
+    ) );
 
     return do_team_view_output( shortcode_atts( $defaults, $attributes, 'our-team' ) );
 

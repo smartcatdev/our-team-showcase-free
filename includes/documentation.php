@@ -24,7 +24,7 @@ add_action( 'admin_menu', 'ots\add_documentation_pages' );
  */
 function add_documentation_sections() {
 
-    add_settings_section( 'plugin-usage', __( 'Plugin Usage', 'ots' ), '', 'ots-getting-started' );
+    add_settings_section( 'plugin-usage', __( 'Displaying the team', 'ots' ), '', 'ots-getting-started' );
     add_settings_section( 'templates',  __( 'Templates', 'ots' ), '', 'ots-getting-started' );
     add_settings_section( 'widgets', __( 'Widgets', 'ots' ), '', 'ots-getting-started' );
 
@@ -35,6 +35,7 @@ function add_documentation_sections() {
     add_settings_section( 'export-general', __( 'Exporting Team Members', 'ots-pro' ), '', 'ots-import-export' );
     add_settings_section( 'import-general', __( 'Importing Team Members', 'ots-pro' ), '', 'ots-import-export' );
 
+    add_settings_section( 'shortcode-general', __( 'Shortcode Details', 'ots-pro' ), '', 'ots-shortcode' );
     
 }
 
@@ -48,7 +49,7 @@ add_action( 'admin_init', 'ots\add_documentation_sections' );
  */
 function add_documentation_fields() {
 
-    add_settings_field( 'usage', __( 'Usage', 'ots' ), 'ots\doc_usage', 'ots-getting-started', 'plugin-usage' );
+    add_settings_field( 'usage', '', 'ots\doc_usage', 'ots-getting-started', 'plugin-usage' );
     add_settings_field( 'templates', __( 'Team View Templates', 'ots' ), 'ots\doc_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-templates', __( 'Setting a Template and Using Shortcodes', 'ots' ), 'ots\doc_shortcode_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-columns', __( 'Setting The number of columns Using Shortcodes', 'ots' ), 'ots\doc_shortcode_columns', 'ots-getting-started', 'templates' );
@@ -70,6 +71,8 @@ function add_documentation_fields() {
     
     add_settings_field( 'export-basics', __( 'Export Team Members', 'ots-pro' ), 'ots\doc_export_team', 'ots-import-export', 'export-general' );
     add_settings_field( 'import-basics', __( 'Import Team Members', 'ots-pro' ), 'ots\doc_import_team', 'ots-import-export', 'import-general' );
+    
+    add_settings_field( 'shortcode-details', __( 'Shortcode Details', 'ots-pro' ), 'ots\doc_shortcode_details', 'ots-shortcode', 'shortcode-general' );
 
 }
 
@@ -83,23 +86,27 @@ add_action( 'admin_init', 'ots\add_documentation_fields' );
 function doc_usage() { ?>
 
     <div>
-        <p>
-            <?php _e( 'To display a team showcase on any page of your site, simply place the short-code <code>[our-team]</code> where you want it to appear within the page.', 'ots' ); ?>
-        </p>
-        <p>
-            <?php _e( 'You can also indicate a specific group to display, as well as override the settings for the full team and single member templates through the short-code:', 'ots' ); ?>
-            <br>
-            <code>[our-team group="slug" template="grid" single_template="panel" columns="3"]</code>
-        </p>
-        <p>
-            <i>
-                <strong><?php _e( 'Tip:', 'ots' ); ?></strong>
-                <?php _e( 'The group "slug" can be viewed and edited from the plugin settings. Go to Team > Groups and select "Quick Edit" for the group you want to use. The slug should have no capital letters, and use underscores (group_slug) or dashes (group-slug) instead of spaces.', 'ots' ); ?>
-            </i>
-        </p>
-        <p>
-            <?php _e( 'Overriding your settings is useful when you want to display the showcase in different ways on different pages.', 'ots' ); ?>
-        </p>
+        
+        <h3>Using the Shortcode</h3>
+        This is the primary recommended way to display your team. Simply add <code>[our-team]</code> to any page, post, widget etc.. and that will render the team members.
+        You can have multiple shortcodes per page. When you use the shortcode without any parameters, the plugin will display your team members according to the layout and appearance settings you have set in the 
+        plugin's <a href="<?php echo esc_url( admin_url( 'edit.php?post_type=team_member&page=ots-settings' ) ) ?>">Settings page.</a>
+        <br>
+        You can add parameters to the shortcode which allows you to customize the output for each instance of the shortcode.<br><br>
+        <strong><a herf="">Click here </a></strong> for a list of all the available Shortcode parameters.
+        
+        
+        <h3>Using the Widgets</h3>
+        The plugin creates two custom widgets that you can use to display your team members. <strong>Our Team Widget</strong> and <strong>Our Team Sidebar Widget</strong>.
+        You can place these widgets in any of the widget areas provided by your theme.
+        
+        <h3>Using PHP Code</h3>
+        Sometimes you may want to call the shortcode directly from your PHP template code. You can leverage WordPress's <code>do_shortcode</code> method for this.
+        <br>
+        <code>echo do_shortcode( '[our-team group="developers"]' );</code>
+        
+        
+        
     </div>
 
 <?php }
@@ -118,7 +125,7 @@ function doc_templates() { ?>
     </p>
     <p>
         <i>
-            <?php _e( 'Please note that <strong>Carousel, Honeycomb, Stacked</strong> and <strong>Directory</strong> are only available in the Pro version.', 'ots' ); ?>
+            <?php _e( 'Please note that several of these demo templates are only available in the Pro version.', 'ots' ); ?>
         </i>
     </p>
 
@@ -149,6 +156,10 @@ function doc_shortcode_templates() { ?>
         <code>[our-team template="carousel"]</code>
         <br>
         <code>[our-team template="grid"]</code>
+        <br>
+        <code>[our-team template="grid2"]</code>
+        <br>
+        <code>[our-team template="grid3"]</code>
         <br>
         <code>[our-team template="grid_cirlces"]</code>
         <br>
@@ -292,7 +303,7 @@ function doc_sidebar_widget() { ?>
 function doc_whatis_hub() { ?>
 
     <p>
-        <?php _e( 'Our Community Hub is an add-on for Our Team Showcase, which creates a private, password-protected area on your site that can be only accessed by your team members.', 'ots' ); ?> 
+        <?php _e( 'Our Community Hub is included in <strong>Our Team Showcase Pro</strong>, which creates a private, password-protected area on your site that can be only accessed by your team members.', 'ots' ); ?> 
     </p>
     
     <p>
@@ -331,9 +342,7 @@ function doc_manage_members() { ?>
                 <img src="<?php echo esc_url( asset( 'images/doc/manage-members-2.jpg' ) ); ?>">
             </a>
         </p>
-        <p>
-            <?php _e( 'The <i>Team Portal</i> widget in the plugin settings page will display helpful information about the status of your member portal. Here you also have the option to enable portal access for all members.', 'ots' ); ?>
-        </p>
+
         <p>
             <i>
                 <?php _e( 'Note: When bulk enabling access, all newly activated members will have a new password auto generated and sent to their contact email address', 'ots' ); ?>
@@ -507,6 +516,84 @@ function doc_import_team() { ?>
 <?php }
 
 /**
+ * 
+ * @since 4.4
+ */
+function doc_shortcode_details() { ?>
+    
+    <table class="widefat data">
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Accepted Values</th>
+                <th>Description</th>
+            </tr>    
+        </thead>
+        <tbody>
+            <tr>
+                <td>group</td>
+                <td><i>The slug of the group.</i></td>
+                <td>Example: <i>development-team</i></td>
+            </tr>
+            <tr>
+                <td>Template</td>
+                <td>
+                    grid, grid2, grid3, grid_circles, grid_circles2, hc, stacked, directory
+                </td>
+                <td>Allows you to set the template for the Team display</td>
+            </tr>
+            <tr>
+                <td>Columns</td>
+                <td>
+                    1, 2, 3, 4
+                </td>
+                <td>Set the number of team members per row</td>
+            </tr>
+            <tr>
+                <td>limit</td>
+                <td>
+                    <i>number</i>
+                </td>
+                <td>Set the total number of team members to display</td>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>
+                    <i>your-unique-id</i>
+                </td>
+                <td>Give each team member view a unique ID. Useful for developers who want to make customizations per shortcode</td>
+            </tr>
+            <tr>
+                <td>single_template</td>
+                <td>
+                    vcard, panel, custom, disabled
+                </td>
+                <td>Give each team member view a unique ID. Useful for developers who want to make customizations per shortcode</td>
+            </tr>
+            <tr>
+                <td>show_filter</td>
+                <td>
+                    yes, no
+                </td>
+                <td>Display buttons that allow viewers to filter your team members by group. You must have groups with assigned team members for this to work.</td>
+            </tr>
+            <tr>
+                <td>show_search</td>
+                <td>
+                    yes, no
+                </td>
+                <td>Display a search bar allowing viewers to search team members by name, title, bio etc...</td>
+            </tr>
+        </tbody>
+    
+        
+    </table>
+    
+    
+<?php }
+
+
+/**
  * Render the documentation page.
  *
  * @since 4.0.0
@@ -516,7 +603,8 @@ function do_documentation_page() {
     $tabs = array(
         'ots-getting-started' => __( 'Getting Started', 'ots' ),
         'ots-portal'          => __( 'Community Hub', 'ots-pro' ),
-        'ots-import-export'          => __( 'Import & Export', 'ots-pro' )
+        'ots-import-export'          => __( 'Import & Export', 'ots-pro' ),
+        'ots-shortcode'          => __( 'Shortcode Parameters', 'ots-pro' )
     );
 
     $tabs = apply_filters( 'ots_documentation_tabs', $tabs );

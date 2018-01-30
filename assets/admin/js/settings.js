@@ -1,13 +1,11 @@
 jQuery(document).ready(function ($) {
 
     // ---------- Tools //
-    $( '#ots-import-form' ).submit( function() {
-//        alert()
-        if( $( '#ots-import-replace-button' ).val() === 'Import & Replace Existing' ) {
+    $( '#ots-import-form' ).submit( function(e) {
+
+        if( $( '#ots-import-replace-existing' ).prop('checked') === true ) {
          
-            var  r
-         
-            r = confirm( 'This will delete all your team members' )
+            var  r = confirm( 'This will delete all your team members' )
 
             if( r == true ) {
                 return true

@@ -38,11 +38,6 @@ function get_members_in_order( $limit = null, $group = false ) {
 		        'field'     => 'slug',
 		        'terms'     => $group
 	        ),
-	        array(
-		        'taxonomy'  => 'team_member_position',
-		        'field'     => 'term_id',
-		        'terms'     => absint( $group )
-	        ),
         );
 
     }
@@ -80,7 +75,7 @@ function get_member_avatar( $member = null, $size = 'post-thumbnail' ) {
  * @param string|array      $size The size of the thumbnail, can be array( width, height ).
  * @since 4.0.0
  */
-function member_avatar( $member = null, $size = 'post_thumbnail' ) {
+function member_avatar( $member = null, $size = 'large' ) {
 
     if( has_post_thumbnail( $member ) ) {
         the_post_thumbnail( $size );

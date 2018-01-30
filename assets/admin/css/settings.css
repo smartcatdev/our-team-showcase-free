@@ -319,6 +319,15 @@
 }
 
 
+.ots-documentation .widefat.data th,
+.ots-documentation .widefat.data td {
+    display: table-cell;
+    width: auto;
+}
+
+.ots-documentation .widefat.data tbody tr:nth-child(odd) {
+    background: #f2f2f2;
+}
 
 /* Reorder Page */
 
