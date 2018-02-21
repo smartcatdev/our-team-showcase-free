@@ -101,6 +101,9 @@ Team Member Details & Icons:
 
 == Changelog == 
 
+= 4.4.0 =
+1. Added the ability to override Team templates from the theme (see documentation)
+
 = 4.3.2 =
 1. Updates to the Import & Export tool
 2. Bug fix with group filtering
