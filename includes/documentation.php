@@ -532,6 +532,10 @@ function doc_import_team() { ?>
         <?php _e( '3. The Import feature will not import member groups, or attempt to create them. This is mainly for team member only at this time.', 'ots' ); ?>    
         </p>
         
+        <p>
+        <?php _e( '4. If you are getting an error that the file you\'re uploading is not a CSV, please ensure that there are no extra spaces or commas in the CSV files.', 'ots' ); ?>    
+        </p>
+        
     </div>
     
 <?php }
