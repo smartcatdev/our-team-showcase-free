@@ -169,7 +169,13 @@ function template_path( $template ) {
     $base = trailingslashit( dirname( __FILE__ ) . '/templates' );
 
     $file = $base . $template . '.php';
+    
+    // Check if override exists in the theme first
+    if( file_exists( get_theme_override( $template . '.php' ) ) ) {
+        return get_theme_override( $template . '.php' );
+    }
 
+    // then check if selected template exists in the plugin
     if( file_exists( $file ) ) {
         return $file;
     }
