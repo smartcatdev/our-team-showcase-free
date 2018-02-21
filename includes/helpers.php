@@ -159,3 +159,17 @@ function member_groups( $member = null, $separator = ' - ', $echo = true ) {
     return $str;
 
 }
+
+/**
+ * 
+ * Returns overide file from theme
+ * 
+ * @since 4.3.3
+ * @param String $file
+ * @return String
+ */
+function get_theme_override( $file ) {
+    
+    return( get_stylesheet_directory() . '/team-template-' . $file );
+    
+}

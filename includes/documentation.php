@@ -55,6 +55,7 @@ function add_documentation_fields() {
     add_settings_field( 'shortcode-columns', __( 'Setting The number of columns Using Shortcodes', 'ots' ), 'ots\doc_shortcode_columns', 'ots-getting-started', 'templates' );
     add_settings_field( 'shortcode-ids', __( 'Setting The ID of a Shortcode Instance', 'ots' ), 'ots\doc_shortcode_ids', 'ots-getting-started', 'templates' );
     add_settings_field( 'single-templates', __( 'Single Member View Templates', 'ots' ), 'ots\doc_single_templates', 'ots-getting-started', 'templates' );
+    add_settings_field( 'override-templates', __( 'Overriding Templates', 'ots' ), 'ots\doc_override_templates', 'ots-getting-started', 'templates' );
     add_settings_field( 'custom-templates', __( 'Custom Templates - <i class="ots-pro">Pro Version</i>', 'ots' ), 'ots\doc_custom_templates', 'ots-getting-started', 'templates' );
 	add_settings_field( 'main-widget', __( 'Main Widget', 'ots' ), 'ots\doc_main_widget', 'ots-getting-started', 'widgets' );
     add_settings_field( 'sidebar-widget', __( 'Sidebar Widget', 'ots' ), 'ots\doc_sidebar_widget', 'ots-getting-started', 'widgets' );
@@ -245,6 +246,26 @@ function doc_single_templates() { ?>
 
 <?php }
 
+
+/**
+ * 
+ */
+function doc_override_templates() { ?>
+    
+    <p>
+        <?php _e( 'Our Team Showcase allows you to customize the team templates, without having to edit the plugin code. ', 'ots' ) ?>
+    </p>
+    
+    <p>
+        <?php _e( 'To customize a template, copy the template file that you want to edit from the plugin to the root of your theme, and prefix it with "team-template-". ', 'ots' ) ?>
+    </p>
+    
+    <p>
+        <?php _e( 'For example, if you want to customize the default grid template, copy grid.php from <code>our-team-enhanced/templates/grid.php</code> and place it in your theme root. Then edit the file name so it becomes '
+                . '<code>team-template-grid.php</code>. Once you do that, you can start making any edits to the template within your theme, and these changes will be maintained when the plugin is updated.', 'ots' ) ?>
+    </p>
+    
+<?php }
 
 /**
  * Render the custom templates topic.
@@ -509,6 +530,10 @@ function doc_import_team() { ?>
         
         <p>
         <?php _e( '3. The Import feature will not import member groups, or attempt to create them. This is mainly for team member only at this time.', 'ots' ); ?>    
+        </p>
+        
+        <p>
+        <?php _e( '4. If you are getting an error that the file you\'re uploading is not a CSV, please ensure that there are no extra spaces or commas in the CSV files.', 'ots' ); ?>    
         </p>
         
     </div>
