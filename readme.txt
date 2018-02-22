@@ -3,7 +3,7 @@ Contributors: smartcat
 Donate link: https://smartcatdesign.net/downloads/our-team-showcase/
 Tags: team, staff, directory, employees, widget, shortcode, members, carousel, honeycomb, stack, grid, custom, template, social, profile, custom post type, portfolio, profile,meet team, skills, cv,v-card, portal
 Requires at least: 4.6
-Tested up to: 4.9.2
+Tested up to: 4.9.4
 Stable tag: 4.3.2
 License: GPLv2 or later
 
