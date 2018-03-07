@@ -213,7 +213,7 @@ class TeamSidebarWidget extends \WP_Widget {
                            class="ots-widget-display-all"
                            name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
 
-                        <?php checked( 'all', $limit ); ?>
+                        <?php checked( 'all', strtolower( $limit ) ); ?>
                         <?php disabled( true, is_numeric( $limit ) ); ?>/><?php _e( 'Display All', 'ots' ); ?>
 
                 </label>
