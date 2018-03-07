@@ -1,21 +1,17 @@
-(function ($) {
+;(function ($) {
 
     $(document).on('change', '.ots-widget-display-all', function() {
+        const checked = $(this).is(':checked'),
+              $limit  = $(this)
+                .parents('.ots-widget-limit')
+                .find('.ots-limit-number');
 
-        var limit = $(this).parents('.ots-widget-limit').find('.ots-limit-number');
-
-        console.log(limit)
-
-        limit.prop('disabled', !limit.prop('disabled'));
+        $limit.prop('disabled', checked);
 
         if (!$(this).prop('checked')) {
-
-            limit.focus().val(1);
-
+            $limit.focus().val(1);
         } else {
-
-            limit.val('');
-
+            $limit.val('');
         }
 
     });
