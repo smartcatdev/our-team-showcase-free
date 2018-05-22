@@ -598,14 +598,14 @@ function doc_shortcode_details() { ?>
             <tr>
                 <td>show_filter</td>
                 <td>
-                    yes, no
+                    true, false
                 </td>
                 <td>Display buttons that allow viewers to filter your team members by group. You must have groups with assigned team members for this to work.</td>
             </tr>
             <tr>
                 <td>show_search</td>
                 <td>
-                    yes, no
+                    true, false
                 </td>
                 <td>Display a search bar allowing viewers to search team members by name, title, bio etc...</td>
             </tr>
