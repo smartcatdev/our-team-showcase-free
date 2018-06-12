@@ -2,165 +2,162 @@
 
 namespace ots;
 
+function get_csv_fields() {
+    $sanitize_bool = function ( $val ) {
+        return $val === 'on' || empty( $val ) ? $val : '';
+    };
+    $fields = array(
+        'name'          => 'sanitize_text_field',
+        'title'         => 'sanitize_text_field',
+        'bio'           => 'wp_kses_post',
+        'photo_url'     => 'esc_url_raw',
+        'email'         => 'sanitize_email',
+        'phone'         => 'sanitize_text_field',
+        'facebook'      => 'esc_url_raw',
+        'twitter'       => 'esc_url_raw',
+        'linkedin'      => 'esc_url_raw',
+        'instagram'     => 'esc_url_raw',
+        'pinterest'     => 'esc_url_raw',
+        'gplus'         => 'esc_url_raw',
+        'website'       => 'esc_url_raw',
+        'other_icon'    => 'sanitize_text_field',
+        'other'         => 'sanitize_text_field',
+        'article_bool'  => $sanitize_bool,
+        'article_title' => 'sanitize_text_field',
+        'article1'      => 'intval',
+        'article2'      => 'intval',
+        'article3'      => 'intval',
+        'skill_bool'    => $sanitize_bool,
+        'skill_title'   => 'sanitize_text_field',
+        'skill1'        => 'sanitize_text_field',
+        'skill_value1'  => 'intval',
+        'skill2'        => 'sanitize_text_field',
+        'skill_value2'  => 'intval',
+        'skill3'        => 'sanitize_text_field',
+        'skill_value3'  => 'intval',
+        'skill4'        => 'sanitize_text_field',
+        'skill_value4'  => 'intval',
+        'skill5'        => 'sanitize_text_field',
+        'skill_value5'  => 'intval',
+        'tags_bool'     => $sanitize_bool,
+        'tags_title'    => 'sanitize_text_field',
+        'tags'          => 'sanitize_text_field',
+        'quote'         => 'sanitize_text_field'
+    );
+    return $fields;
+}
+
 add_action( 'admin_post_ots_export_team', function() {
-    
     $message = array();
-    
-    $team = new \WP_Query( array(
+    $team    = new \WP_Query( array(
         'post_type'         => 'team_member',
         'post_status'       => 'publish',
         'posts_per_page'    => -1
     ) );
     
-    
-    if( $team->post_count <= 0 ) {
-        
+    if ( $team->post_count <= 0 ) {
         $message['export_response'] = 'Failed';
         $message['export_output'] = urlencode( 'There are no team members to export' );
-        
-    }else {
-        
-        
+    } else {
         $members = array();
         
         foreach( $team->posts as $member ) {
-            
             $member = team_member( $member->ID );
-            
-            $members[ $member->get_id() ] = array(
-                'name'              => $member->get_name(),
-                'title'             => $member->title,
-                'bio'               => $member->get_bio(),
-                'photo_url'         => get_the_post_thumbnail_url( $member->get_id() ),
-                'email'             => $member->email,
-                'phone'             => $member->phone,
-                'facebook'          => $member->facebook,
-                'twitter'           => $member->twitter,
-                'linkedin'          => $member->linkedin,
-                'instagram'         => $member->instagram,
-                'pinterest'         => $member->pinterest,
-                'gplus'             => $member->gplus,
-                'website'           => $member->website,
-                'other_icon'        => $member->other_icon,
-                'other'             => $member->other,
-                'article_bool'      => $member->article_bool,
-                'article_title'     => $member->article_title,
-                'article1'          => $member->article1,
-                'article2'          => $member->article2,
-                'article3'          => $member->article3,
-                'skill_bool'        => $member->skill_bool,
-                'skill_title'       => $member->skill_title,
-                'skill1'            => $member->skill1,
-                'skill_value1'      => $member->skill_value1,
-                'skill2'            => $member->skill2,
-                'skill_value2'      => $member->skill_value2,
-                'skill3'            => $member->skill3,
-                'skill_value3'      => $member->skill_value3,
-                'skill4'            => $member->skill4,
-                'skill_value4'      => $member->skill_value4,
-                'skill5'            => $member->skill5,
-                'skill_value5'      => $member->skill_value5,
-                'tags_bool'         => $member->tags_bool,
-                'tags_title'        => $member->tags_title,
-                'tags'              => $member->tags,
-                'quote'             => $member->quote,
+            $export = array(
+                'name'      => sanitize_text_field( $member->get_name() ),
+                'title'     => sanitize_text_field( $member->title ),
+                'bio'       => wp_kses_post( $member->get_bio() ),
+                'photo_url' => esc_url_raw( get_the_post_thumbnail_url( $member->get_id() ) ),
             );
-            
+
+            $fields = get_csv_fields();
+
+            unset( $fields['name'] );
+            unset( $fields['title'] );
+            unset( $fields['bio'] );
+            unset( $fields['photo_url'] );
+
+            foreach ( $fields as $field => $sanitize_callback ) {
+                $export[$field] = call_user_func( $sanitize_callback, $member->{$field} );
+            }
+
+            $members[ $member->get_id() ] = $export;
         }
 
         $csv = put_csv( $members );
-        
         $dir = wp_upload_dir();
         $file_path = $dir['path'] . '/export.csv';
-        
 
-        
-        if( create_file( $file_path, $csv ) ) {
-
+        if ( create_file( $file_path, $csv ) ) {
             $message['export_response'] = 'Success!';
             $message['export_output'] = $dir['url'] . '/export.csv';
-            
-        }else {
-
+        } else {
             $message['export_response'] = 'Failed';
             $message['export_output'] = urlencode( 'Cannot create file, check your server permissions' );
             $message['csv'] = $csv;
         }
-        
     }
     
     wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
-    
 });
 
 
 add_action( 'admin_post_ots_import_team', function() {
-    
     $message = array();
     $total_imported = 0;
     
     maybe_delete_members();
     
     $accepted_mime_types = array(
-            'text/csv',
-            'text/comma-separated-values',
-            'text/plain',
-            'text/anytext',
-            'text/*',
-            'text/plain',
-            'text/anytext',
-            'text/*',
-            'application/csv',
-            'application/excel',
+        'text/csv',
+        'text/comma-separated-values',
+        'text/plain',
+        'text/anytext',
+        'text/*',
+        'text/plain',
+        'text/anytext',
+        'text/*',
+        'application/csv',
+        'application/excel',
     );
     
     // Ensure user has selected an import file
-    if( empty( $_FILES['ots_file_import'] ) ) {
-        
+    if ( empty( $_FILES['ots_file_import'] ) ) {
         $message['import_response'] = 'Failed';
         $message['import_output'] = urlencode( 'Missing import file.' );
         wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
         return;
-        
     }
     
     // Ensure the file is of the right type
-    if( empty( $_FILES['ots_file_import']['type'] ) || ! in_array( strtolower( $_FILES['ots_file_import']['type'] ), $accepted_mime_types ) ) {
-        
+    if ( empty( $_FILES['ots_file_import']['type'] ) || !in_array( strtolower( $_FILES['ots_file_import']['type'] ), $accepted_mime_types ) ) {
         $message['import_response'] = 'Failed';
         $message['import_output'] = urlencode( 'The file you have uploaded cannot be processed. Please upload a CSV file.' );
         wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
         return;
-        
     }
     
     $upload = wp_upload_bits( $_FILES['ots_file_import']['name'], null, file_get_contents( $_FILES['ots_file_import']['tmp_name'] ) );
-    
     $data = read_csv( $upload['file'] );
     
-    
-    foreach( $data as $row ) {
-                    
-        try {
+    foreach ( $data as $row ) {
+        $id = wp_insert_post( array(
+            'post_type'     => 'team_member',
+            'post_status'   => 'publish'
+        ) );
 
-            $id = wp_insert_post( array(
-                'post_type'     => 'team_member',
-                'post_status'   => 'publish'
-            ) );
-
-        } catch ( \Exception $ex ) { 
-
+        if ( is_wp_error( $id ) ) {
             continue;
-
         }
 
         $member = team_member( $id );
+        $fields = get_csv_fields();
         $total_imported++;
 
-        foreach( $row as $key => $val ) {
+        foreach ( $row as $key => $val ) {
+            $val = call_user_func( $fields[$key], $val );
 
             switch( $key ) {
-                
                 case 'name' : 
                     $member->set_name( $val );
                     break;
@@ -176,82 +173,47 @@ add_action( 'admin_post_ots_import_team', function() {
                 default :
                     $member->$key = $val;
                     break;
-                
             }
-            
-
         }
-
-        
     }
     
     $message['import_response'] = 'Success';
     $message['import_output'] = urlencode( 'Import successful! ' . $total_imported . ' member(s) imported' );
-    
-    
+
     wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
-    
 });
 
 
 function import_photo( TeamMember $member, $photo_url ) {
-    
-    if( ! $photo_url ) {
+    if ( !$photo_url ) {
         return;
     }
-    
-    $dir = wp_upload_dir();
-    
-    $contents = file_get_contents( $photo_url );
-    $extension = substr( strrchr( $photo_url,'.' ), 1 );
-    $uploadfile = $dir['path'] . '/' . $member->get_id() . '.' . $extension;
 
-    $savefile = fopen( $uploadfile, 'w' );
-    fwrite( $savefile, $contents );
-    fclose( $savefile );
-    
-    $attachment = array(
-        'post_title'        => $member->get_id() . '.' . $extension,
-        'post_content'      => '',
-        'post_mime_type'    => get_mime_type( $extension ),
-        'post_status'       => 'publish',
-        'post_parent'       => $member->get_id()
-    );
+    $attach_id = media_sideload_image( $photo_url, $member->get_id(), null, 'id' );
 
-    $attach_id = wp_insert_attachment( $attachment, $uploadfile, $member->get_id() );
-
-    $attach_data = wp_generate_attachment_metadata( $attach_id, $uploadfile );
-    wp_update_attachment_metadata( $attach_id, $attach_data );
-
-    update_post_meta( $member->get_id(), '_thumbnail_id', $attach_id );
-    
+    if ( !is_wp_error( $attach_id ) ) {
+        update_post_meta( $member->get_id(), '_thumbnail_id', $attach_id );
+    }
 }
 
 function get_mime_type( $extension ) {
-    
     $mime = null;
     
     switch ( $extension ) {
-        
         case 'jpg' || 'jpeg' :
-            
             $mime = 'image/jpeg';
             break;
         
         case 'png' :
-            
             $mime = 'image/png';
             break;
         
         default :
-            
             $mime = 'image/jpeg';
             break;
-        
     }
     
     return $mime;
-    
 }
 
 /**
@@ -261,83 +223,59 @@ function get_mime_type( $extension ) {
  * @param String $file_path
  * @param String $contents
  * @param String $mode
+ *
  * @return boolean
- * @throws Exception
  */
 function create_file( $file_path, $contents, $mode = 'w' ) {
-    
     $file = fopen( $file_path, $mode );
     
-    if( ! $file ) {
+    if ( !$file ) {
         return false;
     }
-    
-    fputs( $file, $contents );
-    fclose( $file );
-    
-    return true;
-    
+    return fwrite( $file, $contents ) && fclose( $file );
 }
 
 function maybe_delete_members() {
-    
-    if( isset( $_POST['ots_delete_existing'] ) && $_POST['ots_delete_existing'] == 'on' ) {
-        
+    if ( !empty( $_POST['ots_delete_existing'] ) ) {
         $team = new \WP_Query( array(
-            'post_type'         => 'team_member',
-            'post_status'       => 'publish',
-            'posts_per_page'    => -1
+            'post_type'      => 'team_member',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1
         ) );
 
-
-        if( $team->post_count > 0 ) {
-            
-            foreach( $team->posts as $member ) {
-                wp_delete_post( $member->ID );
-            }
-
+        foreach( $team->posts as $member ) {
+            wp_delete_post( $member->ID );
         }
-        
     }
-    
-    
-    
 }
 
 function read_csv( $file_path, $mode = 'r' ) {
-    
-    $array = array();
+    $array  = array();
     $fields = array();
-    $i=0;
+    $i      = 0;
     
     $handle = fopen( $file_path, $mode );
     
-    while ( ( $row = fgetcsv( $handle, 4096 ) ) !== false) {
-        
+    while ( ( $row = fgetcsv( $handle, 4096 ) ) !== false ) {
         if ( empty( $fields ) ) {
             $fields = $row;
             continue;
         }
         
-        foreach ($row as $k => $value ) {
-            
+        foreach ( $row as $k => $value ) {
             $array[$i][$fields[$k]] = $value;
-            
         }
         
         $i++;
     }
     
     if ( !feof( $handle ) ) {
-        
         echo "Error: unexpected fgets() fail\n";
-        
     }
     
-    fclose($handle);
+    fclose( $handle );
     
     return $array;
-    
 }
 
 /**
@@ -348,15 +286,12 @@ function read_csv( $file_path, $mode = 'r' ) {
  * @return String
  */
 function put_csv( $data ) {
-    
     $fh = fopen( 'php://temp', 'rw' ); 
     
     fputcsv( $fh, array_keys( current( $data ) ) );
 
     foreach ( $data as $row ) {
-        
         fputcsv( $fh, $row );
-        
     }
     
     rewind( $fh );
@@ -364,7 +299,6 @@ function put_csv( $data ) {
     fclose( $fh );
 
     return $csv;
-    
 }
 
 function do_import_export_page() { ?>
@@ -459,9 +393,9 @@ function do_import_export_page() { ?>
                                 <th scope="row"><?php _e( 'Import Team Members', 'ots' ) ?></th>
                                 <td>
                                     <input type="file" name="ots_file_import"/><br><br>
-                                    
-                                    <input type="checkbox" name="ots_delete_existing" id="ots-import-replace-existing"/>
-                                    <label><?php _e( 'Delete existing ?', 'ots' ); ?></label><br><br>
+                                    <label>
+                                        <input type="checkbox" name="ots_delete_existing" id="ots-import-replace-existing"/>
+                                        <?php _e( 'Delete existing ?', 'ots' ); ?></label><br><br>
                                     <?php submit_button( __( 'Import', 'ots' ), 'primary', 'ots-import--button', false, false ); ?>
                                 </td>
                             </tr>
