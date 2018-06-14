@@ -38,6 +38,11 @@ function get_members_in_order( $limit = null, $group = false ) {
 		        'field'     => 'slug',
 		        'terms'     => $group
 	        ),
+		array(
+			'taxonomy'  => 'team_member_position',
+			'field'     => 'term_id',
+			'terms'     => array_map(function ($g) { return absint($g); }, $group)
+            	)
         );
 
     }
