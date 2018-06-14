@@ -29,7 +29,7 @@ class TeamSidebarWidget extends \WP_Widget {
 
 	    $defaults = array(
 		    'sc_our_team_widget_title' => __( 'Meet Our Team', 'ots' ),
-		    'sc_our_team_widget_limit' => 'ALL',
+		    'sc_our_team_widget_limit' => 'all',
 		    'sc_our_team_widget_group' => ''
 	    );
 
@@ -179,10 +179,8 @@ class TeamSidebarWidget extends \WP_Widget {
 
                 <?php foreach( $terms as $term ) : ?>
 
-                    <option value="<?php esc_attr_e( $term->term_id ); ?>" <?php selected( $group, $term->term_id ); ?>>
-
-                        <?php esc_html_e( $term->name ); ?>
-
+                    <option value="<?php esc_attr_e( $term->slug ); ?>"
+                        <?php selected( $group, $term->slug ); ?>><?php esc_html_e( $term->name ); ?>
                     </option>
 
                 <?php endforeach; ?>
@@ -197,13 +195,14 @@ class TeamSidebarWidget extends \WP_Widget {
                     <?php _e( 'Limit to Show', 'ots' ); ?>
                 </label>
 
-                    <input class="widefat ots-limit-number"
-                           type="number"
-                           id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
-                           name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
-                           value="<?php echo $limit !== 'all' ? esc_attr_e( $limit ) : ''; ?>"
+                <input class="widefat ots-limit-number"
+                       type="number"
+                       min="1"
+                       id="<?php esc_attr_e( $this->get_field_id( 'sc_our_team_widget_limit' ) ); ?>"
+                       name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
+                       value="<?php echo $limit !== 'all' ? esc_attr_e( $limit ) : ''; ?>"
 
-                        <?php disabled( 'all', $limit ); ?> />
+                    <?php disabled( 'all', strtolower( $limit ) ); ?> />
 
             </p>
             <p>
@@ -214,7 +213,7 @@ class TeamSidebarWidget extends \WP_Widget {
                            class="ots-widget-display-all"
                            name="<?php esc_attr_e( $this->get_field_name( 'sc_our_team_widget_limit' ) ); ?>"
 
-                        <?php checked( 'all', $limit ); ?>
+                        <?php checked( 'all', strtolower( $limit ) ); ?>
                         <?php disabled( true, is_numeric( $limit ) ); ?>/><?php _e( 'Display All', 'ots' ); ?>
 
                 </label>

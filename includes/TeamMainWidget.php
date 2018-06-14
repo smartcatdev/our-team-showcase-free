@@ -2,7 +2,6 @@
 
 namespace ots;
 
-
 class TeamMainWidget extends \WP_Widget {
 
 	public function __construct() {
@@ -67,7 +66,7 @@ class TeamMainWidget extends \WP_Widget {
         $single   = $new_instance['single_template'];
 
 
-        $groups = get_groups();
+        $groups = get_groups( 'slug' );
 
 		$instance['id']    = sanitize_title( $id );
         $instance['title'] = strip_tags( $title );
@@ -201,7 +200,7 @@ class TeamMainWidget extends \WP_Widget {
 			$args = array(
 				'name'     => $this->get_field_name( 'group' ),
 				'selected' => $instance['group'],
-				'options'  => array( '' => __( 'All Groups', 'ots' ) ) + get_groups(),
+				'options'  => array( '' => __( 'All Groups', 'ots' ) ) + get_groups( 'slug' ),
 				'attrs'    => array(
 					'class' => 'widefat',
 					'id'    => $this->get_field_id( 'group' )
@@ -236,10 +235,9 @@ class TeamMainWidget extends \WP_Widget {
                        type="number"
                        id="<?php esc_attr_e( $this->get_field_id( 'limit' ) ); ?>"
                        name="<?php esc_attr_e( $this->get_field_name( 'limit' ) ); ?>"
-                       value="<?php echo $instance['limit'] !== 'all' ? esc_attr_e( $instance['limit'] ) : ''; ?>"
+                       value="<?php echo (  strtolower( $instance['limit'] ) !== 'all' ? esc_attr( $instance['limit'] ) : '' ); ?>"
 
-					<?php disabled( 'all', $instance['limit'] ); ?> />
-
+					<?php disabled( 'all', strtolower( $instance['limit'] ) ); ?> />
             </p>
             <p>
 				<?php _e( '- or -', 'ots' ); ?>
@@ -248,10 +246,7 @@ class TeamMainWidget extends \WP_Widget {
                     <input type="checkbox"
                            class="ots-widget-display-all"
                            name="<?php esc_attr_e( $this->get_field_name( 'limit' ) ); ?>"
-
-						<?php checked( 'all', $instance['limit'] ); ?>
-						<?php disabled( true, is_numeric( $instance['limit'] ) ); ?>/><?php _e( 'Display All', 'ots' ); ?>
-
+						<?php checked( 'all', strtolower( $instance['limit'] ) ); ?> /><?php _e( 'Display All', 'ots' ); ?>
                 </label>
             </p>
         </div>
