@@ -26,6 +26,10 @@
     margin: 10px 10px 0 20px;
 }
 
+.ots-admin-page .button {
+    font-family: 'Lato', 'sans-serif' !important;
+}
+
 .ots-admin-page .inner {
     padding: 0 10px 0 20px;
 }

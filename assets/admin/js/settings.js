@@ -1,12 +1,14 @@
 jQuery(document).ready(function ($) {
 
+
+    // ---------- Tools //
     $('#ots-import-replace-existing, #ots-import--button').prop('disabled', true);
 
     $('[name="ots_file_import"]').change(function (e) {
         $('#ots-import-replace-existing, #ots-import--button').prop('disabled', !$(this).get([0]).files.length);
     });
 
-    // ---------- Tools //
+
     $( '#ots-import-form' ).submit( function(e) {
 
         if( $( '#ots-import-replace-existing' ).prop('checked') === true ) {
@@ -19,6 +21,8 @@ jQuery(document).ready(function ($) {
 
         }
     });
+
+
     // -------------------
     
     var limit = $('#ots-display-limit-number');

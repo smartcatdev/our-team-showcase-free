@@ -107,19 +107,19 @@ add_action( 'admin_post_ots_import_team', function() {
     $total_imported = 0;
     
     maybe_delete_members();
-    
-    $accepted_mime_types = array(
-        'text/csv',
-        'text/comma-separated-values',
-        'text/plain',
-        'text/anytext',
-        'text/*',
-        'text/plain',
-        'text/anytext',
-        'text/*',
-        'application/csv',
-        'application/excel',
-    );
+
+//    $accepted_mime_types = array(
+//        'text/csv',
+//        'text/comma-separated-values',
+//        'text/plain',
+//        'text/anytext',
+//        'text/*',
+//        'text/plain',
+//        'text/anytext',
+//        'text/*',
+//        'application/csv',
+//        'application/excel',
+//    );
     
     // Ensure user has selected an import file
     if ( empty( $_FILES['ots_file_import'] ) ) {
@@ -130,12 +130,12 @@ add_action( 'admin_post_ots_import_team', function() {
     }
     
     // Ensure the file is of the right type
-    if ( empty( $_FILES['ots_file_import']['type'] ) || !in_array( strtolower( $_FILES['ots_file_import']['type'] ), $accepted_mime_types ) ) {
-        $message['import_response'] = 'Failed';
-        $message['import_output'] = urlencode( 'The file you have uploaded cannot be processed. Please upload a CSV file.' );
-        wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
-        return;
-    }
+//    if ( empty( $_FILES['ots_file_import']['type'] ) || !in_array( strtolower( $_FILES['ots_file_import']['type'] ), $accepted_mime_types ) ) {
+//        $message['import_response'] = 'Failed';
+//        $message['import_output'] = urlencode( 'The file you have uploaded cannot be processed. Please upload a CSV file.' );
+//        wp_safe_redirect( add_query_arg( $message, wp_get_referer() ) );
+//        return;
+//    }
     
     $upload = wp_upload_bits( $_FILES['ots_file_import']['name'], null, file_get_contents( $_FILES['ots_file_import']['tmp_name'] ) );
     $data = read_csv( $upload['file'] );
