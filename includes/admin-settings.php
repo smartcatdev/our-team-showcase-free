@@ -37,7 +37,7 @@ function add_menu_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Re-Order Members', 'ots' ), __( 'Re-Order Members', 'ots' ), 'manage_options', 'ots-reorder-members', 'ots\do_member_reorder_page' );
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
-    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Tools', 'ots' ), __( 'Tools', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
+    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Tools', 'ots' ), __( 'Import/Export', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
 
 }
 
@@ -521,12 +521,17 @@ function do_settings_page() {
             <div class="sidebar">
 
                 <div class="widget">
-                    <h2><?php _e( 'We need your help!', 'ots' ); ?></h2>
+                    <h2>
+                        <?php _e( 'Try Buildr Theme!', 'ots' ); ?>
+                        <a style="float: right" class="button button-primary" href="<?php echo esc_url( admin_url( 'theme-install.php?search=buildr' ) ); ?>"><?php _e( 'Free Download', 'ots' ); ?></a>
+                    </h2>
                     <div class="content">
-                        <ul>
-                            <li><?php _e( 'Do you like this plugin ? Please take 1 minute and leave us a 5-star review. Your support of this plugin means more features and improvements!', 'ots' ); ?></li>
-                            <li><a href="https://wordpress.org/support/plugin/our-team-enhanced/reviews/#new-post" target="_BLANK"><?php _e( 'Click here to leave a review.', 'ots' ); ?></a></li>
-                        </ul>
+
+                        <p>
+                            <?php _e( 'Buildr is a unique free theme, with features you would only find in a Pro version. It is the most customizable free theme, that looks amazing out of the box. Also, it is well integrated with Our Team Showcase. Try it out!', 'ots' ) ?>
+                        </p>
+
+                        <img src="https://i.imgur.com/nJHSD5W.jpg" style="width: 100%"/>
                     </div>
                 </div>
                 
