@@ -37,7 +37,7 @@ function add_menu_pages() {
 
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Re-Order Members', 'ots' ), __( 'Re-Order Members', 'ots' ), 'manage_options', 'ots-reorder-members', 'ots\do_member_reorder_page' );
     add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Settings', 'ots' ), __( 'Settings', 'ots' ), 'manage_options', 'ots-settings', 'ots\do_settings_page' );
-    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Import/Export', 'ots' ), __( 'Import/Export', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
+    add_submenu_page( 'edit.php?post_type=team_member', __( 'Our Team Tools', 'ots' ), __( 'Tools', 'ots' ), 'manage_options', 'ots-import-export', 'ots\do_import_export_page' );
 
 }
 
