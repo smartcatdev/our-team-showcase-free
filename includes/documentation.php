@@ -513,7 +513,7 @@ function doc_import_team() { ?>
         <p><?php _e( 'To use this feature, go to Import/Export menu item under Team, select the CSV file that contains your team member data from your computer and click the Import button.', 'ots' ); ?></p>
 
         <p>
-            <a href="//raw.githubusercontent.com/smartcatdev/docs/master/ots/demo-data.csv" class="button button-primary" download="team-export.csv"><?php _e( 'Download Sample CSV', 'ots' ); ?></a>
+            <a href="<?php echo asset('data/demo.csv' ) ?>" class="button button-primary" download="team-export.csv"><?php _e( 'Download Sample CSV', 'ots' ); ?></a>
         </p>
 
         
