@@ -17,6 +17,11 @@ namespace ots;
 include_once dirname( __FILE__ ) . '/constants.php';
 
 
+if ( !function_exists( 'scts_init' ) ) {
+    include_once dirname( __FILE__ ) . '/includes/libraries/theme-showcase.php';
+}
+
+
 /**
  * Load the plugin's text domain.
  *
