@@ -25,30 +25,25 @@ function get_members_in_order( $limit = null, $group = false ) {
     );
 
     if( !empty( $group ) ) {
+        $group = (array) $group;
 
-        $args['tax_query'] = array(
-        	'relation' => 'OR',
-        	array(
-	            'taxonomy'  => 'team_member_position',
-	            'field'     => 'name',
-	            'terms'     => $group
-	        ),
-	        array(
-		        'taxonomy'  => 'team_member_position',
-		        'field'     => 'slug',
-		        'terms'     => $group
-	        ),
-		array(
-			'taxonomy'  => 'team_member_position',
-			'field'     => 'term_id',
-			'terms'     => array_map(function ($g) { return absint($g); }, $group)
-            	)
-        );
+        if ( is_int( $group[0] ) ) {
+            $args['tax_query'][] = array(
+                'taxonomy'  => 'team_member_position',
+                'field'     => 'term_id',
+                'terms'     => array_map(function ($g) { return absint($g); }, $group)
+            );
 
+        } else {
+            $args['tax_query'][] = array(
+                'taxonomy'  => 'team_member_position',
+                'field'     => 'slug',
+                'terms'     => $group
+            );
+        }
     }
 
     return new \WP_Query( $args );
-
 }
 
 
