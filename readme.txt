@@ -99,7 +99,10 @@ Team Member Details & Icons:
 1. Download the plugin, then upload the zipped file to your site from the WordPress dashboard plugin uploader menu
 2. OR - Upload the unpacked folder folder via FTP into /wp-content/plugins
 
-== Changelog == 
+== Changelog ==
+
+= 4.4.2 =
+1. Improved query that pulls team members
 
 = 4.4.1 =
 1. Improved Import/Export functionality
